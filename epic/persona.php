@@ -9,6 +9,7 @@
 		<div>
 			<h1>Kristi Wilkins</h1>
 			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins">
+		</div>
 			<div>
 				<h2>Persona</h2>
 					<p><span>Name:</span> Kristi Wilkins</p>
@@ -37,7 +38,6 @@
 					<li>Does not want to scroll through multiple pages.</li>
 					<li>Does not want just a generic search but rather wants to be able to filter her search.</li>
 				</ul>
-			</div>
 			</div>
 			<div>
 				<h1>Walter Lawrence</h1>
