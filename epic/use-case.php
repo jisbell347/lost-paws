@@ -13,8 +13,12 @@
 			<li>Walt taps the Lost A Pet button.</li>
 			<li>Walt is then presented with a heat map of lost pets in Albuquerque.</li>
 			<li>Walt zooms in on his area of town and filters the map to only view lost dogs.</li>
+			<li>Walt thinks to himself, “wow there are so many lost pets.”	Walt refines his search again to only see dogs found today.</li>
+			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button below the heat map.</li>
+			<li>Walt sets up a user account, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
+			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque.</li>
 		</ol>
-		<p></p>
+
 
 
 		<h2>Kristi Wilkins - Pet Finder</h2>
