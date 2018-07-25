@@ -32,7 +32,11 @@
 				</ul>
 			</div>
 			<div>
-
+				<h2>Frustrations:</h2>
+				<ul>
+					<li>Does not want to scroll through multiple pages.</li>
+					<li>Does not want just a generic search but rather wants to be able to filter her search.</li>
+				</ul>
 			</div>
 			</div>
 			<div>
