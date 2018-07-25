@@ -58,9 +58,9 @@
 			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, breed, etc.</li>
 			<li>She fills out the information and scrolls down to a map with the ability to pin the area where the dog was found.</li>
 			<li>She finalizes the post and waits to see if the owner gets in contact with her.</li>
-			<li>A few days later Kristi receives a message via Facebook from Walter Lawrence.</li>
-			<li>They schedule a time and place to meet so the dog can be returned to Walter.</li>
-			<li>Walter is reunited with his dog and Kristi changes the status of her post to returned!</li>
+			<li>A few days later Kristi receives a message via Facebook from the owner.</li>
+			<li>They schedule a time and place to meet so the dog can be returned to the owner.</li>
+			<li>The owner is reunited with his dog and Kristi changes the status of her post to returned!</li>
 		</ul>
 
 	</body>
