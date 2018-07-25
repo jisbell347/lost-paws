@@ -13,13 +13,13 @@
 		<h3>User Story</h3>
 		<p>Walter needs a website where he can connect with people who have located missing pets.</p>
 		<h3>Frustrations</h3>
-		<ol>
+		<ul>
 			<li>Not able to post pictures of lost pet</li>
-			<li>Needs to provide contact information without providing info to spammers</li>
-		</ol>
+			<li>Needs to provide contact information without providing info to spammers.</li>
+		</ul>
 		<h3>Interaction Flow</h3>
 		<ol>
-			<li>After searching his neighborhood his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smartphone, at the recommendation of a coworker.</li>
+			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smartphone, at the recommendation of a coworker.</li>
 			<li>Walt is greeted to the LostPaws homepage with three options, Lost A Pet, Found A Pet, and I am already a registered user.</li>
 			<li>Walt taps the Lost A Pet button.</li>
 			<li>Walt is then presented with a heat map of lost pets in Albuquerque.</li>
