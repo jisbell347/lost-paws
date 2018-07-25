@@ -24,6 +24,14 @@
 					about the many lost animals she has found and return them home.</p>
 			</div>
 			<div>
+				<h2>Needs</h2>
+				<ul>
+					<li>Wants to be able to post information about found pets.</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div>
 				<h1>Walter Lawrence</h1>
 				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence">
 				<div>
