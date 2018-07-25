@@ -3,6 +3,7 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>Lost Paws Use Case</title>
+		<link rel="stylesheet" href="./css/styles.css" type="text/css">
 	</head>
 	<body>
 		<h1>Use Cases</h1>
