@@ -3,7 +3,7 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>Lost Paws Persona</title>
-		<link rel="stylesheet" href="./css/styles.css">
+		<link rel="stylesheet" href="./css/styles.css" type="text/css">
 	</head>
 	<body>
 		<div>
@@ -30,6 +30,10 @@
 					<li>Wants to be able to contact owners about pets that she found.</li>
 					<li>Wants to be able to search through missing pets to see if they match any she has found.</li>
 				</ul>
+			</div>
+			<div>
+
+			</div>
 			</div>
 			<div>
 				<h1>Walter Lawrence</h1>
