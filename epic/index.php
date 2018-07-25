@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
+<html>
+	<head lang="en">
 		<title>Lost Paws Data Design</title>
 		<meta charset="UTF-8">
 	</head>
