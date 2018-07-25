@@ -3,6 +3,7 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>Lost Paws Persona</title>
+		<link rel="stylesheet" href="./css/styles.css">
 	</head>
 	<body>
 		<div>
@@ -23,7 +24,7 @@
 					about the many lost animals she has found and return them home.</p>
 			</div>
 			<div>
-				<h1>Kristi Wilkins</h1>
+				<h1>Walter Lawrence</h1>
 				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence">
 				<div>
 					<h2>Persona</h2>
