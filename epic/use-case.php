@@ -42,12 +42,6 @@
 		<h3>User Story&#58;</h3>
 		<p>Kristi needs a website that allows her to make a post with relevant information on the dog, so she can
 		get in contact with the owner and return the dog.</p>
-		<h3>Frustrations&#58;</h3>
-		<ul>
-			<li>Not being able to post a picture of the dog.</li>
-			<li>Unable to mark the region where the dog was found.</li>
-			<li>Unable to easily correspond with the owner.</li>
-		</ul>
 		<h3>Interaction Flow&#58;</h3>
 		<ul>
 			<li>Kristi arrives at the homepage.</li>
