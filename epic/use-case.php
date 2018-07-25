@@ -24,7 +24,7 @@
 			<li>Walt is greeted to the LostPaws homepage with three options, Lost A Pet, Found A Pet, and I am already a registered user.</li>
 			<li>Walt taps the Lost A Pet button.</li>
 			<li>Walt is then presented with a list of lost pets in Albuquerque.</li>
-			<li>Walt zooms in on his area of town and filters the map to only view lost dogs.</li>
+			<li>Walt filters results to only view lost dogs.</li>
 			<li>Walt thinks to himself, “wow there are so many lost pets.”	Walt refines his search again to only see dogs found today.</li>
 			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button below the heat map.</li>
 			<li>Walt sets up a user account by signing in with his google id, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
