@@ -26,7 +26,7 @@
 			<li>Walt is then presented with a list of lost pets in Albuquerque.</li>
 			<li>Walt filters results to only view lost dogs.</li>
 			<li>Walt thinks to himself, “wow there are so many lost pets.”	Walt refines his search again to only see dogs found today.</li>
-			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button below the heat map.</li>
+			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button at the bottom of the page.</li>
 			<li>Walt sets up a user account by signing in with his google id, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
 			<li>After submitting the lost dog posting, Walt is given the option to print out an automatically generated lost dog poster. Walt prints 80 copies and plasters every telephone pole in his neighborhood.</li>
 			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved heeler mix.</li>
