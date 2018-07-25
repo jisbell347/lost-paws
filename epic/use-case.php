@@ -12,12 +12,6 @@
 		<p>Walter lost his dog after the leash slipped out of his hands when his heeler mixlunged after a pigeon.</p>
 		<h3>User Story:</h3>
 		<p>Walter needs a website where he can connect with people who have located missing pets.</p>
-		<h3>Frustrations:</h3>
-		<ul>
-			<li>Not able to post pictures of lost pet</li>
-			<li>Needs to provide contact information without providing info to spammers.</li>
-			<li>Doesn't want to deal with Facebook.</li>
-		</ul>
 		<h3>Interaction Flow:</h3>
 		<ol>
 			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smart phone, at the recommendation of a coworker.</li>
