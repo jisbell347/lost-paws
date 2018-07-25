@@ -8,7 +8,7 @@
 	<body>
 		<div>
 			<h1>Kristi Wilkins</h1>
-			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins" class="finder-persona-image">
+			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins" class="persona-image">
 		</div>
 			<div>
 				<h2>Persona</h2>
@@ -41,7 +41,7 @@
 			</div>
 			<div>
 				<h1>Walter Lawrence</h1>
-				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence">
+				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence" class="persona-image">
 				<div>
 					<h2>Persona</h2>
 					<p><span>Name:</span> Walter Lawrence</p>
