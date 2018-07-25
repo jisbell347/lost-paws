@@ -3,12 +3,11 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>Lost Paws Persona</title>
-		<link rel="stylesheet" href="./css/styles.css" type="text/css">
 	</head>
 	<body>
 		<div>
 			<h1>Kristi Wilkins</h1>
-			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins" class="finder-persona-image">
+			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins">
 			<div>
 				<h2>Persona</h2>
 					<p><span>Name:</span> Kristi Wilkins</p>
@@ -24,14 +23,17 @@
 					about the many lost animals she has found and return them home.</p>
 			</div>
 			<div>
-				<h2>Needs</h2>
-				<ul>
-					<li>Wants to be able to post information about found pets.</li>
-					<li>Wants to be able to contact owners about pets that she found.</li>
-					<li>Wants to be able to search through missing pets to see if they match any she has found.</li>
-				</ul>
+				<h1>Kristi Wilkins</h1>
+				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence">
+				<div>
+					<h2>Persona</h2>
+					<p><span>Name:</span> Walter Lawrence</p>
+					<p><span>Gender:</span> Male</p>
+					<p><span>Age:</span> 32</p>
+					<p><span>Marital Status:</span> Married</p>
+					<p><span>Profession:</span> Walter Lawrence is a web developer working at a medium sized software development company. Currently, Walter is in the middle of very challenging and time consuming project that takes a lot of his free time as well.</p>
+				</div>
 			</div>
-
 
 
 	</body>
