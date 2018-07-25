@@ -9,7 +9,7 @@
 		<h1>Use Cases:</h1>
 		<h2>Walter Lawrence - Pet Owner</h2>
 		<h3>Use Case</h3>
-		<p>Walter lost his dog after the leash slipped out of his hands when his poodle lunged after a pigeon.</p>
+		<p>Walter lost his dog after the leash slipped out of his hands when his heeler mixlunged after a pigeon.</p>
 		<h3>User Story:</h3>
 		<p>Walter needs a website where he can connect with people who have located missing pets.</p>
 		<h3>Frustrations:</h3>
@@ -29,7 +29,7 @@
 			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button below the heat map.</li>
 			<li>Walt sets up a user account by signing in with his google id, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
 			<li>After submitting the lost dog posting, Walt is given the option to print out an automatically generated lost dog poster. Walt prints 80 copies and plasters every telephone pole in his neighborhood.</li>
-			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved poodle.</li>
+			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved heeler mix.</li>
 			<li>Walt updates his lost pet listing to "reunited."</li>
 		</ol>
 
