@@ -16,10 +16,11 @@
 		<ul>
 			<li>Not able to post pictures of lost pet</li>
 			<li>Needs to provide contact information without providing info to spammers.</li>
+			<li>Doesn't want to deal with Facebook.</li>
 		</ul>
 		<h3>Interaction Flow:</h3>
 		<ol>
-			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smartphone, at the recommendation of a coworker.</li>
+			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smart phone, at the recommendation of a coworker.</li>
 			<li>Walt is greeted to the LostPaws homepage with three options, Lost A Pet, Found A Pet, and I am already a registered user.</li>
 			<li>Walt taps the Lost A Pet button.</li>
 			<li>Walt is then presented with a heat map of lost pets in Albuquerque.</li>
@@ -28,7 +29,7 @@
 			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button below the heat map.</li>
 			<li>Walt sets up a user account by signing in with his google id, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
 			<li>After submitting the lost dog posting, Walt is given the option to print out an automatically generated lost dog poster. Walt prints 80 copies and plasters every telephone pole in his neighborhood.</li>
-			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque.</li>
+			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved poodle.</li>
 			<li>Walt updates his lost pet listing to "reunited."</li>
 		</ol>
 
