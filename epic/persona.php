@@ -32,7 +32,6 @@
 					<p><span>Age:</span> 32</p>
 					<p><span>Marital Status:</span> Married</p>
 					<p><span>Profession:</span> Walter Lawrence is a web developer working at a medium sized software development company. Currently, Walter is in the middle of very challenging and time consuming project that takes a lot of his free time as well.</p>
-					<p><span>Technology:</span> Walter uses a Windows Surface Pro (Intel Core i7; 16GB RAM; 512GB SSD; 12.3" Touchscreen 2736x1824px Display; Windows 10 Pro) at work and a Dell Inspiron 17 5000 Series laptop (Intel Core i7; 16GB RAM; 17.3" 1920x1080px Display; Windows 10 Home) at home. He also owns an Apple iPhone 5S (iOS 7; 16GB Internal Storage; 1136x640px resolution) with an unlimited 4G data connection.</p>
 				</div>
 			</div>
 
