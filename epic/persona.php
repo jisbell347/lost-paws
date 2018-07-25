@@ -8,7 +8,7 @@
 	<body>
 		<div>
 			<h1>Kristi Wilkins</h1>
-			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins">
+			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins" class="finder-persona-image">
 		</div>
 			<div>
 				<h2>Persona</h2>
