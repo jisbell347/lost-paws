@@ -27,8 +27,8 @@
 				<h2>Needs</h2>
 				<ul>
 					<li>Wants to be able to post information about found pets.</li>
-					<li></li>
-					<li></li>
+					<li>Wants to be able to contact owners about pets that she found.</li>
+					<li>Wants to be able to search through missing pets to see if they match any she has found.</li>
 				</ul>
 			</div>
 			<div>
