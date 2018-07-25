@@ -6,18 +6,18 @@
 		<link rel="stylesheet" href="./css/styles.css" type="text/css">
 	</head>
 	<body>
-		<h1>Use Cases</h1>
+		<h1>Use Cases:</h1>
 		<h2>Walter Lawrence - Pet Owner</h2>
 		<h3>Use Case</h3>
 		<p>Walter lost his dog after the leash slipped out of his hands when his poodle lunged after a pigeon.</p>
-		<h3>User Story</h3>
+		<h3>User Story:</h3>
 		<p>Walter needs a website where he can connect with people who have located missing pets.</p>
-		<h3>Frustrations</h3>
+		<h3>Frustrations:</h3>
 		<ul>
 			<li>Not able to post pictures of lost pet</li>
 			<li>Needs to provide contact information without providing info to spammers.</li>
 		</ul>
-		<h3>Interaction Flow</h3>
+		<h3>Interaction Flow:</h3>
 		<ol>
 			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smartphone, at the recommendation of a coworker.</li>
 			<li>Walt is greeted to the LostPaws homepage with three options, Lost A Pet, Found A Pet, and I am already a registered user.</li>
@@ -26,7 +26,7 @@
 			<li>Walt zooms in on his area of town and filters the map to only view lost dogs.</li>
 			<li>Walt thinks to himself, “wow there are so many lost pets.”	Walt refines his search again to only see dogs found today.</li>
 			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button below the heat map.</li>
-			<li>Walt sets up a user account, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
+			<li>Walt sets up a user account by signing in with his google id, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
 			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque.</li>
 		</ol>
 
