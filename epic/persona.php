@@ -8,7 +8,7 @@
 	<body>
 		<div>
 			<h1>Kristi Wilkins</h1>
-			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins" class="persona-image">
+			<img src="./images/kristi-wilkins.jpg" alt="Image of Kristi Wilkins" class="persona-image" />
 		</div>
 			<div>
 				<h2>Persona</h2>
@@ -47,9 +47,10 @@
 				to create online blogs about animals and food both with her mobile device and laptop. She prefers to use her laptop
 				while at home but enjoys surfing the web on her phone. </p>
 		</div>
+		<hr />
 			<div>
 				<h1>Walter Lawrence</h1>
-				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence" class="persona-image">
+				<img src="./images/walter-lawrence.jpg" alt="Walter Lawrence" class="persona-image" />
 				<div>
 					<h2>Persona</h2>
 					<p><span>Name:</span> Walter Lawrence</p>
