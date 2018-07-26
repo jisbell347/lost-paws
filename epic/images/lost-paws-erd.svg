@@ -159,18 +159,11 @@
       <text x="73.9581" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">animalDate</text>
     </g>
     <g fill="rgb(255,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke="rgb(255,255,204)">
-      <ellipse rx="49.9741" ry="20" clip-path="url(#clipPath2)" cx="372.3716" cy="270.1904" stroke="none"/>
+      <ellipse rx="49.9741" ry="20" clip-path="url(#clipPath2)" cx="367.596" cy="270.1904" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
-      <ellipse rx="49.9741" fill="none" ry="20" clip-path="url(#clipPath2)" cx="372.3716" cy="270.1904"/>
-      <text x="328.2535" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">animalFeatures</text>
-    </g>
-    <g fill="rgb(255,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke="rgb(255,255,204)">
-      <ellipse rx="49.9741" ry="20" clip-path="url(#clipPath2)" cx="502.3199" cy="270.1904" stroke="none"/>
-    </g>
-    <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
-      <ellipse rx="49.9741" fill="none" ry="20" clip-path="url(#clipPath2)" cx="502.3199" cy="270.1904"/>
-      <text x="461.9224" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">animalGender</text>
+      <ellipse rx="49.9741" fill="none" ry="20" clip-path="url(#clipPath2)" cx="367.596" cy="270.1904"/>
+      <text x="327.1985" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">animalGender</text>
     </g>
     <g fill="rgb(255,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke="rgb(255,255,204)">
       <ellipse rx="46.4472" ry="20" clip-path="url(#clipPath2)" cx="60.7064" cy="340.1904" stroke="none"/>
@@ -322,12 +315,8 @@
       <path d="M126.1156 252.6805 L139.0385 249.0751 L130.985 240.1789 Z" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
-      <path fill="none" d="M246.7162 192.9884 L335.7269 247.6761" clip-path="url(#clipPath2)"/>
-      <path d="M345.0993 253.4344 L338.0158 242.0404 L331.7339 252.2648 Z" clip-path="url(#clipPath2)" stroke="none"/>
-    </g>
-    <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
-      <path fill="none" d="M254.1337 182.7034 L451.6214 230.7243 L460.4886 233.9264 L467.6565 238.8074 L473.9748 244.5277" clip-path="url(#clipPath2)"/>
-      <path d="M482.1292 251.9105 L477.2604 239.4087 L469.2065 248.3044 Z" clip-path="url(#clipPath2)" stroke="none"/>
+      <path fill="none" d="M245.7334 192.9884 L331.6165 247.3968" clip-path="url(#clipPath2)"/>
+      <path d="M340.9088 253.2836 L333.9828 241.7932 L327.5608 251.9302 Z" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
       <path fill="none" d="M177.1968 192.9712 L61.052 255.7927 L57.2698 258.4956 L54.7189 261.8469 L53.3994 265.8465 L53.3113 270.4944 L57.4291 309.3029" clip-path="url(#clipPath2)"/>
