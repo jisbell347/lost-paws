@@ -17,23 +17,17 @@
 		<h2>Animal</h2>
 		<ul>
 			<li>animalId (primary key)</li>
-			<li>animalImageId (foreign key)</li>
 			<li>animalProfileId</li>
 			<li>animalChipNumber</li>
 			<li>animalDate</li>
 			<li>animalDescription</li>
 			<li>animalFeatures</li>
 			<li>animalGender</li>
+			<li>animalImageUrl</li>
 			<li>animalLocation</li>
 			<li>animalName</li>
 			<li>animalSpecies</li>
 			<li>animalStatus</li>
-		</ul>
-		<h2>Image</h2>
-		<ul>
-			<li>imageAnimalId (foreign key)</li>
-			<li>imageProfileId (foreign key)</li>
-			<li>imageUrl</li>
 		</ul>
 		<h2>Comments</h2>
 		<ul>
