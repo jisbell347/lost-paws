@@ -7,16 +7,17 @@
 .nav {
 	position: absolute;
 	width: 100%;
-	background: linear-gradient(green, #003d00);
+	background: linear-gradient(#804f0c, #3d190e);
+}
+.nav-list {
 }
 .nav-element {
-	background: linear-gradient(green, #003d00);
+	background: linear-gradient(#804f0c, #3d190e);
 	display: inline-block;
 	position: relative;
 	float: left;
 	padding: .5rem;
 	margin: .1rem;
-	margin-bottom: .8rem;
 	text-align: center;
 	border-right: 1px solid white;
 }
@@ -31,6 +32,17 @@
 a {
 	color: ghostwhite;
 	text-decoration: none;
+}
+
+.nav-logo {
+	display: inline-block;
+	position: relative;
+	float: right;
+	font-size: 1em;
+	color: ghostwhite;
+	margin-right: 5rem;
+	top: 50%;
+	right: 10%;
 }
 /*Sets width and height of images*/
 .persona-image {
