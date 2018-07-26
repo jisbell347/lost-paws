@@ -64,7 +64,11 @@
 					<p><span>Goals:</span>At the moment, Walter needs to fill in a form with the information about Chico quickly and upload the picture of him without any issues. He hopes that with help of <strong>lostpaws.com</strong> he will find Chico very quickly.</p>
 				</div>
 			</div>
-
+		<div>
+			<button class="btn">
+				<a href="./index.php">Back to Home</a>
+			</button>
+		</div>
 
 	</body>
 </html>

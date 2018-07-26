@@ -45,6 +45,11 @@
 		</ul>
 		<h1>Entity Relationship Diagram</h1>
 		<img src="./images/lost-paws-erd.svg" alt="entity relationship diagram">
+		<div>
+			<button class="btn">
+				<a href="./index.php">Back to Home</a>
+			</button>
+		</div>
 
 	</body>
 </html>

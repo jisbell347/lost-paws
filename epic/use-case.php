@@ -52,5 +52,10 @@
 			<li>They schedule a time and place to meet so the dog can be returned to the owner.</li>
 			<li>The owner is reunited with his dog and Kristi changes the status of her post to returned!</li>
 		</ul>
+		<div>
+			<button class="btn">
+				<a href="./index.php">Back to Home</a>
+			</button>
+		</div>
 	</body>
 </html>
