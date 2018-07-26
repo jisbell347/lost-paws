@@ -250,6 +250,13 @@
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
       <text x="-52.388" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" stroke="none">_ _ _ _ _ _ _ _ </text>
     </g>
+    <g fill="rgb(255,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke="rgb(255,255,204)">
+      <ellipse rx="40" ry="20" clip-path="url(#clipPath2)" cx="842.0249" cy="-17.8807" stroke="none"/>
+    </g>
+    <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
+      <ellipse rx="40" fill="none" ry="20" clip-path="url(#clipPath2)" cx="842.0249" cy="-17.8807"/>
+      <text x="805.2983" xml:space="preserve" y="-13.3456" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">profilePhone</text>
+    </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
       <path fill="none" d="M474.9929 -98.3763 L265.1612 -38.0744" clip-path="url(#clipPath2)"/>
       <path d="M254.5891 -35.0362 L267.7795 -32.584 L264.465 -44.1172 Z" clip-path="url(#clipPath2)" stroke="none"/>
@@ -357,6 +364,10 @@
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
       <path fill="none" d="M646.0766 218.175 L890.6344 261.2411" clip-path="url(#clipPath2)"/>
       <path d="M901.4677 263.1488 L890.6901 255.1586 L888.6089 266.9767 Z" clip-path="url(#clipPath2)" stroke="none"/>
+    </g>
+    <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,145)" stroke-linecap="butt">
+      <path fill="none" d="M555.0616 -98.6166 L796.5814 -30.666" clip-path="url(#clipPath2)"/>
+      <path d="M807.1703 -27.6869 L797.2438 -36.7126 L793.9938 -25.1611 Z" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
   </g>
 </svg>
