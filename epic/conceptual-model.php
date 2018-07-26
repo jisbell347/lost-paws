@@ -28,7 +28,7 @@
 			<li>animalSpecies</li>
 			<li>animalStatus</li>
 		</ul>
-		<h2>Comments</h2>
+		<h2>Comment</h2>
 		<ul>
 			<li>commentId (primary key)</li>
 			<li>commentAnimalId (foreign key)</li>
@@ -43,6 +43,5 @@
 			<li>Multiple Profiles can Upload multiple images m-n</li>
 			<li>Multiple Profiles can Post multiple Comments m-n</li>
 		</ul>
-
 	</body>
 </html>
