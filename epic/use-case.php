@@ -38,11 +38,13 @@
 		<h3>Interaction Flow&#58;</h3>
 		<ul>
 			<li>Kristi arrives at the homepage.</li>
-			<li>The homepage displays buttons showing lost a pet, found a pet, search, and create account/login.</li>
-			<li>Kristi clicks on search and filters through recent lost dogs.</li>
+			<li>The homepage displays buttons showing Search Lost and Found Pets, Report a Missing Pet, and User Login.</li>
+			<li>Kristi clicks on search and is show a page with a list of lost dogs.</li>
+			<li>She clicks filter and selects by most recent.</li>
 			<li>Kristi looks through the search results but doesn't find a post for the dog she found.</li>
-			<li>Kristi decides to make an account so that she can make a post about the dog.</li>
-			<li>She clicks on create account and a small popup asking her to make an account through Facebook, Google, or e-mail.</li>
+			<li>Kristi decides to make an account so that she can make a post about the dog and clicks on User login.</li>
+			<li>She is met with a small popup asking for login information or create an account.</li>
+			<li>She clicks create an account and is shown a small popup to create an account through Facebook, Google, or Email.</li>
 			<li>Kristi decides to log in through Facebook for easy communication.</li>
 			<li>Kristi is then brought to a new webpage.</li>
 			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, description, etc.</li>
