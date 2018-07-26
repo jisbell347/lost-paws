@@ -39,7 +39,7 @@
 		<h2>Relations</h2>
 		<ul>
 			<li>Multiple Profiles can Post multiple Animals m-n</li>
-			<li>Multiple Animals can Contain multiple Comments m-n</li>
+			<li>Multiple Animals can Contain multiple Comments m-m</li>
 			<li>Multiple Profiles can Upload multiple images m-n</li>
 			<li>Multiple Profiles can Post multiple Comments m-n</li>
 		</ul>
