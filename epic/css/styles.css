@@ -1,4 +1,14 @@
+/*Sets width and height of images*/
 .persona-image {
 	width: 250px;
 	height: auto;
+}
+
+/*Sets background color and border style of button element*/
+.btn {
+	background-color: #141d19;
+	border-radius: 50%;
+	border: none;
+	padding: 10px;
+	width: 64px;
 }
