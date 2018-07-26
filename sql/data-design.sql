@@ -11,10 +11,10 @@ CREATE TABLE profile (
 	profileHash CHAR(97) NOT NULL,
 	profileName VARCHAR(92) NOT NULL,
 	-- create a unique key
-	UNIQUE KEY (userEmail),
+	UNIQUE KEY (profileHash),
 	-- create index
-	INDEX (userName),
-	PRIMARY KEY (prifileId)
+	INDEX (profileName),
+	PRIMARY KEY (profileId)
 );
 
 -- create the Animal entity
