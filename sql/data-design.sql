@@ -1,7 +1,10 @@
-USE [databasename];
-
 -- set UTF-8 charset
 ALTER DATABASE [databasename] CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- drop tables if exist
+DROP TABLE IF EXISTS profile;
+DROP TABLE IF EXISTS animal;
+DROP TABLE IF EXISTS comment;
 
 -- create the Profile entity
 CREATE TABLE profile (
@@ -32,8 +35,8 @@ CREATE TABLE animal (
 	animalStatus ENUM('found', 'lost')
 );
 
--- create the Comments entity
-CREATE TABLE animal (
+-- create the Comment entity
+CREATE TABLE comment (
 	commentId BINARY(16) NOT NULL,
 	commentAnimalId BINARY(16) NOT NULL,
 	commentProfileId BINARY(16) NOT NULL,
