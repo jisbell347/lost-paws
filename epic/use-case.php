@@ -15,12 +15,12 @@
 		<h3>Interaction Flow:</h3>
 		<ol>
 			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smart phone, at the recommendation of a coworker.</li>
-			<li>Walt is greeted to the LostPaws homepage with three options, Search Lost and Found Pets, Report a Missing Pet, and User Login.</li>
+			<li>Walt is greeted to the LostPaws homepage with three options, "Search Lost and Found Pets", "Report a Missing Pet", and "User Login".</li>
 			<li>Walt taps the Search Lost and Found Pets button.</li>
 			<li>Walt is then presented with a list of reported pets in Albuquerque.</li>
 			<li>Walt clicks the filter menu and filters results to only view found dogs reported today.</li>
-			<li>Unfortunately Walt did not find his dog. So he clicks the  Report a Missing Pet button in the navigation at the bottom of the page.</li>
-			<li>Walt sets up a user account by signing in with his Google id, clicks the "I have lost my pet" radio button, then provides LostPaws with the following information about his lost dog: species(cat or dog),name, description, distinguishing features, date lost, and location last seen.</li>
+			<li>Unfortunately Walt did not find his dog. So he clicks the "Report a Missing Pet" button in the navigation at the bottom of the page.</li>
+			<li>Walt sets up a user account by signing in with his Google id, clicks the "I have lost my pet" radio button, then provides LostPaws with the following information about his lost dog: species(cat or dog), name, description, distinguishing features, date lost, and location last seen.</li>
 			<li>One week later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved heeler mix.</li>
 			<li>Walt updates his lost pet listing to "found."</li>
 		</ol>
