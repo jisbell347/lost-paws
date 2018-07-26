@@ -38,9 +38,10 @@ a {
 	display: inline-block;
 	position: relative;
 	float: right;
+	font-family: 'Gaegu', 'Arial',cursive;
 	font-size: 1em;
 	color: ghostwhite;
-	margin-right: 5rem;
+	margin-right: .5rem;
 	top: 50%;
 	right: 10%;
 }
