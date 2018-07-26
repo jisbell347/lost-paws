@@ -9,19 +9,18 @@
 		<h1>Use Cases:</h1>
 		<h2>Walter Lawrence - Pet Owner</h2>
 		<h3>Use Case</h3>
-		<p>Walter lost his dog after the leash slipped out of his hands when his heeler mixlunged after a pigeon.</p>
+		<p>Walter lost his dog after the leash slipped out of his hands when his heeler mix lunged after a pigeon.</p>
 		<h3>User Story:</h3>
 		<p>Walter needs a website where he can connect with people who have located missing pets.</p>
 		<h3>Interaction Flow:</h3>
 		<ol>
 			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smart phone, at the recommendation of a coworker.</li>
-			<li>Walt is greeted to the LostPaws homepage with three options, Lost A Pet, Found A Pet, and I am already a registered user.</li>
-			<li>Walt taps the Lost A Pet button.</li>
+			<li>Walt is greeted to the LostPaws homepage with three options, Search Lost and Found Pets, Report a Missing Pet, and User Login.</li>
+			<li>Walt taps the Search Lost Pets button.</li>
 			<li>Walt is then presented with a list of lost pets in Albuquerque.</li>
-			<li>Walt filters results to only view lost dogs.</li>
-			<li>Walt thinks to himself, “wow there are so many lost pets.”	Walt refines his search again to only see dogs found today.</li>
-			<li>Unfortunately Walt did not find his dog. So he clicks the post lost pet button at the bottom of the page.</li>
-			<li>Walt sets up a user account by signing in with his google id, then provides LostPaws with the following information about his lost dog: Name, Chip#, Breed, Gender, Color, Size, and other distinguishing features.</li>
+			<li>Walt clicks the fliter menu  and filters results to only view lost dogs reported today.</li>
+			<li>Unfortunately Walt did not find his dog. So he clicks the  Report a Missing Pet button in the navigatation at the bottom of the page.</li>
+			<li>Walt sets up a user account by signing in with his google id, clicks the "I have lost my pet" radio button, then provides LostPaws with the following information about his lost dog: species(cat or dog),name, description, distinguishing features, date lost, location last seen, and .</li>
 			<li>After submitting the lost dog posting, Walt is given the option to print out an automatically generated lost dog poster. Walt prints 80 copies and plasters every telephone pole in his neighborhood.</li>
 			<li>Three weeks later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved heeler mix.</li>
 			<li>Walt updates his lost pet listing to "found."</li>
