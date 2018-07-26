@@ -2,10 +2,10 @@
 .nav {
 	position: absolute;
 	width: 100%;
-	background-color: darkgreen;
+	background: linear-gradient(green, #003d00);
 }
 .nav-element {
-	background-color:slategray;
+	background: linear-gradient(green, #003d00);
 	display: inline-block;
 	position: relative;
 	float: left;
