@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head lang="en">
+<html lang="en">
+	<head>
 		<title>Lost Paws Conceptual Model</title>
 		<meta charset="UTF-8">
 	</head>

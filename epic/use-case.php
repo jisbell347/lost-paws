@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head lang="en">
+<html lang="en">
+	<head>
 		<meta charset="UTF-8">
 		<title>Lost Paws Use Case</title>
 		<link rel="stylesheet" href="./css/styles.css" type="text/css">
