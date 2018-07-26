@@ -3,6 +3,7 @@
 	<head>
 		<title>Lost Paws Data Design</title>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="./css/styles.css">
 	</head>
 	<body>
 		<nav class="nav">
