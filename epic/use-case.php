@@ -39,17 +39,19 @@
 		<h3>Interaction Flow&#58;</h3>
 		<ul>
 			<li>Kristi arrives at the homepage.</li>
-			<li>The homepage has a button that says "Found A Lost Animal? Click Here!"</li>
-			<li>A small popup appears asking her if she would like to make an account through Facebook, Google, or e-mail.</li>
+			<li>The homepage displays buttons showing lost a pet, found a pet, search, and create account/login.</li>
+			<li>Kristi clicks on search and filters through recent lost dogs.</li>
+			<li>Kristi looks through the search results but doesn't find a post for the dog she found.</li>
+			<li>Kristi decides to make an account so that she can make a post about the dog.</li>
+			<li>She clicks on create account and a small popup asking her to make an account through Facebook, Google, or e-mail.</li>
 			<li>Kristi decides to log in through Facebook for easy communication.</li>
 			<li>Kristi is then brought to a new webpage.</li>
-			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, breed, etc.</li>
+			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, description, etc.</li>
 			<li>She fills out the information and scrolls down to a map with the ability to pin the area where the dog was found.</li>
 			<li>She finalizes the post and waits to see if the owner gets in contact with her.</li>
 			<li>A few days later Kristi receives a message via Facebook from the owner.</li>
 			<li>They schedule a time and place to meet so the dog can be returned to the owner.</li>
 			<li>The owner is reunited with his dog and Kristi changes the status of her post to returned!</li>
 		</ul>
-
 	</body>
 </html>
