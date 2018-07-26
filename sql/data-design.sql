@@ -13,6 +13,7 @@ CREATE TABLE profile (
 	profileEmail VARCHAR(128) NOT NULL,
 	profileHash CHAR(97) NOT NULL,
 	profileName VARCHAR(92) NOT NULL,
+	profilePhone VARCHAR(15),
 	-- create a unique key
 	UNIQUE KEY (profileHash),
 	-- create index
