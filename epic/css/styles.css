@@ -1,3 +1,32 @@
+/*Sets rules for nav bar elements*/
+.nav {
+	position: absolute;
+	width: 100%;
+	background-color: darkgreen;
+}
+.nav-element {
+	background-color:slategray;
+	display: inline-block;
+	position: relative;
+	float: left;
+	padding: 1rem;
+	margin: .4rem;
+	margin-bottom: 1.2rem;
+	text-align: center;
+	border-right: 1px solid white;
+}
+/*Adds shadow to element on hover*/
+.nav-element:hover, .btn:hover {
+	box-shadow: 0 10px 5px rgba(0, 0, 0, 0.6);
+}
+.nav-element:active, .btn:active {
+	transform: translateY(.1rem);
+}
+
+a {
+	color: ghostwhite;
+	text-decoration: none;
+}
 /*Sets width and height of images*/
 .persona-image {
 	width: 250px;
