@@ -16,9 +16,9 @@
 		<ol>
 			<li>After searching his neighborhood for hours to find his lost dog, Walt navigates to www.lostpaws.com on his smart phone, at the recommendation of a coworker.</li>
 			<li>Walt is greeted to the LostPaws homepage with three options, Search Lost and Found Pets, Report a Missing Pet, and User Login.</li>
-			<li>Walt taps the Search Lost Pets button.</li>
+			<li>Walt taps the Search Lost and Found Pets button.</li>
 			<li>Walt is then presented with a list of lost pets in Albuquerque.</li>
-			<li>Walt clicks the fliter menu  and filters results to only view lost dogs reported today.</li>
+			<li>Walt clicks the filter menu  and filters results to only view lost dogs reported today.</li>
 			<li>Unfortunately Walt did not find his dog. So he clicks the  Report a Missing Pet button in the navigatation at the bottom of the page.</li>
 			<li>Walt sets up a user account by signing in with his google id, clicks the "I have lost my pet" radio button, then provides LostPaws with the following information about his lost dog: species(cat or dog),name, description, distinguishing features, date lost, location last seen, and .</li>
 			<li>After submitting the lost dog posting, Walt is given the option to print out an automatically generated lost dog poster. Walt prints 80 copies and plasters every telephone pole in his neighborhood.</li>
