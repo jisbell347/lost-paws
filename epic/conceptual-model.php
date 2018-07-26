@@ -18,7 +18,6 @@
 		<ul>
 			<li>animalId (primary key)</li>
 			<li>animalProfileId</li>
-			<li>animalChipNumber</li>
 			<li>animalDate</li>
 			<li>animalDescription</li>
 			<li>animalFeatures</li>
@@ -39,14 +38,9 @@
 		</ul>
 		<h2>Relations</h2>
 		<ul>
-			<li>One Profile can Post multiple Animals 1-n</li>
-			<li>One Animal can Display one Image 1-1</li>
-			<li>One Profile can Upload multiple Images 1-n</li>
-			<li>One Profile can Post multiple Comments 1-m</li>
-			<li>One Profile Contain multiple Comments 1-m</li>
 			<li>Multiple Profiles can Post multiple Animals m-n</li>
 			<li>Multiple Animals can Contain multiple Comments m-n</li>
-			<li>Mutiple Profiles can Upload multiple images m-n</li>
+			<li>Multiple Profiles can Upload multiple images m-n</li>
 			<li>Multiple Profiles can Post multiple Comments m-n</li>
 		</ul>
 
