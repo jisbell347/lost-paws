@@ -43,5 +43,8 @@
 			<li>Multiple Profiles can Upload multiple images m-n</li>
 			<li>Multiple Profiles can Post multiple Comments m-n</li>
 		</ul>
+		<h1>Entity Relationship Diagram</h1>
+		<img src="./images/lost-paws-erd.svg" alt="entity relationship diagram">
+
 	</body>
 </html>
