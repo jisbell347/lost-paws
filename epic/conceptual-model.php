@@ -14,6 +14,7 @@
 			<li>profileEmail</li>
 			<li>profileHash</li>
 			<li>profileName</li>
+			<li>profilePhone</li>
 		</ul>
 		<h2>Animal</h2>
 		<ul>
@@ -46,11 +47,13 @@
 		</ul>
 		<h1>Entity Relationship Diagram</h1>
 		<img src="./images/lost-paws-erd.svg" alt="entity relationship diagram">
-		<div>
-			<button class="btn">
-				<a href="./index.php">Back to Home</a>
-			</button>
-		</div>
+		<nav>
+			<ul>
+				<li><a href="index.php">Index Page</a></li>
+				<li><a href="conceptual-model.php">Conceptual Model</a></li>
+				<li><a href="use-case.php">Use Case</a></li>
+			</ul>
+		</nav>
 
 	</body>
 </html>
