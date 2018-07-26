@@ -34,4 +34,14 @@ CREATE TABLE animal (
 
 -- create the Comments entity
 CREATE TABLE animal (
+	commentId BINARY(16) NOT NULL,
+	commentAnimalId BINARY(16) NOT NULL,
+	commentProfileId BINARY(16) NOT NULL,
+	commentDate DATETIME(6) NOT NULL,
+	commentText VARCHAR(250) NOT NULL,
+	INDEX(commentDate),
+	FOREIGN KEY(commentAnimalId) REFERENCES animal(animalId),
+	FOREIGN KEY(commentProfileId) REFERENCES profile(profileId),
+	PRIMARY KEY(commentId)
 );
+
