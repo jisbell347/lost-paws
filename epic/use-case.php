@@ -46,7 +46,7 @@
 			<li>She is met with a small popup asking for login information or create an account.</li>
 			<li>She clicks create an account and is shown a small popup to create an account through Facebook, Google, or Email.</li>
 			<li>Kristi decides to log in through Facebook for easy communication.</li>
-			<li>Kristi is then brought to a new webpage.</li>
+			<li>Kristi is brought to the homepage and clicks Report a Missing Pet.</li>
 			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, description, etc.</li>
 			<li>She fills out the information and scrolls down to a map with the ability to pin the area where the dog was found.</li>
 			<li>She finalizes the post and waits to see if the owner gets in contact with her.</li>
@@ -54,7 +54,6 @@
 			<li>They schedule a time and place to meet so the dog can be returned to the owner.</li>
 			<li>The owner is reunited with his dog and Kristi changes the status of her post to returned!</li>
 		</ul>
-
 		<h2>Mockup Home Page</h2>
 		<div>
 			<button class="btn">
