@@ -3,6 +3,7 @@
 	<head>
 		<title>Lost Paws Conceptual Model</title>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/styles.css" type="text/css">
 	</head>
 	<body>
 		<h1>Conceptual Model</h1>
