@@ -22,7 +22,6 @@
 			<li>animalProfileId</li>
 			<li>animalDate</li>
 			<li>animalDescription</li>
-			<li>animalFeatures</li>
 			<li>animalGender</li>
 			<li>animalImageUrl</li>
 			<li>animalLocation</li>
