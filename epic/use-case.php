@@ -44,7 +44,7 @@
 			<li>Kristi looks through the search results but doesn't find a post for the dog she found.</li>
 			<li>Kristi decides to login so that she can make a post about the dog and clicks on User login.</li>
 			<li>She is met with a small popup asking for login information or create an account.</li>
-			<li>She clicks through Facebook, so that she can have easy communication.</li>
+			<li>She clicks login through Facebook, so that she can have easy communication.</li>
 			<li>Kristi is brought to the homepage and clicks Report a Missing Pet.</li>
 			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, description, etc.</li>
 			<li>She fills out the information and scrolls down to a map with the ability to pin the area where the dog was found.</li>
