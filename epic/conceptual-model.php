@@ -25,6 +25,7 @@
 		<ul>
 			<li>animalId (primary key)</li>
 			<li>animalProfileId (foreign key)</li>
+			<li>animalColor</li>
 			<li>animalDate</li>
 			<li>animalDescription</li>
 			<li>animalGender</li>
