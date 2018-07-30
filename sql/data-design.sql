@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS profile;
 DROP TABLE IF EXISTS animal;
 DROP TABLE IF EXISTS comment;
 
-CREATE TABLE oAuth {
+CREATE TABLE oAuth (
 	oAuthId BINARY(16) NOT NULL,
 	oAuthSource VARCHAR(16)
-	}
+);
 
 -- create the Profile entity
 CREATE TABLE profile (
