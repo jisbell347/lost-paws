@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS oAuth;
 
 CREATE TABLE oAuth (
 	oAuthId BINARY(16) NOT NULL,
-	oAuthSource VARCHAR(16)
+	oAuthSource VARCHAR(16),
+	PRIMARY KEY (oAuthId)
 );
 
 -- create the Profile entity
@@ -43,7 +44,7 @@ CREATE TABLE animal (
 	animalStatus ENUM('found', 'lost', 'reunited'),
 	INDEX (animalProfileId),
 	INDEX (animalDate),
-	INDEX (animalDescription),
+	INDEX (animalColor),
 	FOREIGN KEY(animalProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY(animalId)
 );
