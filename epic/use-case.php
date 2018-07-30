@@ -38,7 +38,7 @@
 		<ul>
 			<li>Kristi arrives at the homepage.</li>
 			<li>The homepage displays buttons showing Search Lost and Found Pets, Report a Missing Pet, and User Login.</li>
-			<li>Kristi clicks on search and is show a page with a list of lost dogs.</li>
+			<li>Kristi clicks on search and is shown a page with a list of lost dogs.</li>
 			<li>She clicks filter and selects by most recent.</li>
 			<li>Kristi looks through the search results but doesn't find a post for the dog she found.</li>
 			<li>Kristi decides to login so that she can make a post about the dog and clicks on User login.</li>
