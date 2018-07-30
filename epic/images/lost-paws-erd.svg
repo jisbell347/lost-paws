@@ -21,6 +21,9 @@
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath6">
         <path d="M-406.3664 -279.1193 L1038.6337 -279.1193 L1038.6337 434.8807 L-406.3664 434.8807 L-406.3664 -279.1193 Z"/>
       </clipPath>
+      <clipPath clipPathUnits="userSpaceOnUse" id="clipPath7">
+        <path d="M-1070.4548 -567.1904 L374.5451 -567.1904 L374.5451 146.8096 L-1070.4548 146.8096 L-1070.4548 -567.1904 Z"/>
+      </clipPath>
     </defs>
     <g fill="white" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="translate(177,325)" stroke="white">
       <rect x="-177" width="1445" height="714" y="-325" clip-path="url(#clipPath2)" stroke="none"/>
@@ -300,6 +303,15 @@
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,325)" stroke-linecap="butt">
       <ellipse rx="40" fill="none" ry="20" clip-path="url(#clipPath2)" cx="224.3249" cy="270.1904"/>
       <text x="191.5094" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">animalDate</text>
+    </g>
+    <g text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,1070.4549,567.1904)" image-rendering="optimizeQuality">
+      <image x="0" y="0" clip-path="url(#clipPath7)" width="101" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAA9CAYAAAC0oadVAAACNklEQVR4Xu2cyW4U&#10;QRAFk8VgvAC2JbxzwCABBnzxBniRF2QD//8/ZChd0pymWz2N9A7vSXGtljIqs+aS&#10;E+E4juM4juPo5dEDjx94YnrR6gWthqOEg/jAXPIseZ7Mm15QK6BuT6PqOLOYJoSD&#10;F5Ll5FWyYnrxOqpe1I36IWcmMU0IBy0la8lGspO8Nb3YTbaT9WQ1WYyqJ+NsUJBC&#10;y2GYA5HxPvmcfE2+mU6+JJ+i6oYcuudF1GUfFGxildajQz4kB8lJ8tP04ntyFCVo&#10;L3kTNXW47IOCFN4SZiJdQoccJ5fJbfLLdHKdnEeJ+ZhsJS+jfjQNSpPCY8V8ZGT9&#10;iBLyO/ljOrmLEkPH7Eddbi75aFJoQVqSG8AH/5pO7pObqMvM+2IpAliKIJYiiKUI&#10;YimCWIogliKIpQhiKYJYiiCWIoilCGIpgliKIJYiiKUIYimCWIogliKIpQhiKYJY&#10;iiCWIoilCGIpgliKIJYiiKUIYimCWIogliKIpQjyX6Ww5comFxtJfOQu6oNmOlzg&#10;q+Q0apNrO0aSwiEcxpYru3sXUStjyDHTQchZchi187gZI+w8tu1g9sBZO2aEIYaO&#10;oSXNdOgQhDBl3sUI28Ftj569b/bo6Za9qI5hPppuGFl0CEK2YoQ9+sl/nFiMEkPH&#10;cDgPFu+MmQ51ol50CEKoI6OLKTQ4k2IwvBQ1E3lnTD+oF3WjfjP/N0tL+0spRhmW&#10;Odj0h5oBMqjjzEIm0/6vygzDcRzHcRzHkcw/30TLPAO25W4AAAAASUVORK5CYII=" height="61" preserveAspectRatio="none"/>
+      <path fill="rgb(255,204,102)" d="M901.4548 250.1904 L981.4548 250.1904 L981.4548 290.1904 L901.4548 290.1904 Z" clip-path="url(#clipPath2)" transform="matrix(1,0,0,1,-893.4549,-242.1904)" stroke="none" image-rendering="auto"/>
+      <path stroke-linecap="butt" transform="matrix(1,0,0,1,-893.4549,-242.1904)" clip-path="url(#clipPath2)" fill="none" image-rendering="auto" d="M901.4548 250.1904 L981.4548 250.1904 L981.4548 290.1904 L901.4548 290.1904 Z" stroke-miterlimit="1.45"/>
+      <rect stroke-linecap="butt" x="904.4549" y="253.1904" transform="matrix(1,0,0,1,-893.4549,-242.1904)" clip-path="url(#clipPath2)" fill="none" width="74" image-rendering="auto" height="34" stroke-miterlimit="1.45"/>
+    </g>
+    <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,177,325)" stroke-linecap="butt">
+      <text x="913.1042" xml:space="preserve" y="274.7256" clip-path="url(#clipPath2)" stroke="none">Comment</text>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,325)" stroke-linecap="butt">
       <path fill="none" d="M475.0023 -101.3926 L172.5313 -37.2436" clip-path="url(#clipPath2)"/>
