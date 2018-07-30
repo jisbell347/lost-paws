@@ -1,5 +1,5 @@
 -- set UTF-8 charset
-ALTER DATABASE lostfuzzy CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER DATABASE lostFuzzy CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- drop tables if exist
 DROP TABLE IF EXISTS oAuth;
