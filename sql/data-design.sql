@@ -33,7 +33,7 @@ CREATE TABLE animal (
 	animalLocation VARCHAR(200),
 	animalName VARCHAR(100),
 	animalSpecies ENUM('dog', 'cat'),
-	animalStatus ENUM('found', 'lost'),
+	animalStatus ENUM('found', 'lost', 'reunited'),
 	INDEX (animalDate),
 	INDEX (animalDescription),
 	FOREIGN KEY(animalProfileId) REFERENCES profile(profileId),
