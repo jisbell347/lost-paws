@@ -7,12 +7,19 @@
 	</head>
 	<body>
 		<h1>Conceptual Model</h1>
+		<h2>oAuth</h2>
+		<ul>
+			<li>oAuthId (primary key)</li>
+			<li>oAuthFacebook</li>
+			<li>oAuthGoogle</li>
+			<li>oAuthHash</li>
+		</ul>
 		<h2>Profile</h2>
 		<ul>
 			<li>profileId (primary key)</li>
-			<li>profileActivationToken</li>
+			<li>profileOAuthId (foreign key)</li>
+			<li>profileAccessToken</li>
 			<li>profileEmail</li>
-			<li>profileHash</li>
 			<li>profileName</li>
 			<li>profilePhone</li>
 		</ul>
