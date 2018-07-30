@@ -22,6 +22,7 @@
 			<li>Unfortunately Walt did not find his dog. So he clicks the "Report a Missing Pet" button in the navigation at the bottom of the page.</li>
 			<li>Walt sets up a user account by signing in with his Google id, clicks the "I have lost my pet" radio button, then provides LostPaws with the following information about his lost dog: species(cat or dog), name, description, distinguishing features, date lost, and location last seen.</li>
 			<li>Walt uploads the best photo from his iPhone's photo library that shows the best overall view of Chico.</li>
+			<li>Walt reviews his posting and clicks submit.</li>
 			<li>One week later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved heeler mix.</li>
 			<li>Walt updates his lost pet listing to "found."</li>
 		</ol>
@@ -46,8 +47,8 @@
 			<li>She is met with a small popup asking for login information or create an account.</li>
 			<li>She clicks login through Facebook.</li>
 			<li>Kristi is brought to the homepage and clicks Report a Missing Pet.</li>
-			<li>The webpage displays a space to upload a picture as well as multiple lines to fill out name, description, etc.</li>
-			<li>She fills out the information.</li>
+			<li>The webpage displays a space to upload a picture and she adds one picture she took of the dog.</li>
+			<li>She then fills out multiple lines to fill out name, description, etc.</li>
 			<li>She finalizes the post and waits to see if the owner gets in contact with her.</li>
 			<li>A few days later Kristi receives a message via email from the owner.</li>
 			<li>They schedule a time and place to meet so the dog can be returned to the owner.</li>
