@@ -1,6 +1,6 @@
 <?php
 
-namespace  Namespace/here ;
+namespace \namespace\here;
 
 /*
  *oAuth section of lostpaws.com. The user clicks on an authentication service (Google, Facebook, Github) which then
