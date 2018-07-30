@@ -258,8 +258,8 @@
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,325)" stroke-linecap="butt">
       <ellipse rx="40" fill="none" ry="20" clip-path="url(#clipPath2)" cx="435.0249" cy="-219.9519"/>
-      <text x="409.7534" y="-215.4167" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" font-weight="bold" xml:space="preserve">oAuthiD</text>
-      <line y2="-212.8855" fill="none" x1="409.7534" clip-path="url(#clipPath2)" x2="460.2963" y1="-212.8855"/>
+      <text x="410.4975" y="-215.4167" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" font-weight="bold" xml:space="preserve">oAuthId</text>
+      <line y2="-212.8855" fill="none" x1="410.4975" clip-path="url(#clipPath2)" x2="459.5522" y1="-212.8855"/>
     </g>
     <g fill="rgb(255,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,177,325)" stroke="rgb(255,255,204)">
       <ellipse rx="41.5412" ry="20" clip-path="url(#clipPath2)" cx="596.566" cy="-219.9519" stroke="none"/>
