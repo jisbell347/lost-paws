@@ -20,11 +20,10 @@ CREATE TABLE profile (
 	profileEmail VARCHAR(128) NOT NULL,
 	profileName VARCHAR(92) NOT NULL,
 	profilePhone VARCHAR(15),
-	-- create a unique key
-	UNIQUE KEY (profileHash),
-	-- create index
+	-- create indexes
+	INDEX(profileEmail),
 	INDEX (profileName),
-	FOREIGN KEY(profileOAuthId) REFERENCES oauth(oAuthId),
+	FOREIGN KEY(profileOAuthId) REFERENCES oAuth(oAuthId),
 	PRIMARY KEY (profileId)
 );
 
