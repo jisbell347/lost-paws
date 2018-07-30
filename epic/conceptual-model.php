@@ -10,9 +10,7 @@
 		<h2>oAuth</h2>
 		<ul>
 			<li>oAuthId (primary key)</li>
-			<li>oAuthFacebook</li>
-			<li>oAuthGoogle</li>
-			<li>oAuthHash</li>
+			<li>oAuthSource</li>
 		</ul>
 		<h2>Profile</h2>
 		<ul>
