@@ -22,6 +22,7 @@
 			<li>Unfortunately Walt did not find his dog. So he clicks the "Report a Missing Pet" button in the navigation at the bottom of the page.</li>
 			<li>Walt sets up a user account by signing in with his Google id, clicks the "I have lost my pet" radio button, then provides LostPaws with the following information about his lost dog: species(cat or dog), name, description, distinguishing features, date lost, and location last seen.</li>
 			<li>Walt uploads the best photo from his iPhone's photo library that shows the best overall view of Chico.</li>
+			<li>Walt reviews his posting and clicks submit.</li>
 			<li>One week later Walt receives a phone call from a young college student named Margo. Margo found walt's dog in the Bosque. Walter arranges to meet with Margo the same day at the local police station to be reunited with his beloved heeler mix.</li>
 			<li>Walt updates his lost pet listing to "found."</li>
 		</ol>
