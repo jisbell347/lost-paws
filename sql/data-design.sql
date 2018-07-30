@@ -21,7 +21,7 @@ CREATE TABLE profile (
 	profileName VARCHAR(92) NOT NULL,
 	profilePhone VARCHAR(15),
 	-- create indexes
-	INDEX (profileId),
+	INDEX (profileOAuthId),
 	INDEX(profileEmail),
 	INDEX (profileName),
 	FOREIGN KEY(profileOAuthId) REFERENCES oAuth(oAuthId),
