@@ -7,5 +7,30 @@ namespace \namespace\here;
  */
 
 class Comment {
+	/**
+	 * id for comment, this is the primary key
+	 * @var Uuid $commentId
+	 **/
+	private $commentId;
+	/**
+	 * id of the animal that receives the comment, this is a foreign key
+	 * @var Uuid $commentAnimalId
+	 **/
+	private $commentAnimalId;
+	/**
+	 * id of the profile that made the comment, this is a foreign key
+	 * @var Uuid $commentProfileId
+	 **/
+	private $commentProfileId;
+	/**
+	 * date and time this comment was made, in a PHP DateTime Object
+	 * @var \DateTime $commentDate
+	 */
+	private $commentDate;
+	/**
+	 *textual content of this comment
+	 * @var string $commentText
+	 **/
+	private $commentText;
 
 }
