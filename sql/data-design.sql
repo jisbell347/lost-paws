@@ -31,6 +31,7 @@ CREATE TABLE profile (
 CREATE TABLE animal (
 	animalId BINARY(16) NOT NULL,
 	animalProfileId BINARY(16) NOT NULL,
+	animalColor VARCHAR(25),
 	animalDate DATETIME(6) NOT NULL,
 	animalDescription VARCHAR(250) NOT NULL,
 	animalGender ENUM('male', 'female'),
