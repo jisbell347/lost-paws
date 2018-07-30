@@ -47,7 +47,7 @@
 			<li>She is met with a small popup asking for login information or create an account.</li>
 			<li>She clicks login through Facebook.</li>
 			<li>Kristi is brought to the homepage and clicks Report a Missing Pet.</li>
-			<li>The webpage displays spaces to fill out name, description, etc.</li>
+			<li>The webpage displays spaces to fill out the info she has for the dog, such as name, description, etc.</li>
 			<li>She then uploads one photo of the dog she found.</li>
 			<li>She finalizes the post and waits to see if the owner gets in contact with her.</li>
 			<li>A few days later Kristi receives a message via email from the owner.</li>
