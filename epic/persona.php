@@ -42,8 +42,8 @@
 		<div>
 			<h2>Technology</h2>
 			<p>Kristi owns a Macbook Air 13.3" screen with 1.7GHz Intel Core i5 dual-core processor, 4GB DDR3 RAM,128GB
-				Solid-State Hard Drive and macOS operating system. She also loves to browse the web while on the go using her
-				iPhone X 5.8" screen with 256GB and iOS operating system. She is very comfortable with technology as she loves
+				Solid-State Hard Drive and macOS 10.13 operating system. She also loves to browse the web while on the go using her
+				iPhone X 5.8" screen with 256GB and iOS 11.4 operating system. She is very comfortable with technology as she loves
 				to create online blogs about animals and food both with her mobile device and laptop. She prefers to use her laptop
 				while at home but enjoys surfing the web on her phone. </p>
 		</div>
