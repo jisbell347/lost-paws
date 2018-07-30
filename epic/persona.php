@@ -16,7 +16,7 @@
 					<p><span>Gender:</span> Female</p>
 					<p><span>Age:</span> 24</p>
 					<p><span>Marital Status:</span> Single</p>
-					<p><span>Profession:</span> Sous Chef</p>
+					<p><span>Profession:</span> Sous Chef Kitty</p>
 			</div>
 			<div>
 				<h2>Attitude</h2>
