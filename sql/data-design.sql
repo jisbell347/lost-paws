@@ -33,7 +33,6 @@ CREATE TABLE animal (
 	animalProfileId BINARY(16) NOT NULL,
 	animalDate DATETIME(6) NOT NULL,
 	animalDescription VARCHAR(250) NOT NULL,
-	animalFeatures VARCHAR(100),
 	animalGender ENUM('male', 'female'),
 	animalImageUrl VARCHAR(500),
 	animalLocation VARCHAR(200),
