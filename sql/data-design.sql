@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS profile;
 DROP TABLE IF EXISTS oAuth;
 
 CREATE TABLE oAuth (
-	oAuthId BINARY(16) NOT NULL,
+	oAuthId TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	oAuthSource VARCHAR(16),
 	PRIMARY KEY (oAuthId)
 );
@@ -16,8 +16,8 @@ CREATE TABLE oAuth (
 -- create the Profile entity
 CREATE TABLE profile (
 	profileId BINARY(16) NOT NULL,
-	profileOAuthId BINARY(16) NOT NULL,
-	profileAccessToken CHAR(32),
+	profileOAuthId TINYINT UNSIGNED NOT NULL,
+	profileAccessToken VARCHAR(255),
 	profileEmail VARCHAR(128) NOT NULL,
 	profileName VARCHAR(92) NOT NULL,
 	profilePhone VARCHAR(15),
@@ -36,14 +36,13 @@ CREATE TABLE animal (
 	animalColor VARCHAR(25),
 	animalDate DATETIME(6) NOT NULL,
 	animalDescription VARCHAR(250) NOT NULL,
-	animalGender ENUM('male', 'female'),
+	animalGender VARCHAR(6) NOT NULL,
 	animalImageUrl VARCHAR(500),
 	animalLocation VARCHAR(200),
 	animalName VARCHAR(100),
-	animalSpecies ENUM('dog', 'cat'),
-	animalStatus ENUM('found', 'lost', 'reunited'),
+	animalSpecies CHAR(3) NOT NULL ,
+	animalStatus VARCHAR(8) NOT NULL,
 	INDEX (animalProfileId),
-	INDEX (animalDate),
 	INDEX (animalColor),
 	FOREIGN KEY(animalProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY(animalId)
