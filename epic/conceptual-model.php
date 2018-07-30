@@ -52,6 +52,8 @@
 		</ul>
 		<h1>Entity Relationship Diagram</h1>
 		<img src="./images/lost-paws-erd.svg" alt="entity relationship diagram">
+		<h1>Entity Relationship Diagram Using Crow’s Foot Notation</h1>
+		<img src="./images/lost-paws.jpg" alt="entity relationship diagram 2">
 		<nav>
 			<ul>
 				<li><a href="index.php">Index Page</a></li>
