@@ -2,22 +2,29 @@
 ALTER DATABASE [databasename] CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- drop tables if exist
+DROP TABLE IF EXISTS oAuth;
 DROP TABLE IF EXISTS profile;
 DROP TABLE IF EXISTS animal;
 DROP TABLE IF EXISTS comment;
 
+CREATE TABLE oAuth {
+	oAuthId BINARY(16) NOT NULL,
+	oAuthSource VARCHAR(16)
+	}
+
 -- create the Profile entity
 CREATE TABLE profile (
 	profileId BINARY(16) NOT NULL,
-	profileActivationToken CHAR(32),
+	profileOAuthId BINARY(16) NOT NULL,
+	profileAccessToken CHAR(32),
 	profileEmail VARCHAR(128) NOT NULL,
-	profileHash CHAR(97) NOT NULL,
 	profileName VARCHAR(92) NOT NULL,
 	profilePhone VARCHAR(15),
 	-- create a unique key
 	UNIQUE KEY (profileHash),
 	-- create index
 	INDEX (profileName),
+	FOREIGN KEY(profileOAuthId) REFERENCES oauth(oAuthId),
 	PRIMARY KEY (profileId)
 );
 
