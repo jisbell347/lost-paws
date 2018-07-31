@@ -40,7 +40,7 @@ class OAuth {
 	 * @throws \Exception if some other exception occurs
 	 * @throws \TypeError if data violates the type hints
 	 * @Documentation https:/php.net/manuel/en/languqge.oop5.decon.php
-	 */
+	 **/
 
 	public function __construct(int $newOAuthId, string $newOAuthSource) {
 		try {
