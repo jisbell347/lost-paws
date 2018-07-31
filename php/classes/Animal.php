@@ -170,10 +170,32 @@ class Animal {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		$this->animalDate = $newAnimalDate;
+	}
+
+	/**
+	 * accessor method for animal description
+	 *
+	 * @return string description of animal
+	 */
+	public function getAnimalDescription(): string {
+		return ($this->animalDescription);
+	}
+
+	public function setAnimalDescription(string $newAnimalDescription): void {
+		//verify animal description is secure
+		$newAnimalDescription = trim($newAnimalDescription);
+		$newAnimalDescription = filter_var($newAnimalDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newAnimalDescription) === true) {
+			throw(new \InvalidArgumentException("Animal description content is empty or insecure"));
 		}
 
+		// verify the animal description content will fit in the database
+		if(strlen($newAnimalDescription) > 250) {
+			throw(new \RangeException("Animal description content is too long. Limit 250 characters"));
+		}
 
-
-
+		// store the article content
+		$this->animalDescription = $newAnimalDescription;
+	}
 
 }
