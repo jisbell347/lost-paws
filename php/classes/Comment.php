@@ -1,6 +1,6 @@
 <?php
 
-namespace \namespace\here;
+namespace \Jisbell347\LostPaws;
 
 /*
  * Comment section of the lostpaws.com site. A user will be able to post comments about the animal to contact other people in regards to the status of the animal.
@@ -32,5 +32,77 @@ class Comment {
 	 * @var string $commentText
 	 **/
 	private $commentText;
+
+
+	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, $newCommentDate = null, string $newCommentText) {
+		try{
+			$this->setCommentId($newCommentId);
+			$this->setCommentAnimalId($newCommentAnimalId);
+			$this->setCommentProfileId($newCommentProfileId);
+			$this->setCommentDate($newCommentDate);
+			$this->setCommentText($newCommentText);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+	}
+
+	/**
+	 * accessor method for comment id
+	 *
+	 * @return Uuid value of comment id
+	**/
+	/**
+	 * @return Uuid
+	 */
+	public function getCommentId(): Uuid {
+		return($this->commentId);
+	}
+
+	/**
+	 * mutator method for comment id
+	 *
+	 * @param Uuid|string $newCommentId new value of comment id
+	 * @throws \RangeException if $newCommentId is not positive
+	 * @throws \TypeError if $newCommentId is not a uuid or string
+	**/
+	public function setCommentId($newCommentId) : void {
+		try {
+			$uuid = self::validateUuid($newCommentId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+
+		//convert and store the comment id
+		$this->commentId = $uuid;
+	}
+
+	/**
+	 * accessor method for comment animal id
+	 *
+	 * @return Uuid value of comment animal id
+	 */
+	public function getCommentAnimalId(): Uuid {
+		return($this->commentAnimalId);
+	}
+
+	/**
+	 * mutator method for comment animal id
+	 *
+	 * @param Uuid|string $newCommentAnimalId new value of comment animal id
+	 * @throws \RangeException if $newCommentAnimalId is not positive
+	 * @throws \TypeError if $newCommentAnimalId is not a uuid or string
+	**/
+	public function setCommentAnimalId($newCommentAnimalId) : void {
+		try {
+			$uuid = self::validateUuid($newCommentAnimalId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		//convert and store the comment animal id
+		$this->commentAnimalId = $uuid;
+	}
 
 }
