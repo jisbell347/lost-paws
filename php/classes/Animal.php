@@ -7,8 +7,8 @@ namespace \namespace\here;
  */
 
 class Animal {
-	useValidateUuid;
-	useValidateDate;
+	use ValidateUuid;
+	use ValidateDate;
 
 	/**
 	 * id for animal: this is the primary key
