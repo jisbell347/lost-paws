@@ -1,0 +1,13 @@
+<phpunit>
+	<testsuites>
+		<testsuite name="Lost Paws Capstone Project">
+			<!-- Add file name of unit test below -->
+			<file>OAuthTest.php</file>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">..</directory>
+		</whitelist>
+	</filter>
+</phpunit>
