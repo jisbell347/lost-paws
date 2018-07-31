@@ -129,7 +129,7 @@ class Animal {
 	/**
 	 * accessor method for animal profile id
 	 *
-	 * @return Uuid
+	 * @return Uuid value of animal profile id
 	 */
 	public function getAnimalProfileId(): Uuid {
 		return ($this->animalProfileId);
@@ -145,6 +145,33 @@ class Animal {
 		// convert and store the animal id
 		$this->animalProfileId = $uuid;
 	}
+
+	/**
+	 * accessor method for animal date
+	 *
+	 * @return \DateTime value of animal last seen
+	 */
+	public function getAnimalDate(): \DateTime {
+		return ($this->animalDate);
+	}
+
+	public function setAnimalDate($newAnimalDate = null): void {
+		//base case: if the animal date is empty, use the current date and time
+		if($newAnimalDate === null){
+			$this->animalDate = new \DateTime();
+			return;
+		}
+
+		//store the animal using ValidateDate trait
+		try{
+			$newAnimalDate = self::validateDateTime($newAnimalDate);
+		} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		$this->animalDate = $newAnimalDate;
+		}
+
 
 
 
