@@ -376,7 +376,7 @@ class Animal {
 	}
 
 	/**
-	 * accessor method for animal spcecies
+	 * accessor method for animal species
 	 *
 	 * @return string value of animal species
 	 */
@@ -389,7 +389,7 @@ class Animal {
 	 *
 	 * @param string $newAnimalSpecies new value of animal species
 	 * @throws \InvalidArgumentException if $newAnimalSpecies is not a string or insecure
-	 * @throws \RangeException if $newAnimalName is > 3 characters
+	 * @throws \RangeException if $newAnimalSpecies is > 3 characters
 	 * @throws \TypeError if $newAnimalSpecies is not a string
 	 **/
 	public function setAnimalSpecies(string $newAnimalSpecies) : void {
@@ -407,6 +407,40 @@ class Animal {
 
 		// store the animal species
 		$this->animalSpecies = $newAnimalSpecies;
+	}
+
+	/**
+	 * accessor method for animal status
+	 *
+	 * @return string value of animal status
+	 */
+	public function getAnimalStatus(): string {
+		return ($this->animalStatus);
+	}
+
+	/**
+	 * mutator method for animal status (lost, found, reunited)
+	 *
+	 * @param string $newAnimalStatus new value of animal status
+	 * @throws \InvalidArgumentException if $newAnimalStatus is not a string or insecure
+	 * @throws \RangeException if $newAnimalStatus is > 8 characters
+	 * @throws \TypeError if $newAnimalStatus is not a string
+	 **/
+	public function setAnimalStatus(string $newAnimalStatus) : void {
+		// verify the animal status input is secure
+		$newAnimalStatus = trim($newAnimalStatus);
+		$newAnimalStatus = filter_var($newAnimalStatus, FILTER_SANITIZE_URL);
+		if(empty($newAnimalStatus) === true) {
+			throw(new \InvalidArgumentException("animal status is empty or insecure."));
+		}
+
+		// verify the animal species input will fit in the database
+		if(strlen($newAnimalStatus) > 8) {
+			throw(new \RangeException("animal status text is too long. Limit 8 characters."));
+		}
+
+		// store the animal status
+		$this->animalStatus = $newAnimalStatus;
 	}
 }
 
