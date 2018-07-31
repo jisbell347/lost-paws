@@ -155,6 +155,14 @@ class Animal {
 		return ($this->animalColor);
 	}
 
+	/**
+	 * mutator method for animal color
+	 *
+	 * @param string $newAnimalColor new value of animal color
+	 * @throws \InvalidArgumentException if $newAnimalColor is not a string or is insecure
+	 * @throws \RangeException if $newAnimalColor  is > 25 characters
+	 * @throws \TypeError if $newAnimalColor is not a string
+	 **/
 	public function setAnimalColor($newAnimalColor): void {
 		// verify the animal color description string is secure
 		$newAnimalColor = trim($newAnimalColor);
