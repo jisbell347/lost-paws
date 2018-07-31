@@ -303,9 +303,44 @@ class Animal {
 			throw(new \RangeException("animal picture link is too long. limit 500 characters"));
 		}
 
-		// store the author profile picture link
+		// store the animal picture link
 		$this->animalImageUrl = $newAnimalImageUrl;
 	}
+
+	/**
+	 * accessor method for animal location
+	 *
+	 * @return string value of animal location
+	 */
+	public function getAnimalLocation(): string {
+		return ($this->animalLocation);
+	}
+
+	/**
+	 * mutator method for animal image url
+	 *
+	 * @param string $newAnimalLocation new value of animal location
+	 * @throws \InvalidArgumentException if $newAnimalLocation is not a string or insecure
+	 * @throws \RangeException if $newAnimalLocation is > 200 characters
+	 * @throws \TypeError if $newAnimalLocation is not a string
+	 **/
+	public function setAnimalLocation(string $newAnimalLocation) : void {
+		// verify the animal location description is secure
+		$newAnimalLocation = trim($newAnimalLocation);
+		$newAnimalLocation = filter_var($newAnimalLocation, FILTER_SANITIZE_URL);
+		if(empty($newAnimalLocation) === true) {
+			throw(new \InvalidArgumentException("animal location description is empty or insecure"));
+		}
+
+		// verify the animal location description will fit in the database
+		if(strlen($newAnimalLocation) > 200) {
+			throw(new \RangeException("animal location description is too long. Limit 200 characters"));
+		}
+
+		// store the animal location description
+		$this->animalLocation = $newAnimalLocation;
+	}
+
 
 
 }
