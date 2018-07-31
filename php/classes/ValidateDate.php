@@ -1,5 +1,5 @@
 <?php
-namespace Deepdivedylan\DataDesign;
+namespace Jisbell347\LostPaws;
 /**
  * Trait to Validate a mySQL Date
  *

@@ -1,10 +1,9 @@
 <?php
 
-namespace \namespace\here;
+namespace Jisbell347\LostPaws;
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
-use Ramsey\Uuid\Uuid;
 /**
  *oAuth section of lostpaws.com.
  *
@@ -15,8 +14,6 @@ use Ramsey\Uuid\Uuid;
  **/
 
 class OAuth {
-	use ValidateDate;
-	use ValidateUuid;
 
 	/**
 	 * id for this OAuth; This is the primary key
