@@ -135,6 +135,13 @@ class Animal {
 		return ($this->animalProfileId);
 	}
 
+	/**
+	 * mutator method for animal profile id
+	 *
+	 * @param Uuid| string $newAnimalProfileId value of new article id
+	 * @throws \rangeException if $newAnimalProfileId  is not positive
+	 * @throws \TypeError if animal profile id is not valid
+	 **/
 	public function setAnimalProfileId($newAnimalProfileId): void {
 		try{
 			$uuid = self::validateUuid($newAnimalProfileId);
