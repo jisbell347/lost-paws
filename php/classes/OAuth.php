@@ -155,4 +155,109 @@ class OAuth {
 		$parameters = ["oAuthId" => $this->oAuthId, "oAuthSource" => $this->oAuthSource];
 		$statement->execute($parameters);
 	}
+
+	/**
+	 * Gets the oAuth by oAuthID
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $oAuthId oAuth Id to search for
+	 * @return OAuth|null OAuth found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public static function getOAuthByOAuthId(\PDO $pdo, $oAuthId) : ?OAuth {
+		//Create the query template
+		$query = "SELECT oAuthId, oAuthSource FROM oAuth WHERE oAuthId = :oAuthId";
+		$statement = $pdo->prepare($query);
+
+		//Bind the oAuth Id to the place holder in the template
+		$parameters = ["oAuthId" => $oAuthId];
+		$statement->execute($parameters);
+
+		//Grab the oAuth from mySQL
+		try {
+			$oAuth = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$oAuth = new OAuth($row["oAuthId"], $row["oAuthSource"]);
+			}
+		} catch(\Exception $exception) {
+			//If the row couldn't be converted, rethrow it
+			throw (new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($oAuth);
+	}
+
+	/**
+	 * Gets oAuth by source
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $oAuthSource oAuth source to search for
+	 * @return \SplFixedArray SplFixedArray of sources found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getOAuthByOAuthSource(\PDO $pdo, string $oAuthSource) : \SplFixedArray {
+		//Sanitize the source before searching for it
+		$oAuthSource = trim($oAuthSource);
+		$oAuthSource = filter_var($oAuthSource, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+		//Escape any mySQL wild cards
+		$oAuthSource = str_replace("_", "\\", str_replace("%", "\\%", $oAuthSource));
+
+		//Create the query template
+		$query = "SELECT oAuthId, oAuthSource FROM oAuth WHERE oAuthSource LIKE :oAuthSource";
+		$statement = $pdo->prepare($query);
+
+		//Bind the oAuth source to the place holder in the template
+		$oAuthSource = "%$oAuthSource%";
+		$parameters = ["oAuthSource" => $oAuthSource];
+		$statement->execute($parameters);
+
+		//Build an array of sources
+		$sources = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$source = new OAuth($row["oAuthId"], $row["oAuthSource"]);
+				$sources[$sources->key()] = $source;
+				$sources->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw (new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($sources);
+	}
+
+	/**
+	 * Gets all oAuths
+	 *
+	 * @param \PDO $pdo PDO Connection object
+	 * @return \SplFixedArray of OAuths found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function  getAllOAuths(\PDO $pdo) : \SplFixedArray {
+		//Create query template
+		$query = "SELECT oAuthId, oAuthSource FROM oAuth";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		//Build an array of oAuths
+		$oAuths = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$oAuth = new OAuth($row["oAuthId"], $row["oAuthSource"]);
+				$oAuths[$oAuths->key()] = $oAuth;
+				$oAuths->next();
+			} catch(\Exception $exception) {
+				//If the row couldn't be converted, rethrow it
+				throw (new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($oAuths);
+	}
 }
