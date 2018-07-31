@@ -71,7 +71,7 @@ class OAuth {
 	public function setOAuthId(int $newOAuthId) : void {
 		//Verifies that the oAuth Id is a positive number
 		if($newOAuthId <= 0) {
-			throw (new \InvalidArgumentException("Id cannot be less than or equal to zero");)
+			throw (new \InvalidArgumentException("Id cannot be less than or equal to zero"));
 		}
 		//Stores the value if passes validation
 		$this->oAuthId = $newOAuthId;
@@ -95,7 +95,64 @@ class OAuth {
 	 **/
 
 	public function setOAuthSource(string $newOAuthSource) : void {
-
+		//Verify the source content is secure, trim the whitespace and remove any malicious html tags
+		$newOAuthSource = trim($newOAuthSource);
+		$newOAuthSource = filter_var($newOAuthSource, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		//Checks to see if value exceeds set character length and throws an error if it does
+		if(strlen($newOAuthSource) > 16) {
+			throw (new \RangeException("Character length cannot exceed 16 characters"));
+		}
+		$this->oAuthSource = $newOAuthSource;
 	}
 
+	/**
+	 * Inserts the oAuth into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mysSQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) : void {
+		//create query template
+		$query = "INSERT INTO oAuth(oAuthId, oAuthSource) VALUES (:oAuthId, :oAuthSource)";
+		$statement = $pdo->prepare($query);
+
+		//binds the member variables to the place holders in the template
+		$parameters = ["oAuthId" => $this->oAuthId, "oAuthSource" => $this->oAuthSource ];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * Deletes the oAuth from mySQL
+	 *
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+		//Creates the query template
+		$query = "DELETE FROM oAuth WHERE oAuthId = :oAuthId";
+		$statement = $pdo->prepare($query);
+
+		//Binds the member variables to the place holders in the template
+		$parameters = ["oAuthId" => $this->oAuthId];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * Updates the oAuth in mySQL
+	 *
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function update (\PDO $pdo) : void {
+		//Create query template
+		$query = "UPDATE oAuth SET oAuthSource = :oAuthSource WHERE oAuthId = :oAuthId";
+		$statement = $pdo->prepare($query);
+
+		//Binds the member variables to the place holders in the template
+		$parameters = ["oAuthId" => $this->oAuthId, "oAuthSource" => $this->oAuthSource];
+		$statement->execute($parameters);
+	}
 }
