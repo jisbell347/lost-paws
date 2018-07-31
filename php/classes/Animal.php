@@ -445,4 +445,18 @@ class Animal {
 }
 
 
+/**
+ * inserts lest pet into mySQL
+ *
+ * @param \PDO $pdo PDO connection object
+ * @throws\PDOException when mySQL related errors occur
+ * @throws\TypeError if $pdo is not a PDO connection object.
+ **/
+public function insert(\PDO $pdo): void {
+	//create query template
+	$query = "INSERT INTO article(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
+	$statement = $pdo->prepare($query);
+
+
+
 
