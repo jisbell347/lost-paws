@@ -176,5 +176,14 @@ class OAuthTest extends LostPawsTest {
 		$oAuth->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
+		$results = OAuth::getAllOAuths($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\\LostPaws\\OAuth", $results);
+
+		// grab the result from the array and validate it
+		$pdoOAuth = $results[0];
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuthId);
+		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
 	}
 }
