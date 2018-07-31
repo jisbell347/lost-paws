@@ -366,15 +366,49 @@ class Animal {
 			throw(new \InvalidArgumentException("animal name is empty or insecure. Type unknown if unknown"));
 		}
 
-		// verify the animal location description will fit in the database
+		// verify the animal name will fit in the database
 		if(strlen($newAnimalName) > 100) {
 			throw(new \RangeException("animal name text is too long. Limit 100 characters"));
 		}
 
-		// store the animal location description
+		// store the animal name
 		$this->animalName = $newAnimalName;
 	}
 
+	/**
+	 * accessor method for animal spcecies
+	 *
+	 * @return string value of animal species
+	 */
+	public function getAnimalSpecies(): string {
+		return ($this->animalSpecies);
+	}
 
+	/**
+	 * mutator method for animal species (dog or cat)
+	 *
+	 * @param string $newAnimalSpecies new value of animal species
+	 * @throws \InvalidArgumentException if $newAnimalSpecies is not a string or insecure
+	 * @throws \RangeException if $newAnimalName is > 3 characters
+	 * @throws \TypeError if $newAnimalSpecies is not a string
+	 **/
+	public function setAnimalSpecies(string $newAnimalSpecies) : void {
+		// verify the animal species input is secure
+		$newAnimalSpecies = trim($newAnimalSpecies);
+		$newAnimalSpecies = filter_var($newAnimalSpecies, FILTER_SANITIZE_URL);
+		if(empty($newAnimalSpecies) === true) {
+			throw(new \InvalidArgumentException("animal species is empty or insecure. Type unknown if unknown"));
+		}
 
+		// verify the animal species input will fit in the database
+		if(strlen($newAnimalSpecies) > 3) {
+			throw(new \RangeException("animal species text is too long. Limit 3 characters. Dog or Cat."));
+		}
+
+		// store the animal species
+		$this->animalSpecies = $newAnimalSpecies;
+	}
 }
+
+
+
