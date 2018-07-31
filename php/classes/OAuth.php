@@ -68,7 +68,7 @@ class OAuth implements \JsonSerializable {
 	public function setOAuthId(int $newOAuthId) : void {
 		//Verifies that the oAuth Id is a positive number
 		if($newOAuthId <= 0) {
-			throw (new \InvalidArgumentException("Id cannot be less than or equal to zero"));
+			throw (new \RangeException("Id cannot be less than or equal to zero"));
 		}
 		//Stores the value if passes validation
 		$this->oAuthId = $newOAuthId;
