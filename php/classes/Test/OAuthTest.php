@@ -30,7 +30,7 @@ class OAuthTest extends LostPawsTest {
 	 **/
 	protected $VALID_SOURCE2 = "still passing test";
 
-	public function setUp(): void {
+	public final function setUp(): void {
 		parent::setUp();
 	}
 
@@ -106,5 +106,67 @@ class OAuthTest extends LostPawsTest {
 	public function testGetValidOAuthByOAuthId() : void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("oAuth");
+
+		$oAuthId = 4;
+		$oAuth = new OAuth($oAuthId, $this->VALID_SOURCE);
+		$oAuth->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoOAuth = OAuth::getOAuthByOAuthId($this->getPDO(), $oAuth->getOAuthId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuthId);
+		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
+	}
+
+	/**
+	 * test grabbing an OAuth that does not exist
+	 **/
+	public function testGetInvalidOAuthbyOAuthId() : void {
+		//grab an oAuth id that exceeds the maximum allowable oAuth id
+		$fakeOAuthId = 6;
+		$oAuth = OAuth::getOAuthByOAuthId($this->getPDO(), $fakeOAuthId);
+		$this->assertNull($oAuth);
+	}
+
+	/**
+	 * test grabbing an OAuth by source
+	 **/
+	public function testGetValidOAuthBySource() {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("oAuth");
+
+		$oAuthId = 7;
+		$oAuth = new OAuth($oAuthId, $this->VALID_SOURCE);
+		$oAuth->insert($this->getPDO());
+
+		//grab the data from mySQL
+		$results = OAuth::getOAuthByOAuthSource($this->getPDO(), $this->VALID_SOURCE);
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
+
+		//enforce no other objects are bleeding into profile
+		$this->assertContainsOnlyInstancesOf("Jisbell\\LostPaws\\OAuth", $results);
+
+		//enforce the results meet expectations
+		$pdoOAuth = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuthId);
+		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
+	}
+
+	/**
+	 * test grabbing an OAuth by a source that does not exist
+	 **/
+	public function testGetInvalidOAuthBySource() : void {
+		// grab a source that does not exist
+		$oAuth = OAuth::getOAuthByOAuthSource($this->getPDO(), "comcast");
+		$this->assertCount(0, $oAuth);
+
+	}
+
+	/**
+	 * test grabbing all OAuths
+	 **/
+	public function testGetAllValidOAuths() : void {
+
 	}
 }
