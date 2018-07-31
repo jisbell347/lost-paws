@@ -81,7 +81,7 @@ class Animal {
 	 * @param string $newAnimalSpecies
 	 * @param string $newAnimalStatus
 	 **/
-	public function  __construct(Uuid $newAnimalId, Uuid $newAnimalProfileId, $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
+	public function __construct(Uuid $newAnimalId, Uuid $newAnimalProfileId, $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
 		try {
 			$this->setAnimalId($newAnimalId);
 			$this->setAnimalProfileId($newAnimalProfileId);
@@ -105,7 +105,7 @@ class Animal {
 	 * @return Uuid value of animal id
 	 */
 	public function getAnimalId(): Uuid {
-		return($this->animalId);
+		return ($this->animalId);
 	}
 
 	/**
@@ -118,8 +118,8 @@ class Animal {
 	public function setAnimalId($newAnimalId): void {
 		try {
 			$uuid = self::validateUuid($newAnimalId);
-		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			$exceptionType =get_class($exception);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
 			throw (new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		// convert and store the animal id
@@ -143,10 +143,10 @@ class Animal {
 	 * @throws \TypeError if animal profile id is not valid
 	 **/
 	public function setAnimalProfileId($newAnimalProfileId): void {
-		try{
+		try {
 			$uuid = self::validateUuid($newAnimalProfileId);
-		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			$exceptionType =get_class($exception);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
 			throw (new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		// convert and store the animal id
@@ -198,13 +198,13 @@ class Animal {
 
 	public function setAnimalDate($newAnimalDate = null): void {
 		//base case: if the animal date is empty, use the current date and time
-		if($newAnimalDate === null){
+		if($newAnimalDate === null) {
 			$this->animalDate = new \DateTime();
 			return;
 		}
 
 		//store the animal using ValidateDate trait
-		try{
+		try {
 			$newAnimalDate = self::validateDateTime($newAnimalDate);
 		} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
 			$exceptionType = get_class($exception);
@@ -256,7 +256,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalGender  is > 7 characters
 	 * @throws \TypeError if $newAnimalGender is not a string
 	 **/
-	public function setAnimalColor($newAnimalGender): void {
+	public function setAnimalGender($newAnimalGender): void {
 		// verify the animal gender description string is secure
 		$newAnimalGender = trim($newAnimalGender);
 		$newAnimalGender = filter_var($newAnimalGender, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -290,7 +290,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalImageUrl is > 500 characters
 	 * @throws \TypeError if $newAnimalImageUrl is not a string
 	 **/
-	public function setAnimalImageUrl(string $newAnimalImageUrl) : void {
+	public function setAnimalImageUrl(string $newAnimalImageUrl): void {
 		// verify the animal picture link is secure
 		$newAnimalImageUrl = trim($newAnimalImageUrl);
 		$newAnimalImageUrl = filter_var($newAnimalImageUrl, FILTER_SANITIZE_URL);
@@ -324,7 +324,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalLocation is > 200 characters
 	 * @throws \TypeError if $newAnimalLocation is not a string
 	 **/
-	public function setAnimalLocation(string $newAnimalLocation) : void {
+	public function setAnimalLocation(string $newAnimalLocation): void {
 		// verify the animal location description is secure
 		$newAnimalLocation = trim($newAnimalLocation);
 		$newAnimalLocation = filter_var($newAnimalLocation, FILTER_SANITIZE_URL);
@@ -358,7 +358,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalName is > 100 characters
 	 * @throws \TypeError if $newAnimalName is not a string
 	 **/
-	public function setAnimalName(string $newAnimalName) : void {
+	public function setAnimalName(string $newAnimalName): void {
 		// verify the animal name is secure
 		$newAnimalName = trim($newAnimalName);
 		$newAnimalName = filter_var($newAnimalName, FILTER_SANITIZE_URL);
@@ -392,7 +392,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalSpecies is > 3 characters
 	 * @throws \TypeError if $newAnimalSpecies is not a string
 	 **/
-	public function setAnimalSpecies(string $newAnimalSpecies) : void {
+	public function setAnimalSpecies(string $newAnimalSpecies): void {
 		// verify the animal species input is secure
 		$newAnimalSpecies = trim($newAnimalSpecies);
 		$newAnimalSpecies = filter_var($newAnimalSpecies, FILTER_SANITIZE_URL);
@@ -426,7 +426,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalStatus is > 8 characters
 	 * @throws \TypeError if $newAnimalStatus is not a string
 	 **/
-	public function setAnimalStatus(string $newAnimalStatus) : void {
+	public function setAnimalStatus(string $newAnimalStatus): void {
 		// verify the animal status input is secure
 		$newAnimalStatus = trim($newAnimalStatus);
 		$newAnimalStatus = filter_var($newAnimalStatus, FILTER_SANITIZE_URL);
@@ -442,20 +442,27 @@ class Animal {
 		// store the animal status
 		$this->animalStatus = $newAnimalStatus;
 	}
+
+	/**
+	 * inserts lest pet into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws\PDOException when mySQL related errors occur
+	 *
+	 * @throws\TypeError if $pdo is not a PDO connection object.*
+	 **/
+
+	public function insert(\PDO $pdo): void {
+		//create query template
+		$query = "INSERT INTO article(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
+		$statement = $pdo->prepare($query);
+
+		//bind the member variable to the placeholders in template
+		$formattedDate = $this->animalDate->format("Y-m-d H:i:s.u");
+		$parameters = ["animalId" => $this->animalId->getBytes(), "animalProfileId" => $this->animalProfileId->getBytes(), "animalColor" => $this->animalColor, "animalDate" => $formattedDate, "animalDescription" => $this->animalDescription, "animalGender" => $this->animalGender, "animalImageUrl" => $this->animalImageUrl, "animalLocation" => $this->animalLocation, "animalName" => $this->animalName, "animalSpecies" => $this->animalSpecies, "animalStatus" => $this->animalStatus];
+		$statement->execute($parameters);
+	}
 }
-
-
-/**
- * inserts lest pet into mySQL
- *
- * @param \PDO $pdo PDO connection object
- * @throws\PDOException when mySQL related errors occur
- * @throws\TypeError if $pdo is not a PDO connection object.
- **/
-public function insert(\PDO $pdo): void {
-	//create query template
-	$query = "INSERT INTO article(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
-	$statement = $pdo->prepare($query);
 
 
 
