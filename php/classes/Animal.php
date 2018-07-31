@@ -253,7 +253,7 @@ class Animal {
 	 *
 	 * @param string $newAnimalGender new value of animal gender
 	 * @throws \InvalidArgumentException if $newAnimalgender is not a string or is insecure
-	 * @throws \RangeException if $newAnimalGender  is > 6 characters
+	 * @throws \RangeException if $newAnimalGender  is > 7 characters
 	 * @throws \TypeError if $newAnimalGender is not a string
 	 **/
 	public function setAnimalColor($newAnimalGender): void {
@@ -265,7 +265,7 @@ class Animal {
 		}
 
 		// verify the animal color description will fit in the database
-		if(strlen($newAnimalGender) > 6) {
+		if(strlen($newAnimalGender) > 7) {
 			throw(new \RangeException("animal color description is too long"));
 		}
 
