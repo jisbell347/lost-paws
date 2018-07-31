@@ -93,10 +93,143 @@ class Animal {
 			$this->setAnimalName($newAnimalName);
 			$this->setAnimalSpecies($newAnimalSpecies);
 			$this->setAnimalStatus($newAnimalStatus);
-		} catch(\InvalidArgumentException | \RangeException | \ Exception | \TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
+	}
+
+	/**
+	 * accessor method for animal id
+	 *
+	 * @return Uuid value of animal id
+	 */
+	public function getAnimalId(): Uuid {
+		return($this->animalId);
+	}
+
+	/**
+	 * mutator method for animal id
+	 *
+	 * @param Uuid| string $newAnimalId value of new animal id
+	 * @throws \rangeException if $newAnimalId is not positive
+	 * @throws \TypeError if animal id is not valid
+	 */
+	public function setAnimalId($newAnimalId): void {
+		try {
+			$uuid = self::validateUuid($newAnimalId);
+		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType =get_class($exception);
+			throw (new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// convert and store the animal id
+		$this->animalId = $uuid;
+	}
+
+	/**
+	 * accessor method for animal profile id
+	 *
+	 * @return Uuid value of animal profile id
+	 */
+	public function getAnimalProfileId(): Uuid {
+		return ($this->animalProfileId);
+	}
+
+	public function setAnimalProfileId($newAnimalProfileId): void {
+		try{
+			$uuid = self::validateUuid($newAnimalProfileId);
+		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType =get_class($exception);
+			throw (new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// convert and store the animal id
+		$this->animalProfileId = $uuid;
+	}
+
+	/**
+	 * accessor method for animal color
+	 *
+	 * @return string value of animal color
+	 */
+	public function getAnimalColor(): string {
+		return ($this->animalColor);
+	}
+
+	/**
+	 * mutator method for animal color
+	 *
+	 * @param string $newAnimalColor new value of animal color
+	 * @throws \InvalidArgumentException if $newAnimalColor is not a string or is insecure
+	 * @throws \RangeException if $newAnimalColor  is > 25 characters
+	 * @throws \TypeError if $newAnimalColor is not a string
+	 **/
+	public function setAnimalColor($newAnimalColor): void {
+		// verify the animal color description string is secure
+		$newAnimalColor = trim($newAnimalColor);
+		$newAnimalColor = filter_var($newAnimalColor, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newAnimalColor) === true) {
+			throw(new \InvalidArgumentException("Animal color description is empty or insecure"));
+		}
+
+		// verify the animal color description will fit in the database
+		if(strlen($newAnimalColor) > 25) {
+			throw(new \RangeException("animal color description is too long"));
+		}
+
+		// store the author name
+		$this->animalColor = $newAnimalColor;
+	}
+
+	/**
+	 * accessor method for animal date
+	 *
+	 * @return \DateTime value of animal last seen
+	 */
+	public function getAnimalDate(): \DateTime {
+		return ($this->animalDate);
+	}
+
+	public function setAnimalDate($newAnimalDate = null): void {
+		//base case: if the animal date is empty, use the current date and time
+		if($newAnimalDate === null){
+			$this->animalDate = new \DateTime();
+			return;
+		}
+
+		//store the animal using ValidateDate trait
+		try{
+			$newAnimalDate = self::validateDateTime($newAnimalDate);
+		} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		$this->animalDate = $newAnimalDate;
+	}
+
+	/**
+	 * accessor method for animal description
+	 *
+	 * @return string description of animal
+	 */
+	public function getAnimalDescription(): string {
+		return ($this->animalDescription);
+	}
+
+	public function setAnimalDescription(string $newAnimalDescription): void {
+		//verify animal description is secure
+		$newAnimalDescription = trim($newAnimalDescription);
+		$newAnimalDescription = filter_var($newAnimalDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newAnimalDescription) === true) {
+			throw(new \InvalidArgumentException("Animal description content is empty or insecure"));
+		}
+
+		// verify the animal description content will fit in the database
+		if(strlen($newAnimalDescription) > 250) {
+			throw(new \RangeException("Animal description content is too long. Limit 250 characters"));
+		}
+
+		// store the animal description
+		$this->animalDescription = $newAnimalDescription;
 	}
 
 }
