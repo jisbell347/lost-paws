@@ -147,6 +147,32 @@ class Animal {
 	}
 
 	/**
+	 * accessor method for animal color
+	 *
+	 * @return string value of animal color
+	 */
+	public function getAnimalColor(): string {
+		return ($this->animalColor);
+	}
+
+	public function setAnimalColor($newAnimalColor): void {
+		// verify the animal color description string is secure
+		$newAnimalColor = trim($newAnimalColor);
+		$newAnimalColor = filter_var($newAnimalColor, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newAnimalColor) === true) {
+			throw(new \InvalidArgumentException("Animal color description is empty or insecure"));
+		}
+
+		// verify the animal color description will fit in the database
+		if(strlen($newAnimalColor) > 25) {
+			throw(new \RangeException("animal color description is too long"));
+		}
+
+		// store the author name
+		$this->animalColor = $newAnimalColor;
+	}
+
+	/**
 	 * accessor method for animal date
 	 *
 	 * @return \DateTime value of animal last seen
@@ -194,7 +220,7 @@ class Animal {
 			throw(new \RangeException("Animal description content is too long. Limit 250 characters"));
 		}
 
-		// store the article content
+		// store the animal description
 		$this->animalDescription = $newAnimalDescription;
 	}
 
