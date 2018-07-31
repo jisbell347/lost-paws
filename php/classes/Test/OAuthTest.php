@@ -167,6 +167,14 @@ class OAuthTest extends LostPawsTest {
 	 * test grabbing all OAuths
 	 **/
 	public function testGetAllValidOAuths() : void {
+		//count the number of rows and save them for later
+		$numRows = $this->getConnection() ->getRowCount("oAuth");
 
+		//create a new OAuth and insert it into mySQL
+		$oAuthId = 8;
+		$oAuth = new OAuth($oAuthId, $this->VALID_SOURCE);
+		$oAuth->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
 	}
 }
