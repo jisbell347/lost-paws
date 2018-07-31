@@ -261,7 +261,7 @@ class Animal {
 		$newAnimalGender = trim($newAnimalGender);
 		$newAnimalGender = filter_var($newAnimalGender, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newAnimalGender) === true) {
-			throw(new \InvalidArgumentException("Animal gender description is empty or insecure. "));
+			throw(new \InvalidArgumentException("Animal gender description is empty or insecure."));
 		}
 
 		// verify the animal color description will fit in the database
@@ -271,6 +271,40 @@ class Animal {
 
 		// store the author name
 		$this->animalGender = $newAnimalGender;
+	}
+
+	/**
+	 * accessor method for animal image url
+	 *
+	 * @return string value of image URL
+	 */
+	public function getAnimalImageUrl(): string {
+		return ($this->animalImageUrl);
+	}
+
+	/**
+	 * mutator method for animal image url
+	 *
+	 * @param string $newAnimalImageUrl new value of url location of animal picture
+	 * @throws \InvalidArgumentException if $newAnimalImageUrl is not a string or insecure
+	 * @throws \RangeException if $newAnimalImageUrl is > 500 characters
+	 * @throws \TypeError if $newAnimalImageUrl is not a string
+	 **/
+	public function setAnimalImageUrl(string $newAnimalImageUrl) : void {
+		// verify the animal picture link is secure
+		$newAnimalImageUrl = trim($newAnimalImageUrl);
+		$newAnimalImageUrl = filter_var($newAnimalImageUrl, FILTER_SANITIZE_URL);
+		if(empty($newAnimalImageUrl) === true) {
+			throw(new \InvalidArgumentException("animal picture link is empty or insecure"));
+		}
+
+		// verify the animal image url link will fit in the database
+		if(strlen($newAnimalImageUrl) > 500) {
+			throw(new \RangeException("animal picture link is too long. limit 500 characters"));
+		}
+
+		// store the author profile picture link
+		$this->animalImageUrl = $newAnimalImageUrl;
 	}
 
 
