@@ -135,6 +135,13 @@ class Animal {
 		return ($this->animalProfileId);
 	}
 
+	/**
+	 * mutator method for animal profile id
+	 *
+	 * @param Uuid| string $newAnimalProfileId value of new article id
+	 * @throws \rangeException if $newAnimalProfileId  is not positive
+	 * @throws \TypeError if animal profile id is not valid
+	 **/
 	public function setAnimalProfileId($newAnimalProfileId): void {
 		try{
 			$uuid = self::validateUuid($newAnimalProfileId);
@@ -231,5 +238,40 @@ class Animal {
 		// store the animal description
 		$this->animalDescription = $newAnimalDescription;
 	}
+
+	/**
+	 * accessor method for animal gender
+	 *
+	 * @return string value of animal gender
+	 */
+	public function getAnimalGender(): string {
+		return ($this->animalGender);
+	}
+
+	/**
+	 * mutator method for animal gender
+	 *
+	 * @param string $newAnimalGender new value of animal gender
+	 * @throws \InvalidArgumentException if $newAnimalgender is not a string or is insecure
+	 * @throws \RangeException if $newAnimalGender  is > 6 characters
+	 * @throws \TypeError if $newAnimalGender is not a string
+	 **/
+	public function setAnimalColor($newAnimalGender): void {
+		// verify the animal gender description string is secure
+		$newAnimalGender = trim($newAnimalGender);
+		$newAnimalGender = filter_var($newAnimalGender, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newAnimalGender) === true) {
+			throw(new \InvalidArgumentException("Animal gender description is empty or insecure. "));
+		}
+
+		// verify the animal color description will fit in the database
+		if(strlen($newAnimalGender) > 6) {
+			throw(new \RangeException("animal color description is too long"));
+		}
+
+		// store the author name
+		$this->animalGender = $newAnimalGender;
+	}
+
 
 }

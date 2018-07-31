@@ -165,4 +165,38 @@ class Comment {
 		$this->commentDate = $newCommentDate;
 	}
 
+	/**
+	 * accessor method for comment text
+	 *
+	 * @return string value of comment text
+	 */
+	public function getCommentText() : string {
+		return($this->commentText);
+	}
+
+	/**
+	 * mutator method for comment text
+	 *
+	 * @param string $newCommentText new value of comment text
+	 * @throws \InvalidArgumentException if $newCommentText is not a string or insecure
+	 * @throws \RangeException if $newCommentText is > 1000 characters
+	 * @throws \TypeError if $newCommentText is not a string
+	**/
+	public function setCommentText(string $newCommentText) : void {
+		//verify comment text is secure
+		$newCommentText = trim($newCommentText);
+		$newCommentText = filter_var($newCommentText, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newCommentText) === true) {
+			throw(new \InvalidArgumentException("comment text is empty or insecure"));
+		}
+
+		//verify the comment content will fit in the database
+		if(strlen($newCommentText) > 1000) {
+			throw(new \RangeException("comment text is too large"));
+		}
+
+		//store the comment text
+		$this->commentText = $newCommentText;
+	}
+
 }
