@@ -171,12 +171,63 @@ class Profile {
 	 * @throws \RangeException if the token is not exactly 32 characters
 	 * @throws \TypeError if the access token is not a string
 	 */
-	public function setProfileActivationToken(?string $newProfileAccessToken): void {
+	public function setProfileAccessToken(?string $newProfileAccessToken): void {
+		if($newProfileAccessToken === null) {
+			$this->profileAccessToken = null;
+			return;
+		}
+		$newProfileAccessToken = strtolower(trim($newProfileAccessToken));
+		// check if all characters are digits, if not - throw an exception
+		if(!ctype_xdigit($newProfileAccessToken)) {
+			throw(new \RangeException("User access token is not valid"));
+		}
+		//make sure user access token is more than 255 characters
+		if(strlen($newProfileActivationToken) > 255) {
+			throw(new \RangeException("User access token cannot be longer than 255-character long"));
+		}
+		$this->profileAccessToken = $newProfileAccessToken;
+	}
 
+	/**
+	 * accessor method for an email address
+	 *
+	 * @return string value of email
+	 **/
+	public function getProfileEmail(): string {
+		return $this->profileEmail;
+	}
+
+	/**
+	 * mutator method for setting/changing an email address
+	 *
+	 * @param string $newProfileEmail new value of an email address
+	 * @throws \InvalidArgumentException if $newEmail is not a valid email or insecure
+	 * @throws \RangeException if $newEmail is > 128 characters
+	 * @throws \TypeError if $newEmail is not a string
+	 **/
+	public function setProfileEmail(string $newProfileEmail): void {
+		// verify the email is secure
+		$newProfileEmail = trim($newProfileEmail);
+		$newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($newProfileEmail) === true) {
+			throw(new \InvalidArgumentException("profile email is empty or insecure"));
+		}
+		// verify the email will fit in the database
+		if(strlen($newProfileEmail) > 128) {
+			throw(new \RangeException("profile email is too large"));
+		}
+		// store the email
+		$this->profileEmail = $newProfileEmail;
 	}
 
 
 
+
+	/*
+	 * $this->setProfileEmail($newProfileEmail);
+			$this->setProfileName($newProfileName);
+			$this->setProfilePhone($newProfilePhone);
+	 */
 
 
 
