@@ -199,4 +199,23 @@ class Comment {
 		$this->commentText = $newCommentText;
 	}
 
+	/**
+	 * inserts this Comment into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occure
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	**/
+	public function insert(\PDO $pdo) : void {
+
+		//create query template
+		$query = "INSERT INTO comment(commentId, commentAnimalId, commentProfileId, commentDate, commentText) VALUES(:commentID, :commentAnimalId, :commentProfileId, :commentDate, :commentText)";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$formattedDate = $this->commentDate->format("Y-m-d H:i:s:u");
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
+		$statement->execute($parameters);
+	}
+
 }
