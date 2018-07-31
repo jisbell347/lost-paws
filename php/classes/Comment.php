@@ -132,4 +132,37 @@ class Comment {
 		$this->commentProfileId = $uuid;
 	}
 
+	/**
+	 * accessor method for comment date
+	 *
+	 * @return \DateTime value of comment date
+	**/
+	public function getCommentDate() : \DateTime {
+		return($this->commentDate);
+	}
+
+	/**
+	 * mutator method for comment date
+	 *
+	 * @param \DateTime|string|null $newCommentDate comment date as a DateTime object or string (or null to load the current time)
+	 * @throws \InvalidArgumentException if $newCommentDate is not a valid object or string
+	 * @throws \RangeException if $newCommentDate is a date that does not exist
+	**/
+	public function setCommentDate($newCommentDate = null) : void {
+		//base case: if the date is null, use the current date and time
+		if($newCommentDate === null) {
+			$this->commentDate = new \DateTime();
+			return;
+		}
+
+		//store the like date using the ValidateDate trait
+		try {
+			$newCommentDate = self::validateDateTime($newCommentDate);
+		} catch(\InvalidArgumentException | \RangeException $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		$this->commentDate = $newCommentDate;
+	}
+
 }
