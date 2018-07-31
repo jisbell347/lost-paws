@@ -99,4 +99,32 @@ class Animal {
 		}
 	}
 
+	/**
+	 * accessor method for animal id
+	 *
+	 * @return Uuid value of animal id
+	 */
+	public function getAnimalId(): Uuid {
+		return($this->animalId);
+	}
+
+	/**
+	 * mutator method for animal id
+	 *
+	 * @param Uuid| string $newAnimalId value of new animal id
+	 * @throws \rangeException if $newAnimalId is not positive
+	 * @throws \TypeError if animal id is not valid
+	 */
+	public function setAnimalId($newAnimalId): void {
+		try {
+			$uuid = self::validateUuid($newAnimalId);
+		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw (new $exceptionType($exception->getMessage(), 0, $exception);
+		}
+		// convert and store the animal id
+		$this->animalId = $uuid;
+	}
+
+
+
 }
