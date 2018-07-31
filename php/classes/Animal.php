@@ -93,7 +93,7 @@ class Animal {
 			$this->setAnimalName($newAnimalName);
 			$this->setAnimalSpecies($newAnimalSpecies);
 			$this->setAnimalStatus($newAnimalStatus);
-		} catch(\InvalidArgumentException | \RangeException | \ Exception | \TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
@@ -119,11 +119,33 @@ class Animal {
 		try {
 			$uuid = self::validateUuid($newAnimalId);
 		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			throw (new $exceptionType($exception->getMessage(), 0, $exception);
+			$exceptionType =get_class($exception);
+			throw (new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		// convert and store the animal id
 		$this->animalId = $uuid;
 	}
+
+	/**
+	 * accessor method for animal profile id
+	 *
+	 * @return Uuid
+	 */
+	public function getAnimalProfileId(): Uuid {
+		return ($this->animalProfileId);
+	}
+
+	public function setAnimalProfileId($newAnimalProfileId): void {
+		try{
+			$uuid = self::validateUuid($newAnimalProfileId);
+		} catch( \InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType =get_class($exception);
+			throw (new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// convert and store the animal id
+		$this->animalProfileId = $uuid;
+	}
+
 
 
 
