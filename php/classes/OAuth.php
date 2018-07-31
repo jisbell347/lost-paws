@@ -179,7 +179,7 @@ class OAuth implements \JsonSerializable {
 			if($row !== false) {
 				$oAuth = new OAuth($row["oAuthId"], $row["oAuthSource"]);
 			}
-		} catch(\Exception $exception) {
+		} catch(\Exception | \PDOException $exception) {
 			//If the row couldn't be converted, rethrow it
 			throw (new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -194,6 +194,7 @@ class OAuth implements \JsonSerializable {
 	 * @return \SplFixedArray SplFixedArray of sources found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
+	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getOAuthByOAuthSource(\PDO $pdo, string $oAuthSource) : \SplFixedArray {
 		//Sanitize the source before searching for it
@@ -220,7 +221,7 @@ class OAuth implements \JsonSerializable {
 				$source = new OAuth($row["oAuthId"], $row["oAuthSource"]);
 				$sources[$sources->key()] = $source;
 				$sources->next();
-			} catch(\Exception $exception) {
+			} catch(\Exception | \PDOException $exception) {
 				//if the row couldn't be converted, rethrow it
 				throw (new \PDOException($exception->getMessage(), 0, $exception));
 			}
@@ -235,6 +236,7 @@ class OAuth implements \JsonSerializable {
 	 * @return \SplFixedArray of OAuths found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
+	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function  getAllOAuths(\PDO $pdo) : \SplFixedArray {
 		//Create query template
@@ -250,7 +252,7 @@ class OAuth implements \JsonSerializable {
 				$oAuth = new OAuth($row["oAuthId"], $row["oAuthSource"]);
 				$oAuths[$oAuths->key()] = $oAuth;
 				$oAuths->next();
-			} catch(\Exception $exception) {
+			} catch(\Exception | \PDOException $exception) {
 				//If the row couldn't be converted, rethrow it
 				throw (new \PDOException($exception->getMessage(), 0, $exception));
 			}
