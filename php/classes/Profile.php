@@ -240,31 +240,37 @@ class Profile {
 	public function setProfileName(string $newProfileName): void {
 		// verify that the user name is not empty and shorter than 92 characters
 		$newProfileName = trim($newProfileName);
-		$newProfileName = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
-		if(empty($newProfileEmail)) {
-			throw(new \InvalidArgumentException("Profile email address is empty or insecure"));
+		if(empty($newProfileName | !ctype_alpha($newProfileName))) {
+			throw(new \InvalidArgumentException("Profile name is empty or invalid"));
 		}
-		// verify the email will fit in the database
-		if(strlen($newProfileEmail) > 128) {
-			throw(new \RangeException("Profile email address is too long"));
+		// verify that a Profile name is shorter than 92 characters
+		if(strlen($newProfileName) > 92) {
+			throw(new \RangeException("Profile name is too long"));
 		}
-		// store the valid email address
-		$this->profileEmail = $newProfileEmail;
+		// store the valid name in the class state variable
+		$this->profileName = $newProfileName;
 	}
 
+	/**
+	 * accessor method for a Profile phone number
+	 *
+	 * @return string value of a Profile phone number
+	 **/
+	public function getProfilePhone(): string {
+		return $this->profilePhone;
+	}
 
+	/**
+	 * mutator method for setting/changing a Profile phone number
+	 *
+	 * @param string $newProfilePhone new value of a phone number for this Profile
+	 * @throws \InvalidArgumentException if $newProfileName is empty or contains digits and special characters
+	 * @throws \RangeException if $newProfileName is longer than 92-character long
+	 * @throws \TypeError if $newProfileName is not a string
+	 **/
+	public function setProfilePhone(string $newProfilePhone): void {
 
-
-
-	/*
-	 * $this->setProfileEmail($newProfileEmail);
-			$this->setProfileName($newProfileName);
-			$this->setProfilePhone($newProfilePhone);
-	 */
-
-
-
-
+	}
 
 
 
