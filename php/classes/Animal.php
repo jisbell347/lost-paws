@@ -317,7 +317,7 @@ class Animal {
 	}
 
 	/**
-	 * mutator method for animal image url
+	 * mutator method for animal location
 	 *
 	 * @param string $newAnimalLocation new value of animal location
 	 * @throws \InvalidArgumentException if $newAnimalLocation is not a string or insecure
@@ -339,6 +339,40 @@ class Animal {
 
 		// store the animal location description
 		$this->animalLocation = $newAnimalLocation;
+	}
+
+	/**
+	 * accessor method for animal name
+	 *
+	 * @return string value of animal name
+	 */
+	public function getAnimalName(): string {
+		return ($this->animalName);
+	}
+
+	/**
+	 * mutator method for animal Name
+	 *
+	 * @param string $newAnimalName new value of animal name
+	 * @throws \InvalidArgumentException if $newAnimalName is not a string or insecure
+	 * @throws \RangeException if $newAnimalName is > 100 characters
+	 * @throws \TypeError if $newAnimalName is not a string
+	 **/
+	public function setAnimalName(string $newAnimalName) : void {
+		// verify the animal name is secure
+		$newAnimalName = trim($newAnimalName);
+		$newAnimalName = filter_var($newAnimalName, FILTER_SANITIZE_URL);
+		if(empty($newAnimalName) === true) {
+			throw(new \InvalidArgumentException("animal name is empty or insecure. Type unknown if unknown"));
+		}
+
+		// verify the animal location description will fit in the database
+		if(strlen($newAnimalName) > 100) {
+			throw(new \RangeException("animal name text is too long. Limit 100 characters"));
+		}
+
+		// store the animal location description
+		$this->animalName = $newAnimalName;
 	}
 
 
