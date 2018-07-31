@@ -269,10 +269,25 @@ class Profile {
 	 * @throws \TypeError if $newProfileName is not a string
 	 **/
 	public function setProfilePhone(string $newProfilePhone): void {
-
+		//if $profilePhone is null return it right away
+		if($newProfilePhone === null) {
+			$this->profilePhone = null;
+			return;
+		}
+		// verify the phone is secure
+		$newProfilePhone = trim($newProfilePhone);
+		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		// we don't allow using '+' in phone numbers, only digits
+		if(empty($newProfilePhone | !ctype_xdigit($newProfilePhone))) {
+			throw(new \InvalidArgumentException("Pofile phone number is empty or insecure"));
+		}
+		// verify the phone will fit in the database
+		if(strlen($newProfilePhone) > 15) {
+			throw(new \RangeException("profile phone number is too long"));
+		}
+		// store the phone
+		$this->profilePhone = $newProfilePhone;
 	}
-
-
 
 
 
