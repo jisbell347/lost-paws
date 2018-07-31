@@ -253,7 +253,7 @@ class Animal {
 	 *
 	 * @param string $newAnimalGender new value of animal gender
 	 * @throws \InvalidArgumentException if $newAnimalgender is not a string or is insecure
-	 * @throws \RangeException if $newAnimalGender  is > 6 characters
+	 * @throws \RangeException if $newAnimalGender  is > 7 characters
 	 * @throws \TypeError if $newAnimalGender is not a string
 	 **/
 	public function setAnimalColor($newAnimalGender): void {
@@ -265,7 +265,7 @@ class Animal {
 		}
 
 		// verify the animal color description will fit in the database
-		if(strlen($newAnimalGender) > 6) {
+		if(strlen($newAnimalGender) > 7) {
 			throw(new \RangeException("animal color description is too long"));
 		}
 
@@ -303,9 +303,78 @@ class Animal {
 			throw(new \RangeException("animal picture link is too long. limit 500 characters"));
 		}
 
-		// store the author profile picture link
+		// store the animal picture link
 		$this->animalImageUrl = $newAnimalImageUrl;
 	}
+
+	/**
+	 * accessor method for animal location
+	 *
+	 * @return string value of animal location
+	 */
+	public function getAnimalLocation(): string {
+		return ($this->animalLocation);
+	}
+
+	/**
+	 * mutator method for animal location
+	 *
+	 * @param string $newAnimalLocation new value of animal location
+	 * @throws \InvalidArgumentException if $newAnimalLocation is not a string or insecure
+	 * @throws \RangeException if $newAnimalLocation is > 200 characters
+	 * @throws \TypeError if $newAnimalLocation is not a string
+	 **/
+	public function setAnimalLocation(string $newAnimalLocation) : void {
+		// verify the animal location description is secure
+		$newAnimalLocation = trim($newAnimalLocation);
+		$newAnimalLocation = filter_var($newAnimalLocation, FILTER_SANITIZE_URL);
+		if(empty($newAnimalLocation) === true) {
+			throw(new \InvalidArgumentException("animal location description is empty or insecure"));
+		}
+
+		// verify the animal location description will fit in the database
+		if(strlen($newAnimalLocation) > 200) {
+			throw(new \RangeException("animal location description is too long. Limit 200 characters"));
+		}
+
+		// store the animal location description
+		$this->animalLocation = $newAnimalLocation;
+	}
+
+	/**
+	 * accessor method for animal name
+	 *
+	 * @return string value of animal name
+	 */
+	public function getAnimalName(): string {
+		return ($this->animalName);
+	}
+
+	/**
+	 * mutator method for animal Name
+	 *
+	 * @param string $newAnimalName new value of animal name
+	 * @throws \InvalidArgumentException if $newAnimalName is not a string or insecure
+	 * @throws \RangeException if $newAnimalName is > 100 characters
+	 * @throws \TypeError if $newAnimalName is not a string
+	 **/
+	public function setAnimalName(string $newAnimalName) : void {
+		// verify the animal name is secure
+		$newAnimalName = trim($newAnimalName);
+		$newAnimalName = filter_var($newAnimalName, FILTER_SANITIZE_URL);
+		if(empty($newAnimalName) === true) {
+			throw(new \InvalidArgumentException("animal name is empty or insecure. Type unknown if unknown"));
+		}
+
+		// verify the animal location description will fit in the database
+		if(strlen($newAnimalName) > 100) {
+			throw(new \RangeException("animal name text is too long. Limit 100 characters"));
+		}
+
+		// store the animal location description
+		$this->animalName = $newAnimalName;
+	}
+
 
 
 }

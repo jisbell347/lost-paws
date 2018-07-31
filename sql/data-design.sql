@@ -36,7 +36,7 @@ CREATE TABLE animal (
 	animalColor VARCHAR(25),
 	animalDate DATETIME(6) NOT NULL,
 	animalDescription VARCHAR(250) NOT NULL,
-	animalGender VARCHAR(6) NOT NULL,
+	animalGender VARCHAR(7) NOT NULL,
 	animalImageUrl VARCHAR(500),
 	animalLocation VARCHAR(200),
 	animalName VARCHAR(100),
