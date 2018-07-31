@@ -209,16 +209,49 @@ class Profile {
 		// verify the email is secure
 		$newProfileEmail = trim($newProfileEmail);
 		$newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
-		if(empty($newProfileEmail) === true) {
-			throw(new \InvalidArgumentException("profile email is empty or insecure"));
+		if(empty($newProfileEmail)) {
+			throw(new \InvalidArgumentException("Profile email address is empty or insecure"));
 		}
 		// verify the email will fit in the database
 		if(strlen($newProfileEmail) > 128) {
-			throw(new \RangeException("profile email is too large"));
+			throw(new \RangeException("Profile email address is too long"));
 		}
-		// store the email
+		// store the valid email address
 		$this->profileEmail = $newProfileEmail;
 	}
+
+	/**
+	 * accessor method for a full profile name
+	 *
+	 * @return string value of a Profile name
+	 **/
+	public function getProfileName(): string {
+		return $this->profileName;
+	}
+
+	/**
+	 * mutator method for setting/changing a profile name
+	 *
+	 * @param string $newPProfileName new value of a user name for this Profile
+	 * @throws \InvalidArgumentException if $newProfileName is not a valid string
+	 * @throws \RangeException if $newProfileName is longer than 92-character long
+	 * @throws \TypeError if $newProfileName is not a string
+	 **/
+	public function setProfileName(string $newProfileName): void {
+		// verify that the user name is not empty and shorter than 92 characters
+		$newProfileName = trim($newProfileName);
+		$newProfileName = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($newProfileEmail)) {
+			throw(new \InvalidArgumentException("Profile email address is empty or insecure"));
+		}
+		// verify the email will fit in the database
+		if(strlen($newProfileEmail) > 128) {
+			throw(new \RangeException("Profile email address is too long"));
+		}
+		// store the valid email address
+		$this->profileEmail = $newProfileEmail;
+	}
+
 
 
 
