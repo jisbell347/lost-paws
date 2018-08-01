@@ -4,12 +4,15 @@ namespace Jisbell347\LostPaws;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+use Ramsey\Uuid\Uuid;
 
 /*
  * Comment section of the lostpaws.com site. A user will be able to post comments about the animal to contact other people in regards to the status of the animal.
  */
 
 class Comment {
+	use \Jisbell347\LostPaws\ValidateDate;
+	use \Jisbell347\LostPaws\ValidateUuid;
 	/**
 	 * id for comment, this is the primary key
 	 * @var Uuid $commentId
@@ -263,11 +266,59 @@ class Comment {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param Uuid|string $commentId comment id to search for
-	 * @return Commnet|null Comment found or null if not found
+	 * @return Comment|null Comment found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable is not the correct data type
 	**/
-	public static function getCommnet
+	public static function getCommentbyCommentId(\PDO $pdo, $commentId) : ?Comment {
+		//sanitize the commentId before searching
+		try{
+				$commentId = self::validateUuid($commentId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		//create query template
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentId = :commentId";
+		$statement = $pdo->prepare($query);
+
+		//bind the comment id to the place holder in the template
+		$parameters = ["commentId" => $commentId->getBytes()];
+		$statement->execute($parameters);
+
+		//grab the comment from my SQL
+		try {
+			$comment = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if(row !== false) {
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($comment);
+	}
+
+	/**
+	 * gets the Comment by animal id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $tweetProfileId profile id to search by
+	 * @return \SPLFixedArray of Comments found
+	 * @throws \PDOException when mySQL related erros occur
+	 * @throws \TypeError when variables are not the correct data type
+	**/
+	public static function getCommentByCommentProfileId(\PDO $pdo, $commentAnimalId) : \SplFixedArray{
+
+		try {
+			$commentAnimalId = self::validateUuid($commentAnimalId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+	}
 
 
 }
