@@ -540,7 +540,16 @@ class Animal {
 			return($animal);
 		}
 
-	public static function getAnimalByAnimalProfileID(\PDO $pdo, $animalProfileId): \SplFixedArray {
+	/**
+	 * get animals by profile id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid\string $animalProfileId is profile id to search by
+	 * @return \SplFixedArray  of animals found
+	 * @throws \PDOException when mySQl related errors happen
+	 * @throws \TypeError when a variable is not correct data type	 *
+	 **/
+		public static function getAnimalByAnimalProfileID(\PDO $pdo, $animalProfileId): \SplFixedArray {
 		//sanitize animalProfileId before searching
 		try {
 			$animalProfileId = self::validateUuid($animalProfileId);
