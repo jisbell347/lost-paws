@@ -522,11 +522,23 @@ class Animal {
 		$statement = $pdo->prepare($query);
 
 		//bind the article id to the placeholder in the template.
-		$parameters = ["articleId" => $animalId->getBytes()];
+		$parameters = ["animalId" => $animalId->getBytes()];
 		$statement->execute($parameters);
 
-
-	}
+		//grab the animal from mySQL.
+		try{
+			$animal = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$animal = new Animal($row["$animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+				}
+			}catch (\Exception $exception) {
+				//if the row could not be converted, rethrow it.
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+			return($animal);
+		}
 
 }
 
