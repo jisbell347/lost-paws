@@ -350,7 +350,6 @@ class Profile {
 		}
 	}
 
-
 	/**
 	 * delete this Profile from mySQL where profileId matches
 	 *
@@ -373,7 +372,6 @@ class Profile {
 		}
 	}
 
-
 	/**
 	 * get this Profile by profileId
 	 *
@@ -386,7 +384,7 @@ class Profile {
 	public function getProfileByProfileId(\PDO $dbc, string $currProfileId): ?Profile {
 		// sanitize the  user id before searching
 		try {
-			$currUserId = self::validateUuid($currProfileId);
+			$currProfileId = self::validateUuid($currProfileId);
 		} catch (\Exception $e) {
 			error_log( "Error: " .$e->getMessage());
 			return null;
@@ -396,6 +394,57 @@ class Profile {
 			$query = "SELECT * FROM profile WHERE profileId = :profileId";
 			$stmt = $dbc->prepare($query);
 			$stmt->bindParam(':profileId', $this->profileId->getBytes());
+			$stmt->execute();
+			$errorInfo = $stmt->errorInfo();
+			if(isset($errorInfo[2])) {
+				$error = $errorInfo[2];
+			}
+		}  catch (\PDOException | \Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			exit(0);
+		}
+
+		try {
+			// grab the profile from mySQL
+			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
+					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
+			}
+			else {
+				$newProfile = null;
+			}
+			// disconect from the database
+			$dbc = null;
+		} catch (\Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+		} finally {
+			return $newProfile;
+		}
+	}
+
+	/**
+	 * get this Profile by profileOAuthId
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @param string $currProfileOAuthId profile OAuth Id to search for
+	 * @return Profile object or null if profile is not found
+	 * @throws \PDOException in case of mySQL related errors
+	 * @throws \Exception -- all others except for \PDOException exception
+	 **/
+	public function getProfileByProfileOAuthId(\PDO $dbc, string $currProfileOAuthId): ?Profile {
+		// sanitize the  user id before searching
+		try {
+			$currProfileOAuthId = self::validateUuid($currProfileOAuthId);
+		} catch (\Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			return null;
+		}
+
+		try {
+			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId;
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId;
 			$stmt->execute();
 			$errorInfo = $stmt->errorInfo();
 			if(isset($errorInfo[2])) {
