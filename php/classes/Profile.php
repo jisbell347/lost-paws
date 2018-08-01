@@ -289,6 +289,90 @@ class Profile {
 		$this->profilePhone = $newProfilePhone;
 	}
 
+	/**
+	 * inserts this Profile into mySQL
+	 *
+	 * @param \PDO $dbc PDO database connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \Exception all others except for \PDOException exception
+	 **/
+	public function insertProfile(\PDO $dbc): void {
+		// create query template
+		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone) VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
+		try {
+			$stmt = $dbc->prepare($query);
+
+			$stmt->bindParam(':profileId', $this->profileId->getBytes());
+			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
+			$stmt->bindParam(':profileAccessToken', $this->profileAccessToken);
+			$stmt->bindParam(':profileEmail', $this->profileEmail);
+			$stmt->bindParam(':profileName', $this->profileName);
+			$stmt->bindParam(':profilePhone', $this->profilePhone);
+
+			$stmt->execute();
+
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\PDOException | \Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			exit(0);
+		}
+	}
+
+	/**
+	 * update this Profile from mySQL where profileId matches
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @throws \PDOException in case of mySQL related errors
+	 * @throws \Exception all others except for \PDOException exception
+	 **/
+	public function updateProfile(\PDO $dbc): void {
+		try {
+			$query = "UPDATE profile SET profileOAuthId = :profileOAuthId,
+                                    profileAccessToken = :profileAccessToken,
+                                    profileEmail = :profileEmail,
+                                    profileName = :profileName,                              
+                                    profilePhone = :profilePhone WHERE profileId = :profileId";
+			$stmt = $dbc->prepare($query);
+
+			$stmt->bindParam(':profileId', $this->profileId->getBytes());
+			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
+			$stmt->bindParam(':profileAccessToken', $this->profileAccessToken);
+			$stmt->bindParam(':profileEmail', $this->profileEmail);
+			$stmt->bindParam(':profileName', $this->profileName);
+			$stmt->bindParam(':profilePhone', $this->profilePhone);
+
+			$stmt->execute();
+
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\PDOException | \Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			exit(0);
+		}
+	}
+
+	/*
+	 * CREATE TABLE profile (
+	profileId BINARY(16) NOT NULL,
+	profileOAuthId TINYINT UNSIGNED NOT NULL,
+	profileAccessToken VARCHAR(255),
+	profileEmail VARCHAR(128) NOT NULL,
+	profileName VARCHAR(92) NOT NULL,
+	profilePhone VARCHAR(15),
+	-- create indexes
+	INDEX (profileOAuthId),
+	INDEX(profileEmail),
+	INDEX (profileName),
+	FOREIGN KEY(profileOAuthId) REFERENCES oAuth(oAuthId),
+	PRIMARY KEY (profileId)
+);
+	*/
+
+	/**
+	 * TODO: include some test units for the accessors, mutators, and constractor
+	 */
+
 
 
 
