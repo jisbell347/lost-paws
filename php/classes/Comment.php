@@ -41,7 +41,7 @@ class Comment {
 
 
 	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, $newCommentDate = null, string $newCommentText) {
-		try{
+		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentAnimalId($newCommentAnimalId);
 			$this->setCommentProfileId($newCommentProfileId);
@@ -57,12 +57,12 @@ class Comment {
 	 * accessor method for comment id
 	 *
 	 * @return Uuid value of comment id
-	**/
+	 **/
 	/**
 	 * @return Uuid
 	 */
 	public function getCommentId(): Uuid {
-		return($this->commentId);
+		return ($this->commentId);
 	}
 
 	/**
@@ -71,8 +71,8 @@ class Comment {
 	 * @param Uuid|string $newCommentId new value of comment id
 	 * @throws \RangeException if $newCommentId is not positive
 	 * @throws \TypeError if $newCommentId is not a uuid or string
-	**/
-	public function setCommentId($newCommentId) : void {
+	 **/
+	public function setCommentId($newCommentId): void {
 		try {
 			$uuid = self::validateUuid($newCommentId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -90,7 +90,7 @@ class Comment {
 	 * @return Uuid value of comment animal id
 	 */
 	public function getCommentAnimalId(): Uuid {
-		return($this->commentAnimalId);
+		return ($this->commentAnimalId);
 	}
 
 	/**
@@ -99,8 +99,8 @@ class Comment {
 	 * @param Uuid|string $newCommentAnimalId new value of comment animal id
 	 * @throws \RangeException if $newCommentAnimalId is not positive
 	 * @throws \TypeError if $newCommentAnimalId is not a uuid or string
-	**/
-	public function setCommentAnimalId($newCommentAnimalId) : void {
+	 **/
+	public function setCommentAnimalId($newCommentAnimalId): void {
 		try {
 			$uuid = self::validateUuid($newCommentAnimalId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -115,9 +115,9 @@ class Comment {
 	 * accessor method for commentProfileId
 	 *
 	 * @return Uuid value of comment profile id
-	**/
+	 **/
 	public function getCommentProfileId(): Uuid {
-		return($this->commentProfileId);
+		return ($this->commentProfileId);
 	}
 
 	/**
@@ -126,8 +126,8 @@ class Comment {
 	 * @param Uuid|string $newCommentProfileId new value of comment profile id
 	 * @throws \RangeException if $newCommentProfileId is not positive
 	 * @throws \TypeError if $newCommentProfileId is not a uuid or string
-	**/
-	public function setCommentProfileId($newCommentProfileId) : void {
+	 **/
+	public function setCommentProfileId($newCommentProfileId): void {
 		try {
 			$uuid = self::validateUuid($newCommentProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -142,9 +142,9 @@ class Comment {
 	 * accessor method for comment date
 	 *
 	 * @return \DateTime value of comment date
-	**/
-	public function getCommentDate() : \DateTime {
-		return($this->commentDate);
+	 **/
+	public function getCommentDate(): \DateTime {
+		return ($this->commentDate);
 	}
 
 	/**
@@ -153,8 +153,8 @@ class Comment {
 	 * @param \DateTime|string|null $newCommentDate comment date as a DateTime object or string (or null to load the current time)
 	 * @throws \InvalidArgumentException if $newCommentDate is not a valid object or string
 	 * @throws \RangeException if $newCommentDate is a date that does not exist
-	**/
-	public function setCommentDate($newCommentDate = null) : void {
+	 **/
+	public function setCommentDate($newCommentDate = null): void {
 		//base case: if the date is null, use the current date and time
 		if($newCommentDate === null) {
 			$this->commentDate = new \DateTime();
@@ -176,8 +176,8 @@ class Comment {
 	 *
 	 * @return string value of comment text
 	 */
-	public function getCommentText() : string {
-		return($this->commentText);
+	public function getCommentText(): string {
+		return ($this->commentText);
 	}
 
 	/**
@@ -187,8 +187,8 @@ class Comment {
 	 * @throws \InvalidArgumentException if $newCommentText is not a string or insecure
 	 * @throws \RangeException if $newCommentText is > 1000 characters
 	 * @throws \TypeError if $newCommentText is not a string
-	**/
-	public function setCommentText(string $newCommentText) : void {
+	 **/
+	public function setCommentText(string $newCommentText): void {
 		//verify comment text is secure
 		$newCommentText = trim($newCommentText);
 		$newCommentText = filter_var($newCommentText, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -211,8 +211,8 @@ class Comment {
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occure
 	 * @throws \TypeError if $pdo is not a PDO connection object
-	**/
-	public function insert(\PDO $pdo) : void {
+	 **/
+	public function insert(\PDO $pdo): void {
 
 		//create query template
 		$query = "INSERT INTO comment(commentId, commentAnimalId, commentProfileId, commentDate, commentText) VALUES(:commentID, :commentAnimalId, :commentProfileId, :commentDate, :commentText)";
@@ -230,9 +230,9 @@ class Comment {
 	 * @param \PDO @pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
-	**/
+	 **/
 
-	public function delete(\PDO $pdo) : void {
+	public function delete(\PDO $pdo): void {
 
 		//create query template
 		$query = "DELETE FROM comment WHERE commentId = :commentId";
@@ -249,15 +249,15 @@ class Comment {
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
-	**/
-	public function update(\PDO $pdo) : void {
+	 **/
+	public function update(\PDO $pdo): void {
 
 		//create query template
 		$query = "UPDATE comment SET commentAnimalId = :commentAnimalId, commentProfileId = :commentProfileId, commentDate = :commentDate, commentText = :commentText";
 		$statement = $pdo->prepare($query);
 
 		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
-		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(),"commentDate" => $formattedDate, "commentText" => $this->commentText];
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
 		$statement->execute($parameters);
 	}
 
@@ -269,11 +269,11 @@ class Comment {
 	 * @return Comment|null Comment found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable is not the correct data type
-	**/
-	public static function getCommentbyCommentId(\PDO $pdo, $commentId) : ?Comment {
+	 **/
+	public static function getCommentByCommentId(\PDO $pdo, $commentId): ?Comment {
 		//sanitize the commentId before searching
-		try{
-				$commentId = self::validateUuid($commentId);
+		try {
+			$commentId = self::validateUuid($commentId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -298,27 +298,82 @@ class Comment {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($comment);
+		return ($comment);
 	}
 
 	/**
 	 * gets the Comment by animal id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid|string $tweetProfileId profile id to search by
+	 * @param Uuid|string $commentAnimalId animal id to search by
 	 * @return \SPLFixedArray of Comments found
 	 * @throws \PDOException when mySQL related erros occur
 	 * @throws \TypeError when variables are not the correct data type
-	**/
-	public static function getCommentByCommentProfileId(\PDO $pdo, $commentAnimalId) : \SplFixedArray{
+	 **/
+	public static function getCommentByCommentAnimalId(\PDO $pdo, $commentAnimalId): \SplFixedArray {
 
 		try {
 			$commentAnimalId = self::validateUuid($commentAnimalId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentAnimalId = :commentId";
+		$statement = $pdo->prepare($query);
 
+		//bind the comment id to the place holder in the template
+		$parameters = ["commentAnimalId" => $commentAnimalId->getBytes()];
+		$statement->execute($parameters);
+		// build an array of comments
+		$comments = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
+				$comments[$comments->key()] = $comment;
+				$comments->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($comments);
 	}
 
+	/**
+	 * gets the Comment by profile id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $commentProfileId profile id to search by
+	 * @return \SPLFixedArray of Comments found
+	 * @throws \PDOException when mySQL related erros occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getCommentByCommentProfileId(\PDO $pdo, $commentProfilelId): \SplFixedArray {
 
+		try {
+			$commentProfilelId = self::validateUuid($commentProfilelId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentAnimalId = :commentId";
+		$statement = $pdo->prepare($query);
+
+		//bind the comment id to the place holder in the template
+		$parameters = ["commentProfileId" => $commentProfilelId->getBytes()];
+		$statement->execute($parameters);
+		// build an array of comments
+		$comments = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
+				$comments[$comments->key()] = $comment;
+				$comments->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($comments);
+	}
 }
