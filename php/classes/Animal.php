@@ -454,7 +454,7 @@ class Animal {
 
 	public function insert(\PDO $pdo): void {
 		//create query template
-		$query = "INSERT INTO article(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
+		$query = "INSERT INTO animal(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
 		$statement = $pdo->prepare($query);
 
 		//bind the member variable to the placeholders in template
@@ -465,11 +465,12 @@ class Animal {
 
 	public function update(\PDO $pdo): void {
 		//create query template
-		$query = "INSERT INTO article(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
+		$query = "UPDATE animal SET animalProfileID = :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus WHERE  animalId = :animalId";
 		$statement = $pdo->prepare($query);
 
 
 		//bind member variables to the placeholders in template
+		$formattedDate = $this->animalDate->format("Y-m-d H:i:s.u");
 		$parameters = ["animalId" => $this->animalId->getBytes(), "animalProfileId" => $this->animalProfileId->getBytes(), "animalColor" => $this->animalColor, "animalDate" => $formattedDate, "animalDescription" => $this->animalDescription, "animalGender" => $this->animalGender, "animalImageUrl" => $this->animalImageUrl, "animalLocation" => $this->animalLocation, "animalName" => $this->animalName, "animalSpecies" => $this->animalSpecies, "animalStatus" => $this->animalStatus];
 		$statement->execute($parameters);
 	}
