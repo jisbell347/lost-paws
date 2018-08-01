@@ -423,7 +423,60 @@ class Profile {
 		}
 	}
 
+	/**
+	 * get this Profile by profile email address
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @param string $currProfileEmail profile email address to search for
+	 * @return Profile object or NULL if profile is not found
+	 * @throws \PDOException in case of mySQL related errors
+	 * @throws \InvalidArgumentException in case email address is empty or insecure
+	 * @throws \Exception -- all others except for \PDOException exception
+	 **/
+	public function getProfileByProfileEmail(\PDO $dbc, string $currProfileEmail): ?Profile {
+		// verify that user email is secure
+		try {
+			$currProfileEmail = trim($currProfileEmail);
+			$currProfileEmail = filter_var($currProfileEmail, FILTER_VALIDATE_EMAIL);
+			if(empty($currProfileEmail)) {
+				throw(new \InvalidArgumentException("Profile email is empty or insecure"));
+			}
+		} catch (\Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			return NULL;
+		}
 
+		try {
+			$query = "SELECT * FROM profile WHERE profileEmail = :profileEmail";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':userEmail', $this->userEmail);
+			$stmt->execute();
+			$errorInfo = $stmt->errorInfo();
+			if(isset($errorInfo[2])) {
+				$error = $errorInfo[2];
+			}
+		} catch(\Exception $e) {
+			$error = $e->getMessage();
+		}
+
+		try {
+			// grab the user from mySQL
+			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newUser = new User($row["userId"], $row["userEmail"], $row["userHash"], $row["userName"]);
+			}
+			else {
+				$newUser = NULL;
+			}
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\Exception $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+		} finally {
+			return $newUser;
+		}
+	}
 
 
 	/*
