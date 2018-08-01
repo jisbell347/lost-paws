@@ -1,6 +1,6 @@
 <?php
 
-namespace \Jisbell347\LostPaws;
+namespace\Jisbell347\LostPaws;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
@@ -257,6 +257,17 @@ class Comment {
 		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(),"commentDate" => $formattedDate, "commentText" => $this->commentText];
 		$statement->execute($parameters);
 	}
+
+	/**
+	 * gets the Comment by commentId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $commentId comment id to search for
+	 * @return Commnet|null Comment found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable is not the correct data type
+	**/
+	public static function getCommnet
 
 
 }
