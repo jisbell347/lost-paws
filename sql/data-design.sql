@@ -42,7 +42,6 @@ CREATE TABLE animal (
 	animalName VARCHAR(100),
 	animalSpecies CHAR(3) NOT NULL ,
 	animalStatus VARCHAR(8) NOT NULL,
-	INDEX (animalProfileId),
 	INDEX (animalColor),
 	FOREIGN KEY(animalProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY(animalId)
