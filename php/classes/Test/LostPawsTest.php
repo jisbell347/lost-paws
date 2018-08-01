@@ -77,9 +77,6 @@ abstract class LostPawsTest extends TestCase {
 		// if the connection hasn't been established, create it
 		if($this->connection === null) {
 			// connect to mySQL and provide the interface to PHPUnit
-			/**
-			 * TODO: update with correct .ini file name once provided.
-			 */
 			$config = readConfig("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 			$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 			$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
