@@ -585,6 +585,40 @@ class Animal {
 		return ($animals);
 	}
 
+	/**
+	 * Get Animals By Color
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $animalColor to search for
+	 * @return \SplFixedArray of articles found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable is not the correct data type
+	 **/
+	public static function getAnimalByAnimalColor(\PDO $pdo, string $animalColor) : \SplFixedArray {
+		//sanitize the animal color description before searching
+		$animalColor = trim($animalColor);
+		$animalColor = filter_var($animalColor, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($animalColor) === true) {
+			throw(new \PDOException("animal color is invalid."));
+
+			//escape any mySQL wildcards
+			$animalColor = str_replace("_", "\\_", str_replace("%", "\\%", $animalColor));
+
+			//create query template
+			$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalColor LIKE :animalProfileId";
+			$statement = $pdo->prepare($query);
+
+			//bind the animal color to the placeholder in template
+			$articleColor = "%$animalColor%";
+			$parameters = ["animalColor" => $animalColor];
+			$statement->execute($parameters);
+
+
+
+		}
+	}
+
+
 
 }
 
