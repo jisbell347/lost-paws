@@ -294,21 +294,19 @@ class Profile {
 	 *
 	 * @param \PDO $dbc PDO database connection object
 	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \Exception all others except for \PDOException exception
+	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
 	public function insertProfile(\PDO $dbc): void {
 		// create query template
 		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone) VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
 		try {
 			$stmt = $dbc->prepare($query);
-
 			$stmt->bindParam(':profileId', $this->profileId->getBytes());
 			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
 			$stmt->bindParam(':profileAccessToken', $this->profileAccessToken);
 			$stmt->bindParam(':profileEmail', $this->profileEmail);
 			$stmt->bindParam(':profileName', $this->profileName);
 			$stmt->bindParam(':profilePhone', $this->profilePhone);
-
 			$stmt->execute();
 
 			// disconect from the database
@@ -324,7 +322,7 @@ class Profile {
 	 *
 	 * @param \PDO $dbc database connection object
 	 * @throws \PDOException in case of mySQL related errors
-	 * @throws \Exception all others except for \PDOException exception
+	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
 	public function updateProfile(\PDO $dbc): void {
 		try {
@@ -334,14 +332,12 @@ class Profile {
                                     profileName = :profileName,                              
                                     profilePhone = :profilePhone WHERE profileId = :profileId";
 			$stmt = $dbc->prepare($query);
-
 			$stmt->bindParam(':profileId', $this->profileId->getBytes());
 			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
 			$stmt->bindParam(':profileAccessToken', $this->profileAccessToken);
 			$stmt->bindParam(':profileEmail', $this->profileEmail);
 			$stmt->bindParam(':profileName', $this->profileName);
 			$stmt->bindParam(':profilePhone', $this->profilePhone);
-
 			$stmt->execute();
 
 			// disconect from the database
@@ -351,6 +347,84 @@ class Profile {
 			exit(0);
 		}
 	}
+
+
+	/**
+	 * delete this Profile from mySQL where profileId matches
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @throws \PDOException in case of mySQL related errors
+	 * @throws \Exception -- all others except for \PDOException exception
+	 **/
+	public function deleteProfile(\PDO $dbc): void {
+		try {
+			$query = "DELETE FROM profile WHERE profileId = :profileId";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':profileId', $this->profileId->getBytes());
+			$stmt->execute();
+
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\PDOException | \Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			exit(0);
+		}
+	}
+
+
+	/**
+	 * get this Profile by profileId
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @param string $currProfileId profile Id to search for
+	 * @return Profile object or NULL if profile is not found
+	 * @throws \PDOException in case of mySQL related errors
+	 * @throws \Exception -- all others except for \PDOException exception
+	 **/
+	public function getProfileByProfileId(\PDO $dbc, string $currProfileId): ?Profile {
+		// sanitize the  user id before searching
+		try {
+			$currUserId = self::validateUuid($currProfileId);
+		} catch (\Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			return NULL;
+		}
+
+		try {
+			$query = "SELECT * FROM profile WHERE profileId = :profileId";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':profileId', $this->profileId->getBytes());
+			$stmt->execute();
+			$errorInfo = $stmt->errorInfo();
+			if(isset($errorInfo[2])) {
+				$error = $errorInfo[2];
+			}
+		}  catch (\PDOException | \Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+			exit(0);
+		}
+
+		try {
+			// grab the profile from mySQL
+			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
+					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
+			}
+			else {
+				$newProfile = NULL;
+			}
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\Exception $e) {
+			error_log( "Error: " .$e->getMessage());
+		} finally {
+			return $newProfile;
+		}
+	}
+
+
+
 
 	/*
 	 * CREATE TABLE profile (
