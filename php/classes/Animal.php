@@ -517,6 +517,14 @@ class Animal {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 
+		//create query template
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalId = :animalId";
+		$statement = $pdo->prepare($query);
+
+		//bind the article id to the placeholder in the template.
+		$parameters = ["articleId" => $animalId->getBytes()];
+		$statement->execute($parameters);
+
 
 	}
 
