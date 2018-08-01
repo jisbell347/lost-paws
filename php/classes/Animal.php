@@ -1,9 +1,6 @@
 <?php
 
 namespace Jisbell347\LostPaws;
-
-require_once("autoload.php");
-require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -141,7 +138,7 @@ class Animal {
 	/**
 	 * mutator method for animal profile id
 	 *
-	 * @param Uuid| string $newAnimalProfileId value of new article id
+	 * @param Uuid| string $newAnimalProfileId value of new animal id
 	 * @throws \rangeException if $newAnimalProfileId  is not positive
 	 * @throws \TypeError if animal profile id is not valid
 	 **/
@@ -524,7 +521,7 @@ class Animal {
 		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalId = :animalId";
 		$statement = $pdo->prepare($query);
 
-		//bind the article id to the placeholder in the template.
+		//bind the animal id to the placeholder in the template.
 		$parameters = ["animalId" => $animalId->getBytes()];
 		$statement->execute($parameters);
 
@@ -590,7 +587,7 @@ class Animal {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $animalColor to search for
-	 * @return \SplFixedArray of articles found
+	 * @return \SplFixedArray of animals found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable is not the correct data type
 	 **/
@@ -600,6 +597,7 @@ class Animal {
 		$animalColor = filter_var($animalColor, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($animalColor) === true) {
 			throw(new \PDOException("animal color is invalid."));
+		}
 
 			//escape any mySQL wildcards
 			$animalColor = str_replace("_", "\\_", str_replace("%", "\\%", $animalColor));
@@ -609,17 +607,25 @@ class Animal {
 			$statement = $pdo->prepare($query);
 
 			//bind the animal color to the placeholder in template
-			$articleColor = "%$animalColor%";
+			$animalColor = "%$animalColor%";
 			$parameters = ["animalColor" => $animalColor];
 			$statement->execute($parameters);
 
-
-
+			//build an array of animals by color
+			$animals = new \SplFixedArray($statement->rowCount());
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			while(($row = $statement->fetch()) !== false) {
+				try {
+					$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+					$animals[$animals->key()] = $animal;
+					$animal->next();
+				} catch(\Exception $exception) {
+					//if the row couldn't be converted, rethrow it
+					throw(new \PDOException($exception->getMessage(), 0, $exception));
+				}
+			}
+			return ($animals);
 		}
-	}
-
-
-
 }
 
 
