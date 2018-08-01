@@ -75,7 +75,8 @@ class Animal {
 	 * Animal constructor.
 	 * @param Uuid $newAnimalId
 	 * @param Uuid $newAnimalProfileId
-	 * @param \DateTime| $newAnimalDate
+	 * @param string $newAnimalColor
+	 * @param \DateTime $newAnimalDate
 	 * @param string $animalDescription
 	 * @param string $newAnimalGender
 	 * @param string $newAnimalImageUrl
@@ -84,10 +85,11 @@ class Animal {
 	 * @param string $newAnimalSpecies
 	 * @param string $newAnimalStatus
 	 **/
-	public function __construct(Uuid $newAnimalId, Uuid $newAnimalProfileId, $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
+	public function __construct(Uuid $newAnimalId, Uuid $newAnimalProfileId, string $newAnimalColor, \DateTime $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
 		try {
 			$this->setAnimalId($newAnimalId);
 			$this->setAnimalProfileId($newAnimalProfileId);
+			$this->setAnimalColor($newAnimalColor);
 			$this->setAnimalDate($newAnimalDate);
 			$this->setAnimalDescription($animalDescription);
 			$this->setAnimalGender($newAnimalGender);
@@ -361,7 +363,7 @@ class Animal {
 	 * @throws \RangeException if $newAnimalName is > 100 characters
 	 * @throws \TypeError if $newAnimalName is not a string
 	 **/
-	public function setAnimalName(string $newAnimalName): void {
+	public function setAnimalName(string $newAnimalName="unknown"): void {
 		// verify the animal name is secure
 		$newAnimalName = trim($newAnimalName);
 		$newAnimalName = filter_var($newAnimalName, FILTER_SANITIZE_URL);
@@ -547,7 +549,7 @@ class Animal {
 	 * get animals by profile id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid\string $animalProfileId is profile id to search by
+	 * @param Uuid|string $animalProfileId is profile id to search by
 	 * @return \SplFixedArray  of animals found
 	 * @throws \PDOException when mySQl related errors happen
 	 * @throws \TypeError when a variable is not correct data type	 *
@@ -621,7 +623,7 @@ class Animal {
 				try {
 					$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
 					$animals[$animals->key()] = $animal;
-					$animal->next();
+					$animals->next();
 				} catch(\Exception $exception) {
 					//if the row couldn't be converted, rethrow it
 					throw(new \PDOException($exception->getMessage(), 0, $exception));
