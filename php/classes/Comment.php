@@ -213,9 +213,47 @@ class Comment {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$formattedDate = $this->commentDate->format("Y-m-d H:i:s:u");
+		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
 		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
 		$statement->execute($parameters);
 	}
+
+	/**
+	 * deletes this Comment from mySQL
+	 *
+	 * @param \PDO @pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	**/
+
+	public function delete(\PDO $pdo) : void {
+
+		//create query template
+		$query = "DELETE FROM comment WHERE commentId = :commentId";
+		$statement = $pdo->prepare($query);
+
+		//bind the member variables to the place holder in the template
+		$parameters = ["commentId" => $this->commentId->getBytes()];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * updates this comment in mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	**/
+	public function update(\PDO $pdo) : void {
+
+		//create query template
+		$query = "UPDATE comment SET commentAnimalId = :commentAnimalId, commentProfileId = :commentProfileId, commentDate = :commentDate, commentText = :commentText";
+		$statement = $pdo->prepare($query);
+
+		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(),"commentDate" => $formattedDate, "commentText" => $this->commentText];
+		$statement->execute($parameters);
+	}
+
 
 }
