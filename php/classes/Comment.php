@@ -381,6 +381,16 @@ class Comment {
 		return ($comments);
 	}
 
+	/**
+	 * gets the Comment by text
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $commentText comment text to search for
+	 * @return \SplFixedArray SplFixedArray of Comments found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are no the correct data type
+	 */
+
 	public static function getCommentByCommentText(\PDO $pdo, string $commentText): \SplFixedArray {
 		// sanitize the description before searching
 		$commentText = trim($commentText);
@@ -415,6 +425,36 @@ class Comment {
 			}
 
 		}
-		return($comments);
+		return ($comments);
+	}
+
+	/**
+	 * gets all Comments
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of Commens found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllComments(\PDO $pdo): \SplFixedArray {
+		//create query template
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		//build an array of comments
+		$comments = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
+				$comments[$comments->key()] = $comment;
+				$comments->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($comments);
 	}
 }
