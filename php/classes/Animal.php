@@ -462,6 +462,17 @@ class Animal {
 		$parameters = ["animalId" => $this->animalId->getBytes(), "animalProfileId" => $this->animalProfileId->getBytes(), "animalColor" => $this->animalColor, "animalDate" => $formattedDate, "animalDescription" => $this->animalDescription, "animalGender" => $this->animalGender, "animalImageUrl" => $this->animalImageUrl, "animalLocation" => $this->animalLocation, "animalName" => $this->animalName, "animalSpecies" => $this->animalSpecies, "animalStatus" => $this->animalStatus];
 		$statement->execute($parameters);
 	}
+
+	public function update(\PDO $pdo): void {
+		//create query template
+		$query = "INSERT INTO article(animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus) VALUES(:animalId, :animalProfileId, :animalColor, :animalDate, :animalDescription, :animalGender, :animilImageUrl, :animalLocation, :animalName, :animalSpecies, :animalStatus)";
+		$statement = $pdo->prepare($query);
+
+
+		//bind member variables to the placeholders in template
+		$parameters = ["animalId" => $this->animalId->getBytes(), "animalProfileId" => $this->animalProfileId->getBytes(), "animalColor" => $this->animalColor, "animalDate" => $formattedDate, "animalDescription" => $this->animalDescription, "animalGender" => $this->animalGender, "animalImageUrl" => $this->animalImageUrl, "animalLocation" => $this->animalLocation, "animalName" => $this->animalName, "animalSpecies" => $this->animalSpecies, "animalStatus" => $this->animalStatus];
+		$statement->execute($parameters);
+	}
 }
 
 
