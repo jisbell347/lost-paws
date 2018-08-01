@@ -499,8 +499,28 @@ class Animal {
 		$statement->execute($parameters);
 	}
 
-}
+	/**
+	 * gets Animal by animalId (the primary key)
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $animalId is animal id
+	 * @return Animal|null Animal found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable is not the correct data type
+	 **/
 
+	public static function getAnimalByAnimalId(\PDO $pdo, $animalId): ?Animal {
+		//sanitize animalID before searching
+		try {
+			$animalId = self::validateUuid($animalId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+
+	}
+
+}
 
 
 
