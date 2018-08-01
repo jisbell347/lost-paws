@@ -80,8 +80,8 @@ abstract class LostPawsTest extends TestCase {
 			/**
 			 * TODO: update with correct .ini file name once provided.
 			 */
-			$config = readConfig("/etc/apache2/capstone-mysql/ddctwitter.ini");
-			$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddctwitter.ini");
+			$config = readConfig("/etc/apache2/capstone-mysql/lostfuzzy.ini");
+			$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 			$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
 		}
 		return($this->connection);
