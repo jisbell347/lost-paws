@@ -433,16 +433,12 @@ class Profile {
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
 	public function getProfileByProfileOAuthId(\PDO $dbc, string $currProfileOAuthId): ?Profile {
-		// sanitize the  user id before searching
-		try {
-			$currProfileOAuthId = self::validateUuid($currProfileOAuthId);
-		} catch (\Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			return null;
-		}
+		/**
+		 * TODO: check if $currProfileOAuthId is valid
+		 */
 
 		try {
-			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId;
+			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId";
 			$stmt = $dbc->prepare($query);
 			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId;
 			$stmt->execute();
