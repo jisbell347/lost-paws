@@ -540,6 +540,14 @@ class Animal {
 			return($animal);
 		}
 
+	public static function getAnimalByAnimalProfileID(\PDO $pdo, $animalProfileId): \SplFixedArray {
+		//sanitize animalProfileId before searching
+		try {
+			$animalProfileId = self::validateUuid($animalProfileId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw (new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
 }
 
 
