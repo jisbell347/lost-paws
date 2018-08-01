@@ -2,6 +2,9 @@
 
 namespace \Jisbell347\LostPaws;
 
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+
 /*
  * Comment section of the lostpaws.com site. A user will be able to post comments about the animal to contact other people in regards to the status of the animal.
  */
