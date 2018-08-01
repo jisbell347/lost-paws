@@ -3,7 +3,9 @@
 
 
 namespace Jisbell347\LostPaws;
+require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+use Ramsey\Uuid\Uuid;
 /**
  * access token for this profile
  * TODO: include my own autoloader
@@ -78,12 +80,12 @@ class Profile {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newProfileId, int $newProfileOAuthId, ?string $newProfileAccessToken,
+	public function __construct($newProfileId, int $newProfileOAuthId, ?string $profileAccessToken,
 										 string $newProfileEmail, string $newProfileName, ?string $newProfilePhone) {
 		try {
 			$this->setProfileId($newProfileId);
 			$this->setProfileOAuthId($newProfileOAuthId);
-			$this->setProfileAccessToken($newProfileAccessToken);
+			$this->setProfileAccessToken($profileAccessToken);
 			$this->setProfileEmail($newProfileEmail);
 			$this->setProfileName($newProfileName);
 			$this->setProfilePhone($newProfilePhone);
@@ -140,7 +142,7 @@ class Profile {
 	public function setProfileOAuthId(int $newProfileOAuthId): void {
 		try {
 			// make sure that $newProfileOAuthId is an integer
-			if (!is_int($newProfileOAuthIdb)) {
+			if (!is_int($newProfileOAuthId)) {
 				throw (new \TypeError("Profile OAuth ID must be a positive integer", 0, $exception));
 			}
 			// make sure that $newProfileOAuthId is a positive integer
@@ -182,7 +184,7 @@ class Profile {
 			throw(new \RangeException("User access token is not valid"));
 		}
 		//make sure user access token is more than 255 characters
-		if(strlen($newProfileActivationToken) > 255) {
+		if(strlen($newProfileAccessToken) > 255) {
 			throw(new \RangeException("User access token cannot be longer than 255-character long"));
 		}
 		$this->profileAccessToken = $newProfileAccessToken;
@@ -478,32 +480,4 @@ class Profile {
 			return $newProfile;
 		}
 	}
-
-
-	/*
-	 * CREATE TABLE profile (
-	profileId BINARY(16) NOT null,
-	profileOAuthId TINYINT UNSIGNED NOT null,
-	profileAccessToken VARCHAR(255),
-	profileEmail VARCHAR(128) NOT null,
-	profileName VARCHAR(92) NOT null,
-	profilePhone VARCHAR(15),
-	-- create indexes
-	INDEX (profileOAuthId),
-	INDEX(profileEmail),
-	INDEX (profileName),
-	FOREIGN KEY(profileOAuthId) REFERENCES oAuth(oAuthId),
-	PRIMARY KEY (profileId)
-);
-	*/
-
-	/**
-	 * TODO: include some test units for the accessors, mutators, and constractor
-	 */
-
-
-
-
-
-
 }
