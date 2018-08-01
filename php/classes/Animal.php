@@ -482,6 +482,23 @@ class Animal {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * deletes an animal posting from mySQL
+	 *
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
+	public function delete(\PDO $pdo): void {
+		//create query template
+		$query = "DELETE FROM animal WHERE animalId = :animalId";
+		$statement = $pdo->prepare($query);
+
+		//bind member variables into placeholders in the template
+		$parameters = ["animalId" => $this->animalId->getBytes()];
+		$statement->execute($parameters);
+	}
+
 }
 
 
