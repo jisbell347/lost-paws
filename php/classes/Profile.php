@@ -310,7 +310,7 @@ class Profile {
 			$stmt->execute();
 
 			// disconect from the database
-			$dbc = NULL;
+			$dbc = null;
 		} catch (\PDOException | \Exception $e) {
 			error_log( "Error: " .$e->getMessage());
 			exit(0);
@@ -341,7 +341,7 @@ class Profile {
 			$stmt->execute();
 
 			// disconect from the database
-			$dbc = NULL;
+			$dbc = null;
 		} catch (\PDOException | \Exception $e) {
 			error_log( "Error: " .$e->getMessage());
 			exit(0);
@@ -364,7 +364,7 @@ class Profile {
 			$stmt->execute();
 
 			// disconect from the database
-			$dbc = NULL;
+			$dbc = null;
 		} catch (\PDOException | \Exception $e) {
 			error_log( "Error: " .$e->getMessage());
 			exit(0);
@@ -377,7 +377,7 @@ class Profile {
 	 *
 	 * @param \PDO $dbc database connection object
 	 * @param string $currProfileId profile Id to search for
-	 * @return Profile object or NULL if profile is not found
+	 * @return Profile object or null if profile is not found
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
@@ -387,7 +387,7 @@ class Profile {
 			$currUserId = self::validateUuid($currProfileId);
 		} catch (\Exception $e) {
 			error_log( "Error: " .$e->getMessage());
-			return NULL;
+			return null;
 		}
 
 		try {
@@ -412,10 +412,10 @@ class Profile {
 					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
 			}
 			else {
-				$newProfile = NULL;
+				$newProfile = null;
 			}
 			// disconect from the database
-			$dbc = NULL;
+			$dbc = null;
 		} catch (\Exception $e) {
 			error_log( "Error: " .$e->getMessage());
 		} finally {
@@ -428,7 +428,7 @@ class Profile {
 	 *
 	 * @param \PDO $dbc database connection object
 	 * @param string $currProfileEmail profile email address to search for
-	 * @return Profile object or NULL if profile is not found
+	 * @return Profile object or null if profile is not found
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \InvalidArgumentException in case email address is empty or insecure
 	 * @throws \Exception -- all others except for \PDOException exception
@@ -443,13 +443,13 @@ class Profile {
 			}
 		} catch (\Exception $e) {
 			error_log( "Error: " .$e->getMessage());
-			return NULL;
+			return null;
 		}
 
 		try {
 			$query = "SELECT * FROM profile WHERE profileEmail = :profileEmail";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':userEmail', $this->userEmail);
+			$stmt->bindParam(':profileEmail', $this->profileEmail);
 			$stmt->execute();
 			$errorInfo = $stmt->errorInfo();
 			if(isset($errorInfo[2])) {
@@ -457,35 +457,36 @@ class Profile {
 			}
 		} catch(\Exception $e) {
 			$error = $e->getMessage();
+			return null;
 		}
 
 		try {
-			// grab the user from mySQL
+			// grab the selected profile from mySQL
 			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
 			if ($row) {
-				$newUser = new User($row["userId"], $row["userEmail"], $row["userHash"], $row["userName"]);
+				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
+					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
 			}
 			else {
-				$newUser = NULL;
+				$newProfile = null;
 			}
 			// disconect from the database
-			$dbc = NULL;
+			$dbc = null;
 		} catch (\Exception $e) {
-			$error = $e->getMessage();
-			echo "Error: " .$error;
+			error_log( "Error: " .$e->getMessage());
 		} finally {
-			return $newUser;
+			return $newProfile;
 		}
 	}
 
 
 	/*
 	 * CREATE TABLE profile (
-	profileId BINARY(16) NOT NULL,
-	profileOAuthId TINYINT UNSIGNED NOT NULL,
+	profileId BINARY(16) NOT null,
+	profileOAuthId TINYINT UNSIGNED NOT null,
 	profileAccessToken VARCHAR(255),
-	profileEmail VARCHAR(128) NOT NULL,
-	profileName VARCHAR(92) NOT NULL,
+	profileEmail VARCHAR(128) NOT null,
+	profileName VARCHAR(92) NOT null,
 	profilePhone VARCHAR(15),
 	-- create indexes
 	INDEX (profileOAuthId),
