@@ -463,6 +463,13 @@ class Animal {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * updates an animal post in mySQL
+	 *
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
 	public function update(\PDO $pdo): void {
 		//create query template
 		$query = "UPDATE animal SET animalProfileID = :animalProfileId, animalColor = :animalColor, animalDate = :animalDate, animalDescription = :animalDescription, animalDescription = :animalGender, animalImageUrl = :animalImageUrl, animalLocation = :animalLocation, animalName = :animalName, animalSpecies = :animalSpecies, animalStatus = :animalStatus WHERE  animalId = :animalId";
