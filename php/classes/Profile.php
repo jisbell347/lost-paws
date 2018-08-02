@@ -139,11 +139,11 @@ class Profile {
 		try {
 			// make sure that $newProfileOAuthId is an integer
 			if (!is_int($newProfileOAuthId)) {
-				throw (new \TypeError("Profile OAuth ID must be a positive integer", 0, $exception));
+				throw (new \TypeError("Profile OAuth ID must be a positive integer"));
 			}
 			// make sure that $newProfileOAuthId is a positive integer
 			if ($newProfileOAuthId <= 0) {
-				throw (new \RangeException("Profile OAuth ID must be a positive integer", 0, $exception));
+				throw (new \RangeException("Profile OAuth ID must be a positive integer"));
 			}
 		} catch( \TypeError | \Exception  $exception) {
 			$exceptionType = get_class($exception);
