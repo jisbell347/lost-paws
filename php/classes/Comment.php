@@ -11,8 +11,8 @@ use Ramsey\Uuid\Uuid;
  */
 
 class Comment {
-	use \Jisbell347\LostPaws\ValidateDate;
-	use \Jisbell347\LostPaws\ValidateUuid;
+	use ValidateDate;
+	use ValidateUuid;
 	/**
 	 * id for comment, this is the primary key
 	 * @var Uuid $commentId
