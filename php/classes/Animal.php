@@ -4,7 +4,7 @@ namespace Jisbell347\LostPaws;
 use Ramsey\Uuid\Uuid;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
 /**
  * Animal section of the lostpaws.com site. After logging in, a user can post information about the animal including: status, color, name, species, gender and location as well as upload an image of the animal.
