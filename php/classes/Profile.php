@@ -6,11 +6,7 @@ namespace Jisbell347\LostPaws;
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
-/**
- * access token for this profile
- * TODO: include my own autoloader
- */
-use Ramsey\Uuid\Uuid;
+
 /*
  * Profile section of the lostpaws.com site. After logging in with oAuth, a user profile is created which displays name and contact info.
  */
