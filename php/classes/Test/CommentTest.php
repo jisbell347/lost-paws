@@ -56,6 +56,9 @@ abstract class CommentTest extends TestCase {
 		//create and insert an Animal to receive the the test Comment
 
 		// create and insert a Profile to own the test Comment
+		/**
+		 * NEED TO ASK ABOUT THIS LINE, NOT SURE HOW TO STRUCTURE AND CAUSING ERRORS :(
+		 **/
 		$this->profile = new Profile(generateUuidV4(), null, "username", );
 
 		// calculate the date (just use the time the unit test was setup)
@@ -88,4 +91,23 @@ abstract class CommentTest extends TestCase {
 	/**
 	 * test inserting a Comment, editing it, and then updating it
 	 */
+
+	public function testUpdateValidComment() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("comment");
+
+		// create a new Comment and insert it into mySQL
+		$commentid = generateUuidV4();
+		$comment = new Comment($commentid, $this->profile->getProfileId(), $this->VALID_COMMENTTEXT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
+
+		// edit the Comment and update it in the mySQL
+		$comment->setCommentText($this->VALID_COMMENTTEXT2);
+		$comment->update($this->getPDO());
+
+		// grab the data from mySQL and ensure the fields match our expectations
+		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
+	}
+
+
 }
