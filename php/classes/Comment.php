@@ -58,9 +58,6 @@ class Comment {
 	 *
 	 * @return Uuid value of comment id
 	 **/
-	/**
-	 * @return Uuid
-	 */
 	public function getCommentId(): Uuid {
 		return ($this->commentId);
 	}
