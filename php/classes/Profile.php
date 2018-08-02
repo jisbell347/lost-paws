@@ -192,7 +192,6 @@ class Profile {
 	 * @param string $newProfileEmail new value of an email address
 	 * @throws \InvalidArgumentException if $newEmail is not a valid email or insecure
 	 * @throws \RangeException if $newEmail is > 128 characters
-	 * @throws \TypeError if $newEmail is not a string
 	 **/
 	public function setProfileEmail(string $newProfileEmail): void {
 		// verify the email is secure
@@ -224,17 +223,16 @@ class Profile {
 	 * @param string $newProfileName new value of a user name for this Profile
 	 * @throws \InvalidArgumentException if $newProfileName is not a valid string
 	 * @throws \RangeException if $newProfileName is longer than 92-character long
-	 * @throws \TypeError if $newProfileName is not a string
 	 **/
 	public function setProfileName(string $newProfileName): void {
 		// verify that the user name is not empty and shorter than 92 characters
 		$newProfileName = trim($newProfileName);
 		if(empty($newProfileName | !ctype_alpha($newProfileName))) {
-			throw(new \InvalidArgumentException("Profile name is empty or invalid"));
+			throw(new \InvalidArgumentException("Profile name is empty or invalid."));
 		}
 		// verify that a Profile name is shorter than 92 characters
 		if(strlen($newProfileName) > 92) {
-			throw(new \RangeException("Profile name is too long"));
+			throw(new \RangeException("Profile name is too long."));
 		}
 		// store the valid name in the class state variable
 		$this->profileName = $newProfileName;
@@ -255,7 +253,6 @@ class Profile {
 	 * @param string $newProfilePhone new value of a phone number for this Profile
 	 * @throws \InvalidArgumentException if $newProfileName is empty or contains digits and special characters
 	 * @throws \RangeException if $newProfileName is longer than 92-character long
-	 * @throws \TypeError if $newProfileName is not a string
 	 **/
 	public function setProfilePhone(string $newProfilePhone): void {
 		//if $profilePhone is null return it right away
@@ -265,14 +262,17 @@ class Profile {
 		}
 		// verify the phone is secure
 		$newProfilePhone = trim($newProfilePhone);
-		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		// we don't allow using '+' in phone numbers, only digits
-		if(empty($newProfilePhone | !ctype_xdigit($newProfilePhone))) {
-			throw(new \InvalidArgumentException("Profile phone number is empty or insecure"));
+		// FILTER_SANITIZE_NUMBER_INT removes everything except digits, "+", and "-"
+		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_NUMBER_INT);
+		if(empty($newProfilePhone)) {
+			throw(new \InvalidArgumentException("Profile phone number is empty or insecure."));
 		}
+		/**
+		 * TODO: remove possible "+" and "-" characters
+		 */
 		// verify the phone will fit in the database
 		if(strlen($newProfilePhone) > 15) {
-			throw(new \RangeException("profile phone number is too long"));
+			throw(new \RangeException("profile phone number is too long."));
 		}
 		// store the phone
 		$this->profilePhone = $newProfilePhone;
