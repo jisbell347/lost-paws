@@ -50,7 +50,7 @@ class OAuthTest extends LostPawsTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoOAuth = OAuth::getOAuthByOAuthId($this->getPDO(), $oAuth->getOAuthId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
-		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuth);
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuth->getOAuthId());
 		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
 	}
 
@@ -73,8 +73,8 @@ class OAuthTest extends LostPawsTest {
 		$pdoOAuth = OAuth::getOAuthByOAuthId($this->getPDO(), $oAuth->getOAuthId());
 
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
-		$this->assertEquals($pdoOAuth->getOAuthId(), null);
-		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuth->getOAuthId());
+		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE2);
 	}
 
 	/**
@@ -110,7 +110,7 @@ class OAuthTest extends LostPawsTest {
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoOAuth = OAuth::getOAuthByOAuthId($this->getPDO(), $oAuth->getOAuthId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
-		$this->assertEquals($pdoOAuth->getOAuthId(), null);
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuth->getOAuthId());
 		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
 	}
 
@@ -144,7 +144,7 @@ class OAuthTest extends LostPawsTest {
 		//enforce the results meet expectations
 		$pdoOAuth = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
-		$this->assertEquals($pdoOAuth->getOAuthId(), null);
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuth->getOAuthId());
 		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
 	}
 
@@ -177,7 +177,7 @@ class OAuthTest extends LostPawsTest {
 
 		// grab the result from the array and validate it
 		$pdoOAuth = $results[0];
-		$this->assertEquals($pdoOAuth->getOAuthId(), null);
+		$this->assertEquals($pdoOAuth->getOAuthId(), $oAuth->getOAuthId());
 		$this->assertEquals($pdoOAuth->getOAuthSource(), $this->VALID_SOURCE);
 	}
 }
