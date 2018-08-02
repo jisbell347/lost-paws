@@ -408,7 +408,7 @@ class Comment {
 		$statement = $pdo->prepare($query);
 
 		//bind the comment text to the place holder in the template
-		$commentText = "%commentText%";
+		$commentText = "%$commentText%";
 		$parameters = ["commentText" => $commentText];
 		$statement->execute($parameters);
 
