@@ -292,7 +292,7 @@ class Comment {
 			$comment = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
-			if(row !== false) {
+			if($row !== false) {
 				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
 			}
 		} catch(\Exception $exception) {
@@ -351,10 +351,10 @@ class Comment {
 	 * @throws \PDOException when mySQL related erros occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getCommentByCommentProfileId(\PDO $pdo, $commentProfilelId): \SplFixedArray {
+	public static function getCommentByCommentProfileId(\PDO $pdo, $commentProfileId): \SplFixedArray {
 
 		try {
-			$commentProfilelId = self::validateUuid($commentProfilelId);
+			$commentProfileId = self::validateUuid($commentProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -364,7 +364,7 @@ class Comment {
 		$statement = $pdo->prepare($query);
 
 		//bind the comment id to the place holder in the template
-		$parameters = ["commentProfileId" => $commentProfilelId->getBytes()];
+		$parameters = ["commentProfileId" => $commentProfileId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
