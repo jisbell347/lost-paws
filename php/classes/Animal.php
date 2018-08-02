@@ -180,12 +180,12 @@ class Animal {
 		$newAnimalColor = trim($newAnimalColor);
 		$newAnimalColor = filter_var($newAnimalColor, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newAnimalColor) === true) {
-			throw(new \InvalidArgumentException("Animal color description is empty or insecure"));
+			throw(new \InvalidArgumentException("Animal color description is empty or insecure."));
 		}
 
 		// verify the animal color description will fit in the database
 		if(strlen($newAnimalColor) > 25) {
-			throw(new \RangeException("animal color description is too long"));
+			throw(new \RangeException("Animal color description is too long."));
 		}
 
 		// store the author name
@@ -232,12 +232,12 @@ class Animal {
 		$newAnimalDescription = trim($newAnimalDescription);
 		$newAnimalDescription = filter_var($newAnimalDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newAnimalDescription) === true) {
-			throw(new \InvalidArgumentException("Animal description content is empty or insecure"));
+			throw(new \InvalidArgumentException("Animal description content is empty or insecure."));
 		}
 
 		// verify the animal description content will fit in the database
 		if(strlen($newAnimalDescription) > 250) {
-			throw(new \RangeException("Animal description content is too long. Limit 250 characters"));
+			throw(new \RangeException("Animal description content is too long. Limit 250 characters."));
 		}
 
 		// store the animal description
@@ -271,7 +271,7 @@ class Animal {
 
 		// verify the animal color description will fit in the database
 		if(strlen($newAnimalGender) > 7) {
-			throw(new \RangeException("Animal gender description is too long"));
+			throw(new \RangeException("Animal gender description is too long."));
 		}
 
 		// store the author name
@@ -282,7 +282,7 @@ class Animal {
 	 * accessor method for animal image url
 	 *
 	 * @return string value of image URL
-	 */
+	 **/
 	public function getAnimalImageUrl(): string {
 		return ($this->animalImageUrl);
 	}
@@ -300,12 +300,12 @@ class Animal {
 		$newAnimalImageUrl = trim($newAnimalImageUrl);
 		$newAnimalImageUrl = filter_var($newAnimalImageUrl, FILTER_SANITIZE_URL);
 		if(empty($newAnimalImageUrl) === true) {
-			throw(new \InvalidArgumentException("Animal picture link is empty or insecure"));
+			throw(new \InvalidArgumentException("Animal picture link is empty or insecure."));
 		}
 
 		// verify the animal image url link will fit in the database
 		if(strlen($newAnimalImageUrl) > 500) {
-			throw(new \RangeException("Animal picture link is too long. limit 500 characters"));
+			throw(new \RangeException("Animal picture link is too long. limit 500 characters."));
 		}
 
 		// store the animal picture link
@@ -316,7 +316,7 @@ class Animal {
 	 * accessor method for animal location
 	 *
 	 * @return string value of animal location
-	 */
+	 **/
 	public function getAnimalLocation(): string {
 		return ($this->animalLocation);
 	}
@@ -334,12 +334,12 @@ class Animal {
 		$newAnimalLocation = trim($newAnimalLocation);
 		$newAnimalLocation = filter_var($newAnimalLocation, FILTER_SANITIZE_URL);
 		if(empty($newAnimalLocation) === true) {
-			throw(new \InvalidArgumentException("animal location description is empty or insecure"));
+			throw(new \InvalidArgumentException("Animal location description is empty or insecure."));
 		}
 
 		// verify the animal location description will fit in the database
 		if(strlen($newAnimalLocation) > 200) {
-			throw(new \RangeException("animal location description is too long. Limit 200 characters"));
+			throw(new \RangeException("Animal location description is too long. Limit 200 characters."));
 		}
 
 		// store the animal location description
@@ -369,12 +369,12 @@ class Animal {
 		$newAnimalName = trim($newAnimalName);
 		$newAnimalName = filter_var($newAnimalName, FILTER_SANITIZE_URL);
 		if(empty($newAnimalName) === true) {
-			throw(new \InvalidArgumentException("animal name is empty or insecure. Type unknown if unknown"));
+			throw(new \InvalidArgumentException("Animal name is empty or insecure. Type unknown if unknown."));
 		}
 
 		// verify the animal name will fit in the database
 		if(strlen($newAnimalName) > 100) {
-			throw(new \RangeException("animal name text is too long. Limit 100 characters"));
+			throw(new \RangeException("Animal name text is too long. Limit 100 characters."));
 		}
 
 		// store the animal name
@@ -403,12 +403,12 @@ class Animal {
 		$newAnimalSpecies = trim($newAnimalSpecies);
 		$newAnimalSpecies = filter_var($newAnimalSpecies, FILTER_SANITIZE_URL);
 		if(empty($newAnimalSpecies) === true) {
-			throw(new \InvalidArgumentException("animal species is empty or insecure. Type unknown if unknown"));
+			throw(new \InvalidArgumentException("Animal species is empty or insecure."));
 		}
 
 		// verify the animal species input will fit in the database
 		if(strlen($newAnimalSpecies) > 3) {
-			throw(new \RangeException("animal species text is too long. Limit 3 characters. Dog or Cat."));
+			throw(new \RangeException("Animal species text is too long. Limit 3 characters. Dog or Cat."));
 		}
 
 		// store the animal species
@@ -437,12 +437,12 @@ class Animal {
 		$newAnimalStatus = trim($newAnimalStatus);
 		$newAnimalStatus = filter_var($newAnimalStatus, FILTER_SANITIZE_URL);
 		if(empty($newAnimalStatus) === true) {
-			throw(new \InvalidArgumentException("animal status is empty or insecure."));
+			throw(new \InvalidArgumentException("Animal status is empty or insecure."));
 		}
 
 		// verify the animal species input will fit in the database
 		if(strlen($newAnimalStatus) > 8) {
-			throw(new \RangeException("animal status text is too long. Limit 8 characters."));
+			throw(new \RangeException("Animal status text is too long. Limit 8 characters."));
 		}
 
 		// store the animal status
