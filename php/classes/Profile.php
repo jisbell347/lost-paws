@@ -136,12 +136,11 @@ class Profile {
 	 * mutator method for OAuth id
 	 *
 	 * @param  int $newProfileOAuthId OAuth id for this Profile
-	 *  @throws \TypeError if $newProfileOAuthId is not a string
 	 * @throws \RangeException if $newProfileOAuthId is not positive
 	 **/
 	public function setProfileOAuthId(int $newProfileOAuthId): void {
 		if ($newProfileOAuthId <= 0) {
-			throw (new \RangeException("Profile OAuth ID must be a positive integer"));
+			throw (new \RangeException("Profile OAuth ID must be a positive integer."));
 		}
 		$this->profileOAuthId = $newProfileOAuthId;
 	}
@@ -159,9 +158,7 @@ class Profile {
 	 * mutator method for account activation token
 	 *
 	 * @param string $newProfileAccessToken
-	 * @throws \InvalidArgumentException  if the token is not a string or insecure
 	 * @throws \RangeException if the token is not exactly 32 characters
-	 * @throws \TypeError if the access token is not a string
 	 */
 	public function setProfileAccessToken(?string $newProfileAccessToken): void {
 		if($newProfileAccessToken === null) {
@@ -171,11 +168,11 @@ class Profile {
 		$newProfileAccessToken = strtolower(trim($newProfileAccessToken));
 		// check if all characters are digits, if not - throw an exception
 		if(!ctype_xdigit($newProfileAccessToken)) {
-			throw(new \RangeException("User access token is not valid"));
+			throw(new \RangeException("User access token is not valid."));
 		}
 		//make sure user access token is more than 255 characters
 		if(strlen($newProfileAccessToken) > 255) {
-			throw(new \RangeException("User access token cannot be longer than 255-character long"));
+			throw(new \RangeException("User access token cannot be longer than 255-character long."));
 		}
 		$this->profileAccessToken = $newProfileAccessToken;
 	}
@@ -202,11 +199,11 @@ class Profile {
 		$newProfileEmail = trim($newProfileEmail);
 		$newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
 		if(empty($newProfileEmail)) {
-			throw(new \InvalidArgumentException("Profile email address is empty or insecure"));
+			throw(new \InvalidArgumentException("Profile email address is empty or insecure."));
 		}
 		// verify the email will fit in the database
 		if(strlen($newProfileEmail) > 128) {
-			throw(new \RangeException("Profile email address is too long"));
+			throw(new \RangeException("Profile email address is too long."));
 		}
 		// store the valid email address
 		$this->profileEmail = $newProfileEmail;
