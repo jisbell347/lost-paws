@@ -257,7 +257,7 @@ class Animal {
 	 * mutator method for animal gender
 	 *
 	 * @param string $newAnimalGender new value of animal gender
-	 * @throws \InvalidArgumentException if $newAnimalgender is not a string or is insecure
+	 * @throws \InvalidArgumentException if $newAnimalGender is not a string or is insecure
 	 * @throws \RangeException if $newAnimalGender  is > 7 characters
 	 * @throws \TypeError if $newAnimalGender is not a string
 	 **/
@@ -271,7 +271,7 @@ class Animal {
 
 		// verify the animal color description will fit in the database
 		if(strlen($newAnimalGender) > 7) {
-			throw(new \RangeException("animal color description is too long"));
+			throw(new \RangeException("Animal gender description is too long"));
 		}
 
 		// store the author name
@@ -300,12 +300,12 @@ class Animal {
 		$newAnimalImageUrl = trim($newAnimalImageUrl);
 		$newAnimalImageUrl = filter_var($newAnimalImageUrl, FILTER_SANITIZE_URL);
 		if(empty($newAnimalImageUrl) === true) {
-			throw(new \InvalidArgumentException("animal picture link is empty or insecure"));
+			throw(new \InvalidArgumentException("Animal picture link is empty or insecure"));
 		}
 
 		// verify the animal image url link will fit in the database
 		if(strlen($newAnimalImageUrl) > 500) {
-			throw(new \RangeException("animal picture link is too long. limit 500 characters"));
+			throw(new \RangeException("Animal picture link is too long. limit 500 characters"));
 		}
 
 		// store the animal picture link
@@ -365,6 +365,7 @@ class Animal {
 	 **/
 	public function setAnimalName(string $newAnimalName="unknown"): void {
 		// verify the animal name is secure
+		$newAnimalName = ucwords(strtolower($newAnimalName));
 		$newAnimalName = trim($newAnimalName);
 		$newAnimalName = filter_var($newAnimalName, FILTER_SANITIZE_URL);
 		if(empty($newAnimalName) === true) {
