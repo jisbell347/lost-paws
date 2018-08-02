@@ -32,7 +32,7 @@ Class AnimalTest extends LostPawsTest{
 	/**
 	 * content of updated Animal entity
 	 * @var string $VALID_ANIMAL_CONTENT2
-	 */
+	 **/
 	protected $VALID_ANIMAL_CONTENT2 = "PHPUnit test is still passing";
 	/**
 	 * timestamp of the Animal; this starts as null and is assigned later
@@ -41,17 +41,17 @@ Class AnimalTest extends LostPawsTest{
 	protected $VALID_ANIMAL_DATE = null;
 	/**
 	 * Valid timestamp to use as an OLD_ANIMAL_POST_DATE
-	 */
+	 **/
 	protected $VALID_OLD_ANIMAL_POST_DATE = null;
 	/**
 	 * Valid timestamp to use as an NEW_ANIMAL_POST_DATE
-	 */
+	 **/
 	protected $VALID_NEW_ANIMAL_POST_DATE = null;
 
 
 	/**
 	 * create dependent objects before running each test
-	 */
+	 **/
 	public final function setUp(): void {
 		//create and insert a Profile to own and test the Animal.
 		$this->profile = new Profile(generateUuidV4(), null);
@@ -64,6 +64,20 @@ Class AnimalTest extends LostPawsTest{
 		//format the old animal post date to use for testing
 		$this->VALID_OLD_ANIMAL_POST_DATE = new \DateTime();
 		$this->VALID_OLD_ANIMAL_POST_DATE->sub(new \DateInterval("P5D"));
+	}
+
+	/**
+	 * test inserting a valid Animal Posting, and verify that the actual mySQL data matches
+	 **/
+	public function testInsertValidAnimal(): void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("animal");
+		$animalId = generateUuidV4();
+		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_CONTENT, $this->VALID_ANIMAL_DATE);
+		$animal->insert($this->getPDO());
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoAnimal = Animal::getAnimalByAnimalId($this->getPDO(),$animal->getAnimalId());
+
 	}
 
 
