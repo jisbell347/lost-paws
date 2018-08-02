@@ -76,12 +76,12 @@ class Profile {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newProfileId, int $newProfileOAuthId, ?string $profileAccessToken,
-										 string $newProfileEmail, string $newProfileName, ?string $newProfilePhone) {
+	public function __construct($newProfileId, int $newProfileOAuthId, string $newProfileAccessToken,
+										 string $newProfileEmail, string $newProfileName, string $newProfilePhone) {
 		try {
 			$this->setProfileId($newProfileId);
 			$this->setProfileOAuthId($newProfileOAuthId);
-			$this->setProfileAccessToken($profileAccessToken);
+			$this->setProfileAccessToken($newProfileAccessToken);
 			$this->setProfileEmail($newProfileEmail);
 			$this->setProfileName($newProfileName);
 			$this->setProfilePhone($newProfilePhone);
