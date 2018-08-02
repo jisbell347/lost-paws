@@ -22,13 +22,13 @@ class OAuthTest extends LostPawsTest {
 	 * valid oAuth source to use
 	 * @var string $VALID_SOURCE
 	 **/
-	protected $VALID_SOURCE = "oauth test";
+	protected $VALID_SOURCE = "Google";
 
 	/**
 	 * valid oAuth source to update
 	 * @var string $VALID_SOURCE2
 	 **/
-	protected $VALID_SOURCE2 = "still passing test";
+	protected $VALID_SOURCE2 = "Facebook";
 
 	public final function setUp(): void {
 		parent::setUp();

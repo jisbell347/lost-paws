@@ -115,12 +115,13 @@ class OAuth {
 	 **/
 	public function insert(\PDO $pdo) : void {
 		//create query template
-		$query = "INSERT INTO oAuth(oAuthId, oAuthSource) VALUES (:oAuthId, :oAuthSource)";
+		$query = "INSERT INTO oAuth(oAuthSource) VALUES (:oAuthSource)";
 		$statement = $pdo->prepare($query);
 
 		//binds the member variables to the place holders in the template
-		$parameters = ["oAuthId" => $this->oAuthId, "oAuthSource" => $this->oAuthSource ];
+		$parameters = ["oAuthSource" => $this->oAuthSource ];
 		$statement->execute($parameters);
+		$this->oAuthId = $pdo->lastInsertId();
 	}
 
 	/**
