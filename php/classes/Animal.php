@@ -12,7 +12,7 @@ require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
  * @author  Jude Baca-Miller <jmiller156@cnm.edu>
  **/
 
-class Animal {
+class Animal implements \JsonSerializable {
 	use ValidateUuid;
 	use ValidateDate;
 
@@ -632,6 +632,22 @@ class Animal {
 			}
 			return ($animals);
 		}
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() : array {
+		$fields = get_object_vars($this);
+
+		$fields["animalId"] = $this->animalId->toString();
+		$fields["animalProfileId"] = $this->animalProfileId->toString();
+
+		//format the date so that the front end can consume it
+		$fields["animalDate"] = round(floatval($this->animalDate->format("U.u")) * 1000);
+		return($fields);
+	}
 }
 
 
