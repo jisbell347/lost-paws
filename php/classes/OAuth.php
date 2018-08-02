@@ -43,7 +43,7 @@ class OAuth {
 		try {
 			$this->setOAuthId($newOAuthId);
 			$this->setOAuthSource($newOAuthSource);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
 			$exceptionType = get_class($exception);
 			throw (new $exceptionType($exception->getMessage(), 0, $exception));
 		}
