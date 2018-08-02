@@ -609,7 +609,7 @@ class Animal implements \JsonSerializable {
 			$animalColor = str_replace("_", "\\_", str_replace("%", "\\%", $animalColor));
 
 			//create query template
-			$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalColor LIKE :animalProfileId";
+			$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalColor LIKE :animalColor";
 			$statement = $pdo->prepare($query);
 
 			//bind the animal color to the placeholder in template
@@ -632,6 +632,53 @@ class Animal implements \JsonSerializable {
 			}
 			return ($animals);
 		}
+
+	/**
+	* get animal by description
+	*
+	* @param \PDO $pdo PDO connection object
+	* @param string $animalDescription text to search for
+	* @return \SplFixedArray SplFixedArray of Animals found
+	* @throws \PDOException when mySQL related errors occur
+	* @throws \TypeError when variables are no the correct data type
+	*/
+
+	public static function getAnimalByAnimalDescription(\PDO $pdo, string $animalDescription): \SplFixedArray {
+		// sanitize the description before searching
+		$animalDescription = trim($animalDescription);
+		$animalDescription = filter_var($animalDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($animalDescription) === true) {
+			throw(new \PDOException("Animal description is invalid."));
+		}
+
+		// escape any mySQL wild cards
+		$animalText = str_replace("_", "\\_", str_replace("%", "\\%", $animalDescription));
+
+		//create query template
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalDescription LIKE :animalDescription";
+		$statement = $pdo->prepare($query);
+
+		//bind the animal text to the place holder in the template
+		$animalDescription = "%$animalDescription%";
+		$parameters = ["animalText" => $animalDescription];
+		$statement->execute($parameters);
+
+		// build an array of animals
+		$animals = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+				$animals[$animals->key()] = $animal;
+				$animals->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+
+		}
+		return ($animals);
+	}
 
 	/**
 	 * formats the state variables for JSON serialization
