@@ -39,7 +39,7 @@ class OAuth {
 	 * @Documentation https:/php.net/manuel/en/languqge.oop5.decon.php
 	 **/
 
-	public function __construct(int $newOAuthId, string $newOAuthSource) {
+	public function __construct(?int $newOAuthId, string $newOAuthSource) {
 		try {
 			$this->setOAuthId($newOAuthId);
 			$this->setOAuthSource($newOAuthSource);
@@ -54,7 +54,7 @@ class OAuth {
 	 *
 	 * @return int value of oAuth id
 	 **/
-	public function getOAuthId() : int {
+	public function getOAuthId() : ?int {
 		return($this->oAuthId);
 	}
 
@@ -65,7 +65,11 @@ class OAuth {
 	 * @throws \RangeException if $newOAuthId is not positive
 	 * @throws \TypeError if $newOAuthId is not an integer
 	 **/
-	public function setOAuthId(int $newOAuthId) : void {
+	public function setOAuthId(?int $newOAuthId) : void {
+		if($newOAuthId === null){
+			$this->oAuthId = $newOAuthId;
+			return;
+		}
 		//Verifies that the oAuth Id is a positive number
 		if($newOAuthId <= 0) {
 			throw (new \RangeException("Id cannot be less than or equal to zero"));
