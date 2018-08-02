@@ -10,7 +10,11 @@ use Ramsey\Uuid\Uuid;
 /*
  * Profile section of the lostpaws.com site. After logging in with oAuth, a user profile is created which displays name and contact info.
  */
-
+/**
+ * for Profile Names: first - to lower, then - capitalize the first letter
+ * TODO: setProfileName()
+ *
+ **/
 
 /**
  * Profile class describes a registered user of LostPaws.com
@@ -136,18 +140,8 @@ class Profile {
 	 * @throws \RangeException if $newProfileOAuthId is not positive
 	 **/
 	public function setProfileOAuthId(int $newProfileOAuthId): void {
-		try {
-			// make sure that $newProfileOAuthId is an integer
-			if (!is_int($newProfileOAuthId)) {
-				throw (new \TypeError("Profile OAuth ID must be a positive integer"));
-			}
-			// make sure that $newProfileOAuthId is a positive integer
-			if ($newProfileOAuthId <= 0) {
-				throw (new \RangeException("Profile OAuth ID must be a positive integer"));
-			}
-		} catch( \TypeError | \Exception  $exception) {
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		if ($newProfileOAuthId <= 0) {
+			throw (new \RangeException("Profile OAuth ID must be a positive integer"));
 		}
 		$this->profileOAuthId = $newProfileOAuthId;
 	}
