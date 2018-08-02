@@ -191,12 +191,12 @@ class Comment {
 		$newCommentText = trim($newCommentText);
 		$newCommentText = filter_var($newCommentText, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newCommentText) === true) {
-			throw(new \InvalidArgumentException("comment text is empty or insecure"));
+			throw(new \InvalidArgumentException("Comment text is empty or insecure."));
 		}
 
 		//verify the comment content will fit in the database
 		if(strlen($newCommentText) > 1000) {
-			throw(new \RangeException("comment text is too large"));
+			throw(new \RangeException("Comment text is too large."));
 		}
 
 		//store the comment text
@@ -207,7 +207,7 @@ class Comment {
 	 * inserts this Comment into mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL related errors occure
+	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function insert(\PDO $pdo): void {
@@ -430,7 +430,7 @@ class Comment {
 	 * gets all Comments
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @return \SplFixedArray SplFixedArray of Commens found or null if not found
+	 * @return \SplFixedArray SplFixedArray of Comments found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
