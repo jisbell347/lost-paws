@@ -122,7 +122,7 @@ class Profile {
 	/**
 	 * accessor method for OAuth id
 	 *
-	 * @return $profileOAuthId value for this Profile as an integer
+	 * @return int $profileOAuthId value for this Profile as an integer
 	 **/
 	public function getProfileOAuthId(): int {
 		return ($this->profileOAuthId);
