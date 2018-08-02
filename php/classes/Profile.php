@@ -287,7 +287,8 @@ class Profile {
 	 **/
 	public function insertProfile(\PDO $dbc): void {
 		// create query template
-		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone) VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
+		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone)
+ 									VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
 		try {
 			$stmt = $dbc->prepare($query);
 			$stmt->bindParam(':profileId', $this->profileId->getBytes());
@@ -300,9 +301,10 @@ class Profile {
 
 			// disconect from the database
 			$dbc = null;
-		} catch (\PDOException | \Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			exit(0);
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw an exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
 
@@ -331,9 +333,10 @@ class Profile {
 
 			// disconect from the database
 			$dbc = null;
-		} catch (\PDOException | \Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			exit(0);
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if any
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
 
