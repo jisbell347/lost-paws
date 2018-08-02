@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 
 
 /**
- * Profile class describes a registere user of LostPaws.com
+ * Profile class describes a registered user of LostPaws.com
  *
  * This entity depends on the OAuth entity
  *
@@ -64,7 +64,7 @@ class Profile {
 	/**
 	 * constructor for this Profile
 	 *
-	 * @param string|Uuid $newProfileId id of this Profile or null if a new Profile
+	 * @param Uuid|string $newProfileId id of this Profile or null if a new Profile
 	 * @param int $newProfileOAuthId OAuth id for this Profile
 	 * @param string $newProfileAccessToken access token to safe guard against malicious accounts
 	 * @param string $newProfileEmail string containing email for this Profile
@@ -104,7 +104,7 @@ class Profile {
 	/**
 	 * mutator method for profile id
 	 *
-	 * @param  Uuid| string $newProfileId value of new profile id
+	 * @param  Uuid|string $newProfileId value of new profile id
 	 * @throws \RangeException if $newProfileId is not positive
 	 * @throws \TypeError if the profile Id is not
 	 **/
@@ -155,7 +155,7 @@ class Profile {
 	/**
 	 * accessor method for an access token for this Profile
 	 *
-	 * @return $profileAccessToken value for this Profile as string
+	 * @return string $profileAccessToken value for this Profile as string
 	 **/
 	public function getProfileAccessToken(): string {
 		return ($this->profileAccessToken);
