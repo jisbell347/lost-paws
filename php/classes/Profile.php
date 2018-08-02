@@ -230,7 +230,7 @@ class Profile {
 	/**
 	 * mutator method for setting/changing a profile name
 	 *
-	 * @param string $newPProfileName new value of a user name for this Profile
+	 * @param string $newProfileName new value of a user name for this Profile
 	 * @throws \InvalidArgumentException if $newProfileName is not a valid string
 	 * @throws \RangeException if $newProfileName is longer than 92-character long
 	 * @throws \TypeError if $newProfileName is not a string
@@ -277,7 +277,7 @@ class Profile {
 		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		// we don't allow using '+' in phone numbers, only digits
 		if(empty($newProfilePhone | !ctype_xdigit($newProfilePhone))) {
-			throw(new \InvalidArgumentException("Pofile phone number is empty or insecure"));
+			throw(new \InvalidArgumentException("Profile phone number is empty or insecure"));
 		}
 		// verify the phone will fit in the database
 		if(strlen($newProfilePhone) > 15) {
@@ -436,7 +436,7 @@ class Profile {
 		try {
 			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId;
+			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
 			$stmt->execute();
 			$errorInfo = $stmt->errorInfo();
 			if(isset($errorInfo[2])) {
