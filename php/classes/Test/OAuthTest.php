@@ -139,7 +139,7 @@ class OAuthTest extends LostPawsTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("oAuth"));
 
 		//enforce no other objects are bleeding into profile
-		$this->assertContainsOnlyInstancesOf("Jisbell\\LostPaws\\OAuth", $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\\LostPaws\\OAuth", $results);
 
 		//enforce the results meet expectations
 		$pdoOAuth = $results[0];
