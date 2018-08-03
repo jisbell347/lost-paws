@@ -248,17 +248,6 @@ class Profile {
 	}
 
 	/**
-	 * helper function that removes "+" and "-" from the string
-	 *
-	 * @param string $newPhoneNumber string that portentially contains "+" and "-"
-	 * @return string that was stripped from "+" and "-"
-	 **/
-	private function fixPhoneNumber(string $phoneNumber) : string {
-		$chars = ["+","-"];
-		return(str_replace($chars, "", $phoneNumber));
-	}
-
-	/**
 	 * mutator method for setting/changing a Profile phone number
 	 *
 	 * @param string $newProfilePhone new value of a phone number for this Profile
@@ -279,7 +268,7 @@ class Profile {
 			throw(new \InvalidArgumentException("Phone number is empty or insecure."));
 		}
 		// remove all "+" and "-" from the phone number
-		$newProfilePhone = fixPhoneNumber($newProfilePhone);
+		$newProfilePhone = str_replace(["+","-"], "", $newProfilePhone);
 		// verify the phone will fit in the database
 		if(strlen($newProfilePhone) > 15) {
 			throw(new \RangeException("Phone number is too long."));
@@ -308,9 +297,6 @@ class Profile {
 			$stmt->bindParam(':profileName', $this->profileName);
 			$stmt->bindParam(':profilePhone', $this->profilePhone);
 			$stmt->execute();
-
-			// disconect from the database
-			$dbc = null;
 		} catch (\PDOException | \Exception $exception) {
 			// re-throw an exception if occured
 			$exceptionType = get_class($exception);
@@ -319,7 +305,7 @@ class Profile {
 	}
 
 	/**
-	 * update this Profile from mySQL where profileId matches
+	 * update this Profile from mySQL where profileId matches the search
 	 *
 	 * @param \PDO $dbc database connection object
 	 * @throws \PDOException in case of mySQL related errors
@@ -340,11 +326,8 @@ class Profile {
 			$stmt->bindParam(':profileName', $this->profileName);
 			$stmt->bindParam(':profilePhone', $this->profilePhone);
 			$stmt->execute();
-
-			// disconect from the database
-			$dbc = null;
 		} catch (\PDOException | \Exception $exception) {
-			// re-throw exception if any
+			// re-throw exception if occured
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
