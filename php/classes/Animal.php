@@ -401,7 +401,7 @@ class Animal implements \JsonSerializable {
 	public function setAnimalSpecies(string $newAnimalSpecies): void {
 		// verify the animal species input is secure
 		$newAnimalSpecies = trim($newAnimalSpecies);
-		$newAnimalSpecies = filter_var($newAnimalSpecies, FILTER_SANITIZE_URL);
+		$newAnimalSpecies = filter_var($newAnimalSpecies, FILTER_SANITIZE_STRING);
 		if(empty($newAnimalSpecies) === true) {
 			throw(new \InvalidArgumentException("Animal species is empty or insecure."));
 		}
@@ -652,7 +652,7 @@ class Animal implements \JsonSerializable {
 		}
 
 		// escape any mySQL wild cards
-		$animalText = str_replace("_", "\\_", str_replace("%", "\\%", $animalDescription));
+		$animalDescription = str_replace("_", "\\_", str_replace("%", "\\%", $animalDescription));
 
 		//create query template
 		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalDescription LIKE :animalDescription";
