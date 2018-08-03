@@ -258,7 +258,6 @@ class Animal implements \JsonSerializable {
 	 *
 	 * @param string $newAnimalGender new value of animal gender
 	 * @throws \InvalidArgumentException if $newAnimalGender is not a string or is insecure
-	 * @throws \RangeException if $newAnimalGender  is > 7 characters
 	 * @throws \TypeError if $newAnimalGender is not a string
 	 **/
 	public function setAnimalGender($newAnimalGender): void {
@@ -269,9 +268,9 @@ class Animal implements \JsonSerializable {
 			throw(new \InvalidArgumentException("Animal gender description is empty or insecure."));
 		}
 
-		// verify the animal color description will fit in the database
-		if(strlen($newAnimalGender) > 7) {
-			throw(new \RangeException("Animal gender description is too long."));
+		// verify the animal color description will fit in the database and is male, female, or unknown
+		if(($newAnimalGender) !== "female" || ($newAnimalGender) !== "male" || ($newAnimalGender) !== "unknown") {
+			throw(new \InvalidArgumentException("Animal gender description is not valid. Choose Female, Male, or Unknown"));
 		}
 
 		// store the author name
@@ -405,9 +404,10 @@ class Animal implements \JsonSerializable {
 			throw(new \InvalidArgumentException("Animal species is empty or insecure."));
 		}
 
-		// verify the animal species input will fit in the database
-		if($newAnimalSpecies !== "dog" or $newAnimalSpecies !== "cat")
+		// verify the animal species input will fit in the database and is dog or cat.
+		if(($newAnimalSpecies) !== "dog" || ($newAnimalSpecies) !== "cat") {
 			throw(new \InvalidArgumentException("Animal species is not dog or cat."));
+		}
 
 
 		// store the animal species
