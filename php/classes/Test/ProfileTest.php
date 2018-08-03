@@ -17,5 +17,45 @@ require_once (dirname(__DIR__) . "/autoload.php");
  **/
 
 class ProfileTest extends LostPawsTest {
+	protected $oAuth = null;
 
+	public function testInsertValidProfile() {
+
+	}
+
+	public function testInsertInvalidProfile() {
+
+	}
+
+	public function updateProfileByValidValues() {
+
+	}
+
+	public function updateProfileByInvalidValues() {
+
+	}
+
+	public function updateProfileUsingValidProfileId() {
+
+	}
+
+	public function updateProfileUsingInvalidProfileId() {
+
+	}
+
+	public function deleteProfileUsingValidProfileId() {
+
+	}
+
+	public function deleteProfileUsingInvalidProfileId() {
+
+	}
+
+	/*
+updateProfile
+deleteProfile
+getProfileByProfileId
+getProfileByProfileOAuthId
+getProfileByProfileEmail
+*/
 }
