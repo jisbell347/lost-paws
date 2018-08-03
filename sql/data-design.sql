@@ -23,7 +23,6 @@ CREATE TABLE profile (
 	profilePhone VARCHAR(15),
 	-- create indexes
 	INDEX (profileOAuthId),
-	INDEX (profileName),
 	UNIQUE KEY (profileEmail),
 	FOREIGN KEY(profileOAuthId) REFERENCES oAuth(oAuthId),
 	PRIMARY KEY (profileId)
