@@ -269,7 +269,7 @@ class Animal implements \JsonSerializable {
 		}
 
 		// verify the animal color description will fit in the database and is male, female, or unknown
-		if(($newAnimalGender) !== "female" || ($newAnimalGender) !== "male" || ($newAnimalGender) !== "unknown") {
+		if(($newAnimalGender) !== "Female" || ($newAnimalGender) !== "Male" || ($newAnimalGender) !== "Unknown") {
 			throw(new \InvalidArgumentException("Animal gender description is not valid. Choose Female, Male, or Unknown"));
 		}
 
@@ -405,7 +405,7 @@ class Animal implements \JsonSerializable {
 		}
 
 		// verify the animal species input will fit in the database and is dog or cat.
-		if(($newAnimalSpecies) !== "dog" || ($newAnimalSpecies) !== "cat") {
+		if(($newAnimalSpecies) !== "Dog" || ($newAnimalSpecies) !== "Cat") {
 			throw(new \InvalidArgumentException("Animal species is not dog or cat."));
 		}
 
