@@ -5,7 +5,8 @@ namespace Jisbell347\LostPaws\Test;
  */
 use Jisbell347\LostPaws\{
 	Profile,
-	Animal
+	Animal,
+	OAuth
 };
 use PDO;
 use PHPUnit\DbUnit\TestCase;
@@ -25,6 +26,11 @@ require_once(dirname(__DIR__) . "/autoload.php");
 
 Class AnimalTest extends LostPawsTest{
 	/**
+	 * OAuth Id that created profile
+	 * @var OAuth oAuth
+	 */
+	protected $oAuth = null;
+	/**
 	 * Profile that created the Animal: this is the foreign key
 	 * @var Profile profile
 	 **/
@@ -39,6 +45,16 @@ Class AnimalTest extends LostPawsTest{
 	 * @var string $VALID_ANIMAL_COLOR2
 	 **/
 	protected $VALID_ANIMAL_COLOR2 = "PHPUnit test is still passing";
+	/**
+	 * timestamp of the Animal; this starts as null and is assigned later
+	 * @var \DateTime $VALID_ANIMAL_DATE
+	 **/
+	protected $VALID_ANIMAL_DATE = null;
+	/**
+	 * update timestamp of the Animal; this starts as null and is assigned later
+	 * @var \DateTime $VALID_ANIMAL_DATE2
+	 **/
+	protected $VALID_ANIMAL_DATE2 = null;
 	/**
 	 * Description of the Animal
 	 * @var string $VALID_ANIMAL_DESCRIPTION
@@ -112,11 +128,7 @@ Class AnimalTest extends LostPawsTest{
 
 
 
-	/**
-	 * timestamp of the Animal; this starts as null and is assigned later
-	 * @var \DateTime $VALID_ANIMAL_DATE
-	 **/
-	protected $VALID_ANIMAL_DATE = null;
+
 	/**
 	 * Valid timestamp to use as an OLD_ANIMAL_POST_DATE
 	 **/
@@ -131,18 +143,22 @@ Class AnimalTest extends LostPawsTest{
 	 * create dependent objects before running each test
 	 **/
 	public final function setUp(): void {
+		parent::setUp();
+
 		/**
 		 * TODO: create oAuth object fix profile constructor
 		 * $this->profile->getProfileId();
 		 */
+		$
 		//create and insert a Profile to own and test the Animal.
-		$this->profile = new Profile(generateUuidV4(), null);
+		$this->oAuth = new OAuth($this->oAuth->getOAuthId(),$this->oAuth->getOAuthSource());
+		$this->profile = new Profile($this->profile->getProfileId(), $this->profile->getProfileOAuthId(), $this->profile->getProfileAccessToken(), $this->profile->getProfileEmail(), $this->profile->getProfileName(), $this->profile->getProfilePhone());
 		$this->profile->insert($this->getPDO());
 		//calculate the date(use the time the unit test was setup)
 		$this->VALID_ANIMAL_DATE = new \DateTime();
 		//format the new animal post date to use for testing P5D means period of 5 days
-		$this->VALID_NEW_ANIMAL_POST_DATE = new \DateTime();
-		$this->VALID_NEW_ANIMAL_POST_DATE->sub(new \DateInterval("P5D"));
+		$this->VALID_NEW_ANIMAT_DATE = new \DateTime();
+		$this->VALID_NEW_ANIMA_DATE->sub(new \DateInterval("P5D"));
 		//format the old animal post date to use for testing
 		$this->VALID_OLD_ANIMAL_POST_DATE = new \DateTime();
 		$this->VALID_OLD_ANIMAL_POST_DATE->sub(new \DateInterval("P5D"));
