@@ -30,6 +30,16 @@ Class AnimalTest extends LostPawsTest{
 	 **/
 	protected $profile = null;
 	/**
+	 * Color of the Animal
+	 * @var string $VALID_ANIMAL_COLOR
+	 **/
+	protected $VALID_ANIMAL_COLOR = "PHPUnit test passing";
+	/**
+	 * Updated color of the Animal
+	 * @var string $VALID_ANIMAL_COLOR2
+	 **/
+	protected $VALID_ANIMAL_COLOR2 = "PHPUnit test is still passing";
+	/**
 	 * Description of the Animal
 	 * @var string $VALID_ANIMAL_DESCRIPTION
 	 **/
@@ -39,9 +49,68 @@ Class AnimalTest extends LostPawsTest{
 	 * @var string $VALID_ANIMAL_DESCRIPTION2
 	 **/
 	protected $VALID_ANIMAL_DESCRIPTION2 = "PHPUnit test is still passing";
+	/**
+	 * Gender of the Animal
+	 * @var string $VALID_ANIMAL_GENDER
+	 **/
+	protected $VALID_ANIMAL_GENDER = "PHPUnit test passing";
+	/**
+	 * Updated Gender of the Animal
+	 * @var string $VALID_ANIMAL_GENDER2
+	 **/
+	protected $VALID_ANIMAL_GENDER2 = "PHPUnit test is still passing";
+	/**
+	 * URL of Animal photo
+	 * @var string $VALID_ANIMAL_IMAGEURL
+	 **/
+	protected $VALID_ANIMAL_IMAGEURL = "PHPUnit test passing";
+	/**
+	 * Updated URL of Animal photo
+	 * @var string $VALID_ANIMAL_IMAGEURL2
+	 **/
+	protected $VALID_ANIMAL_IMAGEURL2 = "PHPUnit test is still passing";
+	/**
+	 * Location of the Animal
+	 * @var string $VALID_ANIMAL_LOCATION
+	 **/
+	protected $VALID_ANIMAL_LOCATION = "PHPUnit test passing";
+	/**
+	 * Updated location of the Animal
+	 * @var string $VALID_ANIMAL_LOCATION2
+	 **/
+	protected $VALID_ANIMAL_LOCATION2 = "PHPUnit test is still passing";
+	/**
+	 * Name of the Animal
+	 * @var string $VALID_ANIMAL_NAME
+	 **/
+	protected $VALID_ANIMAL_NAME = "PHPUnit test passing";
+	/**
+	 * Updated name of the Animal
+	 * @var string $VALID_ANIMAL_NAME2
+	 **/
+	protected $VALID_ANIMAL_NAME2 = "PHPUnit test is still passing";
+	/**
+	 * Species of the Animal
+	 * @var string $VALID_ANIMAL_SPECIES
+	 **/
+	protected $VALID_ANIMAL_SPECIES = "PHPUnit test passing";
+	/**
+	 * Updated species of the Animal
+	 * @var string $VALID_ANIMAL_SPECIES2
+	 **/
+	protected $VALID_ANIMAL_SPECIES2 = "PHPUnit test is still passing";
+	/**
+	 * Status of the Animal
+	 * @var string $VALID_ANIMAL_STATUS
+	 **/
+	protected $VALID_ANIMAL_STATUS = "PHPUnit test passing";
+	/**
+	 * Updated status of the Animal
+	 * @var string $VALID_ANIMAL_STATUS2
+	 **/
+	protected $VALID_ANIMAL_STATUS2 = "PHPUnit test is still passing";
 
 
-	//insert color etc
 
 	/**
 	 * timestamp of the Animal; this starts as null and is assigned later
