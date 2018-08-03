@@ -1,7 +1,10 @@
 <?php
-namespace Jisbell347\LostPaws;
+namespace Jisbell347\LostPaws\Test;
 
-use Jisbell347\LostPaws\Test\LostPawsTest;
+use Jisbell347\LostPaws\{
+	Profile,
+	Animal
+};
 use PDO;
 use PHPUnit\DbUnit\TestCase;
 
