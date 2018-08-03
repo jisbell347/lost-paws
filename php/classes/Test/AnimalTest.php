@@ -302,6 +302,13 @@ Class AnimalTest extends LostPawsTest{
 		//format the date to seconds since the beginning of time to avoid round off error.
 		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
 	}
+	/**
+	 * test grabbing an animal by an animal description that does not exist
+	 */
+	public function testGetInvalidAnimalByAnimalDescription() : void {
+		//grab an animal by a description that does not exist for an animal
+		$animal = Animal::getAnimalByAnimalDescription($this->getPDO(),"Clean Title, Low Miles, Cold A/C, Owned by a Non-Smoker");
+		$this->assertCount(0, $animal);
 
 
 
