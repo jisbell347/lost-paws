@@ -1,6 +1,8 @@
 <?php
 namespace Jisbell347\LostPaws\Test;
-
+/**
+ * TODO: Add oAuth
+ */
 use Jisbell347\LostPaws\{
 	Profile,
 	Animal
@@ -60,6 +62,10 @@ Class AnimalTest extends LostPawsTest{
 	 * create dependent objects before running each test
 	 **/
 	public final function setUp(): void {
+		/**
+		 * TODO: create oAuth object fix profile constructor
+		 * $this->profile->getProfileId();
+		 */
 		//create and insert a Profile to own and test the Animal.
 		$this->profile = new Profile(generateUuidV4(), null);
 		$this->profile->insert($this->getPDO());
