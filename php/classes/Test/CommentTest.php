@@ -98,7 +98,7 @@ abstract class CommentTest extends TestCase {
 
 		// create a new Comment and insert it into mySQL
 		$commentid = generateUuidV4();
-		$comment = new Comment($commentid, $this->profile->getProfileId(), $this->VALID_COMMENTTEXT, $this->VALID_COMMENTDATE);
+		$comment = new Comment($commentid, $this->animal->getAnimalId(), $this->profile->getProfileId(), $this->VALID_COMMENTTEXT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
 		// edit the Comment and update it in the mySQL
@@ -107,7 +107,50 @@ abstract class CommentTest extends TestCase {
 
 		// grab the data from mySQL and ensure the fields match our expectations
 		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
+		$this->assertEquals($pdoComment->getCommentId(), $commentid);
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
+		$this->assertEquals($pdoComment->getCommentAnimalId(), $this->animal->getAnimalId());
+		$this->assertEquals($pdoComment->getCommentProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoComment->getCommentText(), $this->VALID_COMMENTTEXT2);
+		// format the date to seconds since the beginning of time to avoid round off error
+		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
+
 	}
 
+	/**
+	 * test creating a Comment and then deleting it
+	 **/
+	public function testDeleteValidComment() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("comment");
+
+		// create a new Comment and insert it into mySQL
+		$commentId = generateUuidV4();
+		$comment = new Comment($commentId, $this->animal->getAnimalId(), $this->profile->getProfileId(), $this->VALID_COMMENTTEXT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
+
+		// delete the Comment from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
+		$comment->delete($this->getPDO());
+
+		// grab the data from mySQL and ensure that the Comment does not exist
+		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
+		$this->assertNull($pdoComment);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("comment"));
+
+	}
+
+	/**
+	 * test grabbing a Comment that does not exist
+	 **/
+	public function testGetInvalidCommentByCommentId() : void {
+		// grab a profile id that exceeds the maximum allowable profile id
+		$comment = Comment::getCommentByCommentId($this->getPDO(), generateUuidV4());
+		$this->assertNull($comment);
+	}
+
+	/**
+	 * test inserting a Comment and regrabbing it from mySQL
+	 */
 
 }
