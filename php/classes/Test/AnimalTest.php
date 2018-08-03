@@ -271,6 +271,37 @@ Class AnimalTest extends LostPawsTest{
 		$animal = Animal::getAnimalByAnimalColor($this->getPDO(),"purple");
 		$this->assertCount(0, $animal);
 	}
+	/**
+	 * test grabbing an animal by animal description
+	 */
+	public function testGetAnimalByAnimalDescription() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("animal");
+		//create a new Animal and insert into mySQL
+		$animalId = generateUuidV4();
+		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGEURL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
+		$animal->insert($this->getPDO());
+		// grab the data from mySQL and enforce that the fields match expectations
+		$results = Animal::getAnimalByAnimalDescription($this->getPDO(), $animal->getAnimalDescription());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
+		$this->assertCount(1, $results);
+		//enforce that no other objects are bleeding into the test
+		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\php\Animal", $results);
+		//grab the result from the array and validate it
+		$pdoAnimal = $results[0];
+		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
+		$this->assertEquals($pdoAnimal->getAnimalProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoAnimal->getAnimalColor(), $this->VALID_ANIMAL_COLOR);
+		$this->assertEquals($pdoAnimal->getAnimalDescription(),$this->VALID_ANIMAL_DESCRIPTION);
+		$this->assertEquals($pdoAnimal->getAnimalGender(), $this->VALID_ANIMAL_GENDER);
+		$this->assertEquals($pdoAnimal->getAnimalImageUrl(),$this->VALID_ANIMAL_IMAGEURL);
+		$this->assertEquals($pdoAnimal->getAnimalLocation(), $this->VALID_ANIMAL_LOCATION);
+		$this->assertEquals($pdoAnimal->getAnimalName(),$this->VALID_ANIMAL_NAME);
+		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES);
+		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS);
+		//format the date to seconds since the beginning of time to avoid round off error.
+		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
+	}
 
 
 
