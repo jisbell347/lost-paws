@@ -164,6 +164,7 @@ Class AnimalTest extends LostPawsTest{
 	public function testInsertValidAnimal(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("animal");
+		//create a new Animal and insert into mySQL
 		$animalId = generateUuidV4();
 		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGEURL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
 		$animal->insert($this->getPDO());
@@ -182,6 +183,13 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS);
 		//format the date to seconds since the beginning of time to avoid round off error.
 		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
+	}
+	/**
+	 * test inserting an animal, editing, then updating it
+	 */
+	public function testUpdateValidAnimal() : void {
+		//count the number of rows and save it for  later
+
 	}
 
 
