@@ -248,4 +248,8 @@ class CommentTest extends LostPawsTest {
 		$this->assertCount(0, $comment);
 
 	}
+
+	/**
+	 * test grabbing a Comment by the comment Text
+	 **/
 }
