@@ -25,15 +25,19 @@ Class AnimalTest extends LostPawsTest{
 	 **/
 	protected $profile = null;
 	/**
-	 * Content the Animal entity
-	 * @var string $VALID_ANIMAL_CONTENT
+	 * Description of the Animal
+	 * @var string $VALID_ANIMAL_DESCRIPTION
 	 **/
-	protected $VALID_ANIMAL_CONTENT = "PHPUnit test passing";
+	protected $VALID_ANIMAL_DESCRIPTION = "PHPUnit test passing";
 	/**
-	 * content of updated Animal entity
-	 * @var string $VALID_ANIMAL_CONTENT2
+	 * Updated description of the Animal
+	 * @var string $VALID_ANIMAL_DESCRIPTION2
 	 **/
-	protected $VALID_ANIMAL_CONTENT2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_DESCRIPTION2 = "PHPUnit test is still passing";
+
+
+	//insert color etc
+
 	/**
 	 * timestamp of the Animal; this starts as null and is assigned later
 	 * @var \DateTime $VALID_ANIMAL_DATE
@@ -77,6 +81,8 @@ Class AnimalTest extends LostPawsTest{
 		$animal->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoAnimal = Animal::getAnimalByAnimalId($this->getPDO(),$animal->getAnimalId());
+		//see line 82 on tweettest
+
 
 	}
 
