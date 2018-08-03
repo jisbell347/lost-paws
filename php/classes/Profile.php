@@ -140,7 +140,7 @@ class Profile {
 	 **/
 	public function setProfileOAuthId(int $newProfileOAuthId): void {
 		if ($newProfileOAuthId <= 0) {
-			throw (new \RangeException("Profile OAuth ID must be a positive integer."));
+			throw (new \RangeException("OAuth ID must be a positive integer."));
 		}
 		$this->profileOAuthId = $newProfileOAuthId;
 	}
@@ -168,11 +168,11 @@ class Profile {
 		$newProfileAccessToken = strtolower(trim($newProfileAccessToken));
 		// check if all characters are digits, if not - throw an exception
 		if(!ctype_xdigit($newProfileAccessToken)) {
-			throw(new \RangeException("User access token is not valid."));
+			throw(new \RangeException("Access token is not valid."));
 		}
 		//make sure user access token is more than 255 characters
 		if(strlen($newProfileAccessToken) > 255) {
-			throw(new \RangeException("User access token cannot be longer than 255-character long."));
+			throw(new \RangeException("Access token cannot be longer than 255-character long."));
 		}
 		$this->profileAccessToken = $newProfileAccessToken;
 	}
@@ -194,15 +194,15 @@ class Profile {
 	 * @throws \RangeException if $newEmail is > 128 characters
 	 **/
 	public function setProfileEmail(string $newProfileEmail): void {
-		// verify the email is secure
+		// verify that the email address is secure
 		$newProfileEmail = trim($newProfileEmail);
 		$newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
 		if(empty($newProfileEmail)) {
-			throw(new \InvalidArgumentException("Profile email address is empty or insecure."));
+			throw(new \InvalidArgumentException("Email address is empty or insecure."));
 		}
 		// verify the email will fit in the database
 		if(strlen($newProfileEmail) > 128) {
-			throw(new \RangeException("Profile email address is too long."));
+			throw(new \RangeException("Email address is too long."));
 		}
 		// store the valid email address
 		$this->profileEmail = $newProfileEmail;
@@ -225,14 +225,14 @@ class Profile {
 	 * @throws \RangeException if $newProfileName is longer than 92-character long
 	 **/
 	public function setProfileName(string $newProfileName): void {
-		// verify that the user name is not empty and shorter than 92 characters
+		// verify that the profile name is not empty and shorter than 92 characters
 		$newProfileName = trim($newProfileName);
 		if(empty($newProfileName | !ctype_alpha($newProfileName))) {
-			throw(new \InvalidArgumentException("Profile name is empty or invalid."));
+			throw(new \InvalidArgumentException("Name is empty or invalid."));
 		}
-		// verify that a Profile name is shorter than 92 characters
+		// verify that a Profile name is shorter than or wqual to 92 characters
 		if(strlen($newProfileName) > 92) {
-			throw(new \RangeException("Profile name is too long."));
+			throw(new \RangeException("Name is too long."));
 		}
 		// store the valid name in the class state variable
 		$this->profileName = $newProfileName;
@@ -245,6 +245,17 @@ class Profile {
 	 **/
 	public function getProfilePhone(): string {
 		return $this->profilePhone;
+	}
+
+	/**
+	 * helper function that removes "+" and "-" from the string
+	 *
+	 * @param string $newPhoneNumber string that portentially contains "+" and "-"
+	 * @return string that was stripped from "+" and "-"
+	 **/
+	private function fixPhoneNumber(string $phoneNumber) : string {
+		$chars = ["+","-"];
+		return(str_replace($chars, "", $phoneNumber));
 	}
 
 	/**
@@ -265,14 +276,13 @@ class Profile {
 		// FILTER_SANITIZE_NUMBER_INT removes everything except digits, "+", and "-"
 		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_NUMBER_INT);
 		if(empty($newProfilePhone)) {
-			throw(new \InvalidArgumentException("Profile phone number is empty or insecure."));
+			throw(new \InvalidArgumentException("Phone number is empty or insecure."));
 		}
-		/**
-		 * TODO: remove possible "+" and "-" characters
-		 */
+		// remove all "+" and "-" from the phone number
+		$newProfilePhone = fixPhoneNumber($newProfilePhone);
 		// verify the phone will fit in the database
 		if(strlen($newProfilePhone) > 15) {
-			throw(new \RangeException("profile phone number is too long."));
+			throw(new \RangeException("Phone number is too long."));
 		}
 		// store the phone
 		$this->profilePhone = $newProfilePhone;
