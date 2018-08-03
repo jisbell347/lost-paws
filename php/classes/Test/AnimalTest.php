@@ -144,12 +144,6 @@ Class AnimalTest extends LostPawsTest{
 	 **/
 	public final function setUp(): void {
 		parent::setUp();
-
-		/**
-		 * TODO: create oAuth object fix profile constructor
-		 * $this->profile->getProfileId();
-		 */
-		$
 		//create and insert a Profile to own and test the Animal.
 		$this->oAuth = new OAuth($this->oAuth->getOAuthId(),$this->oAuth->getOAuthSource());
 		$this->profile = new Profile($this->profile->getProfileId(), $this->profile->getProfileOAuthId(), $this->profile->getProfileAccessToken(), $this->profile->getProfileEmail(), $this->profile->getProfileName(), $this->profile->getProfilePhone());
@@ -157,8 +151,8 @@ Class AnimalTest extends LostPawsTest{
 		//calculate the date(use the time the unit test was setup)
 		$this->VALID_ANIMAL_DATE = new \DateTime();
 		//format the new animal post date to use for testing P5D means period of 5 days
-		$this->VALID_NEW_ANIMAT_DATE = new \DateTime();
-		$this->VALID_NEW_ANIMA_DATE->sub(new \DateInterval("P5D"));
+		$this->VALID_NEW_ANIMAL_POST_DATE = new \DateTime();
+		$this->VALID_NEW_ANIMAL_POST_DATE->sub(new \DateInterval("P5D"));
 		//format the old animal post date to use for testing
 		$this->VALID_OLD_ANIMAL_POST_DATE = new \DateTime();
 		$this->VALID_OLD_ANIMAL_POST_DATE->sub(new \DateInterval("P5D"));
