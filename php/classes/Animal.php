@@ -395,8 +395,7 @@ class Animal implements \JsonSerializable {
 	 *
 	 * @param string $newAnimalSpecies new value of animal species
 	 * @throws \InvalidArgumentException if $newAnimalSpecies is not a string or insecure
-	 * @throws \RangeException if $newAnimalSpecies is > 3 characters
-	 * @throws \TypeError if $newAnimalSpecies is not a string
+	  * @throws \TypeError if $newAnimalSpecies is not a string
 	 **/
 	public function setAnimalSpecies(string $newAnimalSpecies): void {
 		// verify the animal species input is secure
@@ -407,9 +406,9 @@ class Animal implements \JsonSerializable {
 		}
 
 		// verify the animal species input will fit in the database
-		if(strlen($newAnimalSpecies) > 3) {
-			throw(new \RangeException("Animal species text is too long. Limit 3 characters. Dog or Cat."));
-		}
+		if($newAnimalSpecies !== "dog" or $newAnimalSpecies !== "cat")
+			throw(new \InvalidArgumentException("Animal species is not dog or cat."));
+
 
 		// store the animal species
 		$this->animalSpecies = $newAnimalSpecies;
