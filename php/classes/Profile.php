@@ -346,12 +346,10 @@ class Profile {
 			$stmt = $dbc->prepare($query);
 			$stmt->bindParam(':profileId', $this->profileId->getBytes());
 			$stmt->execute();
-
-			// disconect from the database
-			$dbc = null;
-		} catch (\PDOException | \Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			exit(0);
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
 
@@ -364,29 +362,26 @@ class Profile {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function getProfileByProfileId(\PDO $dbc, string $currProfileId): ?Profile {
+	public static function getProfileByProfileId(\PDO $dbc, string $profileId): ?Profile {
 		// sanitize the  user id before searching
 		try {
-			$currProfileId = self::validateUuid($currProfileId);
-		} catch (\Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			return null;
+			$currProfileId = self::validateUuid($profileId);
+		} catch (\Exception $exception) {
+			// re-throw exception if occured
+			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
-
+		// if everything goes well so far:
 		try {
 			$query = "SELECT * FROM profile WHERE profileId = :profileId";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileId', $this->profileId->getBytes());
+			$stmt->bindParam(':profileId', $profileId);
 			$stmt->execute();
-			$errorInfo = $stmt->errorInfo();
-			if(isset($errorInfo[2])) {
-				$error = $errorInfo[2];
-			}
-		}  catch (\PDOException | \Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			exit(0);
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-
+		$newProfile = null;
 		try {
 			// grab the profile from mySQL
 			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -394,16 +389,13 @@ class Profile {
 				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
 					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
 			}
-			else {
-				$newProfile = null;
-			}
-			// disconect from the database
-			$dbc = null;
-		} catch (\Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-		} finally {
-			return $newProfile;
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
+		// if everything went well, return $newProfile
+		return $newProfile;
 	}
 
 	/**
@@ -415,25 +407,17 @@ class Profile {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function getProfileByProfileOAuthId(\PDO $dbc, string $currProfileOAuthId): ?Profile {
-		/**
-		 * TODO: check if $currProfileOAuthId is valid
-		 */
-
+	public static function getProfileByProfileOAuthId(\PDO $dbc, string $profileOAuthId): ?Profile {
 		try {
 			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
+			$stmt->bindParam(':profileOAuthId', $profileOAuthId);
 			$stmt->execute();
-			$errorInfo = $stmt->errorInfo();
-			if(isset($errorInfo[2])) {
-				$error = $errorInfo[2];
-			}
-		}  catch (\PDOException | \Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			exit(0);
+		}  catch (\Exception $exception) {
+			// re-throw exception if occured
+			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
-
+		$newProfile = null;
 		try {
 			// grab the profile from mySQL
 			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -441,16 +425,13 @@ class Profile {
 				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
 					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
 			}
-			else {
-				$newProfile = null;
-			}
-			// disconect from the database
-			$dbc = null;
-		} catch (\Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-		} finally {
-			return $newProfile;
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
+		// if everything went well, return $newProfile
+		return $newProfile;
 	}
 
 	/**
@@ -463,33 +444,24 @@ class Profile {
 	 * @throws \InvalidArgumentException in case email address is empty or insecure
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function getProfileByProfileEmail(\PDO $dbc, string $currProfileEmail): ?Profile {
+	public function getProfileByProfileEmail(\PDO $dbc, string $profileEmail): ?Profile {
 		// verify that user email is secure
-		try {
-			$currProfileEmail = trim($currProfileEmail);
-			$currProfileEmail = filter_var($currProfileEmail, FILTER_VALIDATE_EMAIL);
-			if(empty($currProfileEmail)) {
-				throw(new \InvalidArgumentException("Profile email is empty or insecure"));
-			}
-		} catch (\Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-			return null;
+		$currProfileEmail = trim($currProfileEmail);
+		$currProfileEmail = filter_var($currProfileEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($currProfileEmail)) {
+			throw(new \InvalidArgumentException("Profile email is empty or insecure"));
 		}
-
 		try {
+			// our assumption is that all email addresses are unique, so our query returns only one object, not a collection of objects
 			$query = "SELECT * FROM profile WHERE profileEmail = :profileEmail";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileEmail', $this->profileEmail);
+			$stmt->bindParam(':profileEmail', $profileEmail);
 			$stmt->execute();
-			$errorInfo = $stmt->errorInfo();
-			if(isset($errorInfo[2])) {
-				$error = $errorInfo[2];
-			}
-		} catch(\Exception $e) {
-			$error = $e->getMessage();
-			return null;
+		}   catch (\Exception $exception) {
+			// re-throw exception if occured
+			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
-
+		$newProfile = null;
 		try {
 			// grab the selected profile from mySQL
 			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -497,15 +469,12 @@ class Profile {
 				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
 					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
 			}
-			else {
-				$newProfile = null;
-			}
-			// disconect from the database
-			$dbc = null;
-		} catch (\Exception $e) {
-			error_log( "Error: " .$e->getMessage());
-		} finally {
-			return $newProfile;
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
+		// if everything went well, return $newProfile
+		return $newProfile;
 	}
 }
