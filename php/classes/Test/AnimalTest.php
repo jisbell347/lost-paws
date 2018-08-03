@@ -146,7 +146,9 @@ Class AnimalTest extends LostPawsTest{
 		parent::setUp();
 		//create and insert a Profile to own and test the Animal.
 		$this->oAuth = new OAuth($this->oAuth->getOAuthId(),$this->oAuth->getOAuthSource());
-		$this->profile = new Profile($this->profile->getProfileId(), $this->profile->getProfileOAuthId(), $this->profile->getProfileAccessToken(), $this->profile->getProfileEmail(), $this->profile->getProfileName(), $this->profile->getProfilePhone());
+		//Replaced info below with filler as per tweet example. Not sure if this is correct.
+		//$this->profile = new Profile($this->profile->getProfileId(), $this->profile->getProfileOAuthId(), $this->profile->getProfileAccessToken(), $this->profile->getProfileEmail(), $this->profile->getProfileName(), $this->profile->getProfilePhone());
+		$this->profile = new Profile(generateUuidV4(), "Google", null, "juantabo@aol.com", "Juan Tabo", "505-869-5309");
 		$this->profile->insert($this->getPDO());
 		//calculate the date(use the time the unit test was setup)
 		$this->VALID_ANIMAL_DATE = new \DateTime();
