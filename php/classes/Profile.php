@@ -25,7 +25,7 @@ use Ramsey\Uuid\Uuid;
  * @version 1.0.0
  **/
 
-class Profile {
+class Profile implements \JsonSerializable {
 	use ValidateUuid;
 
 	/**
@@ -476,5 +476,22 @@ class Profile {
 		}
 		// if everything went well, return $newProfile
 		return $newProfile;
+	}
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() {
+		// this is secret data
+		unset($this->profileAccessToken);
+		return [
+			'profileId' => strval($this->profileId),
+			'profileOAuthId' => strval($this->profileOAuthId),
+			'profileEmail' => $this->profileEmail,
+			'profileName' => $this->profileName,
+			'profilePhone' => $this->profilePhone
+		];
 	}
 }
