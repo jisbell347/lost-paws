@@ -88,7 +88,7 @@ class CommentTest extends LostPawsTest {
 	/**
 	 * test inserting a valid Comment and verify that the actual mySQL data matches
 	 */
-	public function testInsertValidComment() : void {
+	public function testInsertValidComment(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
@@ -99,7 +99,7 @@ class CommentTest extends LostPawsTest {
 
 		// grab the data from mySQL and ensure the fields match our expectations
 		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
-		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("comment"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertEquals($pdoComment->getCommentId(), $commentId);
 		$this->assertEquals($pdoComment->getCommentAnimalId(), $this->animal->getAnimalId());
 		$this->assertEquals($pdoComment->getCommentProfileId(), $this->profile->getProfileId());
@@ -112,7 +112,7 @@ class CommentTest extends LostPawsTest {
 	 * test inserting a Comment, editing it, and then updating it
 	 */
 
-	public function testUpdateValidComment() : void {
+	public function testUpdateValidComment(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
@@ -140,7 +140,7 @@ class CommentTest extends LostPawsTest {
 	/**
 	 * test creating a Comment and then deleting it
 	 **/
-	public function testDeleteValidComment() : void {
+	public function testDeleteValidComment(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
@@ -163,7 +163,7 @@ class CommentTest extends LostPawsTest {
 	/**
 	 * test grabbing a Comment that does not exist
 	 **/
-	public function testGetInvalidCommentByCommentId() : void {
+	public function testGetInvalidCommentByCommentId(): void {
 		// grab a profile id that exceeds the maximum allowable profile id
 		$comment = Comment::getCommentByCommentId($this->getPDO(), generateUuidV4());
 		$this->assertNull($comment);
@@ -202,11 +202,12 @@ class CommentTest extends LostPawsTest {
 	/**
 	 * test grabbing a Comment that does not exist
 	 */
-	public function testGetInvalidCommentByCommentProfileId() : void {
+	public function testGetInvalidCommentByCommentProfileId(): void {
 		// grab a profile id that exceeds the maximum allowable comment profile id
 		$comment = Comment::getCommentByCommentProfileId($this->getPDO(), generateUuidV4());
 		$this->assertCount(0, $comment);
 	}
+
 	/**
 	 * test grabbing a comment by animal id
 	 **/
@@ -237,12 +238,14 @@ class CommentTest extends LostPawsTest {
 		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 
 	}
+
 	/**
 	 * test grabbing a comment that does not exist
 	 **/
-	public function testGetInvalidCommentByCommentAnimalId() : void {
+	public function testGetInvalidCommentByCommentAnimalId(): void {
 		// grab a profile id that exceeds the maximum allowable comment animal id
 		$comment = Comment::getCommentByCommentAnimalId($this->getPDO(), generateUuidV4());
 		$this->assertCount(0, $comment);
 
+	}
 }
