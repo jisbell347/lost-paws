@@ -188,9 +188,43 @@ Class AnimalTest extends LostPawsTest{
 	 * test inserting an animal, editing, then updating it
 	 */
 	public function testUpdateValidAnimal() : void {
-		//count the number of rows and save it for  later
-
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("animal");
+		//create a new Animal and insert into mySQL
+		$animalId = generateUuidV4();
+		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGEURL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
+		$animal->insert($this->getPDO());
+		//edit the Animal and update it in mySQL
+		$animal->setAnimalDescription($this->VALID_ANIMAL_DESCRIPTION2);
+		$animal->update($this->getPDO());
+		//grab the data from mySQL and enforce the fields to match our expectations
+		$pdoAnimal = Animal::getAnimalByAnimalId($this->getPDO(),$animal->getAnimalId());
+		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
+		$this->assertEquals($pdoAnimal->getAnimalProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoAnimal->setAnimalDescription(), $this->VALID_ANIMAL_DESCRIPTION2);
+		//format the date to seconds since the beginning of time to avoid round off error.
+		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
 	}
+	/**
+	 * Test creating an Animal and then removing it.
+	 **/
+	public function testDeleteValidAnimal(): void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("animal");
+		//create a new Animal and insert into mySQL
+		$animalId = generateUuidV4();
+		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGEURL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
+		$animal->insert($this->getPDO());
+		// Delete the animal from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
+		$animal->delete($this->getPDO());
+		//grab the data from mySQL and enforce that the animal is removed.
+		$pdoAnimal = Animal::getAnimalByAnimalId($this->getPDO(), $animal->getAnimalId());
+		$this->assertNull($pdoAnimal);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("animal"));
+	}
+
 
 
 }
