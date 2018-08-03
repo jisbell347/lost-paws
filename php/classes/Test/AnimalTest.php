@@ -307,10 +307,7 @@ Class AnimalTest extends LostPawsTest{
 	 */
 	public function testGetInvalidAnimalByAnimalDescription() : void {
 		//grab an animal by a description that does not exist for an animal
-		$animal = Animal::getAnimalByAnimalDescription($this->getPDO(),"Clean Title, Low Miles, Cold A/C, Owned by a Non-Smoker");
+		$animal = Animal::getAnimalByAnimalDescription($this->getPDO(), "Clean Title, Low Miles, Cold A/C, Owned by a Non-Smoker");
 		$this->assertCount(0, $animal);
-
-
-
-
+	}
 }
