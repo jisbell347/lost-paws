@@ -678,6 +678,36 @@ class Animal implements \JsonSerializable {
 		}
 		return ($animals);
 	}
+	/**
+	 *get all animals
+	 *
+	 *@param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixed Array of Animals found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \typeError when variables are not the correct data type
+	 */
+	public static function getAllAnimals(\PDO $pdo) : SPLFixedArray {
+		//create query template
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		//build an array of animals
+		$animals = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row=$statement->fetch()) !== false){
+			try {
+				$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+				$animals[$animals->key()] = $animal;
+				$animals->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($animals);
+	}
+
 
 	/**
 	 * formats the state variables for JSON serialization
