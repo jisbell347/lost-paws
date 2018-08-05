@@ -140,16 +140,16 @@
         },
         {
             "name": "google/recaptcha",
-            "version": "1.2",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/recaptcha.git",
-                "reference": "3875d025d0465f36f32452f614e7ffc1462c889f"
+                "reference": "e7add3be59211482ecdb942288f52da64a35f61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/recaptcha/zipball/3875d025d0465f36f32452f614e7ffc1462c889f",
-                "reference": "3875d025d0465f36f32452f614e7ffc1462c889f",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/e7add3be59211482ecdb942288f52da64a35f61a",
+                "reference": "e7add3be59211482ecdb942288f52da64a35f61a",
                 "shasum": ""
             },
             "require": {
@@ -183,7 +183,7 @@
                 "recaptcha",
                 "spam"
             ],
-            "time": "2018-08-01T11:58:31+00:00"
+            "time": "2018-08-05T09:31:53+00:00"
         },
         {
             "name": "kukulich/fshl",
@@ -1475,16 +1475,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.2.7",
+            "version": "7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8e878aff7917ef66e702e03d1359b16eee254e2c"
+                "reference": "0b6b29faf95c03fd7867e866438b78d5692b6f03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8e878aff7917ef66e702e03d1359b16eee254e2c",
-                "reference": "8e878aff7917ef66e702e03d1359b16eee254e2c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0b6b29faf95c03fd7867e866438b78d5692b6f03",
+                "reference": "0b6b29faf95c03fd7867e866438b78d5692b6f03",
                 "shasum": ""
             },
             "require": {
@@ -1529,7 +1529,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "7.2-dev"
+                    "dev-master": "7.3-dev"
                 }
             },
             "autoload": {
@@ -1555,7 +1555,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-07-15T05:20:50+00:00"
+            "time": "2018-08-03T06:02:45+00:00"
         },
         {
             "name": "psr/container",
