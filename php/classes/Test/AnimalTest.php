@@ -1,8 +1,6 @@
 <?php
 namespace Jisbell347\LostPaws\Test;
-/**
- * TODO: Add oAuth
- */
+
 use Jisbell347\LostPaws\{
 	Profile,
 	Animal,
@@ -28,7 +26,7 @@ Class AnimalTest extends LostPawsTest{
 	/**
 	 * OAuth Id that created profile
 	 * @var OAuth oAuth
-	 */
+	 **/
 	protected $oAuth = null;
 	/**
 	 * Profile that created the Animal: this is the foreign key
@@ -188,7 +186,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test inserting an animal, editing, then updating it
-	 */
+	 **/
 	public function testUpdateValidAnimal() : void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("animal");
@@ -235,7 +233,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test grabbing an an Animal that does not exist (AKA Grab Unicorn)
-	 */
+	 **/
 	public function testGetInvalidAnimalByAnimalId() : void {
 		// grab a profile id that exceeds the max allowable profile id
 		$animal = Animal::getAnimalByAnimalId($this->getPDO(), generateUuidV4());
@@ -243,7 +241,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test grabbing an animal by animal color
-	 */
+	 **/
 	public function testGetAnimalByAnimalColor() : void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("animal");
@@ -274,7 +272,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test grabbing an animal by an animal color that does not exist
-	 */
+	 **/
 	public function testGetInvalidAnimalByAnimalColor() : void {
 		//grab an animal by color that does not exist for an animal
 		$animal = Animal::getAnimalByAnimalColor($this->getPDO(),"purple");
@@ -282,7 +280,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test grabbing an animal by animal description
-	 */
+	 **/
 	public function testGetAnimalByAnimalDescription() : void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("animal");
@@ -313,7 +311,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test grabbing an animal by an animal description that does not exist
-	 */
+	 **/
 	public function testGetInvalidAnimalByAnimalDescription() : void {
 		//grab an animal by a description that does not exist for an animal
 		$animal = Animal::getAnimalByAnimalDescription($this->getPDO(), "Salvage Title but it just needs a bumper, Low Miles, A/C needs recharge, Owned by a Non-Smoker. $10,000. No low ballers. I know what I have!");
@@ -321,7 +319,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * Test grabbing all of the animals
-	 */
+	 **/
 	public function testGetAllValidAnimals() : void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("animal");
