@@ -213,7 +213,7 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($pdoAnimal->getAnimalImageUrl(), $this->VALID_ANIMAL_IMAGE_URL2);
 		$this->assertEquals($pdoAnimal->getAnimalLocation(), $this->VALID_ANIMAL_LOCATION2);
 		$this->assertEquals($pdoAnimal->getAnimalName(), $this->VALID_ANIMAL_NAME2);
-		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES);
+		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES2);
 		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS2);
 		//format the date to seconds since the beginning of time to avoid round off error.
 		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
