@@ -54,7 +54,7 @@ class ProfileTest extends LostPawsTest {
 	}
 
 	/**
-	 * insert a valid Profile and verify a new record appeared in the database
+	 * test inserting a valid Profile and verifying a new record appeared in the database
 	 * @depends createProfile
 	 **/
 	public function testInsertValidProfile() : void {
@@ -80,6 +80,7 @@ class ProfileTest extends LostPawsTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
 		$this->assertEquals($pdoProfile->getProfileId(), $profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $profile->getProfileOAuthId());
 		$this->assertEquals($pdoProfile->getProfileAccessToken(), $profile->getProfileAccessToken());
 		$this->assertEquals($pdoProfile->getProfileEmail(), $profile->getProfileEmail());
 		$this->assertEquals($pdoProfile->getProfileName(), $profile->getProfileName());
@@ -87,18 +88,22 @@ class ProfileTest extends LostPawsTest {
 	}
 
 	/**
-	 * test grabing a Profile that doesn't exist from the database using a valid Profile ID
+	 * test grabing a Profile (that doesn't exist) from the database using a valid but wrong Profile ID
+	 * @depends testInsertValidProfile
 	 **/
-	public function testGetProfileByProfileId() : void {
+	public function testGetProfileByWrongProfileId() : void {
 		$wrongProfileId = generateUuidV4();
+		// make sure that our test database has at least one record
+		$profile = $this->createProfile();
+		$profile->insert($this->getPDO());
 		// try to grab a record with wrong profile ID
 		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
 		$this->assertNull($pdoProfile);
 	}
 
 	/**
-	 * insert a valid Profile, edit it, and update it and then verify that the actual mySQL data matches
-	 * @depends createProfile
+	 * test inserting a valid Profile, editing it, updating it and then verifying that the actual mySQL data matches
+	 * @depends testInsertValidProfile
 	 **/
 	public function testUpdateValidProfile() :void {
 		// count the number of rows and save it for later
@@ -117,6 +122,7 @@ class ProfileTest extends LostPawsTest {
 
 		$this->assertEquals($numRows+1, $this->getConnection()->getRowCount("profile"));
 		$this->assertEquals($pdoProfile->getProfileId(),  $profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $profile->getProfileOAuthId());
 		$this->assertEquals($pdoProfile->getProfileAccessToken(),  $profile->getProfileAccessToken());
 		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL2);
 		$this->assertEquals($pdoProfile->getProfileName(), $this->VALID_NAME2);
@@ -124,7 +130,7 @@ class ProfileTest extends LostPawsTest {
 	}
 
 	/**
-	 * insert a valid Profile into the database and then delete it
+	 * teset inserting a valid Profile into the database and then deleting it
 	 * @depends testInsertValidProfile
 	 **/
 	public function testDeleteValidProfile() : void {
@@ -144,64 +150,34 @@ class ProfileTest extends LostPawsTest {
 	}
 
 	/**
-	 * grab a Profile from the database using a valid Profile ID
+	 * test grabing a Profile from the database using a valid email address
+	 * @depends testInsertValidProfile
 	 **/
-	public function testGetProfileByValidId() : void {
+	public function testGetProfileByValidEmail() : void {
+		// create an instance of the Profile class and insert it into the database
+		$profile = $this->createProfile();
+		$profile->insert($this->getPDO());
 
-
-	}
-	/**
-	 * grab a Profile from the database using an invalid Profile ID
-	 **/
-	public function testGetProfileByInvalidId() : void {
-
-	}
-
-	/**
-	 * grab a Profile from the database using a valid phone number
-	 **/
-	public function testGetProfileByValidPhone() : void {
-
+		// try grabing the data from mySQL and check if the fields match our expectations
+		$pdoProfile = Profile::getProfileByProfileEmail($this->getPDO(), $profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileId(), $profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $profile->getProfileOAuthId());
+		$this->assertEquals($pdoProfile->getProfileAccessToken(), $profile->getProfileAccessToken());
+		$this->assertEquals($pdoProfile->getProfileEmail(), $profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileName(), $profile->getProfileName());
+		$this->assertEquals($pdoProfile->getProfilePhone(), $profile->getProfilePhone());
 	}
 
 	/**
-	 * grab a Profile from the database using an invalid phone number
+	 * test grabing a Profile from the database using a wrong email address
 	 **/
-	public function testGetProfileByInvalidPhone() : void {
-
+	public function testGetProfileByInvalidEmail() : void {
+		// make sure that our test database has at least one record
+		$profile = $this->createProfile();
+		$profile->insert($this->getPDO());
+		// try to grab a record with wrong email address
+		$pdoProfile = Profile::getProfileByProfileEmail($this->getPDO(), "yesyes@nonono.com");
+		$this->assertNull($pdoProfile);
 	}
-
-	/**
-	 * try to insert a Profile that has invalid properties to the database
-	 **/
-	public function testInsertInvalidProfile() : void {
-
-	}
-
-	/**
-	 * try to update a Profile in the database with invalid properties
-	 **/
-	public function updateProfileByInvalidValues() : void{
-
-	}
-
-	/*
-		updateProfile
-		deleteProfile
-		getProfileByProfileId
-		getProfileByProfileOAuthId
-		getProfileByProfileEmail
-
-	fake email: yesyes@nonono.com
-		*/
-
-	/*
-	 * profileId BINARY(16) NOT NULL,
-	profileOAuthId TINYINT UNSIGNED NOT NULL,
-	profileAccessToken VARCHAR(255),
-	profileEmail VARCHAR(128) NOT NULL,
-	profileName VARCHAR(92) NOT NULL,
-	profilePhone VARCHAR(15),
-	*/
 
 }
