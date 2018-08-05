@@ -6,11 +6,16 @@ use Jisbell347\LostPaws\{
 	Animal,
 	OAuth
 };
-use PDO;
-use PHPUnit\DbUnit\TestCase;
+
+//TODO: do we need this? I am not sure where these two came from. They cause phpstorm errors
+//use PDO;
+//use PHPUnit\DbUnit\TestCase;
 
 //grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
+
+//grab the uuid generator
+require_once(dirname(__DIR__, 2) . "uuid.php");
 
 /**
  * Full PHPUnit test for the Animal class
@@ -37,12 +42,12 @@ Class AnimalTest extends LostPawsTest{
 	 * Color of the Animal
 	 * @var string $VALID_ANIMAL_COLOR
 	 **/
-	protected $VALID_ANIMAL_COLOR = "PHPUnit test passing";
+	protected $VALID_ANIMAL_COLOR = "Black";
 	/**
 	 * Updated color of the Animal
 	 * @var string $VALID_ANIMAL_COLOR2
 	 **/
-	protected $VALID_ANIMAL_COLOR2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_COLOR2 = "Brown";
 	/**
 	 * timestamp of the Animal; this starts as null and is assigned later
 	 * @var \DateTime $VALID_ANIMAL_DATE
@@ -67,62 +72,62 @@ Class AnimalTest extends LostPawsTest{
 	 * Gender of the Animal
 	 * @var string $VALID_ANIMAL_GENDER
 	 **/
-	protected $VALID_ANIMAL_GENDER = "PHPUnit test passing";
+	protected $VALID_ANIMAL_GENDER = "Male";
 	/**
 	 * Updated Gender of the Animal
 	 * @var string $VALID_ANIMAL_GENDER2
 	 **/
-	protected $VALID_ANIMAL_GENDER2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_GENDER2 = "Female";
 	/**
 	 * URL of Animal photo
 	 * @var string $VALID_ANIMAL_IMAGE_URL
 	 **/
-	protected $VALID_ANIMAL_IMAGE_URL = "PHPUnit test passing";
+	protected $VALID_ANIMAL_IMAGE_URL = "https://www.lostpaws.com/images/cat123.jpg";
 	/**
 	 * Updated URL of Animal photo
 	 * @var string $VALID_ANIMAL_IMAGE_URL2
 	 **/
-	protected $VALID_ANIMAL_IMAGE_URL2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_IMAGE_URL2 = "https://www.lostpaws.com/images/dog123.jpg";
 	/**
 	 * Location of the Animal
 	 * @var string $VALID_ANIMAL_LOCATION
 	 **/
-	protected $VALID_ANIMAL_LOCATION = "PHPUnit test passing";
+	protected $VALID_ANIMAL_LOCATION = "Barelas";
 	/**
 	 * Updated location of the Animal
 	 * @var string $VALID_ANIMAL_LOCATION2
 	 **/
-	protected $VALID_ANIMAL_LOCATION2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_LOCATION2 = "Old Town";
 	/**
 	 * Name of the Animal
 	 * @var string $VALID_ANIMAL_NAME
 	 **/
-	protected $VALID_ANIMAL_NAME = "PHPUnit test passing";
+	protected $VALID_ANIMAL_NAME = "Spot";
 	/**
 	 * Updated name of the Animal
 	 * @var string $VALID_ANIMAL_NAME2
 	 **/
-	protected $VALID_ANIMAL_NAME2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_NAME2 = "Wayne";
 	/**
 	 * Species of the Animal
 	 * @var string $VALID_ANIMAL_SPECIES
 	 **/
-	protected $VALID_ANIMAL_SPECIES = "PHPUnit test passing";
+	protected $VALID_ANIMAL_SPECIES = "Cat";
 	/**
 	 * Updated species of the Animal
 	 * @var string $VALID_ANIMAL_SPECIES2
 	 **/
-	protected $VALID_ANIMAL_SPECIES2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_SPECIES2 = "Dog";
 	/**
 	 * Status of the Animal
 	 * @var string $VALID_ANIMAL_STATUS
 	 **/
-	protected $VALID_ANIMAL_STATUS = "PHPUnit test passing";
+	protected $VALID_ANIMAL_STATUS = "Lost";
 	/**
 	 * Updated status of the Animal
 	 * @var string $VALID_ANIMAL_STATUS2
 	 **/
-	protected $VALID_ANIMAL_STATUS2 = "PHPUnit test is still passing";
+	protected $VALID_ANIMAL_STATUS2 = "Reunited";
 
 
 
