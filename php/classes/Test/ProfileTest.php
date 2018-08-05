@@ -110,9 +110,48 @@ class ProfileTest extends LostPawsTest {
 		$pdoProfile Profile::getProfileByProfileId($this->getPDO(), $currProfileId);
 		$this->assertNull($pdoProfile);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("profile"));
+	}
+
+	/**
+	 * grab a Profile from the database using a valid Profile ID
+	 **/
+	public function testGetProfileByValidId() : void {
+
+	}
+	/**
+	 * grab a Profile from the database using an invalid Profile ID
+	 **/
+	public function testGetProfileByInvalidId() : void {
 
 	}
 
+	/**
+	 * grab a Profile from the database using a valid phone number
+	 **/
+	public function testGetProfileByValidPhone() : void {
+
+	}
+
+	/**
+	 * grab a Profile from the database using an invalid phone number
+	 **/
+	public function testGetProfileByInvalidPhone() : void {
+
+	}
+
+	/**
+	 * try to insert a Profile that has invalid properties to the database
+	 **/
+	public function testInsertInvalidProfile() : void {
+
+	}
+
+	/**
+	 * try to update a Profile in the database with invalid properties
+	 **/
+	public function updateProfileByInvalidValues() : void{
+
+	}
 
 	/*
 		updateProfile
@@ -122,8 +161,6 @@ class ProfileTest extends LostPawsTest {
 		getProfileByProfileEmail
 		*/
 
-
-
 	/*
 	 * profileId BINARY(16) NOT NULL,
 	profileOAuthId TINYINT UNSIGNED NOT NULL,
@@ -132,33 +169,5 @@ class ProfileTest extends LostPawsTest {
 	profileName VARCHAR(92) NOT NULL,
 	profilePhone VARCHAR(15),
 	*/
-
-	public function testInsertInvalidProfile() {
-
-	}
-
-	public function updateProfileByValidValues() {
-
-	}
-
-	public function updateProfileByInvalidValues() {
-
-	}
-
-	public function updateProfileUsingValidProfileId() {
-
-	}
-
-	public function updateProfileUsingInvalidProfileId() {
-
-	}
-
-	public function deleteProfileUsingValidProfileId() {
-
-	}
-
-	public function deleteProfileUsingInvalidProfileId() {
-
-	}
 
 }
