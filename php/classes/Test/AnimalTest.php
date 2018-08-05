@@ -237,7 +237,7 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("animal"));
 	}
 	/**
-	 * test grabbing an an Animal that does not exist (AKA Grab Unicorn)
+	 * test grabbing an an Animal Id that does not exist (AKA Grab Unicorn)
 	 **/
 	public function testGetInvalidAnimalByAnimalId() : void {
 		// grab a profile id that exceeds the max allowable profile id
