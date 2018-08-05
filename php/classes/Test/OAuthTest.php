@@ -3,6 +3,7 @@ namespace Jisbell347\LostPaws\Test;
 
 use Jisbell347\LostPaws\OAuth;
 
+
 // grab the class under scrutiny
 require_once (dirname(__DIR__) . "/autoload.php");
 
