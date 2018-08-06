@@ -7,10 +7,6 @@ use Jisbell347\LostPaws\{
 	OAuth
 };
 
-//TODO: do we need this? I am not sure where these two came from. They cause phpstorm errors
-//use PDO;
-//use PHPUnit\DbUnit\TestCase;
-
 //grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
 
