@@ -3,6 +3,7 @@ namespace Jisbell347\LostPaws\Test;
 // grab the class under scrutiny
 require_once (dirname(__DIR__) . "/autoload.php");
 //require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 use Jisbell347\LostPaws\{OAuth, Profile};
 use Ramsey\Uuid;
 /**
@@ -21,6 +22,7 @@ class ProfileTest extends LostPawsTest {
 	/**
 	 * declare state variables
 	 */
+	protected $VALID_PROFILE_ID;
 	protected $oAuth = 100;
 	protected $VALID_ACCESS_TOKEN;
 	protected $VALID_EMAIL1 = "b.smith@gmail.com";
@@ -39,11 +41,11 @@ class ProfileTest extends LostPawsTest {
 	 * instantiate a valid Profile object and return it
 	 **/
 	public function createProfile() : Profile {
-		$this->VALID_ACCESS_TOKEN = bin2hex(random_bytes(16));
+		$this->$VALID_PROFILE_ID = bin2hex(random_bytes(16));
 		$this->$VALID_ACCESS_TOKEN = generateUuidV4();
-		$profile = (new Profile($this->$VALID_ACCESS_TOKEN, $this->oAuth, $this->VALID_ACCESS_TOKEN, $this->VALID_EMAIL1, $this->VALID_NAME1, $this->VALID_PHONE1);
+		$profile = new Profile($this->$VALID_PROFILE_ID, $this->oAuth, $this->VALID_ACCESS_TOKEN, $this->VALID_EMAIL1, $this->VALID_NAME1, $this->VALID_PHONE1);
 		// make sure that accessors return the expected properties
-		$this->assertEquals($profile->getProfileId(), $this->$VALID_ACCESS_TOKEN);
+		$this->assertEquals($profile->getProfileId(), $this->$VALID_PROFILE_ID);
 		$this->assertEquals($profile->getProfileOAuthId(), $this->oAuth);
 		$this->assertEquals($profile->getProfileAccessToken(), $this->VALID_ACCESS_TOKEN);
 		$this->assertEquals($profile->getProfileEmail(), $this->VALID_EMAIL1);
@@ -172,11 +174,13 @@ class ProfileTest extends LostPawsTest {
 	 * test grabing a Profile from the database using a wrong email address
 	 **/
 	public function testGetProfileByInvalidEmail() : void {
-		// make sure that our test database has at least one record
-		$profile = $this->createProfile();
+		// fake invalid email address
+		$invalidEmail = "yesyes@nonono.com";
+		// try to create a profile with an invalid email address and insert it into the database
+		$profile = new Profile(bin2hex(random_bytes(16)), $this->oAuth, generateUuidV4(), $invalidEmail, $this->VALID_NAME1, $this->VALID_PHONE1);
 		$profile->insert($this->getPDO());
-		// try to grab a record with wrong email address
-		$pdoProfile = Profile::getProfileByProfileEmail($this->getPDO(), "yesyes@nonono.com");
+		// try to grab a record with wrong email address (there is should not be such a record)
+		$pdoProfile = Profile::getProfileByProfileEmail($this->getPDO(), $invalidEmail);
 		$this->assertNull($pdoProfile);
 	}
 
