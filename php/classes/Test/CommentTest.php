@@ -75,7 +75,7 @@ class CommentTest extends LostPawsTest {
 		$this->oAuth = new OAuth(null, "facebook");
 		$this->oAuth->insert($this->getPDO());
 
-		$this->profile = new Profile($this->profile->getProfileId(), $this->profile->getProfileOAuthId(), "woof", "catsanddogs@found.com", "TheGoodestBoy", "1234567890");
+		$this->profile = new Profile(generateUuidV4(), 12, "123", "catsanddogs@found.com", "TheGoodestBoy", "1234567890");
 		$this->profile->insert($this->getPDO());
 
 		$this->animal = new Animal($this->animal->getAnimalId(), $this->animal->getAnimalProfileId(), "white", $this->animal->getAnimalDate(), "Cocker Spaniel Dachsund Mix", "Female", "https://placedog.net/520", "Downtown Albuquerque", "Lady", "dog", "lost");

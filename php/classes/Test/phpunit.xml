@@ -3,9 +3,9 @@
 		<testsuite name="Lost Paws Capstone Project">
 			<!-- Add file name of unit test below -->
 			<!--<file>OAuthTest.php</file>-->
-			<file>ProfileTest.php</file>
+			<!--<file>ProfileTest.php</file>-->
 			<!-- <file>AnimalTest.php</file> -->
-			<!--<file>CommentTest.php</file>-->
+			<file>CommentTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>
