@@ -102,7 +102,7 @@ class Profile implements \JsonSerializable {
 	 * @return Uuid value of profile id (or null if new Profile)
 	 **/
 	public function getProfileId(): Uuid {
-		return (bin2hex($this->profileId));
+		return($this->profileId);
 	}
 
 	/**
@@ -237,11 +237,9 @@ class Profile implements \JsonSerializable {
 	public function setProfileName(string $newProfileName): void {
 		// verify that the profile name is not empty and shorter than 92 characters
 		$newProfileName = trim($newProfileName);
-		if(empty($newProfileName | !ctype_alpha($newProfileName))) {
+		if(empty($newProfileName)) {
 			throw(new \InvalidArgumentException("Name is empty or invalid."));
-		}
-		// verify that a Profile name is shorter than or wqual to 92 characters
-		if(strlen($newProfileName) > 92) {
+		} else if (strlen($newProfileName) > 92) {
 			throw(new \RangeException("Name is too long."));
 		}
 		// store the valid name in the class state variable
@@ -255,6 +253,22 @@ class Profile implements \JsonSerializable {
 	 **/
 	public function getProfilePhone(): string {
 		return $this->profilePhone;
+	}
+
+	/**
+	 * this is a helper function that normalize the phone number
+	 *
+	 * @return string value of a normalized phone number or an empty string
+	 **/
+	public static function normalizePhoneNumber (string $phoneNum) : string {
+		$phoneNum = trim($phoneNum);
+		// FILTER_SANITIZE_NUMBER_INT removes everything except digits, "+", and "-"
+		$phoneNum = filter_var($phoneNum, FILTER_SANITIZE_NUMBER_INT);
+		if(!empty($phoneNum)) {
+			// remove all "+" and "-" from the phone number
+			$phoneNum = str_replace(["+","-"], "", $phoneNum);
+		}
+		return $phoneNum;
 	}
 
 	/**

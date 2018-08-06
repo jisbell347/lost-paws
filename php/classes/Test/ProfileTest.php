@@ -24,7 +24,7 @@ class ProfileTest extends LostPawsTest {
 	 */
 
 	protected $VALID_PROFILE_ID;
-	protected $oAuth = null;
+	protected $VALID_OAUTH = null;
 	protected $profile = null;
 	protected $VALID_ACCESS_TOKEN;
 	protected $VALID_EMAIL1 = "b.smith@gmail.com";
@@ -40,16 +40,16 @@ class ProfileTest extends LostPawsTest {
 
 		$oAuth = new OAuth(null, "google");
 		$oAuth->insert($this->getPDO());
-
-		$this->VALID_PROFILE_ID = bin2hex(random_bytes(16));
+		$this->VALID_OAUTH = $oAuth->getOAuthId();
+		$this->VALID_PROFILE_ID = generateUuidV4();
 		$this->VALID_ACCESS_TOKEN = generateUuidV4();
-		$this->profile = new Profile($this->VALID_PROFILE_ID, $this->$oAuth, $this->VALID_ACCESS_TOKEN, $this->VALID_EMAIL1, $this->VALID_NAME1, $this->VALID_PHONE1);
+		$this->profile = new Profile($this->VALID_PROFILE_ID, $this->VALID_OAUTH, $this->VALID_ACCESS_TOKEN, $this->VALID_EMAIL1, $this->VALID_NAME1, $this->VALID_PHONE1);
 	}
 
 	public function testValidProfileCreated() : void {
 		$this->assertNotNull($this->profile);
 		$this->assertEquals($this->profile->getProfileId(), $this->VALID_PROFILE_ID);
-		//$this->assertEquals($this->profile->getProfileOAuthId(), $this->oAuth);
+		$this->assertEquals($this->profile->getProfileOAuthId(), $this->VALID_OAUTH);
 		$this->assertEquals($this->profile->getProfileAccessToken(), $this->VALID_ACCESS_TOKEN);
 		$this->assertEquals($this->profile->getProfileEmail(), $this->VALID_EMAIL1);
 		$this->assertEquals($this->profile->getProfileName(), $this->VALID_NAME1);
