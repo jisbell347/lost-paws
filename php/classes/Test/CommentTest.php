@@ -12,7 +12,7 @@ use Jisbell347\LostPaws\{
 //grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
 
-// grab the uuid generator
+//grab the uuid generator
 require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 
 /**
@@ -72,10 +72,10 @@ class CommentTest extends LostPawsTest {
 
 		// create and insert a Profile to own the test Comment
 
-		$this->oAuth = new OAuth($this->oAuth->getOAuthId(), "facebook");
+		$this->oAuth = new OAuth(null, "facebook");
 		$this->oAuth->insert($this->getPDO());
 
-		$this->profile = new Profile($this->profile->getProfileId(), $this->profile->getProfileOAuthId(), "woof", "catsanddogs@found.com", "TheGoodestBoy", "1234567890");
+		$this->profile = new Profile(generateUuidV4(), 12, "123", "catsanddogs@found.com", "TheGoodestBoy", "1234567890");
 		$this->profile->insert($this->getPDO());
 
 		$this->animal = new Animal($this->animal->getAnimalId(), $this->animal->getAnimalProfileId(), "white", $this->animal->getAnimalDate(), "Cocker Spaniel Dachsund Mix", "Female", "https://placedog.net/520", "Downtown Albuquerque", "Lady", "dog", "lost");
