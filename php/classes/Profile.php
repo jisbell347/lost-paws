@@ -91,8 +91,8 @@ class Profile implements \JsonSerializable {
 			$this->setProfilePhone($newProfilePhone);
 		} catch(\InvalidArgumentException | \RangeException |\TypeError | \Exception $exception) {
 			//determine what exception type was thrown
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+			//$exceptionType = get_class($exception);
+			//throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
 
@@ -102,7 +102,7 @@ class Profile implements \JsonSerializable {
 	 * @return Uuid value of profile id (or null if new Profile)
 	 **/
 	public function getProfileId(): Uuid {
-		return ($this->profileId);
+		return (bin2hex($this->profileId));
 	}
 
 	/**
@@ -115,7 +115,7 @@ class Profile implements \JsonSerializable {
 	public function setProfileId($newProfileId): void {
 		try {
 			// make sure that $newProfileId is a valid UUID
-			$newProfileId = self::validateUuid($newProfileId);
+		//	$newProfileId = self::validateUuid($newProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception  $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -153,6 +153,13 @@ class Profile implements \JsonSerializable {
 	public function getProfileAccessToken(): string {
 		return ($this->profileAccessToken);
 	}
+	public function validateAccessToken() : bool {
+
+		//preg_match("regex", "string")
+
+		//^/?([\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12})?$
+	}
+
 
 	/**
 	 * mutator method for account activation token
@@ -167,9 +174,12 @@ class Profile implements \JsonSerializable {
 		}
 		$newProfileAccessToken = strtolower(trim($newProfileAccessToken));
 		// check if all characters are digits, if not - throw an exception
+		// validate the AccessToken here
+		/*
 		if(!ctype_xdigit($newProfileAccessToken)) {
 			throw(new \RangeException("Access token is not valid."));
 		}
+		*/
 		//make sure user access token is more than 255 characters
 		if(strlen($newProfileAccessToken) > 255) {
 			throw(new \RangeException("Access token cannot be longer than 255-character long."));
