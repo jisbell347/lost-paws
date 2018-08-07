@@ -374,7 +374,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public static function getProfileByProfileId(\PDO $pdo, $profileId) : ?Profile {
+	public static function getProfileByProfileId(\PDO $dbc, $profileId) : ?Profile {
 		// sanitize the profile id before searching
 		try {
 			$profileId = self::validateUuid($profileId);
@@ -383,11 +383,7 @@ class Profile implements \JsonSerializable {
 		}
 		// create query template
 		$query = "SELECT * FROM profile WHERE profileId = :profileId";
-		/*
-		$query = "SELECT profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone
- 					FROM profile WHERE profileId = :profileId";
-		*/
-		$statement = $pdo->prepare($query);
+		$statement = $dbc->prepare($query);
 		// bind the profile id to the place holder in the template
 		$parameters = ["profileId" => $profileId->getBytes()];
 		$statement->execute($parameters);
@@ -407,43 +403,7 @@ class Profile implements \JsonSerializable {
 		// if everything went well, return $newProfile
 		return ($newProfile);
 	}
-/*
-	public static function getProfileByProfileId(\PDO $dbc, string $profileId): ?Profile {
-		// sanitize the  user id before searching
-		try {
-			$profileId = self::validateUuid($profileId);
-		} catch (\Exception $exception) {
-			// re-throw exception if occured
-			throw(new \Exception($exception->getMessage(), 0, $exception));
-		}
-		// if everything goes well so far:
-		try {
-			$query = "SELECT * FROM profile WHERE profileId = :profileId";
-			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileId', $profileId);
-			$stmt->execute();
-		} catch (\PDOException | \Exception $exception) {
-			// re-throw exception if occured
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}
-		$newProfile = null;
-		try {
-			// grab the profile from mySQL
-			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
-			if ($row) {
-				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
-					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
-			}
-		} catch (\PDOException | \Exception $exception) {
-			// re-throw exception if occured
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}
-		// if everything went well, return $newProfile
-		return $newProfile;
-	}
-*/
+
 	/**
 	 * get this Profile by profileOAuthId
 	 *
@@ -456,9 +416,10 @@ class Profile implements \JsonSerializable {
 	public static function getProfileByProfileOAuthId(\PDO $dbc, string $profileOAuthId): ?Profile {
 		try {
 			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId";
-			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileOAuthId', $profileOAuthId);
-			$stmt->execute();
+			$statement = $dbc->prepare($query);
+			// bind the profile id to the place holder in the template
+			$parameters = ["profileOAuthId" => $profileOAuthId];
+			$statement->execute($parameters);
 		}  catch (\Exception $exception) {
 			// re-throw exception if occured
 			throw(new \Exception($exception->getMessage(), 0, $exception));
@@ -466,7 +427,7 @@ class Profile implements \JsonSerializable {
 		$newProfile = null;
 		try {
 			// grab the profile from mySQL
-			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch(\PDO::FETCH_ASSOC);
 			if ($row) {
 				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
 					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
@@ -490,19 +451,19 @@ class Profile implements \JsonSerializable {
 	 * @throws \InvalidArgumentException in case email address is empty or insecure
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function getProfileByProfileEmail(\PDO $dbc, string $profileEmail): ?Profile {
-		// verify that user email is secure
+	public function getProfileByProfileEmail(\PDO $dbc, string $currProfileEmail): ?Profile {
+		// verify that the email address is secure
 		$currProfileEmail = trim($currProfileEmail);
 		$currProfileEmail = filter_var($currProfileEmail, FILTER_VALIDATE_EMAIL);
 		if(empty($currProfileEmail)) {
-			throw(new \InvalidArgumentException("Profile email is empty or insecure"));
+			throw(new \InvalidArgumentException("Profile email address is empty or insecure."));
 		}
 		try {
-			// our assumption is that all email addresses are unique, so our query returns only one object, not a collection of objects
 			$query = "SELECT * FROM profile WHERE profileEmail = :profileEmail";
-			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileEmail', $profileEmail);
-			$stmt->execute();
+			$statement = $dbc->prepare($query);
+			// bind the profile id to the place holder in the template
+			$parameters = ["profileEmail" => $currProfileEmail];
+			$statement->execute($parameters);
 		}   catch (\Exception $exception) {
 			// re-throw exception if occured
 			throw(new \Exception($exception->getMessage(), 0, $exception));
@@ -510,10 +471,10 @@ class Profile implements \JsonSerializable {
 		$newProfile = null;
 		try {
 			// grab the selected profile from mySQL
-			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch(\PDO::FETCH_ASSOC);
 			if ($row) {
 				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
-					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
+					$row["profileEmail"], $row["profileName"], $row["profilePhone"]);
 			}
 		} catch (\PDOException | \Exception $exception) {
 			// re-throw exception if occured

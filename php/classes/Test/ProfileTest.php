@@ -22,7 +22,6 @@ class ProfileTest extends LostPawsTest {
 	/**
 	 * declare state variables
 	 */
-
 	protected $VALID_PROFILE_ID;
 	protected $VALID_OAUTH = null;
 	protected $profile = null;
@@ -155,10 +154,37 @@ class ProfileTest extends LostPawsTest {
 		$this->assertNull($pdoProfile);
 	}
 
+	/**
+	 * test grabing a Profile from the database using a valid email address
+	 **/
+	public function testGetProfileByValidEmail() : void {
+		// create a PDO connection object
+		$pdo = $this->getPDO();
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+		// try grabing the data from mySQL and check if the fields match our expectations
+		$pdoProfile = Profile::getProfileByProfileEmail($this->getPDO(), $this->profile->getProfileEmail());
+		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
+		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());
+		$this->assertEquals($pdoProfile->getProfileEmail(), $this->profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
+		$this->assertEquals($pdoProfile->getProfilePhone(), $this->profile->getProfilePhone());
+	}
 
-
-
-
-
+	/**
+	 * test grabing a Profile from the database using a wrong email address
+	 **/
+	public function testGetProfileByInvalidEmail() : void {
+		// fake email address
+		$invalidEmail = "yesyes@nonono.com";
+		$pdo = $this->getPDO();
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+		// try to grab a record using a wrong email address (there should not be any record with this email address in the database)
+		$pdoProfile = Profile::getProfileByProfileEmail($pdo, $invalidEmail);
+		$this->assertNull($pdoProfile);
+	}
 
 }
