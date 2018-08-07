@@ -68,7 +68,7 @@ class ProfileTest extends LostPawsTest {
 		$this->assertNotNull($pdo, "The PDO connection object is supposed to be not null");
 
 		// insert an instance of the Profile class into the database
-		$this->profile->insertProfile($pdo);
+		$this->profile->insert($pdo);
 		$newNumProws = $this->getConnection()->getRowCount("profile");
 
 		// make sure that the record is inserted
@@ -85,6 +85,8 @@ class ProfileTest extends LostPawsTest {
 		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
 		$this->assertEquals($pdoProfile->getProfilePhone(), $this->profile->getProfilePhone());
 	}
+
+
 
 
 

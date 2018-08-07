@@ -302,7 +302,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function insertProfile(\PDO $dbc): void {
+	public function insert(\PDO $dbc): void {
 		// create query template
 		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone)
  									VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
@@ -323,7 +323,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function updateProfile(\PDO $dbc): void {
+	public function update(\PDO $dbc): void {
 		try {
 			$query = "UPDATE profile SET profileOAuthId = :profileOAuthId,
                                     profileAccessToken = :profileAccessToken,
@@ -352,7 +352,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function deleteProfile(\PDO $dbc): void {
+	public function delete(\PDO $dbc): void {
 		try {
 			$query = "DELETE FROM profile WHERE profileId = :profileId";
 			$stmt = $dbc->prepare($query);
