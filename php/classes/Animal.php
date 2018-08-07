@@ -554,7 +554,7 @@ class Animal implements \JsonSerializable {
 	 * @throws \PDOException when mySQl related errors happen
 	 * @throws \TypeError when a variable is not correct data type	 *
 	 **/
-		public static function getAnimalByAnimalProfileID(\PDO $pdo, $animalProfileId): \SplFixedArray {
+		public static function getAnimalByAnimalProfileId(\PDO $pdo, $animalProfileId): \SplFixedArray {
 		//sanitize animalProfileId before searching
 		try {
 			$animalProfileId = self::validateUuid($animalProfileId);
