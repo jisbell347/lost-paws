@@ -39,12 +39,7 @@ Class AnimalTest extends LostPawsTest{
 	 * @var string $VALID_ANIMAL_COLOR
 	 **/
 	protected $VALID_ANIMAL_COLOR = "Black";
-	/**
-	 * Updated color of the Animal
-	 * @var string $VALID_ANIMAL_COLOR2
-	 **/
-	protected $VALID_ANIMAL_COLOR2 = "Brown";
-	/**
+		/**
 	 * timestamp of the Animal; this starts as null and is assigned later
 	 * @var \DateTime $VALID_ANIMAL_DATE
 	 **/
@@ -70,61 +65,30 @@ Class AnimalTest extends LostPawsTest{
 	 **/
 	protected $VALID_ANIMAL_GENDER = "Male";
 	/**
-	 * Updated Gender of the Animal
-	 * @var string $VALID_ANIMAL_GENDER2
-	 **/
-	protected $VALID_ANIMAL_GENDER2 = "Female";
-	/**
 	 * URL of Animal photo
 	 * @var string $VALID_ANIMAL_IMAGE_URL
 	 **/
 	protected $VALID_ANIMAL_IMAGE_URL = "https://www.lostpaws.com/images/cat123.jpg";
-	/**
-	 * Updated URL of Animal photo
-	 * @var string $VALID_ANIMAL_IMAGE_URL2
-	 **/
-	protected $VALID_ANIMAL_IMAGE_URL2 = "https://www.lostpaws.com/images/dog123.jpg";
 	/**
 	 * Location of the Animal
 	 * @var string $VALID_ANIMAL_LOCATION
 	 **/
 	protected $VALID_ANIMAL_LOCATION = "Barelas";
 	/**
-	 * Updated location of the Animal
-	 * @var string $VALID_ANIMAL_LOCATION2
-	 **/
-	protected $VALID_ANIMAL_LOCATION2 = "Old Town";
-	/**
 	 * Name of the Animal
 	 * @var string $VALID_ANIMAL_NAME
 	 **/
 	protected $VALID_ANIMAL_NAME = "Spot";
-	/**
-	 * Updated name of the Animal
-	 * @var string $VALID_ANIMAL_NAME2
-	 **/
-	protected $VALID_ANIMAL_NAME2 = "Wayne";
 	/**
 	 * Species of the Animal
 	 * @var string $VALID_ANIMAL_SPECIES
 	 **/
 	protected $VALID_ANIMAL_SPECIES = "Cat";
 	/**
-	 * Updated species of the Animal
-	 * @var string $VALID_ANIMAL_SPECIES2
-	 **/
-	protected $VALID_ANIMAL_SPECIES2 = "Dog";
-	/**
 	 * Status of the Animal
 	 * @var string $VALID_ANIMAL_STATUS
 	 **/
 	protected $VALID_ANIMAL_STATUS = "Lost";
-	/**
-	 * Updated status of the Animal
-	 * @var string $VALID_ANIMAL_STATUS2
-	 **/
-	protected $VALID_ANIMAL_STATUS2 = "Reunited";
-
 
 
 
@@ -146,7 +110,7 @@ Class AnimalTest extends LostPawsTest{
 		//create and insert a Profile to own and test the Animal.
 		$this->oAuth = new OAuth(null,"Google");
 		$this->oAuth->insert($this->getPDO());
-		$this->profile = new Profile(generateUuidV4(), $this->oAuth->getOAuthId(), null, "juantabo@aol.com", "Juan Tabo", "505-869-5309");
+		$this->profile = new Profile(generateUuidV4(), $this->oAuth->getOAuthId(), bin2hex(random_bytes(16)), "juantabo@aol.com", "Juan Tabo", "505-869-5309");
 		$this->profile->insert($this->getPDO());
 		//calculate the date(use the time the unit test was setup)
 		$this->VALID_ANIMAL_DATE = new \DateTime();
@@ -202,14 +166,14 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertEquals($pdoAnimal->getAnimalProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoAnimal->getAnimalColor(),$this->VALID_ANIMAL_COLOR2);
+		$this->assertEquals($pdoAnimal->getAnimalColor(),$this->VALID_ANIMAL_COLOR);
 		$this->assertEquals($pdoAnimal->getAnimalDescription(), $this->VALID_ANIMAL_DESCRIPTION2);
-		$this->assertEquals($pdoAnimal->getAnimalGender(), $this->VALID_ANIMAL_GENDER2);
-		$this->assertEquals($pdoAnimal->getAnimalImageUrl(), $this->VALID_ANIMAL_IMAGE_URL2);
-		$this->assertEquals($pdoAnimal->getAnimalLocation(), $this->VALID_ANIMAL_LOCATION2);
-		$this->assertEquals($pdoAnimal->getAnimalName(), $this->VALID_ANIMAL_NAME2);
-		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES2);
-		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS2);
+		$this->assertEquals($pdoAnimal->getAnimalGender(), $this->VALID_ANIMAL_GENDER);
+		$this->assertEquals($pdoAnimal->getAnimalImageUrl(), $this->VALID_ANIMAL_IMAGE_URL);
+		$this->assertEquals($pdoAnimal->getAnimalLocation(), $this->VALID_ANIMAL_LOCATION);
+		$this->assertEquals($pdoAnimal->getAnimalName(), $this->VALID_ANIMAL_NAME);
+		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES);
+		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS);
 		//format the date to seconds since the beginning of time to avoid round off error.
 		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
 	}
