@@ -331,13 +331,13 @@ class Profile implements \JsonSerializable {
                                     profileName = :profileName,                              
                                     profilePhone = :profilePhone WHERE profileId = :profileId";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileId', $this->profileId->getBytes());
-			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
-			$stmt->bindParam(':profileAccessToken', $this->profileAccessToken);
-			$stmt->bindParam(':profileEmail', $this->profileEmail);
-			$stmt->bindParam(':profileName', $this->profileName);
-			$stmt->bindParam(':profilePhone', $this->profilePhone);
-			$stmt->execute();
+			$parameters = ["profileId" => $this->profileId->getBytes(),
+				"profileOAuthId" => $this->profileOAuthId,
+				"profileAccessToken" => $this->profileAccessToken,
+				"profileEmail" => $this->profileEmail,
+				"profileName" => $this->profileName,
+				"profilePhone" => $this->profilePhone];
+			$stmt->execute($parameters);
 		} catch (\PDOException | \Exception $exception) {
 			// re-throw exception if occured
 			$exceptionType = get_class($exception);
