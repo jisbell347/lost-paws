@@ -85,7 +85,7 @@ class Animal implements \JsonSerializable {
 	 * @param string $newAnimalSpecies
 	 * @param string $newAnimalStatus
 	 **/
-	public function __construct(Uuid $newAnimalId, Uuid $newAnimalProfileId, string $newAnimalColor, \DateTime $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
+	public function __construct($newAnimalId, $newAnimalProfileId, string $newAnimalColor, $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
 		try {
 			$this->setAnimalId($newAnimalId);
 			$this->setAnimalProfileId($newAnimalProfileId);
@@ -659,7 +659,7 @@ class Animal implements \JsonSerializable {
 
 		//bind the animal text to the place holder in the template
 		$animalDescription = "%$animalDescription%";
-		$parameters = ["animalText" => $animalDescription];
+		$parameters = ["animalDescription" => $animalDescription];
 		$statement->execute($parameters);
 
 		// build an array of animals
@@ -686,7 +686,7 @@ class Animal implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \typeError when variables are not the correct data type
 	 */
-	public static function getAllAnimals(\PDO $pdo) : SPLFixedArray {
+	public static function getAllAnimals(\PDO $pdo) : \SplFixedArray {
 		//create query template
 		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal";
 		$statement = $pdo->prepare($query);
