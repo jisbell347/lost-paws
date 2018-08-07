@@ -253,7 +253,7 @@ class CommentTest extends LostPawsTest {
 	 * test grabbing a Comment by the comment Text
 	 **/
 	public function testGetValidCommentByCommentText() : void {
-		// count the number of rows and sive it for later
+		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
 		// create a new Comment and insert it into mySQL
@@ -267,7 +267,7 @@ class CommentTest extends LostPawsTest {
 		$this->assertCount(1, $results);
 
 		// enforce no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Test", $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Comment", $results);
 
 		// grab the result from the array and validate it
 		$pdoComment = $results[0];
@@ -301,7 +301,7 @@ class CommentTest extends LostPawsTest {
 		$results = Comment::getAllComments($this->getPDO());
 		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Test", $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Comment", $results);
 
 		// grab the result from the array and validate it
 		$pdoComment = $results[0];

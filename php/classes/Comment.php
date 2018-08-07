@@ -255,7 +255,7 @@ class Comment {
 		$statement = $pdo->prepare($query);
 
 		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
-		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
+		$parameters = [ "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
 		$statement->execute($parameters);
 	}
 
