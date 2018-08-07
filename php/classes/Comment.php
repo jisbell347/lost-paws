@@ -29,25 +29,24 @@ class Comment {
 	 **/
 	private $commentProfileId;
 	/**
-	 *textual content of this comment
-	 * @var string $commentText
-	 **/
-	private $commentText;
-	/**
 	 * date and time this comment was made, in a PHP DateTime Object
 	 * @var \DateTime $commentDate
 	 */
 	private $commentDate;
+	/**
+	 *textual content of this comment
+	 * @var string $commentText
+	 **/
+	private $commentText;
 
 
-
-	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, string $newCommentText, $newCommentDate = null) {
+	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, $newCommentDate = null, string $newCommentText) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentAnimalId($newCommentAnimalId);
 			$this->setCommentProfileId($newCommentProfileId);
-			$this->setCommentText($newCommentText);
 			$this->setCommentDate($newCommentDate);
+			$this->setCommentText($newCommentText);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -135,39 +134,6 @@ class Comment {
 		//convert and store the comment animal id
 		$this->commentProfileId = $uuid;
 	}
-	/**
-	 * accessor method for comment text
-	 *
-	 * @return string value of comment text
-	 */
-	public function getCommentText(): string {
-		return ($this->commentText);
-	}
-
-	/**
-	 * mutator method for comment text
-	 *
-	 * @param string $newCommentText new value of comment text
-	 * @throws \InvalidArgumentException if $newCommentText is not a string or insecure
-	 * @throws \RangeException if $newCommentText is > 1000 characters
-	 * @throws \TypeError if $newCommentText is not a string
-	 **/
-	public function setCommentText(string $newCommentText): void {
-		//verify comment text is secure
-		$newCommentText = trim($newCommentText);
-		$newCommentText = filter_var($newCommentText, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newCommentText) === true) {
-			throw(new \InvalidArgumentException("Comment text is empty or insecure."));
-		}
-
-		//verify the comment content will fit in the database
-		if(strlen($newCommentText) > 1000) {
-			throw(new \RangeException("Comment text is too large."));
-		}
-
-		//store the comment text
-		$this->commentText = $newCommentText;
-	}
 
 	/**
 	 * accessor method for comment date
@@ -203,6 +169,39 @@ class Comment {
 		$this->commentDate = $newCommentDate;
 	}
 
+	/**
+	 * accessor method for comment text
+	 *
+	 * @return string value of comment text
+	 */
+	public function getCommentText(): string {
+		return ($this->commentText);
+	}
+
+	/**
+	 * mutator method for comment text
+	 *
+	 * @param string $newCommentText new value of comment text
+	 * @throws \InvalidArgumentException if $newCommentText is not a string or insecure
+	 * @throws \RangeException if $newCommentText is > 1000 characters
+	 * @throws \TypeError if $newCommentText is not a string
+	 **/
+	public function setCommentText(string $newCommentText): void {
+		//verify comment text is secure
+		$newCommentText = trim($newCommentText);
+		$newCommentText = filter_var($newCommentText, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newCommentText) === true) {
+			throw(new \InvalidArgumentException("Comment text is empty or insecure."));
+		}
+
+		//verify the comment content will fit in the database
+		if(strlen($newCommentText) > 1000) {
+			throw(new \RangeException("Comment text is too large."));
+		}
+
+		//store the comment text
+		$this->commentText = $newCommentText;
+	}
 
 	/**
 	 * inserts this Comment into mySQL
@@ -214,12 +213,12 @@ class Comment {
 	public function insert(\PDO $pdo): void {
 
 		//create query template
-		$query = "INSERT INTO comment(commentId, commentAnimalId, commentProfileId, commentText, commentDate) VALUES(:commentID, :commentAnimalId, :commentProfileId,:commentText, :commentDate)";
+		$query = "INSERT INTO comment(commentId, commentAnimalId, commentProfileId, commentDate, commentText) VALUES(:commentID, :commentAnimalId, :commentProfileId, :commentDate, :commentText)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
-		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(),"commentText" => $this->commentText, "commentDate" => $formattedDate];
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
 		$statement->execute($parameters);
 	}
 
@@ -252,11 +251,11 @@ class Comment {
 	public function update(\PDO $pdo): void {
 
 		//create query template
-		$query = "UPDATE comment SET commentAnimalId = :commentAnimalId, commentProfileId = :commentProfileId, commentText = :commentText, commentDate = :commentDate";
+		$query = "UPDATE comment SET commentAnimalId = :commentAnimalId, commentProfileId = :commentProfileId, commentDate = :commentDate, commentText = :commentText";
 		$statement = $pdo->prepare($query);
 
 		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
-		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentText" => $this->commentText, "commentDate" => $formattedDate];
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentAnimalId" => $this->commentAnimalId->getBytes(), "commentProfileId" => $this->commentProfileId->getBytes(), "commentDate" => $formattedDate, "commentText" => $this->commentText];
 		$statement->execute($parameters);
 	}
 
@@ -278,7 +277,7 @@ class Comment {
 		}
 
 		//create query template
-		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentText, commentDate  FROM comment WHERE commentId = :commentId";
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentId = :commentId";
 		$statement = $pdo->prepare($query);
 
 		//bind the comment id to the place holder in the template
@@ -291,7 +290,7 @@ class Comment {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentText"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
@@ -306,7 +305,7 @@ class Comment {
 	 * @param \PDO $pdo PDO connection object
 	 * @param Uuid|string $commentAnimalId animal id to search by
 	 * @return \SPLFixedArray of Comments found
-	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \PDOException when mySQL related erros occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
 	public static function getCommentByCommentAnimalId(\PDO $pdo, $commentAnimalId): \SplFixedArray {
@@ -318,7 +317,7 @@ class Comment {
 		}
 
 		// create query template
-		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentText, commentDate  FROM comment WHERE commentAnimalId = :commentAnimalId";
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentAnimalId = :commentAnimalId";
 		$statement = $pdo->prepare($query);
 
 		//bind the comment id to the place holder in the template
@@ -329,7 +328,7 @@ class Comment {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentText"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
@@ -358,7 +357,7 @@ class Comment {
 		}
 
 		//create query template
-		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentText, commentDate  FROM comment WHERE commentProfileId = :commentProfileId";
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentProfileId = :commentProfileId";
 		$statement = $pdo->prepare($query);
 
 		//bind the comment id to the place holder in the template
@@ -369,7 +368,7 @@ class Comment {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentText"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
@@ -402,7 +401,7 @@ class Comment {
 		$commentText = str_replace("_", "\\_", str_replace("%", "\\%", $commentText));
 
 		//create query template
-		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentText, commentDate  FROM comment WHERE commentText LIKE :commentText";
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment WHERE commentText LIKE :commentText";
 		$statement = $pdo->prepare($query);
 
 		//bind the comment text to the place holder in the template
@@ -415,7 +414,7 @@ class Comment {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentText"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
@@ -437,7 +436,7 @@ class Comment {
 	 **/
 	public static function getAllComments(\PDO $pdo): \SplFixedArray {
 		//create query template
-		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentText, commentDate FROM comment";
+		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -446,7 +445,7 @@ class Comment {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentText"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
