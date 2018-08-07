@@ -260,7 +260,7 @@ class Profile implements \JsonSerializable {
 	 *
 	 * @return string value of a normalized phone number or an empty string
 	 **/
-	public static function normalizePhoneNumber (string $phoneNum) : string {
+	public static function normalizePhoneNumber(string $phoneNum) : string {
 		$phoneNum = trim($phoneNum);
 		// FILTER_SANITIZE_NUMBER_INT removes everything except digits, "+", and "-"
 		$phoneNum = filter_var($phoneNum, FILTER_SANITIZE_NUMBER_INT);
@@ -281,18 +281,12 @@ class Profile implements \JsonSerializable {
 	public function setProfilePhone(string $newProfilePhone): void {
 		//if $profilePhone is null return it right away
 		if($newProfilePhone === null) {
-			$this->profilePhone = null;
+			$this->profilePhone = "";
 			return;
 		}
 		// verify the phone is secure
-		$newProfilePhone = trim($newProfilePhone);
-		// FILTER_SANITIZE_NUMBER_INT removes everything except digits, "+", and "-"
-		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_NUMBER_INT);
-		if(empty($newProfilePhone)) {
-			throw(new \InvalidArgumentException("Phone number is empty or insecure."));
-		}
-		// remove all "+" and "-" from the phone number
-		$newProfilePhone = str_replace(["+","-"], "", $newProfilePhone);
+		$newProfilePhone = Profile::normalizePhoneNumber($newProfilePhone);
+
 		// verify the phone will fit in the database
 		if(strlen($newProfilePhone) > 15) {
 			throw(new \RangeException("Phone number is too long."));
@@ -312,20 +306,14 @@ class Profile implements \JsonSerializable {
 		// create query template
 		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone)
  									VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
-		try {
-			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileId', $this->profileId->getBytes());
-			$stmt->bindParam(':profileOAuthId', $this->profileOAuthId);
-			$stmt->bindParam(':profileAccessToken', $this->profileAccessToken);
-			$stmt->bindParam(':profileEmail', $this->profileEmail);
-			$stmt->bindParam(':profileName', $this->profileName);
-			$stmt->bindParam(':profilePhone', $this->profilePhone);
-			$stmt->execute();
-		} catch (\PDOException | \Exception $exception) {
-			// re-throw an exception if occured
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}
+		$statement = $dbc->prepare($query);
+		$parameters = ["profileId" => $this->profileId->getBytes(),
+							"profileOAuthId" => $this->profileOAuthId,
+							"profileAccessToken" => $this->profileAccessToken,
+							"profileEmail" => $this->profileEmail,
+							"profileName" => $this->profileName,
+							"profilePhone" => $this->profilePhone];
+		$statement->execute($parameters);
 	}
 
 	/**

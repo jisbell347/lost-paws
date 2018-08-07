@@ -42,7 +42,7 @@ class ProfileTest extends LostPawsTest {
 		$oAuth->insert($this->getPDO());
 		$this->VALID_OAUTH = $oAuth->getOAuthId();
 		$this->VALID_PROFILE_ID = generateUuidV4();
-		$this->VALID_ACCESS_TOKEN = generateUuidV4();
+		$this->VALID_ACCESS_TOKEN = bin2hex(random_bytes(16));
 		$this->profile = new Profile($this->VALID_PROFILE_ID, $this->VALID_OAUTH, $this->VALID_ACCESS_TOKEN, $this->VALID_EMAIL1, $this->VALID_NAME1, $this->VALID_PHONE1);
 	}
 
@@ -53,9 +53,28 @@ class ProfileTest extends LostPawsTest {
 		$this->assertEquals($this->profile->getProfileAccessToken(), $this->VALID_ACCESS_TOKEN);
 		$this->assertEquals($this->profile->getProfileEmail(), $this->VALID_EMAIL1);
 		$this->assertEquals($this->profile->getProfileName(), $this->VALID_NAME1);
-		$this->assertEquals($this->profile->getProfilePhone(), $this->VALID_PHONE1);
+		$this->assertEquals($this->profile->getProfilePhone(), Profile::normalizePhoneNumber($this->VALID_PHONE1));
 	}
 
+	/**
+	 * test inserting a valid Profile and verifying a new record appeared in the database
+	 **/
+	public function testInsertValidProfile() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("profile");
+
+		// create a PDO object
+		$pdo = $this->getPDO();
+
+		// and insert an instance of the Profile class into the database
+		$this->profile->insertProfile($pdo);
+
+		// count the number of rows in the  "profile" table
+		$nRows = $pdo->query('SELECT COUNT(*) FROM profile')->fetchColumn();
+
+		// make sure that the record is inserted
+		$this->assertEquals($numRows+1, $this->getConnection()->getRowCount("profile"), "New Number of rows: " .strval($numRows+1) ."Number of actual rows: " .strval($nRows));
+	}
 
 
 
