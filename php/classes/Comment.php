@@ -40,7 +40,7 @@ class Comment {
 	private $commentText;
 
 
-	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, $newCommentDate = null, string $newCommentText) {
+	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, $newCommentDate, string $newCommentText) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentAnimalId($newCommentAnimalId);
@@ -213,7 +213,7 @@ class Comment {
 	public function insert(\PDO $pdo): void {
 
 		//create query template
-		$query = "INSERT INTO comment(commentId, commentAnimalId, commentProfileId, commentDate, commentText) VALUES(:commentID, :commentAnimalId, :commentProfileId, :commentDate, :commentText)";
+		$query = "INSERT INTO comment(commentId, commentAnimalId, commentProfileId, commentDate, commentText) VALUES(:commentId, :commentAnimalId, :commentProfileId, :commentDate, :commentText)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
