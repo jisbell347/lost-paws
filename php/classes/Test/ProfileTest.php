@@ -63,17 +63,35 @@ class ProfileTest extends LostPawsTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("profile");
 
-		// create a PDO object
+		// create a PDO connection object
 		$pdo = $this->getPDO();
+		$this->assertNotNull($pdo, "The PDO connection object is supposed to be not null");
 
-		// and insert an instance of the Profile class into the database
+		// insert an instance of the Profile class into the database
 		$this->profile->insertProfile($pdo);
-
-		// count the number of rows in the  "profile" table
-		$nRows = $pdo->query('SELECT COUNT(*) FROM profile')->fetchColumn();
+		$newNumProws = $this->getConnection()->getRowCount("profile");
 
 		// make sure that the record is inserted
-		$this->assertEquals($numRows+1, $this->getConnection()->getRowCount("profile"), "New Number of rows: " .strval($numRows+1) ."Number of actual rows: " .strval($nRows));
+		$this->assertEquals($numRows+1, $newNumProws, "Expected number of rows: " .strval($numRows+1) ." Actual number of rows: " .strval($newNumProws));
+
+		// grab just inserted profile from the database and compare it to the original object
+		$pdoProfile = Profile::getProfileByProfileId($pdo, $this->profile->getProfileId());
+
+		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+		$tempProfileID = $pdoProfile->getProfileId();
+		$this->assertEquals(get_type($tempProfileID), "uuid", "The Profile ID must be of type UUID");
+
+
+
+
+		/*
+		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
+		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());
+		$this->assertEquals($pdoProfile->getProfileEmail(), $this->profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
+		$this->assertEquals($pdoProfile->getProfilePhone(), $this->profile->getProfilePhone());
+		*/
 	}
 
 

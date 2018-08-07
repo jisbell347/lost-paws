@@ -91,8 +91,8 @@ class Profile implements \JsonSerializable {
 			$this->setProfilePhone($newProfilePhone);
 		} catch(\InvalidArgumentException | \RangeException |\TypeError | \Exception $exception) {
 			//determine what exception type was thrown
-			//$exceptionType = get_class($exception);
-			//throw(new $exceptionType($exception->getMessage(), 0, $exception));
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
 
@@ -102,7 +102,7 @@ class Profile implements \JsonSerializable {
 	 * @return Uuid value of profile id (or null if new Profile)
 	 **/
 	public function getProfileId(): Uuid {
-		return($this->profileId);
+		return ($this->profileId);
 	}
 
 	/**
@@ -374,10 +374,44 @@ class Profile implements \JsonSerializable {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
+	public static function getProfileByProfileId(\PDO $pdo, string $profileId) : ?Profile {
+		// sanitize the profile id before searching
+		try {
+			$profileId = self::validateUuid($profileId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// create query template
+		$query = "SELECT * FROM profile WHERE profileId = :profileId";
+		/*
+		$query = "SELECT profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone
+ 					FROM profile WHERE profileId = :profileId";
+		*/
+		$statement = $pdo->prepare($query);
+		// bind the profile id to the place holder in the template
+		$parameters = ["profileId" => $profileId->getBytes()];
+		$statement->execute($parameters);
+		$newProfile = null;
+		try {
+			// grab the profile from mySQL
+			$row = $statement->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
+					$row["profileEmail"], $row["profileName"], $row["profilePhone"]);
+			}
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// if everything went well, return $newProfile
+		return ($newProfile);
+	}
+/*
 	public static function getProfileByProfileId(\PDO $dbc, string $profileId): ?Profile {
 		// sanitize the  user id before searching
 		try {
-			$currProfileId = self::validateUuid($profileId);
+			$profileId = self::validateUuid($profileId);
 		} catch (\Exception $exception) {
 			// re-throw exception if occured
 			throw(new \Exception($exception->getMessage(), 0, $exception));
@@ -409,7 +443,7 @@ class Profile implements \JsonSerializable {
 		// if everything went well, return $newProfile
 		return $newProfile;
 	}
-
+*/
 	/**
 	 * get this Profile by profileOAuthId
 	 *
