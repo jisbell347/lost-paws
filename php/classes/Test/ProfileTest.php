@@ -76,11 +76,15 @@ class ProfileTest extends LostPawsTest {
 
 		// grab just inserted profile from the database and compare it to the original object
 		$pdoProfile = Profile::getProfileByProfileId($pdo, $this->profile->getProfileId());
-
 		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+
+		$tempProfileID = $this->profile->getProfileId();
+		$this->assertEquals(gettype($tempProfileID), "object", "The Profile ID must be of type UUID");
+
+		/*
 		$tempProfileID = $pdoProfile->getProfileId();
 		$this->assertEquals(get_type($tempProfileID), "uuid", "The Profile ID must be of type UUID");
-
+*/
 
 
 
