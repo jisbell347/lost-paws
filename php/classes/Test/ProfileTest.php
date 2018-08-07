@@ -80,22 +80,13 @@ class ProfileTest extends LostPawsTest {
 
 		$tempProfileID = $this->profile->getProfileId();
 		$this->assertEquals(gettype($tempProfileID), "object", "The Profile ID must be of type UUID");
-
-		/*
-		$tempProfileID = $pdoProfile->getProfileId();
-		$this->assertEquals(get_type($tempProfileID), "uuid", "The Profile ID must be of type UUID");
-*/
-
-
-
-		/*
+		$this->assertEquals(gettype(pdoProfile->getProfileId()), "object", "The Profile ID must be of type UUID");
 		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
 		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
 		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());
 		$this->assertEquals($pdoProfile->getProfileEmail(), $this->profile->getProfileEmail());
 		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
 		$this->assertEquals($pdoProfile->getProfilePhone(), $this->profile->getProfilePhone());
-		*/
 	}
 
 
