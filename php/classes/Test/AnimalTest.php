@@ -39,7 +39,12 @@ Class AnimalTest extends LostPawsTest{
 	 * @var string $VALID_ANIMAL_COLOR
 	 **/
 	protected $VALID_ANIMAL_COLOR = "Black";
-		/**
+	/**
+	 * Updated color of the Animal
+	 * @var string $VALID_ANIMAL_COLOR2
+	 **/
+	protected $VALID_ANIMAL_COLOR2 = "Brown";
+	/**
 	 * timestamp of the Animal; this starts as null and is assigned later
 	 * @var \DateTime $VALID_ANIMAL_DATE
 	 **/
@@ -65,30 +70,61 @@ Class AnimalTest extends LostPawsTest{
 	 **/
 	protected $VALID_ANIMAL_GENDER = "Male";
 	/**
+	 * Updated Gender of the Animal
+	 * @var string $VALID_ANIMAL_GENDER2
+	 **/
+	protected $VALID_ANIMAL_GENDER2 = "Female";
+	/**
 	 * URL of Animal photo
 	 * @var string $VALID_ANIMAL_IMAGE_URL
 	 **/
 	protected $VALID_ANIMAL_IMAGE_URL = "https://www.lostpaws.com/images/cat123.jpg";
+	/**
+	 * Updated URL of Animal photo
+	 * @var string $VALID_ANIMAL_IMAGE_URL2
+	 **/
+	protected $VALID_ANIMAL_IMAGE_URL2 = "https://www.lostpaws.com/images/dog123.jpg";
 	/**
 	 * Location of the Animal
 	 * @var string $VALID_ANIMAL_LOCATION
 	 **/
 	protected $VALID_ANIMAL_LOCATION = "Barelas";
 	/**
+	 * Updated location of the Animal
+	 * @var string $VALID_ANIMAL_LOCATION2
+	 **/
+	protected $VALID_ANIMAL_LOCATION2 = "Old Town";
+	/**
 	 * Name of the Animal
 	 * @var string $VALID_ANIMAL_NAME
 	 **/
 	protected $VALID_ANIMAL_NAME = "Spot";
+	/**
+	 * Updated name of the Animal
+	 * @var string $VALID_ANIMAL_NAME2
+	 **/
+	protected $VALID_ANIMAL_NAME2 = "Wayne";
 	/**
 	 * Species of the Animal
 	 * @var string $VALID_ANIMAL_SPECIES
 	 **/
 	protected $VALID_ANIMAL_SPECIES = "Cat";
 	/**
+	 * Updated species of the Animal
+	 * @var string $VALID_ANIMAL_SPECIES2
+	 **/
+	protected $VALID_ANIMAL_SPECIES2 = "Dog";
+	/**
 	 * Status of the Animal
 	 * @var string $VALID_ANIMAL_STATUS
 	 **/
 	protected $VALID_ANIMAL_STATUS = "Lost";
+	/**
+	 * Updated status of the Animal
+	 * @var string $VALID_ANIMAL_STATUS2
+	 **/
+	protected $VALID_ANIMAL_STATUS2 = "Reunited";
+
 
 
 
@@ -159,23 +195,31 @@ Class AnimalTest extends LostPawsTest{
 		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGE_URL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
 		$animal->insert($this->getPDO());
 		//edit the Animal and update it in mySQL
+		$animal->setAnimalColor($this->VALID_ANIMAL_COLOR2);
 		$animal->setAnimalDescription($this->VALID_ANIMAL_DESCRIPTION2);
+		$animal->setAnimalGender($this->VALID_ANIMAL_GENDER2);
+		$animal->setAnimalImageUrl($this->VALID_ANIMAL_IMAGE_URL2);
+		$animal->setAnimalLocation($this->VALID_ANIMAL_LOCATION2);
+		$animal->setAnimalName($this->VALID_ANIMAL_NAME2);
+		$animal->setAnimalSpecies($this->VALID_ANIMAL_SPECIES2);
+		$animal->setAnimalStatus($this->VALID_ANIMAL_STATUS2);
+		$animal->setAnimalDate($this->VALID_ANIMAL_DATE2);
 		$animal->update($this->getPDO());
 		//grab the data from mySQL and enforce the fields to match our expectations
 		$pdoAnimal = Animal::getAnimalByAnimalId($this->getPDO(),$animal->getAnimalId());
 		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertEquals($pdoAnimal->getAnimalProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoAnimal->getAnimalColor(),$this->VALID_ANIMAL_COLOR);
+		$this->assertEquals($pdoAnimal->getAnimalColor(),$this->VALID_ANIMAL_COLOR2);
 		$this->assertEquals($pdoAnimal->getAnimalDescription(), $this->VALID_ANIMAL_DESCRIPTION2);
-		$this->assertEquals($pdoAnimal->getAnimalGender(), $this->VALID_ANIMAL_GENDER);
-		$this->assertEquals($pdoAnimal->getAnimalImageUrl(), $this->VALID_ANIMAL_IMAGE_URL);
-		$this->assertEquals($pdoAnimal->getAnimalLocation(), $this->VALID_ANIMAL_LOCATION);
-		$this->assertEquals($pdoAnimal->getAnimalName(), $this->VALID_ANIMAL_NAME);
-		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES);
-		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS);
+		$this->assertEquals($pdoAnimal->getAnimalGender(), $this->VALID_ANIMAL_GENDER2);
+		$this->assertEquals($pdoAnimal->getAnimalImageUrl(), $this->VALID_ANIMAL_IMAGE_URL2);
+		$this->assertEquals($pdoAnimal->getAnimalLocation(), $this->VALID_ANIMAL_LOCATION2);
+		$this->assertEquals($pdoAnimal->getAnimalName(), $this->VALID_ANIMAL_NAME2);
+		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES2);
+		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS2);
 		//format the date to seconds since the beginning of time to avoid round off error.
-		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE->getTimestamp());
+		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE2->getTimestamp());
 	}
 	/**
 	 * Test creating an Animal and then removing it.
@@ -218,7 +262,7 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertCount(1, $results);
 		//enforce that no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\php\Animal", $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Animal", $results);
 		//grab the result from the array and validate it
 		$pdoAnimal = $results[0];
 		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
@@ -257,7 +301,7 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertCount(1, $results);
 		//enforce that no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\php\Animal", $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Animal", $results);
 		//grab the result from the array and validate it
 		$pdoAnimal = $results[0];
 		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
@@ -296,7 +340,7 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertCount(1, $results);
 		//enforce that no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\php\Animal", $results);
+		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Animal", $results);
 		//grab the result from the array and validate it.
 		$pdoAnimal = $results[0];
 		$this->assertEquals($pdoAnimal->getAnimalId(), $animalId);
