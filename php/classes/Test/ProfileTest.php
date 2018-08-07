@@ -78,9 +78,6 @@ class ProfileTest extends LostPawsTest {
 		$pdoProfile = Profile::getProfileByProfileId($pdo, $this->profile->getProfileId());
 		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
 
-		$tempProfileID = $this->profile->getProfileId();
-		$this->assertEquals(gettype($tempProfileID), "object", "The Profile ID must be of type UUID");
-		$this->assertEquals(gettype(pdoProfile->getProfileId()), "object", "The Profile ID must be of type UUID");
 		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
 		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
 		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());

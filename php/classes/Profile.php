@@ -115,7 +115,7 @@ class Profile implements \JsonSerializable {
 	public function setProfileId($newProfileId): void {
 		try {
 			// make sure that $newProfileId is a valid UUID
-		//	$newProfileId = self::validateUuid($newProfileId);
+			$newProfileId = self::validateUuid($newProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception  $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -374,7 +374,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public static function getProfileByProfileId(\PDO $pdo, string $profileId) : ?Profile {
+	public static function getProfileByProfileId(\PDO $pdo, $profileId) : ?Profile {
 		// sanitize the profile id before searching
 		try {
 			$profileId = self::validateUuid($profileId);
