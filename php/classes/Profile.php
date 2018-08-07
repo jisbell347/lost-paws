@@ -356,8 +356,8 @@ class Profile implements \JsonSerializable {
 		try {
 			$query = "DELETE FROM profile WHERE profileId = :profileId";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindParam(':profileId', $this->profileId->getBytes());
-			$stmt->execute();
+			$parameters = ["profileId" => $this->profileId->getBytes()];
+			$stmt->execute($parameters);
 		} catch (\PDOException | \Exception $exception) {
 			// re-throw exception if occured
 			$exceptionType = get_class($exception);

@@ -120,8 +120,8 @@ class ProfileTest extends LostPawsTest {
 		// grab the record from the database and check if each field matches the correspondent value
 		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $this->profile->getProfileId());
 		// make sure that pdoProfile object is not null
-
 		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+		// test all the fields
 		$this->assertEquals($numRows+1, $this->getConnection()->getRowCount("profile"));
 		$this->assertEquals($pdoProfile->getProfileId(),  $this->profile->getProfileId());
 		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
@@ -131,7 +131,29 @@ class ProfileTest extends LostPawsTest {
 		$this->assertEquals($pdoProfile->getProfilePhone(), Profile::normalizePhoneNumber($this->VALID_PHONE2)); // normalize the phone number
 	}
 
-
+	/**
+	 * teset inserting a valid Profile into the database and then deleting it
+	 **/
+	public function testDeleteValidProfile() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("profile");
+		// create a PDO connection object
+		$pdo = $this->getPDO();
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+		$newNumProws = $this->getConnection()->getRowCount("profile");
+		$this->assertEquals($numRows+1, $newNumProws, "Expected number of rows: " .strval($numRows+1) ." Actual number of rows: " .strval($newNumProws));
+		// save profile ID that is going to be deleted
+		$currProfileId = $this->profile->getProfileId();
+		// delete this profile
+		$this->profile->delete($pdo);
+		// check if the number of rows in the table decreased
+		$newNumProws = $this->getConnection()->getRowCount("profile");
+		$this->assertEquals($numRows, $newNumProws);
+		// check if this profile is still in the database
+		$pdoProfile = Profile::getProfileByProfileId($pdo, $currProfileId);
+		$this->assertNull($pdoProfile);
+	}
 
 
 
