@@ -73,17 +73,21 @@ class Animal implements \JsonSerializable {
 
 	/**
 	 * Animal constructor.
-	 * @param Uuid $newAnimalId
-	 * @param Uuid $newAnimalProfileId
-	 * @param string $newAnimalColor
-	 * @param \DateTime $newAnimalDate
-	 * @param string $animalDescription
-	 * @param string $newAnimalGender
-	 * @param string $newAnimalImageUrl
-	 * @param string $newAnimalLocation
-	 * @param string $newAnimalName
-	 * @param string $newAnimalSpecies
-	 * @param string $newAnimalStatus
+	 * @param string|Uuid $newAnimalId id of this animal or null if a new animal
+	 * @param string|Uuid $newAnimalProfileId id of the proflie that created the animal entry
+	 * @param string $newAnimalColor string containing color name
+	 * @param \DateTime|string|null $newAnimalDate date and time the animal entry was created or null if set to current date and time
+	 * @param string $animalDescription string containing the animal description
+	 * @param string $newAnimalGender string containing animal gender (Male | Female)
+	 * @param string $newAnimalImageUrl string containing the url location of the animal picture
+	 * @param string $newAnimalLocation string containing the animal location
+	 * @param string $newAnimalName string containing the animal's name
+	 * @param string $newAnimalSpecies string containing the animal species (Cat | Dog)
+	 * @param string $newAnimalStatus string containing the animal status (Found | Lost | Reunited)
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
+	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 	public function __construct($newAnimalId, $newAnimalProfileId, string $newAnimalColor, $newAnimalDate, string $animalDescription, string $newAnimalGender, string $newAnimalImageUrl, string $newAnimalLocation, string $newAnimalName, string $newAnimalSpecies, string $newAnimalStatus) {
 		try {
