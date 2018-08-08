@@ -273,7 +273,14 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $animal->getAnimalDate()->getTimestamp());
 	}
 
-
+	/**
+	 * test grabbing an animal that does not exist by profileId
+	 */
+	public function testGetInvalidAnimalByAnimalProfileId() : void {
+		//grab profile id that exceeds the max allowable profile id length
+		$animal = Animal::getAnimalByAnimalProfileId($this->getPDO(), generateUuidV4());
+		$this->assertCount(0, $animal);
+	}
 
 	/**
 	 * test grabbing an animal by animal color
