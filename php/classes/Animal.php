@@ -683,9 +683,9 @@ class Animal implements \JsonSerializable {
 		return ($animals);
 	}
 	/**
-	 *get all animals
+	 * get all animals
 	 *
-	 *@param \PDO $pdo PDO connection object
+	 * @param \PDO $pdo PDO connection object
 	 * @return \SplFixedArray SplFixed Array of Animals found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \typeError when variables are not the correct data type
