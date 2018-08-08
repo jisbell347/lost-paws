@@ -477,7 +477,7 @@ class Animal implements \JsonSerializable {
 	 */
 	public function update(\PDO $pdo): void {
 		//create query template
-		$query = "UPDATE animal SET animalProfileID = :animalProfileId, animalColor = :animalColor, animalDate = :animalDate, animalDescription = :animalDescription, animalDescription = :animalGender, animalImageUrl = :animalImageUrl, animalLocation = :animalLocation, animalName = :animalName, animalSpecies = :animalSpecies, animalStatus = :animalStatus WHERE  animalId = :animalId";
+		$query = "UPDATE animal SET animalProfileID = :animalProfileId, animalColor = :animalColor, animalDate = :animalDate, animalDescription = :animalDescription, animalGender = :animalGender, animalImageUrl = :animalImageUrl, animalLocation = :animalLocation, animalName = :animalName, animalSpecies = :animalSpecies, animalStatus = :animalStatus WHERE  animalId = :animalId";
 		$statement = $pdo->prepare($query);
 
 
