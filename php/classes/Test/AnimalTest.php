@@ -181,7 +181,6 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test inserting an animal, editing, then updating it
-	 * TODO: do we need valid animal date 2? It is not in the tweet example.
 	 **/
 	public function testUpdateValidAnimal() : void {
 		// count the number of rows and save it for later
