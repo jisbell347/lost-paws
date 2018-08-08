@@ -187,4 +187,11 @@ class ProfileTest extends LostPawsTest {
 		$this->assertNull($pdoProfile);
 	}
 
+	/**
+	 * test grabing all existing Profile records from the database
+	 **/
+	public function testGetAllProfiles() : void {
+
+	}
+
 }
