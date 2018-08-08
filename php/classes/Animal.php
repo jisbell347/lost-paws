@@ -331,7 +331,7 @@ class Animal implements \JsonSerializable {
 	public function setAnimalLocation(string $newAnimalLocation): void {
 		// verify the animal location description is secure
 		$newAnimalLocation = trim($newAnimalLocation);
-		$newAnimalLocation = filter_var($newAnimalLocation, FILTER_SANITIZE_URL);
+		$newAnimalLocation = filter_var($newAnimalLocation, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newAnimalLocation) === true) {
 			throw(new \InvalidArgumentException("Animal location description is empty or insecure."));
 		}
