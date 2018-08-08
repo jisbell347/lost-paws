@@ -158,15 +158,6 @@ class Profile implements \JsonSerializable {
 	}
 
 	/**
-	 * helper function that validated the access token
-	 *
-	 * @return true if the access token is valid, false - otherwise
-	 **/
-	public static function validateAccessToken(string $token) : bool {
-		return (ctype_xdigit($token));
-	}
-
-	/**
 	 * mutator method for account activation token (we allow Access Token to be NULL
 	 *
 	 * @param string $newProfileAccessToken
@@ -183,7 +174,7 @@ class Profile implements \JsonSerializable {
 				throw(new \RangeException("Access token cannot be longer than 255-character long."));
 			}
 
-			if (!Profile::validateAccessToken($newProfileAccessToken)) {
+			if (ctype_xdigit($newProfileAccessToken)) {
 				$this->profileAccessToken = $newProfileAccessToken;
 			}
 		}
