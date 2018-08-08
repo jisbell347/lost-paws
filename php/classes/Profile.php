@@ -80,8 +80,8 @@ class Profile implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newProfileId, int $newProfileOAuthId, string $newProfileAccessToken,
-										 string $newProfileEmail, string $newProfileName, string $newProfilePhone) {
+	public function __construct($newProfileId, int $newProfileOAuthId, ?string $newProfileAccessToken,
+										 string $newProfileEmail, string $newProfileName, ?string $newProfilePhone) {
 		try {
 			$this->setProfileId($newProfileId);
 			$this->setProfileOAuthId($newProfileOAuthId);
@@ -139,8 +139,11 @@ class Profile implements \JsonSerializable {
 	 * @throws \RangeException if $newProfileOAuthId is not positive
 	 **/
 	public function setProfileOAuthId(int $newProfileOAuthId): void {
-		if ($newProfileOAuthId <= 0) {
+		if ($newProfileOAuthId < 0) {
 			throw (new \RangeException("OAuth ID must be a positive integer."));
+		}
+		if ($newProfileOAuthId > 255) {
+			throw (new \RangeException("OAuth ID coudl not be greater than 255."));
 		}
 		$this->profileOAuthId = $newProfileOAuthId;
 	}
@@ -153,38 +156,37 @@ class Profile implements \JsonSerializable {
 	public function getProfileAccessToken(): string {
 		return ($this->profileAccessToken);
 	}
-	public function validateAccessToken() : bool {
-
-		//preg_match("regex", "string")
-
-		//^/?([\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12})?$
-	}
-
 
 	/**
-	 * mutator method for account activation token
+	 * helper function that validated the access token
+	 *
+	 * @return true if the access token is valid, false - otherwise
+	 **/
+	public static function validateAccessToken(string $token) : bool {
+		return (ctype_xdigit($token));
+	}
+
+	/**
+	 * mutator method for account activation token (we allow Access Token to be NULL
 	 *
 	 * @param string $newProfileAccessToken
 	 * @throws \RangeException if the token is not exactly 32 characters
 	 */
 	public function setProfileAccessToken(?string $newProfileAccessToken): void {
-		if($newProfileAccessToken === null) {
-			$this->profileAccessToken = null;
-			return;
+		$this->profileAccessToken = null;
+		if ($newProfileAccessToken) {
+			$newProfileAccessToken = trim($newProfileAccessToken);
+			// remove all '-' if any
+			$newProfileAccessToken = str_replace(["-"], "", $newProfileAccessToken);
+
+			if(strlen($newProfileAccessToken) > 255) {
+				throw(new \RangeException("Access token cannot be longer than 255-character long."));
+			}
+
+			if (!Profile::validateAccessToken($newProfileAccessToken)) {
+				$this->profileAccessToken = $newProfileAccessToken;
+			}
 		}
-		$newProfileAccessToken = strtolower(trim($newProfileAccessToken));
-		// check if all characters are digits, if not - throw an exception
-		// validate the AccessToken here
-		/*
-		if(!ctype_xdigit($newProfileAccessToken)) {
-			throw(new \RangeException("Access token is not valid."));
-		}
-		*/
-		//make sure user access token is more than 255 characters
-		if(strlen($newProfileAccessToken) > 255) {
-			throw(new \RangeException("Access token cannot be longer than 255-character long."));
-		}
-		$this->profileAccessToken = $newProfileAccessToken;
 	}
 
 	/**
@@ -278,7 +280,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if $newProfileName is empty or contains digits and special characters
 	 * @throws \RangeException if $newProfileName is longer than 92-character long
 	 **/
-	public function setProfilePhone(string $newProfilePhone): void {
+	public function setProfilePhone(?string $newProfilePhone): void {
 		//if $profilePhone is null return it right away
 		if($newProfilePhone === null) {
 			$this->profilePhone = "";
@@ -430,7 +432,7 @@ class Profile implements \JsonSerializable {
 			$row = $statement->fetch(\PDO::FETCH_ASSOC);
 			if ($row) {
 				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
-					$row["profileEmail"], $row["userName"], $row["profilePhone"]);
+					$row["profileEmail"], $row["profileName"], $row["profilePhone"]);
 			}
 		} catch (\PDOException | \Exception $exception) {
 			// re-throw exception if occured

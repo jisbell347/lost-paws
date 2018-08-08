@@ -34,7 +34,7 @@ class ProfileTest extends LostPawsTest {
 	protected $VALID_PHONE2 = "+1-222-333-4455";
 
 
-	public final function setUp() : void {
+	public final function setUp(): void {
 		parent::setUp();
 
 		$oAuth = new OAuth(null, "google");
@@ -45,7 +45,7 @@ class ProfileTest extends LostPawsTest {
 		$this->profile = new Profile($this->VALID_PROFILE_ID, $this->VALID_OAUTH, $this->VALID_ACCESS_TOKEN, $this->VALID_EMAIL1, $this->VALID_NAME1, $this->VALID_PHONE1);
 	}
 
-	public function testValidProfileCreated() : void {
+	public function testValidProfileCreated(): void {
 		$this->assertNotNull($this->profile);
 		$this->assertEquals($this->profile->getProfileId(), $this->VALID_PROFILE_ID);
 		$this->assertEquals($this->profile->getProfileOAuthId(), $this->VALID_OAUTH);
@@ -55,10 +55,16 @@ class ProfileTest extends LostPawsTest {
 		$this->assertEquals($this->profile->getProfilePhone(), Profile::normalizePhoneNumber($this->VALID_PHONE1));
 	}
 
+	public function testSetProfileAccessToken(): void {
+		$newAccessToken = bin2hex(random_bytes(16));
+		$this->profile->setProfileAccessToken($newAccessToken);
+		$this->assertEquals($this->profile->getProfileAccessToken(), $newAccessToken);
+	}
+
 	/**
 	 * test inserting a valid Profile and verifying a new record appeared in the database
 	 **/
-	public function testInsertValidProfile() : void {
+	public function testInsertValidProfile(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("profile");
 
@@ -86,6 +92,42 @@ class ProfileTest extends LostPawsTest {
 	}
 
 	/**
+	 * test inserting a profile with a phone number not provided
+	 */
+	public function testInsertValidProfileWithoutPhone(): void {
+		//update a phone number to null in the existing object
+		$this->profile->setProfilePhone(null);
+		$this->assertNotNull($this->profile, "The profile object is supposed to be not null");
+		$this->assertEmpty($this->profile->getProfilePhone());
+
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("profile");
+
+		// create a PDO connection object
+		$pdo = $this->getPDO();
+		$this->assertNotNull($pdo, "The PDO connection object is supposed to be not null");
+
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+		$newNumProws = $this->getConnection()->getRowCount("profile");
+
+		// make sure that the intended record is inserted
+		$this->assertEquals($numRows+1, $newNumProws, "Expected number of rows: " .strval($numRows+1) ." Actual number of rows: " .strval($newNumProws));
+
+		// grab just inserted profile from the database and compare it to the original object
+		$pdoProfile = Profile::getProfileByProfileId($pdo, $this->profile->getProfileId());
+		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+
+		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
+		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());
+		$this->assertEquals($pdoProfile->getProfileEmail(), $this->profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
+		$this->assertEmpty($pdoProfile->getProfilePhone());
+	}
+
+
+	/**
 	 * test grabing a Profile (that doesn't exist) from the database using a valid but wrong Profile ID
 	 **/
 	public function testGetProfileByWrongProfileId() : void {
@@ -101,7 +143,7 @@ class ProfileTest extends LostPawsTest {
 	/**
 	 * test inserting a valid Profile, editing it, updating it and then verifying that the actual mySQL data matches
 	 **/
-	public function testUpdateValidProfile() : void {
+	public function testUpdateValidProfile(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("profile");
 		// create a PDO connection object
@@ -133,7 +175,7 @@ class ProfileTest extends LostPawsTest {
 	/**
 	 * teset inserting a valid Profile into the database and then deleting it
 	 **/
-	public function testDeleteValidProfile() : void {
+	public function testDeleteValidProfile(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("profile");
 		// create a PDO connection object
@@ -154,10 +196,36 @@ class ProfileTest extends LostPawsTest {
 		$this->assertNull($pdoProfile);
 	}
 
+//getProfileByProfileOAuthId(\PDO $dbc, string $profileOAuthId): ?Profile
+
+	/**
+	 * test grabing a Profile (that doesn't exist) from the database using a valid but wrong Profile ID
+	 **/
+	public function testGetProfileByProfileOAuthId() : void {
+		$currOAuthId = $this->profile->getProfileOAuthId();
+		$this->assertTrue(is_int($currOAuthId), "Profile OAuth ID:" .strval($currOAuthId));
+
+		// create a PDO connection object
+		$pdo = $this->getPDO();
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+
+		// try to grab a record using oAuth ID
+		$pdoProfile = Profile::getProfileByProfileOAuthId($pdo, $currOAuthId);
+		// verify that the profile object is not null and all fields are as expected
+		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $currOAuthId);
+		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());
+		$this->assertEquals($pdoProfile->getProfileEmail(), $this->profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
+		$this->assertEquals($pdoProfile->getProfilePhone(), $this->profile->getProfilePhone());
+	}
+
 	/**
 	 * test grabing a Profile from the database using a valid email address
 	 **/
-	public function testGetProfileByValidEmail() : void {
+	public function testGetProfileByValidEmail(): void {
 		// create a PDO connection object
 		$pdo = $this->getPDO();
 		// insert an instance of the Profile class into the database
@@ -176,7 +244,7 @@ class ProfileTest extends LostPawsTest {
 	/**
 	 * test grabing a Profile from the database using a wrong email address
 	 **/
-	public function testGetProfileByInvalidEmail() : void {
+	public function testGetProfileByInvalidEmail(): void {
 		// fake email address
 		$invalidEmail = "yesyes@nonono.com";
 		$pdo = $this->getPDO();
@@ -190,7 +258,7 @@ class ProfileTest extends LostPawsTest {
 	/**
 	 * test grabing all existing Profile records from the database
 	 **/
-	public function testGetAllProfiles() : void {
+	public function testGetAllProfiles(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("profile");
 		// create a PDO connection object
@@ -200,16 +268,13 @@ class ProfileTest extends LostPawsTest {
 		// check if the object was inserted
 		$this->assertEquals($numRows+1, $this->getConnection()->getRowCount("profile"));
 
-		/*
 		// create one more profile
 		$anotherOAuth = new OAuth(128, "facebook");
 		$anotherOAuth->insert($this->getPDO());
-		$anotherProfile = new Profile("62844d315ddc4e1598eb2a7b634d0f97",$anotherOAuth->getOAuthId(), bin2hex(random_bytes(16)), $this->VALID_EMAIL2, $this->VALID_NAME2, $this->VALID_PHONE2);
+		$anotherProfile = new Profile(generateUuidV4(),$anotherOAuth->getOAuthId(), bin2hex(random_bytes(16)), $this->VALID_EMAIL2, $this->VALID_NAME2, $this->VALID_PHONE2);
 		$anotherProfile->insert($pdo);
 		// check if the object was inserted
 		$this->assertEquals($numRows+2, $this->getConnection()->getRowCount("profile"));
-		*/
-
 
 		//grab all the records from the Profile table
 		$profiles = Profile::getAllProfiles($pdo);
