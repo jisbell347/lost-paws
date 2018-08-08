@@ -191,7 +191,32 @@ class ProfileTest extends LostPawsTest {
 	 * test grabing all existing Profile records from the database
 	 **/
 	public function testGetAllProfiles() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("profile");
+		// create a PDO connection object
+		$pdo = $this->getPDO();
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+		// check if the object was inserted
+		$this->assertEquals($numRows+1, $this->getConnection()->getRowCount("profile"));
 
+		/*
+		// create one more profile
+		$anotherOAuth = new OAuth(128, "facebook");
+		$anotherOAuth->insert($this->getPDO());
+		$anotherProfile = new Profile("62844d315ddc4e1598eb2a7b634d0f97",$anotherOAuth->getOAuthId(), bin2hex(random_bytes(16)), $this->VALID_EMAIL2, $this->VALID_NAME2, $this->VALID_PHONE2);
+		$anotherProfile->insert($pdo);
+		// check if the object was inserted
+		$this->assertEquals($numRows+2, $this->getConnection()->getRowCount("profile"));
+		*/
+
+
+		//grab all the records from the Profile table
+		$profiles = Profile::getAllProfiles($pdo);
+
+		for ($i = 0; $i < $profiles->getSize(); $i++) {
+			$this->assertInstanceOf("Jisbell347\\LostPaws\\Profile", $profiles[$i]);
+		}
 	}
 
 }

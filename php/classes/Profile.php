@@ -486,6 +486,38 @@ class Profile implements \JsonSerializable {
 	}
 
 	/**
+	 * gets all Profiles
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @return \SplFixedArray SplFixedArray of Profiles found or null if the table is empty
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \Exception -- all others except for \PDOException exception
+	 **/
+	public static function getAllProfiles(\PDO $dbc) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT * FROM profile";
+		$statement = $dbc->prepare($query);
+		$statement->execute();
+		// build an array of profiles
+		$num = $statement->rowCount();
+		$profiles = new \SplFixedArray($num);
+
+		try {
+			for ($i = 0; $i < $num; $i++) {
+				$row = $statement->fetch(\PDO::FETCH_ASSOC);
+				$profile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
+					$row["profileEmail"], $row["profileName"], $row["profilePhone"]);
+				$profiles[$i] = $profile;
+			}
+		} catch (\Exception $exception) {
+			// rethrow the exception
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		return $profiles;
+	}
+
+	/**
 	 * formats the state variables for JSON serialization
 	 *
 	 * @return array resulting state variables to serialize
