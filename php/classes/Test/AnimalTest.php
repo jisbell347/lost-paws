@@ -93,7 +93,7 @@ Class AnimalTest extends LostPawsTest{
 	 * Updated location of the Animal
 	 * @var string $VALID_ANIMAL_LOCATION2
 	 **/
-	protected $VALID_ANIMAL_LOCATION2 = "Old Town";
+	protected $VALID_ANIMAL_LOCATION2 = "Sawmill";
 	/**
 	 * Name of the Animal
 	 * @var string $VALID_ANIMAL_NAME
@@ -186,6 +186,7 @@ Class AnimalTest extends LostPawsTest{
 	}
 	/**
 	 * test inserting an animal, editing, then updating it
+	 * TODO: do we need valid animal date 2? It is not in the tweet example.
 	 **/
 	public function testUpdateValidAnimal() : void {
 		// count the number of rows and save it for later
@@ -203,7 +204,7 @@ Class AnimalTest extends LostPawsTest{
 		$animal->setAnimalName($this->VALID_ANIMAL_NAME2);
 		$animal->setAnimalSpecies($this->VALID_ANIMAL_SPECIES2);
 		$animal->setAnimalStatus($this->VALID_ANIMAL_STATUS2);
-		$animal->setAnimalDate($this->VALID_ANIMAL_DATE2);
+		//$animal->setAnimalDate($this->VALID_ANIMAL_DATE2);
 		$animal->update($this->getPDO());
 		//grab the data from mySQL and enforce the fields to match our expectations
 		$pdoAnimal = Animal::getAnimalByAnimalId($this->getPDO(),$animal->getAnimalId());
@@ -219,7 +220,7 @@ Class AnimalTest extends LostPawsTest{
 		$this->assertEquals($pdoAnimal->getAnimalSpecies(), $this->VALID_ANIMAL_SPECIES2);
 		$this->assertEquals($pdoAnimal->getAnimalStatus(), $this->VALID_ANIMAL_STATUS2);
 		//format the date to seconds since the beginning of time to avoid round off error.
-		$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE2->getTimestamp());
+		//$this->assertEquals($pdoAnimal->getAnimalDate()->getTimestamp(), $this->VALID_ANIMAL_DATE2->getTimestamp());
 	}
 	/**
 	 * Test creating an Animal and then removing it.
