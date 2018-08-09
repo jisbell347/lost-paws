@@ -13,7 +13,7 @@ require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
  * @version 1.0.0
  **/
 
-class OAuth {
+class OAuth implements \JsonSerializable {
 
 	/**
 	 * id for this OAuth; This is the primary key
@@ -261,6 +261,14 @@ class OAuth {
 			}
 		}
 		return($oAuths);
+	}
+
+	public function jsonSerialize() : array {
+		$fields = get_object_vars($this);
+
+		$fields["oAuthId"] = $this->oAuthId;
+		$fields["oAuthSource"] = $this->oAuthSource;
+		return($fields);
 	}
 
 }
