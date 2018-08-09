@@ -292,7 +292,7 @@ class CommentTest extends LostPawsTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
-		// create a new Comment and insert to into mySQL
+		// create a new Comment and insert it into mySQL
 		$commentId = generateUuidV4();
 		$comment = new Comment($commentId, $this->animal->getAnimalId(), $this->profile->getProfileId(), $this->VALID_COMMENTDATE, $this->VALID_COMMENTTEXT);
 		$comment->insert($this->getPDO());
