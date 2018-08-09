@@ -516,8 +516,7 @@ class Profile implements \JsonSerializable {
 	 * @return array resulting state variables to serialize
 	 **/
 	public function jsonSerialize() {
-		// this is secret data
-		unset($this->profileAccessToken);
+		// this profileAccessToken a secret
 		return [
 			'profileId' => strval($this->profileId),
 			'profileOAuthId' => strval($this->profileOAuthId),
