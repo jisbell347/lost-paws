@@ -258,8 +258,8 @@ class Profile implements \JsonSerializable {
 		// FILTER_SANITIZE_NUMBER_INT removes everything except digits, "+", and "-"
 		$phoneNum = filter_var($phoneNum, FILTER_SANITIZE_NUMBER_INT);
 		if(!empty($phoneNum)) {
-			// remove all "+" and "-" from the phone number
-			$phoneNum = str_replace(["+","-"], "", $phoneNum);
+			// remove all "-" from the phone number (but allow "+" at the beginning
+			$phoneNum = str_replace(["-"], "", $phoneNum);
 		}
 		return $phoneNum;
 	}
@@ -291,15 +291,15 @@ class Profile implements \JsonSerializable {
 	/**
 	 * inserts this Profile into mySQL
 	 *
-	 * @param \PDO $dbc PDO database connection object
+	 * @param \PDO $pdo PDO database connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function insert(\PDO $dbc): void {
+	public function insert(\PDO $pdo): void {
 		// create query template
 		$query = "INSERT INTO profile(profileId, profileOAuthId, profileAccessToken, profileEmail, profileName, profilePhone)
  									VALUES (:profileId, :profileOAuthId, :profileAccessToken, :profileEmail, :profileName, :profilePhone)";
-		$statement = $dbc->prepare($query);
+		$statement = $pdo->prepare($query);
 		$parameters = ["profileId" => $this->profileId->getBytes(),
 							"profileOAuthId" => $this->profileOAuthId,
 							"profileAccessToken" => $this->profileAccessToken,
@@ -312,18 +312,18 @@ class Profile implements \JsonSerializable {
 	/**
 	 * update this Profile from mySQL where profileId matches the search
 	 *
-	 * @param \PDO $dbc database connection object
+	 * @param \PDO $pdo database connection object
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function update(\PDO $dbc): void {
+	public function update(\PDO $pdo): void {
 		try {
 			$query = "UPDATE profile SET profileOAuthId = :profileOAuthId,
                                     profileAccessToken = :profileAccessToken,
                                     profileEmail = :profileEmail,
                                     profileName = :profileName,                              
                                     profilePhone = :profilePhone WHERE profileId = :profileId";
-			$stmt = $dbc->prepare($query);
+			$stmt = $pdo->prepare($query);
 			$parameters = ["profileId" => $this->profileId->getBytes(),
 				"profileOAuthId" => $this->profileOAuthId,
 				"profileAccessToken" => $this->profileAccessToken,
@@ -341,14 +341,14 @@ class Profile implements \JsonSerializable {
 	/**
 	 * delete this Profile from mySQL where profileId matches
 	 *
-	 * @param \PDO $dbc database connection object
+	 * @param \PDO $pdo database connection object
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function delete(\PDO $dbc): void {
+	public function delete(\PDO $pdo): void {
 		try {
 			$query = "DELETE FROM profile WHERE profileId = :profileId";
-			$stmt = $dbc->prepare($query);
+			$stmt = $pdo->prepare($query);
 			$parameters = ["profileId" => $this->profileId->getBytes()];
 			$stmt->execute($parameters);
 		} catch (\PDOException | \Exception $exception) {
@@ -361,13 +361,13 @@ class Profile implements \JsonSerializable {
 	/**
 	 * get this Profile by profileId
 	 *
-	 * @param \PDO $dbc database connection object
+	 * @param \PDO $pdo database connection object
 	 * @param string $currProfileId profile Id to search for
 	 * @return Profile object or null if profile is not found
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public static function getProfileByProfileId(\PDO $dbc, $profileId) : ?Profile {
+	public static function getProfileByProfileId(\PDO $pdo, $profileId) : ?Profile {
 		// sanitize the profile id before searching
 		try {
 			$profileId = self::validateUuid($profileId);
@@ -376,7 +376,7 @@ class Profile implements \JsonSerializable {
 		}
 		// create query template
 		$query = "SELECT * FROM profile WHERE profileId = :profileId";
-		$statement = $dbc->prepare($query);
+		$statement = $pdo->prepare($query);
 		// bind the profile id to the place holder in the template
 		$parameters = ["profileId" => $profileId->getBytes()];
 		$statement->execute($parameters);
@@ -400,16 +400,16 @@ class Profile implements \JsonSerializable {
 	/**
 	 * get this Profile by profileOAuthId
 	 *
-	 * @param \PDO $dbc database connection object
+	 * @param \PDO $pdo database connection object
 	 * @param string $currProfileOAuthId profile OAuth Id to search for
 	 * @return Profile object or null if profile is not found
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public static function getProfileByProfileOAuthId(\PDO $dbc, string $profileOAuthId): ?Profile {
+	public static function getProfileByProfileOAuthId(\PDO $pdo, string $profileOAuthId): ?Profile {
 		try {
 			$query = "SELECT * FROM profile WHERE profileOAuthId = :profileOAuthId";
-			$statement = $dbc->prepare($query);
+			$statement = $pdo->prepare($query);
 			// bind the profile id to the place holder in the template
 			$parameters = ["profileOAuthId" => $profileOAuthId];
 			$statement->execute($parameters);
@@ -437,14 +437,14 @@ class Profile implements \JsonSerializable {
 	/**
 	 * get this Profile by profile email address
 	 *
-	 * @param \PDO $dbc database connection object
+	 * @param \PDO $pdo database connection object
 	 * @param string $currProfileEmail profile email address to search for
 	 * @return Profile object or null if profile is not found
 	 * @throws \PDOException in case of mySQL related errors
 	 * @throws \InvalidArgumentException in case email address is empty or insecure
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function getProfileByProfileEmail(\PDO $dbc, string $currProfileEmail): ?Profile {
+	public function getProfileByProfileEmail(\PDO $pdo, string $currProfileEmail): ?Profile {
 		// verify that the email address is secure
 		$currProfileEmail = trim($currProfileEmail);
 		$currProfileEmail = filter_var($currProfileEmail, FILTER_VALIDATE_EMAIL);
@@ -453,7 +453,7 @@ class Profile implements \JsonSerializable {
 		}
 		try {
 			$query = "SELECT * FROM profile WHERE profileEmail = :profileEmail";
-			$statement = $dbc->prepare($query);
+			$statement = $pdo->prepare($query);
 			// bind the profile id to the place holder in the template
 			$parameters = ["profileEmail" => $currProfileEmail];
 			$statement->execute($parameters);
@@ -481,15 +481,15 @@ class Profile implements \JsonSerializable {
 	/**
 	 * gets all Profiles
 	 *
-	 * @param \PDO $dbc database connection object
+	 * @param \PDO $pdo database connection object
 	 * @return \SplFixedArray SplFixedArray of Profiles found or null if the table is empty
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public static function getAllProfiles(\PDO $dbc) : \SPLFixedArray {
+	public static function getAllProfiles(\PDO $pdo) : \SPLFixedArray {
 		// create query template
 		$query = "SELECT * FROM profile";
-		$statement = $dbc->prepare($query);
+		$statement = $pdo->prepare($query);
 		$statement->execute();
 		// build an array of profiles
 		$num = $statement->rowCount();
