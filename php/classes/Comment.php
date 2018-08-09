@@ -39,6 +39,19 @@ class Comment {
 	 **/
 	private $commentText;
 
+	/**
+	 * Comment constructor.
+	 * @param string|Uuid $newCommentId id of this comment or null if new comment
+	 * @param string|Uuid $newCommentAnimalId id of the animal that is receiving the comment
+	 * @param string|Uuid $newCommentProfileId id of the profile that made the comment
+	 * @param \DateTime|string|null $newCommentDate date and time the comment was made or null if set to current date and time
+	 * @param string $newCommentText string of the actual content of the comment
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
+	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
+	 **/
+
 
 	public function __construct($newCommentId, $newCommentAnimalId, $newCommentProfileId, $newCommentDate, string $newCommentText) {
 		try {
@@ -454,5 +467,22 @@ class Comment {
 			}
 		}
 		return ($comments);
+	}
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() : array {
+		$fields = get_object_vars($this);
+
+		$fields["commentId"] = $this->commentId->toString();
+		$fields["commentAnimalId"] = $this->commentAnimalId->toString();
+		$fields["commentProfileId"] = $this->commentProfileId->toString();
+
+		//format the date so that the front end can consume it
+		$fields["commentDate"] = round(floatval($this->commentDate->format("U.u")) * 1000);
+		return($fields);
 	}
 }

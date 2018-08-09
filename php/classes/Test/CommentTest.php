@@ -218,7 +218,7 @@ class CommentTest extends LostPawsTest {
 
 		// create a new Comment and insert it into mySQL
 		$commentId = generateUuidV4();
-		$comment = new Comment($commentId, $this->animal->getAnimalId(), $this->profile->getProfileId(), $this->VALID_COMMENTDATE, $this->VALID_COMMENTTEXT);
+		$comment = new Comment($commentId, $this->animal->getAnimalId(), $this->profile->getProfileId(), null, $this->VALID_COMMENTTEXT);
 		$comment->insert($this->getPDO());
 
 		// grab the data from mySQL and ensure the fields match our expectations
@@ -234,7 +234,7 @@ class CommentTest extends LostPawsTest {
 		$this->assertEquals($pdoComment->getCommentAnimalId(), $this->animal->getAnimalId());
 		$this->assertEquals($pdoComment->getCommentProfileId(), $this->profile->getProfileId());
 		// format the date to seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
+		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $comment->getCommentDate()->getTimestamp());
 		$this->assertEquals($pdoComment->getCommentText(), $this->VALID_COMMENTTEXT);
 
 	}
