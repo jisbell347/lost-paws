@@ -182,13 +182,14 @@ try{
 			$reply->message = "Animal post deleted OK";
 		} else {
 			throw(new InvalidArgumentException("Invalid HTTP method request."));
-		}
-
-
-
 	}
 
+	//update the $reply->status $reply->message
+	} catch(\Exception | \TypeError $exception) {
+		$reply->status = $exception->getCode();
+		$reply->message = $exception->getMessage();
+	}
 
-}
-
-//
+	//encode and return reply to the fnont end caller
+	header("Content-type: application/json");
+	echo json_encode($reply);
