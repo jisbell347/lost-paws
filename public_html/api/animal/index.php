@@ -160,6 +160,16 @@ try{
 			//update reply
 			$reply->message = "Animal posting created OK";
 
+		} else if ($method === "DELETE") {
+
+			//enforce that the end user has an XSRF token.
+			verifyXsrf();
+
+			//retrieve the Animal posting to be deleted.
+			$animal = Animal::getAnimalByAnimalId($pdo, $id);
+			if($animal === null) {
+				throw(new RuntimeException("Animal posting does not exist.", 404));
+			}
 		}
 
 
