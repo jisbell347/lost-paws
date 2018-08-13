@@ -4,6 +4,7 @@ require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "php/lib/jwt.php";
 require_once ("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Jisbell347\LostPaws\{
@@ -35,7 +36,7 @@ try {
 	$pdo = connectToEncryptedMySQL("");
 
 	//determine which HTTP method was used
-	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
 	$commentId = filter_input(INPUT_GET, "commentId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -43,7 +44,7 @@ try {
 	$commentProfileId = filter_input(INPUT_GET, "commentProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentText = filter_input(INPUT_GET, "commentText", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-	//make sure the comment id is valid for methods that require it
+	//make sure the comment id is valid for methods that require it (required field)
 	if(($method === "DELETE" || $method === "PUT") && empty($commentId) === true) {
 		throw(new InvalidArgumentException("comment id cannot be empty", 405));
 	}
@@ -53,7 +54,7 @@ try {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		//get a specific comment and update it
+		//get a specific comment and update reply
 		if(empty($commentId) === false) {
 
 			var_dump($commentId);
@@ -86,6 +87,14 @@ try {
 		}
 	} else if($method === "PUT" || $method ==="POST") {
 
+		//enforce the user has a XSRF token
+		verifyXsrf();
+
+		$requestContent = file_get_contents("php://input");
+		//Retrieves the JSON package that the front end has sent, and stores it in $requestContent. Here we are using file_get_contents ("php://input) to get the request from th efront end. File_get_contents() is a PHP function that reads a file into a string. THe argument for the function here is "php://input". This is a read only stream that allows raw data to be read from the front end request which is in this case a JSON package.
+		$requestObject = json_decode($requestContent);
+		//This line then decodes the json package and stores that result in $requestObject.
+
 		// enforce the user is signed in
 		if(empty($_SESSION["profile"]) === true) {
 			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
@@ -94,6 +103,12 @@ try {
 		// make sure the comment date is accurate (optional field)
 		if (empty($requestObject->commentDate) === true) {
 			$requestObject->commentDate = null;
+		} else {
+			// if the date exists, Angular's milliseconds since the beginning of time must be converted
+			$commentDate = DateTime::createFromFormat("U.u", $requestObject->commentDate / 1000);
+			if($commentDate === false) {
+				throw(new RuntimeException("Invalid comment date", 400));
+			}
 		}
 
 		//perform the actual put or post
@@ -106,6 +121,7 @@ try {
 			}
 
 			//enforce the end user has a JWT token
+			validateJwtHeader();
 
 
 			//enforce the user is signed in and only trying to edit their own comment
@@ -116,7 +132,7 @@ try {
 			//validate JWTHeader();
 
 			//update all attributes
-			//$comment->setCommentDate($requestObject->commentDate);
+			$comment->setCommentDate($requestObject->commentDate);
 			$comment->setCommentText($requestObject->commentText);
 			$comment->update($pdo);
 
@@ -149,6 +165,37 @@ try {
 
 		// retrieve the Comment to be deleted
 		$comment = Comment::getCommentByCommentId($pdo, $commentId);
+		if($comment === null) {
+			throw(new RuntimeException("Comment does not exist", 404));
+		}
+
+
+		//enforce the user is signed in and only trying to edit their own comment
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $comment->getCommentProfileId()->toString()) {
+			throw(new \InvalidArgumentException("You are not allowed to delete this comment", 403));
+		}
+
+		//enforce the end user has a JWT token
+		validateJwtHeader();
+
+		//delete the comment
+		$comment->delete($pdo);
+		//update reply
+		$reply->message = "Comment deleted OK";
+	} else {
+		throw(new InvalidArgumentException("Invalid HTTP method request", 418));
 	}
 
-}// this is the end!
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+}
+
+header("Content-type: application/json");
+if($reply->data === null) {
+	unset($reply->data);
+}
+
+
+//encode and return reply to front end caller
+echo json_encode($reply);
