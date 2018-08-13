@@ -250,7 +250,7 @@ Class AnimalTest extends LostPawsTest{
 		$numRows = $this->getConnection()->getRowCount("animal");
 		//create a new Animal and insert into mySQL
 		$animalId = generateUuidV4();
-		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGE_URL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
+		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, null, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGE_URL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
 		$animal->insert($this->getPDO());
 		//grab the data from mySQL and enforce the fields match expectations.
 		$results= Animal::getAnimalByAnimalProfileId($this->getPDO(), $animal->getAnimalProfileId());
@@ -371,7 +371,7 @@ Class AnimalTest extends LostPawsTest{
 		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGE_URL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
 		$animal->insert($this->getPDO());
 		// grab the data from mySQl and enforce that the fields match expectations.
-		$results = Animal::getAllAnimals($this->getPDO());
+		$results = Animal::getAllCurrentAnimals($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertCount(1, $results);
 		//enforce that no other objects are bleeding into the test
