@@ -445,7 +445,7 @@ class Animal implements \JsonSerializable {
 
 		// verify the animal status input will fit in the database
 		if(($newAnimalStatus) !== "Lost" && ($newAnimalStatus) !== "Found" && ($newAnimalStatus) !=="Reunited"){
-				throw(new \RangeException("Animal status is not Lost, Found, or Reunited."));
+				throw(new \InvalidArgumentException("Animal status is not Lost, Found, or Reunited."));
 		}
 
 		// store the animal status
