@@ -683,6 +683,51 @@ class Animal implements \JsonSerializable {
 		return ($animals);
 	}
 	/**
+	 * Get Animals By Species
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $animalSpecies to search for
+	 * @return \SplFixedArray of animals found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable is not the correct data type
+	 **/
+	public static function getAnimalByAnimalSpecies(\PDO $pdo, string $animalSpecies) : \SplFixedArray {
+		//sanitize the animal species description before searching
+		$animalSpecies = trim($animalSpecies);
+		$animalSpecies = filter_var($animalSpecies, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($animalSpecies) === true) {
+			throw(new \PDOException("animal species is invalid."));
+		}
+
+		//escape any mySQL wildcards
+		$animalSpecies = str_replace("_", "\\_", str_replace("%", "\\%", $animalSpecies));
+
+		//create query template
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalSpecies LIKE :animalSpecies";
+		$statement = $pdo->prepare($query);
+
+		//bind the animal species to the placeholder in template
+		$animalSpecies = "%$animalSpecies%";
+		$parameters = ["animalSpecies" => $animalSpecies];
+		$statement->execute($parameters);
+
+		//build an array of animals by species
+		$animals = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+				$animals[$animals->key()] = $animal;
+				$animals->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($animals);
+	}
+
+	/**
 	 * get all animals that are not reunited
 	 *
 	 * @param \PDO $pdo PDO connection object
