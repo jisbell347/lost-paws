@@ -127,7 +127,28 @@ try {
 
 
 			// enforce the user is signed in
+			if(empty($_SESSION["profile"]) === true) {
+				throw(new \ InvalidArgumentException("You must be logged in to post comments", 403));
+			}
+
+			//enforce the end user has a JWT token
+
+			validateJwtHeader();
+
+			//create a new comment and insert into the database
+			$comment = new Comment(generateUuidV4(), $requestObject->getAnimalId(), $_SESSION["profile"]->getProfileId(), null, $requestObject->commentText);
+			$comment->insert($pdo);
+
+			// update comment
+			$reply->message = "Comment created OK";
 		}
+	} else if($method === "DELETE") {
+
+		//enforce that the end user has a XSRF token.
+		verifyXsrf();
+
+		// retrieve the Comment to be deleted
+		$comment = Comment::getCommentByCommentId($pdo, $commentId);
 	}
 
 }// this is the end!
