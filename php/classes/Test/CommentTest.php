@@ -252,7 +252,7 @@ class CommentTest extends LostPawsTest {
 	/**
 	 * test grabbing a Comment by the comment Text
 	 **/
-	public function testGetValidCommentByCommentText() : void {
+	public function testGetValidCommentByCommentText(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
@@ -263,7 +263,7 @@ class CommentTest extends LostPawsTest {
 
 		// grab the data from mySQL and ensure the fields match our expectations
 		$results = Comment::getCommentByCommentText($this->getPDO(), $comment->getCommentText());
-		$this->assertEquals($numRows + 1, $this->getConnection()-> getRowCount("comment"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
 
 		// enforce no other objects are bleeding into the test
@@ -279,37 +279,9 @@ class CommentTest extends LostPawsTest {
 		$this->assertEquals($pdoComment->getCommentText(), $this->VALID_COMMENTTEXT);
 	}
 
-	public function testGetInvalidCommentByCommentText() : void {
+	public function testGetInvalidCommentByCommentText(): void {
 		//grab a comment by text that does not exist
 		$comment = Comment::getCommentByCommentText($this->getPDO(), "bork!");
 		$this->assertCount(0, $comment);
-	}
-
-	/**
-	 * test grabbing all Comments
-	 **/
-	public function testGetAllValidComments() : void {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("comment");
-
-		// create a new Comment and insert it into mySQL
-		$commentId = generateUuidV4();
-		$comment = new Comment($commentId, $this->animal->getAnimalId(), $this->profile->getProfileId(), $this->VALID_COMMENTDATE, $this->VALID_COMMENTTEXT);
-		$comment->insert($this->getPDO());
-
-		// grab the data from MySQL and enforce the fields match our expectations
-		$results = Comment::getAllComments($this->getPDO());
-		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("comment"));
-		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Comment", $results);
-
-		// grab the result from the array and validate it
-		$pdoComment = $results[0];
-		$this->assertEquals($pdoComment->getCommentId(), $commentId);
-		$this->assertEquals($pdoComment->getCommentAnimalId(), $this->animal->getAnimalId());
-		$this->assertEquals($pdoComment->getCommentProfileId(), $this->profile->getProfileId());
-		// format the date to seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
-		$this->assertEquals($pdoComment->getCommentText(), $this->VALID_COMMENTTEXT);
 	}
 }

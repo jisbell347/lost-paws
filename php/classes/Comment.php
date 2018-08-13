@@ -439,35 +439,6 @@ class Comment {
 		return ($comments);
 	}
 
-	/**
-	 * gets all Comments
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @return \SplFixedArray SplFixedArray of Comments found or null if not found
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
-	 **/
-	public static function getAllComments(\PDO $pdo): \SplFixedArray {
-		//create query template
-		$query = "SELECT commentId, commentAnimalId, commentProfileId, commentDate, commentText FROM comment";
-		$statement = $pdo->prepare($query);
-		$statement->execute();
-
-		//build an array of comments
-		$comments = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$comment = new Comment($row["commentId"], $row["commentAnimalId"], $row["commentProfileId"], $row["commentDate"], $row["commentText"]);
-				$comments[$comments->key()] = $comment;
-				$comments->next();
-			} catch(\Exception $exception) {
-				//if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return ($comments);
-	}
 
 	/**
 	 * formats the state variables for JSON serialization
