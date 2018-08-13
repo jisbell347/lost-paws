@@ -2,10 +2,9 @@
 
 require_once dirname(__DIR__,3 . "/vendor/autoload.php");
 require_once dirname(__DIR__, 3 . "php/classes/autoload.php");
-require_once ("/etc/apache2/capstone-mysql/encrypted-config.php");
 require_once dirname(__DIR__, 3 . "php/lib/xsrf.php");
 require_once  dirname(__DIR__, 3 ."php/lib/uuid.php");
-//TODO: in example api has jwt and etc/apache2/...
+require_once ("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Jisbell347\LostPaws\{
 	Profile,
@@ -160,29 +159,31 @@ try{
 			//update reply
 			$reply->message = "Animal posting created OK";
 
-		} else if ($method === "DELETE") {
+		}
 
-			//enforce that the end user has an XSRF token.
-			verifyXsrf();
+	} else if ($method === "DELETE") {
 
-			//retrieve the Animal posting to be deleted.
-			$animal = Animal::getAnimalByAnimalId($pdo, $id);
-			if($animal === null) {
-				throw(new RuntimeException("Animal posting does not exist.", 404));
-			}
+		//enforce that the end user has an XSRF token.
+		verifyXsrf();
 
-			//enforce the user is signed in and is only trying to edit their own animal post.
-			if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId() !== $animal->getAnimalProfileId()) {
-				throw(new \InvalidArgumentException("You are not allowed to delete this animal post.", 403));
-			}
+		//retrieve the Animal posting to be deleted.
+		$animal = Animal::getAnimalByAnimalId($pdo, $id);
+		if($animal === null) {
+			throw(new RuntimeException("Animal posting does not exist.", 404));
+		}
 
-			//delete the animal post
-			$animal->delete($pdo);
-			//update reply
-			$reply->message = "Animal post deleted OK";
-		} else {
-			throw(new InvalidArgumentException("Invalid HTTP method request."));
-	}
+		//enforce the user is signed in and is only trying to edit their own animal post.
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId() !== $animal->getAnimalProfileId()) {
+			throw(new \InvalidArgumentException("You are not allowed to delete this animal post.", 403));
+		}
+
+		//delete the animal post
+		$animal->delete($pdo);
+		//update reply
+		$reply->message = "Animal post deleted OK";
+	} else {
+		throw(new InvalidArgumentException("Invalid HTTP method request."));
+}
 
 	//update the $reply->status $reply->message
 	} catch(\Exception | \TypeError $exception) {
