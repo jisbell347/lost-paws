@@ -482,7 +482,7 @@ class Profile implements \JsonSerializable {
 	 * @return array resulting state variables to serialize
 	 **/
 	public function jsonSerialize() {
-		// this profileAccessToken a secret
+		// keep this profileAccessToken secret
 		return [
 			'profileId' => strval($this->profileId),
 			'profileOAuthId' => strval($this->profileOAuthId),
