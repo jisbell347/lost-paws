@@ -170,7 +170,20 @@ try{
 			if($animal === null) {
 				throw(new RuntimeException("Animal posting does not exist.", 404));
 			}
+
+			//enforce the user is signed in and is only trying to edit their own animal post.
+			if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId() !== $animal->getAnimalProfileId()) {
+				throw(new \InvalidArgumentException("You are not allowed to delete this animal post.", 403));
+			}
+
+			//delete the animal post
+			$animal->delete($pdo);
+			//update reply
+			$reply->message = "Animal post deleted OK";
+		} else {
+			throw(new InvalidArgumentException("Invalid HTTP method request."));
 		}
+
 
 
 	}
