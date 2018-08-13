@@ -453,7 +453,7 @@ class Animal implements \JsonSerializable {
 	}
 
 	/**
-	 * inserts lest pet into mySQL
+	 * inserts lost pet into mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws\PDOException when mySQL related errors occur
