@@ -443,9 +443,9 @@ class Animal implements \JsonSerializable {
 			throw(new \InvalidArgumentException("Animal status is empty or insecure."));
 		}
 
-		// verify the animal species input will fit in the database
-		if(strlen($newAnimalStatus) > 8) {
-			throw(new \RangeException("Animal status text is too long. Limit 8 characters."));
+		// verify the animal status input will fit in the database
+		if(($newAnimalStatus) !== "Lost" && ($newAnimalStatus) !== "Found" && ($newAnimalStatus) !=="Reunited"){
+				throw(new \RangeException("Animal status is not Lost, Found, or Reunited."));
 		}
 
 		// store the animal status
@@ -683,16 +683,16 @@ class Animal implements \JsonSerializable {
 		return ($animals);
 	}
 	/**
-	 * get all animals
+	 * get all animals that are not reunited
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @return \SplFixedArray SplFixed Array of Animals found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \typeError when variables are not the correct data type
 	 */
-	public static function getAllAnimals(\PDO $pdo) : \SplFixedArray {
+	public static function getAllCurrentAnimals(\PDO $pdo) : \SplFixedArray {
 		//create query template
-		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal";
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalStatus != 'reunited'";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -711,7 +711,6 @@ class Animal implements \JsonSerializable {
 		}
 		return ($animals);
 	}
-
 
 	/**
 	 * formats the state variables for JSON serialization
