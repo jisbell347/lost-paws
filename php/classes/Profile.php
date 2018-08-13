@@ -30,7 +30,7 @@ class Profile implements \JsonSerializable {
 
 	/**
 	 * id for this Profile; this is the primary key
-	 * @var Uuid $profileId
+	 * @var Uuid/string $profileId
 	 **/
 	private $profileId;
 
@@ -42,8 +42,7 @@ class Profile implements \JsonSerializable {
 
 	/**
 	 * access token for this profile
-	 * TODO: find out about access token
-	 * @var $profileAccessToken
+	 * @var ?string $profileAccessToken
 	 **/
 	private $profileAccessToken;
 
@@ -61,16 +60,15 @@ class Profile implements \JsonSerializable {
 
 	/**
 	 * phone number for this profile
-	 * @var string $profilePhone
+	 * @var ?string $profilePhone
 	 **/
 	private $profilePhone;
 
 	/**
-	 * constructor for this Profile
-	 *
-	 * @param Uuid|string $newProfileId id of this Profile or null if a new Profile
+	 * Profile constructor.
+	 * @param string|Uuid $newProfileId id of this Profile or null if a new Profile
 	 * @param int $newProfileOAuthId OAuth id for this Profile
-	 * @param string $newProfileAccessToken access token to safe guard against malicious accounts
+	 * @param ?string $newProfileAccessToken access token to safe guard against malicious accounts (could be null)
 	 * @param string $newProfileEmail string containing email for this Profile
 	 * @param string $newProfileName string containing a full name for this Profile
 	 * @param string $newProfilePhone string containing phone number for this Profile
@@ -153,7 +151,7 @@ class Profile implements \JsonSerializable {
 	 *
 	 * @return string $profileAccessToken value for this Profile as string
 	 **/
-	public function getProfileAccessToken(): string {
+	public function getProfileAccessToken(): ?string {
 		return ($this->profileAccessToken);
 	}
 
