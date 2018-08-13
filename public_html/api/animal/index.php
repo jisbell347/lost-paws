@@ -97,7 +97,7 @@ try{
 			throw(new \InvalidArgumentException("No gender input for the animal.", 405));
 		}
 		//make sure the animal species is available (required field)
-		if(empty($requestObject->animalSpecies === true) {
+		if(empty($requestObject->animalSpecies) === true) {
 			throw(new \InvalidArgumentException("No species entered for the animal.", 405));
 		}
 		//make sure the animal status is available (required field)
@@ -109,7 +109,7 @@ try{
 		if(empty($requestObject->animalDate) === true) {
 			$requestObject->animalDate = null;
 		} else {
-			// if the date exists, Angular's milliseconds since the begining of time must be converted
+			// if the date exists, Angular's milliseconds since the beginning of time must be converted
 			$animalDate = DateTime::createFromFormat("U.u", $requestObject->animalDate / 1000);
 			if($animalDate === false) {
 				throw(new RuntimeException("invalid animal date", 400));
