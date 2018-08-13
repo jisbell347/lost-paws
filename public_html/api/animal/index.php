@@ -59,7 +59,7 @@ try{
 		//get a specific animal or all animals  and update reply
 		if(empty($id) === false) {
 			$reply->data = Animal::getAnimalByAnimalId($pdo, $id);
-		}else if (empty($animalProfileId) === false) {
+		} else if(empty($animalProfileId) === false) {
 			$reply->data = Animal::getAnimalByAnimalProfileId($pdo, $animalProfileId)->toArray();
 		} else if(empty($animalColor) === false) {
 			$reply->data = Animal::getAnimalByAnimalColor($pdo,$animalColor)->toArray();
@@ -74,7 +74,51 @@ try{
 		} else {
 			$reply->data = Animal:: getAllCurrentAnimals($pdo)->toArray();
 		}
-	} else if($method === "PUT" || $method === "POST")
+	} else if($method === "PUT" || $method === "POST") {
+
+		// enforce that the user hs an XSRF token
+		verifyXsrf();
+
+		$requestContent = file_get_contents("php://input");
+		//Retrieves the JSON package that the front end has sent, and stores it in $requestContent. Here we are using file_get_contents ("php://input) to get the request from th efront end. File_get_contents() is a PHP function that reads a file into a string. THe argument for the function here is "php://input". This is a read only stream that allows raw data to be read from the front end request which is in this case a JSON package.
+		$requestObject = json_decode($requestContent);
+		//This line then decodes the json package and stores that result in $requestObject.
+
+		//make sure the animal color is available (required field)
+		if(empty($requestObject->animalColor) === true) {
+			throw(new \InvalidArgumentException("No color input for the animal.", 405));
+		}
+		//make sure the animal description is available (required field)
+		if(empty($requestObject->animalDescription) === true) {
+			throw(new \InvalidArgumentException("No description for the animal.", 405));
+		}
+		//make sure the animal gender is available (required field)
+		if(empty($requestObject->animalGender) === true) {
+			throw(new \InvalidArgumentException("No gender input for the animal.", 405));
+		}
+		//make sure the animal species is available (required field)
+		if(empty($requestObject->animalSpecies === true) {
+			throw(new \InvalidArgumentException("No species entered for the animal.", 405));
+		}
+		//make sure the animal status is available (required field)
+		if(empty($requestObject->animalStatus) === true) {
+			throw(new \InvalidArgumentException("No status input for the animal.", 405));
+		}
+
+		//make sure the animal date is accurate (optional field)
+		if(empty($requestObject->animalDate) === true) {
+			$requestObject->animalDate = null;
+		} else {
+			// if the date exists, Angular's milliseconds since the begining of time must be converted
+			$animalDate = DateTime::createFromFormat("U.u", $requestObject->animalDate / 1000);
+			if($animalDate === false) {
+				throw(new RuntimeException("invalid animal date", 400));
+			}
+			$requestObject->animalDate = $animalDate;
+		}
+
+
+	}
 
 
 }
