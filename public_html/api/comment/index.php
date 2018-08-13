@@ -88,9 +88,46 @@ try {
 
 		// enforce the user is signed in
 		if(empty($_SESSION["profile"]) === true) {
-			throw(new \InvalidArgumentException("you must be logged in to post comments", 401));
+			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
 		}
 
 		// make sure the comment date is accurate (optional field)
+		if (empty($requestObject->commentDate) === true) {
+			$requestObject->commentDate = null;
+		}
+
+		//perform the actual put or post
+		if($method === "PUT") {
+
+			// retrieve the comment to update
+			$comment = Comment::getCommentByCommentId($pdo, $commentId);
+			if($comment === null) {
+				throw(new RuntimeException("Comment does not exist", 404));
+			}
+
+			//enforce the end user has a JWT token
+
+
+			//enforce the user is signed in and only trying to edit their own comment
+			if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $comment->getCommentProfileId()->toString()) {
+				throw(new \InvalidArgumentException("You are not allowed to edit this comment", 403));
+			}
+
+			//validate JWTHeader();
+
+			//update all attributes
+			//$comment->setCommentDate($requestObject->commentDate);
+			$comment->setCommentText($requestObject->commentText);
+			$comment->update($pdo);
+
+			// update reply
+			$reply->message = "Comment update OK";
+
+		} else if($method === "POST") {
+
+
+			// enforce the user is signed in
+		}
 	}
-}
+
+}// this is the end!
