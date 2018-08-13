@@ -683,6 +683,50 @@ class Animal implements \JsonSerializable {
 		return ($animals);
 	}
 	/**
+	 * Get Animals By Gender
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $animalGender to search for
+	 * @return \SplFixedArray of animals found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable is not the correct data type
+	 **/
+	public static function getAnimalByAnimalGender(\PDO $pdo, string $animalGender) : \SplFixedArray {
+		//sanitize the animal gender description before searching
+		$animalGender = trim($animalGender);
+		$animalGender = filter_var($animalGender, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($animalGender) === true) {
+			throw(new \PDOException("animal gender is invalid."));
+		}
+
+		//escape any mySQL wildcards
+		$animalGender = str_replace("_", "\\_", str_replace("%", "\\%", $animalGender));
+
+		//create query template
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalGender LIKE :animalGender";
+		$statement = $pdo->prepare($query);
+
+		//bind the animal gender to the placeholder in template
+		$animalGender = "%$animalGender%";
+		$parameters = ["animalGender" => $animalGender];
+		$statement->execute($parameters);
+
+		//build an array of animals by gender
+		$animals = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+				$animals[$animals->key()] = $animal;
+				$animals->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($animals);
+	}
+	/**
 	 * Get Animals By Species
 	 *
 	 * @param \PDO $pdo PDO connection object
@@ -712,6 +756,50 @@ class Animal implements \JsonSerializable {
 		$statement->execute($parameters);
 
 		//build an array of animals by species
+		$animals = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$animal = new Animal ($row["animalId"], $row["animalProfileId"], $row["animalColor"], $row["animalDate"], $row["animalDescription"], $row["animalGender"], $row["animalImageUrl"], $row["animalLocation"], $row["animalName"], $row["animalSpecies"], $row["animalStatus"]);
+				$animals[$animals->key()] = $animal;
+				$animals->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($animals);
+	}
+	/**
+	 * Get Animals By Status
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $animalStatus to search for
+	 * @return \SplFixedArray of animals found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable is not the correct data type
+	 **/
+	public static function getAnimalByAnimalStatus(\PDO $pdo, string $animalStatus) : \SplFixedArray {
+		//sanitize the animal status description before searching
+		$animalStatus = trim($animalStatus);
+		$animalStatus = filter_var($animalStatus, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($animalStatus) === true) {
+			throw(new \PDOException("animal status is invalid."));
+		}
+
+		//escape any mySQL wildcards
+		$animalStatus = str_replace("_", "\\_", str_replace("%", "\\%", $animalStatus));
+
+		//create query template
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalStatus LIKE :animalStatus";
+		$statement = $pdo->prepare($query);
+
+		//bind the animal status to the placeholder in template
+		$animalStatus = "%$animalStatus%";
+		$parameters = ["animalStatus" => $animalStatus];
+		$statement->execute($parameters);
+
+		//build an array of animals by status
 		$animals = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
