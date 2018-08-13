@@ -51,6 +51,31 @@ try{
 		throw(new InvalidArgumentException("id cannot be empty", 405));
 	}
 
+	//handle GET request - if id is present, that animal is returned, otherwise all animals are returned.
+	if($method === "GET") {
+		//set XSFR cookie
+		setXsrfCookie();
+
+		//get a specific animal or all animals  and update reply
+		if(empty($id) === false) {
+			$reply->data = Animal::getAnimalByAnimalId($pdo, $id);
+		}else if (empty($animalProfileId) === false) {
+			$reply->data = Animal::getAnimalByAnimalProfileId($pdo, $animalProfileId)->toArray();
+		} else if(empty($animalColor) === false) {
+			$reply->data = Animal::getAnimalByAnimalColor($pdo,$animalColor)->toArray();
+		} else if(empty($animalDescription) === false) {
+			$reply->data = Animal::getAnimalByAnimalDescription($pdo, $animalDescription)->toArray();
+		} else if(empty($animalGender) === false) {
+			$reply->data = Animal::getAnimalByAnimalGender($pdo, $animalGender)->toArray();
+		} else if(empty($animalSpecies) === false) {
+			$reply->data = Animal::getAnimalByAnimalSpecies($pdo, $animalSpecies)->toArray();
+		} else if(empty($animalStatus) === false) {
+			$reply->data = Animal::getAnimalByAnimalStatus($pdo, $animalSpecies)->toArray();
+		} else {
+			$reply->data = Animal:: getAllCurrentAnimals($pdo)->toArray();
+		}
+	} else if($method === "PUT" || $method === "POST")
+
 
 }
 
