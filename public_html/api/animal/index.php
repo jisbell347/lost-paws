@@ -117,6 +117,37 @@ try{
 			$requestObject->animalDate = $animalDate;
 		}
 
+		//perform the actual put or post
+		if($method === "PUT") {
+
+			//retrieve the animal to update
+			$animal = Animal::getAnimalByAnimalId($pdo, $id);
+			if($animal === null) {
+				throw (new RuntimeException("Animal does not exist", 404));
+			}
+
+			//enforce the user is  signed in and only trying to edit their own animal post.
+			if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $animal->getAnimalId()->toString()) {
+				throw(new \InvalidArgumentException("You are not allow to edit this animal posting.", 403));
+			}
+
+			//update all attributes
+			$animal->setAnimalColor($requestObject->animalColor);
+			$animal->setAnimalDate($requestObject->animalDate);
+			$animal->setAnimalDescription($requestObject->animalDescription);
+			$animal->setAnimalGender($requestObject->animalGender);
+			$animal->setAnimalImageUrl($requestObject->animalImageUrl);
+			$animal->setAnimalLocation($requestObject->animalLocation);
+			$animal->setAnimalName($requestObject->animalName);
+			$animal->setAnimalSpecies($requestObject->animalSpecies);
+			$animal->setAnimalStatus($requestObject->animalStatus);
+			$animal->update($pdo);
+
+			//update reply
+			$reply->message = "Animal Posting updated OK";
+
+		}
+
 
 	}
 
