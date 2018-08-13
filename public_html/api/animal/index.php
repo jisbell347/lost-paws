@@ -144,7 +144,21 @@ try{
 			$animal->update($pdo);
 
 			//update reply
-			$reply->message = "Animal Posting updated OK";
+			$reply->message = "Animal posting updated OK";
+
+		} else if($method === "POST") {
+
+			// enforce that the user is signed in
+			if(empty($_SESSION[$profile]) === true) {
+				throw(new \InvalidArgumentException("You must be logged in to post an animal.", 403));
+			}
+
+			//create new animal and insert it into the database
+			$animal = new Animal(generateUuidV4(), $_SESSION["profile"]->getProfileId(), $requestObject->animalColor, null, $requestObject->animalDescription, $requestObject->animalGender, $requestObject->animalImageUrl, $requestObject->animalLocation, $requestObject->animalName, $requestObject->animalSpecies, $requestObject->animalStatus);
+			$animal->insert($pdo);
+
+			//update reply
+			$reply->message = "Animal posting created OK";
 
 		}
 
