@@ -5,6 +5,7 @@ require_once (dirname(__DIR__, 3) . "/php/classes/autoload.php");
 require_once (dirname(__DIR__, 3) . "/php/lib/xsrf.php");
 require_once  (dirname(__DIR__, 3) ."/php/lib/uuid.php");
 require_once ("/etc/apache2/capstone-mysql/encrypted-config.php");
+require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 
 use Jisbell347\LostPaws\{
 	Profile,
@@ -52,7 +53,7 @@ try{
 
 	//handle GET request - if id is present, that animal is returned, otherwise all animals are returned.
 	if($method === "GET") {
-		//set XSFR cookie
+		//set XSRF cookie
 		setXsrfCookie();
 
 		//get a specific animal or all animals  and update reply
@@ -130,6 +131,9 @@ try{
 				throw(new \InvalidArgumentException("You are not allow to edit this animal posting.", 403));
 			}
 
+			//enforce that the end user has a JWT token
+			validateJwtHeader();
+
 			//update all attributes
 			$animal->setAnimalColor($requestObject->animalColor);
 			$animal->setAnimalDate($requestObject->animalDate);
@@ -151,6 +155,9 @@ try{
 			if(empty($_SESSION[$profile]) === true) {
 				throw(new \InvalidArgumentException("You must be logged in to post an animal.", 403));
 			}
+
+			//enforce that the end user has a JWT token
+			validateJwtHeader();
 
 			//create new animal and insert it into the database
 			$animal = new Animal(generateUuidV4(), $_SESSION["profile"]->getProfileId(), $requestObject->animalColor, null, $requestObject->animalDescription, $requestObject->animalGender, $requestObject->animalImageUrl, $requestObject->animalLocation, $requestObject->animalName, $requestObject->animalSpecies, $requestObject->animalStatus);
@@ -176,6 +183,9 @@ try{
 		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId() !== $animal->getAnimalProfileId()) {
 			throw(new \InvalidArgumentException("You are not allowed to delete this animal post.", 403));
 		}
+
+		//enforce that the end user has a JWT token
+		validateJwtHeader();
 
 		//delete the animal post
 		$animal->delete($pdo);
