@@ -2,6 +2,8 @@
   "require": {
     "ramsey/uuid": "@stable",
     "google/recaptcha": "@stable",
+    "google/apiclient": "^2.0",
+    "league/oauth2-google": "@stable",
     "apigen/apigen": "dev-master",
     "phpdocumentor/reflection-docblock": "@stable",
     "phpunit/dbunit": "@stable",
