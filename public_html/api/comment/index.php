@@ -39,13 +39,13 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$commentId = filter_input(INPUT_GET, "commentId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentAnimalId = filter_input(INPUT_GET, "commentAnimalId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentProfileId = filter_input(INPUT_GET, "commentProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentText = filter_input(INPUT_GET, "commentText", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	//make sure the comment id is valid for methods that require it (required field)
-	if(($method === "DELETE" || $method === "PUT") && empty($commentId) === true) {
+	if(($method === "DELETE" || $method === "PUT") && empty($id) === true) {
 		throw(new InvalidArgumentException("comment id cannot be empty", 405));
 	}
 
@@ -55,10 +55,10 @@ try {
 		setXsrfCookie();
 
 		//get a specific comment and update reply
-		if(empty($commentId) === false) {
+		if(empty($id) === false) {
 
-			var_dump($commentId);
-			$comment = Comment::getCommentByCommentId($pdo, $commentId);
+			var_dump($id);
+			$comment = Comment::getCommentByCommentId($pdo, $id);
 			if($comment !== null) {
 				$reply->data = $comment;
 			}
@@ -91,7 +91,7 @@ try {
 		verifyXsrf();
 
 		$requestContent = file_get_contents("php://input");
-		//Retrieves the JSON package that the front end has sent, and stores it in $requestContent. Here we are using file_get_contents ("php://input) to get the request from th efront end. File_get_contents() is a PHP function that reads a file into a string. THe argument for the function here is "php://input". This is a read only stream that allows raw data to be read from the front end request which is in this case a JSON package.
+		//Retrieves the JSON package that the front end has sent, and stores it in $requestContent. Here we are using file_get_contents ("php://input) to get the request from the front end. File_get_contents() is a PHP function that reads a file into a string. THe argument for the function here is "php://input". This is a read only stream that allows raw data to be read from the front end request which is in this case a JSON package.
 		$requestObject = json_decode($requestContent);
 		//This line then decodes the json package and stores that result in $requestObject.
 
@@ -115,7 +115,7 @@ try {
 		if($method === "PUT") {
 
 			// retrieve the comment to update
-			$comment = Comment::getCommentByCommentId($pdo, $commentId);
+			$comment = Comment::getCommentByCommentId($pdo, $id);
 			if($comment === null) {
 				throw(new RuntimeException("Comment does not exist", 404));
 			}
@@ -129,7 +129,6 @@ try {
 				throw(new \InvalidArgumentException("You are not allowed to edit this comment", 403));
 			}
 
-			//validate JWTHeader();
 
 			//update all attributes
 			$comment->setCommentDate($requestObject->commentDate);
@@ -164,7 +163,7 @@ try {
 		verifyXsrf();
 
 		// retrieve the Comment to be deleted
-		$comment = Comment::getCommentByCommentId($pdo, $commentId);
+		$comment = Comment::getCommentByCommentId($pdo, $id);
 		if($comment === null) {
 			throw(new RuntimeException("Comment does not exist", 404));
 		}
