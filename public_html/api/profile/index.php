@@ -36,22 +36,15 @@ try{
 //determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 	$method = strtoupper($method);
+	$inputType = ($method === "POST") ? INPUT_POST : INPUT_GET;
 
-	// sanitize input (one of these inputs shouldn't be empty
-	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profileOAuthId = filter_input(INPUT_GET, "profileOAuthId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profileName = filter_input(INPUT_GET, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profilePhone = filter_input(INPUT_GET, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	// sanitize inputs
+	$profileEmail = filter_input($inputType, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profileName = filter_input($inputType, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profilePhone = filter_input($inputType, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
+	// we are getting profileId, profileOAuthId, and profileAccessToken internally (not from the web browser)
 
-
-
-
-
-
-//	"New user email: " . filter_input(INPUT_POST,
-//		"email", FILTER_VALIDATE_EMAIL);
 
 	// if updating or deleting the Profile record, id field cannot be empty
 	if(($method === "PUT" || $method === "DELETE") && empty($id)) {
@@ -81,11 +74,55 @@ try{
 				}
 			}
 			break;
+		case "PUT":
 		case "POST":
-			$profileEmail = filter_input(INPUT_POST, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$profileName = filter_input(INPUT_POST, "profileName", FILTER_SANITIZE_EMAIL, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$profilePhone = filter_input(INPUT_POST, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			// make sure that the user is logged in
+			// verify that a XSRF-TOKEN is present
+			verifyXsrf();
+			// make sure that the user is logged in before updating his/her profile
+			if(empty($_SESSION["profile"])) {
+				throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+			}
+			// validate header
+			validateJwtHeader();
+
+			// use PHP’s stream handling to get request content and then decode JSON object
+			$requestContent = file_get_contents("php://input");
+			$requestObject = json_decode($requestContent);
+
+			// get profile ID from JSON object
+			$currId = $requestObject["profileId"];
+
+		//make sure tweet content is available (required field)
+		if(empty($requestObject->tweetContent) === true) {
+			throw(new \InvalidArgumentException ("No content for Tweet.", 405));
+		}
+
+		// make sure tweet date is accurate (optional field)
+		if(empty($requestObject->tweetDate) === true) {
+			$requestObject->tweetDate = null;
+		} else {
+			// if the date exists, Angular's milliseconds since the beginning of time MUST be converted
+			$tweetDate = DateTime::createFromFormat("U.u", $requestObject->tweetDate / 1000);
+			if($tweetDate === false) {
+				throw(new RuntimeException("invalid tweet date", 400));
+			}
+			$requestObject->tweetDate = $tweetDate;
+		}
+
+		//  make sure profileId is available
+		if(empty($requestObject->tweetProfileId) === true) {
+			throw(new \InvalidArgumentException ("No Profile ID.", 405));
+		}
+
+
+
+
+
+
+
+
+
+		// make sure that the user is logged in
 			if(empty($_SESSION["profile"])) {
 				throw(new \InvalidArgumentException("You must be logged in to modify your profile.", 403));
 			}
@@ -163,18 +200,6 @@ try{
 			$profile->setProfilePhone($requestObject->profilePhone);
 			$profile->update($pdo);
 
-
-
-
-
-
-
-
-
-
-
-
-
 			break;
 		case "DELETE":
 
@@ -184,29 +209,6 @@ try{
 } catch() {
 
 }
-
-
-
-
-
-
-// use PHP’s stream handling to create the complete request to send
-$url = 'http://localhost/book/get-form-page.php';
-$data = ["category" => "technology", "rows" => 20];
-
-$get_addr = $url . '?' . http_build_query($data);
-$page = file_get_contents($get_addr);
-echo $page;
-
-
-	$url = 'http://localhost/book/post-form-page.php';
-	$data = ["email" => "lorna@example.com", "display_name" => "LornaJane"];
-	$options = ["http" =>
-		["method"  => "POST",
-			"header"  => "Content-Type: application/x-www-form-urlencoded",
-			"content" => http_build_query($data)
-		]
-	];
 
 
 
