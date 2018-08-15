@@ -89,52 +89,13 @@ try{
 			$requestContent = file_get_contents("php://input");
 			$requestObject = json_decode($requestContent);
 
-			// get profile ID from JSON object
-			$currId = $requestObject["profileId"];
-
-		//make sure tweet content is available (required field)
-		if(empty($requestObject->tweetContent) === true) {
-			throw(new \InvalidArgumentException ("No content for Tweet.", 405));
-		}
-
-		// make sure tweet date is accurate (optional field)
-		if(empty($requestObject->tweetDate) === true) {
-			$requestObject->tweetDate = null;
-		} else {
-			// if the date exists, Angular's milliseconds since the beginning of time MUST be converted
-			$tweetDate = DateTime::createFromFormat("U.u", $requestObject->tweetDate / 1000);
-			if($tweetDate === false) {
-				throw(new RuntimeException("invalid tweet date", 400));
+			// make sure that decoded JSON contains a valid profiile
+			if(empty($requestContent["profileId"])) {
+				throw(new \InvalidArgumentException ("No profile was located.", 404));
 			}
-			$requestObject->tweetDate = $tweetDate;
-		}
 
-		//  make sure profileId is available
-		if(empty($requestObject->tweetProfileId) === true) {
-			throw(new \InvalidArgumentException ("No Profile ID.", 405));
-		}
-
-
-
-
-
-
-
-
-
-		// make sure that the user is logged in
-			if(empty($_SESSION["profile"])) {
-				throw(new \InvalidArgumentException("You must be logged in to modify your profile.", 403));
-			}
-			// the logged in user already has a valid profile record in our database (his profile is being updated)
-			// pull out the corresponding profile object from the database
-			$profile = Profile::getProfileByProfileId($pdo, $_SESSION["profile"]->getProfileId());
-			if(!$profile) {
-				throw(new RuntimeException("Profile does not exist.", 404));
-			}
 			// make sure that changes are being made before updating a profile
 			$changed = false;
-
 			// check what needs to be updated
 			if  (!emtpy($requestObject->profileEmail)) {
 				$profile->setProfileEmail($requestObject->profileEmail);
@@ -144,19 +105,22 @@ try{
 				$profile->setProfileName($requestObject->profileName);
 				$changed = true;
 			}
-			}
 			if (!emtpy($requestObject->profilePhone)) {
 				$profile->setProfilePhone($requestObject->profilePhone);
 				$changed = true;
 			}
 
 			if ($changed) {
-				$profile->update($pdo);
+				// construct a temp object on the fly
+				$tempProfile = new Profile($requestContent["profileId"], $requestObject["profileOAuthId"], $requestObject["profileAccessToken"],
+					$requestObject["profileEmail"], $requestObject["profileName"], $requestObject["profilePhone"]);
+				$tempProfile->update($pdo);
+				// update message
+				$reply->message = "Profile was updated OK.";
 			}
-
-
-			// update reply
-			$reply->message = "Tweet created OK";
+			else {
+				$reply->message = "No changes were made.";
+			}
 			break;
 		case "PUT":
 			// verify that a XSRF-TOKEN is present

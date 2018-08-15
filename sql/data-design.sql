@@ -16,7 +16,7 @@ CREATE TABLE oAuth (
 -- create the Profile entity
 CREATE TABLE profile (
 	profileId BINARY(16) NOT NULL,
-	profileOAuthId TINYINT UNSIGNED,
+	profileOAuthId TINYINT UNSIGNED NOT NULL,
 	profileAccessToken VARCHAR(255),
 	profileEmail VARCHAR(128) NOT NULL,
 	profileName VARCHAR(92) NOT NULL,
