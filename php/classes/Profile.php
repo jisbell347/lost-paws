@@ -452,7 +452,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \InvalidArgumentException in case email address is empty or insecure
 	 * @throws \Exception -- all others except for \PDOException exception
 	 **/
-	public function getProfileByProfileEmail(\PDO $pdo, string $currProfileEmail): ?Profile {
+	public static function getProfileByProfileEmail(\PDO $pdo, string $currProfileEmail): ?Profile {
 		// verify that the email address is secure
 		$currProfileEmail = trim($currProfileEmail);
 		$currProfileEmail = filter_var($currProfileEmail, FILTER_VALIDATE_EMAIL);
