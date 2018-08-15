@@ -165,16 +165,10 @@ class Profile implements \JsonSerializable {
 		$this->profileAccessToken = null;
 		if ($newProfileAccessToken) {
 			$newProfileAccessToken = trim($newProfileAccessToken);
-			// remove all '-' if any
-			$newProfileAccessToken = str_replace(["-"], "", $newProfileAccessToken);
-
 			if(strlen($newProfileAccessToken) > 255) {
 				throw(new \RangeException("Access token cannot be longer than 255-character long."));
 			}
-
-			if (ctype_xdigit($newProfileAccessToken)) {
-				$this->profileAccessToken = $newProfileAccessToken;
-			}
+			$this->profileAccessToken = $newProfileAccessToken;
 		}
 	}
 

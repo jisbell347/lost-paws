@@ -41,9 +41,20 @@ try{
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileOAuthId = filter_input(INPUT_GET, "profileOAuthId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profileName = filter_input(INPUT_GET, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profilePhone = filter_input(INPUT_GET, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+
+
+
+
+
+
+//	"New user email: " . filter_input(INPUT_POST,
+//		"email", FILTER_VALIDATE_EMAIL);
 
 	// if updating or deleting the Profile record, id field cannot be empty
-	if(($method === "DELETE" || $method === "PUT") && empty($id)) {
+	if(($method === "PUT" || $method === "DELETE") && empty($id)) {
 		throw(new InvalidArgumentException("ID is invalid.", 405));
 	}
 
@@ -70,9 +81,99 @@ try{
 				}
 			}
 			break;
+		case "POST":
+			$profileEmail = filter_input(INPUT_POST, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			$profileName = filter_input(INPUT_POST, "profileName", FILTER_SANITIZE_EMAIL, FILTER_FLAG_NO_ENCODE_QUOTES);
+			$profilePhone = filter_input(INPUT_POST, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			// make sure that the user is logged in
+			if(empty($_SESSION["profile"])) {
+				throw(new \InvalidArgumentException("You must be logged in to modify your profile.", 403));
+			}
+			// the logged in user already has a valid profile record in our database (his profile is being updated)
+			// pull out the corresponding profile object from the database
+			$profile = Profile::getProfileByProfileId($pdo, $_SESSION["profile"]->getProfileId());
+			if(!$profile) {
+				throw(new RuntimeException("Profile does not exist.", 404));
+			}
+			// make sure that changes are being made before updating a profile
+			$changed = false;
+
+			// check what needs to be updated
+			if  (!emtpy($requestObject->profileEmail)) {
+				$profile->setProfileEmail($requestObject->profileEmail);
+				$changed = true;
+			}
+			if (!emtpy($requestObject->profileName)) {
+				$profile->setProfileName($requestObject->profileName);
+				$changed = true;
+			}
+			}
+			if (!emtpy($requestObject->profilePhone)) {
+				$profile->setProfilePhone($requestObject->profilePhone);
+				$changed = true;
+			}
+
+			if ($changed) {
+				$profile->update($pdo);
+			}
+
+
+			// update reply
+			$reply->message = "Tweet created OK";
+			break;
 		case "PUT":
 			// verify that a XSRF-TOKEN is present
 			verifyXsrf();
+
+			// make sure that the user is logged in before undating his/her profile
+			if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $id) {
+				throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+			}
+			// validate header
+			validateJwtHeader();
+
+			// use PHP’s stream handling to get request content and then decode json object
+			$requestContent = file_get_contents("php://input");
+			$requestObject = json_decode($requestContent);
+
+			//retrieve the profile to be updated
+			$profile = Profile::getProfileByProfileId($pdo, $id);
+			if(!$profile) {
+				throw(new RuntimeException("Profile does not exist.", 404));
+			}
+
+			// check whether all necessary data are present
+			//profile OAuth ID
+			if(empty($requestObject->profileOAuthId)) {
+				throw(new \InvalidArgumentException ("No profile OAuth ID.", 405));
+			}
+
+			//profile email is a required field
+			if(empty($requestObject->profileEmail) === true) {
+				throw(new \InvalidArgumentException ("No profile email present", 405));
+			}
+
+			//profile phone # | if null use the profile phone that is in the database
+			if(empty($requestObject->profilePhone) === true) {
+				$requestObject->ProfilePhone = $profile->getProfilePhone();
+			}
+
+			$profile->setProfileAtHandle($requestObject->profileAtHandle);
+			$profile->setProfileEmail($requestObject->profileEmail);
+			$profile->setProfilePhone($requestObject->profilePhone);
+			$profile->update($pdo);
+
+
+
+
+
+
+
+
+
+
+
+
 
 			break;
 		case "DELETE":
@@ -80,12 +181,7 @@ try{
 			break;
 	}
 
-
-
-	if () {
-		// set up a XSRF-TOKEN to prevent CSRF
-		setXsrfCookie();
-	}
+} catch() {
 
 }
 
