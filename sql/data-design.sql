@@ -61,3 +61,6 @@ CREATE TABLE comment (
 	PRIMARY KEY(commentId)
 );
 
+
+INSERT INTO oAuth(oAuthId, oAuthSource) VALUES (1, "Google");
+INSERT INTO oAuth(oAuthId, oAuthSource) VALUES (2, "Facebook");
