@@ -21,7 +21,7 @@ use Ramsey\Uuid\Uuid;
  *
  * This entity depends on the OAuth entity
  *
- * @author Asya Nikitina <anikitina@cnm.edu>
+ * @author Asya Nikitina <a.f.nikitina@gmail.com>
  * @version 1.0.0
  **/
 
@@ -306,6 +306,16 @@ class Profile implements \JsonSerializable {
 							"profilePhone" => $this->profilePhone];
 		$statement->execute($parameters);
 	}
+
+
+	/**
+	 * updates a profile in mySQL
+	 *
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
+
 
 	/**
 	 * update this Profile from mySQL where profileId matches the search

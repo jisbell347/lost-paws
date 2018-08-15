@@ -13,7 +13,7 @@ use Ramsey\Uuid;
  *
  * @see OAuth
  * @see Profile
- * Asya Nikitina <anikitina@cnm.edu>
+ * Asya Nikitina <a.f.nikitina@gmail.com>
  * @version 1.0.0
  **/
 
