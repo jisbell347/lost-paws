@@ -56,10 +56,11 @@ if(!empty($_GET['error'])) {
 		$userName= $ownerDetails->getName();
 		$userEmail = $ownerDetails->getEmail();
 
+
 		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
 		if(($profile) === null) {
 			// create a new profile
-			$user = new Profile(generateUuidV4(), null, $token, $userEmail, $userName, "505-555-5555");
+			$user = new Profile(generateUuidV4(), 1, $token, $userEmail, $userName, "505-555-5555");
 			$user->insert($pdo);
 			$reply->message = "Welcome to Lost Paws!";
 		}else {
