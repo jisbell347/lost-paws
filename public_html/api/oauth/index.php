@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
+/*require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";*/
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Jisbell347\LostPaws\Profile;
@@ -13,6 +14,9 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
 }
 
+$reply = new \stdClass();
+$reply->status = 200;
+$reply->data = null;
 /**
  * Create the client object and set the authorization configuration
 **/
@@ -44,10 +48,28 @@ if(!empty($_GET['error'])) {
 	//Try to get an access token (using the authorization code grant)
 	$token = $provider->getAccessToken('authorization_code', ['code' => $_GET['code']
 	]);
-	//Optional: Now you have a token you can look up a users profile datat
+	//Optional: Now you have a token you can look up a users profile data
 	try {
 		//We go an access token, let's now get the owner details
 		$ownerDetails = $provider->getResourceOwner($token);
+		$userId = $ownerDetails->getId();
+		$userName= $ownerDetails->getName();
+		$userEmail = $ownerDetails->getEmail();
+
+		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
+		if(($profile) === null) {
+			// create a new profile
+			$user = new Profile(generateUuidV4(), null, $token, $userEmail, $userName, "505-555-5555");
+			$user->insert($pdo);
+			$reply->message = "Welcome to Lost Paws!";
+		}else {
+			$reply->message ="Welcome back to Lost Paws!";
+		}
+		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
+		$_SESSION["profile"] = $profile;
+
+		header("Location: ../..");
+
 	} catch(Exception $e) {
 		//Failed to get the user details
 		exit('Something went wrong: ' . $e->getMessage());
@@ -61,5 +83,8 @@ if(!empty($_GET['error'])) {
 	//Number of seconds until the access token will expire and need refreshing
 	echo $token->getExpires();
 }
+
+
+
 
 
