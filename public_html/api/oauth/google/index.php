@@ -7,6 +7,14 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Jisbell347\LostPaws\Profile;
 
+/**
+ * Google OAuth login API
+ *
+ * credit to thephpleague for the code which this api was based around.
+ * https://github.com/thephpleague/oauth2-google
+ *
+ * @author Joe Isbell <jisbell1@cnm.edu>
+ **/
 
 
 //Verify the session, start if not active
@@ -50,17 +58,19 @@ if(!empty($_GET['error'])) {
 	]);
 	//Optional: Now you have a token you can look up a users profile data
 	try {
-		//We go an access token, let's now get the owner details
+		//We got an access token, let's now get the owner details
 		$ownerDetails = $provider->getResourceOwner($token);
-		$userId = $ownerDetails->getId();
 		$userName= $ownerDetails->getName();
 		$userEmail = $ownerDetails->getEmail();
 
-
+		/**
+		 * Verifies if the profile exists by checking the email.
+		 * If the profile doesn't exist, creates a new profile an inserts into the database.
+		 */
 		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
 		if(($profile) === null) {
 			// create a new profile
-			$user = new Profile(generateUuidV4(), 1, $token, $userEmail, $userName, "505-555-5555");
+			$user = new Profile(generateUuidV4(), 1, null, $userEmail, $userName, "");
 			$user->insert($pdo);
 			$reply->message = "Welcome to Lost Paws!";
 		}else {
