@@ -8,7 +8,6 @@ require_once ("/etc/apache2/capstone-mysql/encrypted-config.php");
 require_once (dirname(__DIR__, 3) . "/php/lib/jwt.php");
 
 use Jisbell347\LostPaws\{OAuth, Profile};
-use Ramsey\Uuid;
 
 /**
  * api for the Profile Class
@@ -127,7 +126,7 @@ try{
 			}
 			break;
 		default:
-			throw new \Exception("Method Not Supported.", 405);
+			throw (new \Exception("Method Not Supported.", 405));
 	}
 
 } catch(\Exception | \TypeError $exception) {
