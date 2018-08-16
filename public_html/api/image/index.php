@@ -9,6 +9,16 @@ require_once (dirname(__DIR__, 3) . "/php/lib/jwt.php");
 
 use Jisbell347\LostPaws\{OAuth, Profile, Animal};
 
+/**
+ * the user upload an image file to Cloudinary, the server grabs the secure image URL from Cloudinary
+ * and updates the animalImageUrl field of a specified animal
+ * @see OAuth
+ * @see Profile
+ * @see Animal
+ * @author Asya Nikitina <a.f.nikitina@gmail.com>
+ * @version 1.0.0
+ */
+
 // verify that a session is active, if not -- start the session
 if(session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
@@ -19,26 +29,121 @@ $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
 
-// to create or update an image on the server we are going to use returning values from forms: multipart/form-data
-// the user upload an image file, the server receives it using either POST (image created) or PUT (image updated) protocols
 
-$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
-// make sure that a user is logged in
-if(empty($_SESSION["profile"])) {
-	throw(new \InvalidArgumentException("You are not logged in.", 403));
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["file_to_upload"]["name"]);
+$upload_ok = 1;
+$image_file_type = pathinfo($target_file,PATHINFO_EXTENSION);
+// checking if image file is accessible
+if(isset($_POST["submit"])) {
+	$check = getimagesize($_FILES["file_to_upload"]["tmp_name"]);
+	if($check !== false) {
+		echo "The file you picked is an image - " . $check["mime"] . ".";
+		$upload_ok = 1;
+	} else {
+		echo "The file you picked is not image.";
+		$upload_ok = 0;
+	}
 }
 
-// handle two cases: POST and PUT
-switch ($method) {
-	case "POST":
-		break;
-	case "PUT":
-		break;
-	default:
-		throw (new \Exception("Method Not Supported.", 405));
+//if (preg_match('/^image/p?jpeg$/i', $_FILES['upload']['type']) or
+//	preg_match('/^image/gif$/i', $_FILES['upload']['type']) or
+//	preg_match('/^image/(x-)?png$/i', $_FILES['upload']['type']))
+//{
+//	// Handle the file...
+//}
+//else
+//{
+//	$error = 'Please submit a JPEG, GIF, or PNG image file.';
+//	include $_SERVER['DOCUMENT_ROOT'] . '/includes/error.html.php';
+//	exit();
+//}
+//
+//
+
+try {
+	//grab the mySQL Connection
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
+
+	//sanitize input
+	$id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	// determine the HTTP method used (we only allow the POST method to be used for image uploaing)
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
+	if ($method !== "POST") {
+		throw (new \Exception("Method not supported for image upload.", 405));
+	}
+
+	// make sure that a user is logged in
+	if(empty($_SESSION["profile"])) {
+		throw(new \InvalidArgumentException("You are not logged in.", 403));
+	}
+	//determine which HTTP method was used
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
+
+	// verify that a XSRF-TOKEN is present
+	verifyXsrf();
+
+	// make sure that the user is logged in before updating his/her profile
+	if(empty($_SESSION["profile"])) {
+		throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+	}
+	// validate header
+	validateJwtHeader();
+
+	$config = readConfig("/etc/apache2/lost-paws/php.ini");
+	$cloudinary = json_decode($config["cloudinary"]);
+	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "api_key" => $cloudinary->apiKey, "api_secret" => $cloudinary->apiSecret]);
+
+	if ($method === "POST") {
+		// grab the animal record from the database using animal ID (from $_POST["animalImageUrl"])
+		$animal = Animal::getAnimalByAnimalId($pdo, $id);
+		if(!$animal) {
+			throw(new \InvalidArgumentException ("Could not locate specified animal(s) fro this profile.", 404));
+		}
+		// assigning variable to the animal, add image extension
+		$tempAnimalFileName = $_FILES["image"]["tmp_name"];
+		// upload image to cloudinary and get public id
+		$cloudinaryResult = \Cloudinary\Uploader::upload($tempAnimalFileName, array("width" => 500, "crop" => "scale"));
+		// after sending the image to Cloudinary, set animalImageUrl to the animal record
+		$animal->setAnimalImageUrl($cloudinaryResult["secure_url"]);
+		$animal->update($pdo);
+		// update reply
+		$reply->message = "Image uploaded Ok";
+	} else {
+		throw (new \Exception("Method is not supported.", 405));
+	}
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
 }
 
+//encode and return reply to the fnont end caller
+header("Content-type: image/jpeg");
+echo json_encode($reply);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// headers['Content-Length'].to_i > 3.megabytes
 
 
 //

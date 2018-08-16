@@ -46,6 +46,8 @@ try{
 	$animalSpecies = filter_input(INPUT_GET, "animalSpecies", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$animalStatus = filter_input(INPUT_GET, "animalStatus", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
+
+
 	//make sure the id is valid for methods that require it.
 	if(($method === "DELETE" || $method === "PUT") && empty($id) === true){
 		throw(new InvalidArgumentException("id cannot be empty", 405));
