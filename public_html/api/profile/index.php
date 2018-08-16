@@ -30,26 +30,16 @@ $reply->status = 200;
 $reply->data = null;
 
 try{
-//grab the mySQL Connection
+	//grab the mySQL Connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 
-//determine which HTTP method was used
+	//determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
-	$method = strtoupper($method);
-	$inputType = ($method === "POST") ? INPUT_POST : INPUT_GET;
 
 	// sanitize inputs
-	$profileEmail = filter_input($inputType, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profileName = filter_input($inputType, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profilePhone = filter_input($inputType, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-
-	// we are getting profileId, profileOAuthId, and profileAccessToken internally (not from the web browser)
-
-
-	// if updating or deleting the Profile record, id field cannot be empty
-	if(($method === "PUT" || $method === "DELETE") && empty($id)) {
-		throw(new InvalidArgumentException("ID is invalid.", 405));
-	}
+	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profileName = filter_input(INPUT_GET, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profilePhone = filter_input(INPUT_GET, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	// handle different HTTP methods
 	switch ($method) {
@@ -57,25 +47,20 @@ try{
 			// set up a XSRF-TOKEN to prevent CSRF
 			setXsrfCookie();
 
-			if(!empty($id)) {
-				$profile = Profile::getProfileByProfileId($pdo, $id);
-				if($profile) {
-					$reply->data = $profile;
-				}
-			} else if(!empty($profileOAuthId)) {
-				$profile = Profile::getProfileByProfileOAuthId($pdo, $profileOAuthId);
-				if($profile) {
-					$reply->data = $profile;
-				}
-			} else if(!empty($profileEmail)) {
-				$profile = Profile::getProfileByProfileEmail($pdo, $profileEmail);
-				if($profile) {
-					$reply->data = $profile;
-				}
+			// make sure that the user is logged in
+			if(empty($_SESSION["profile"])) {
+				throw(new \InvalidArgumentException("You are not logged in.", 403));
+			}
+			// get profile by profile ID form the database
+			$profile = Profile::getProfileByProfileId($pdo, $_SESSION["profile"]->getProfileId());
+			if($profile) {
+				$reply->data = $profile;
+				$reply->message = "Profile was found OK.";
+			} else {
+				throw(new \InvalidArgumentException ("Could not locate specified profile.", 404));
 			}
 			break;
 		case "PUT":
-		case "POST":
 			// verify that a XSRF-TOKEN is present
 			verifyXsrf();
 			// make sure that the user is logged in before updating his/her profile
@@ -85,36 +70,39 @@ try{
 			// validate header
 			validateJwtHeader();
 
-			// use PHP’s stream handling to get request content and then decode JSON object
-			$requestContent = file_get_contents("php://input");
-			$requestObject = json_decode($requestContent);
+			// use PHP’s stream handling to get request content and decode JSON object
+			$decodedObject = json_decode(file_get_contents("php://input"), true);
 
-			// make sure that decoded JSON contains a valid profiile
-			if(empty($requestContent["profileId"])) {
+			if (!$decodedObject) {
+				throw (new Exception("Data missing or invalid.", 404));
+			}
+
+			// make sure that decoded JSON contains a valid profile
+			if(empty($decodedObject["profileId"])) {
 				throw(new \InvalidArgumentException ("No profile was located.", 404));
 			}
+			// construct a temp object on the fly using JSON
+			$profile = new Profile($decodedObject["profileId"], $decodedObject["profileOAuthId"], $decodedObject["profileAccessToken"],
+				$decodedObject["profileEmail"], $decodedObject["profileName"], $decodedObject["profilePhone"]);
 
 			// make sure that changes are being made before updating a profile
 			$changed = false;
 			// check what needs to be updated
-			if  (!emtpy($requestObject->profileEmail)) {
-				$profile->setProfileEmail($requestObject->profileEmail);
+			if  (!empty($profileEmail)) {
+				$profile->setProfileEmail($profileEmail);
 				$changed = true;
 			}
-			if (!emtpy($requestObject->profileName)) {
-				$profile->setProfileName($requestObject->profileName);
+			if (!empty($profileName)) {
+				$profile->setProfileName($profileName);
 				$changed = true;
 			}
-			if (!emtpy($requestObject->profilePhone)) {
-				$profile->setProfilePhone($requestObject->profilePhone);
+			if (!empty($profilePhone)) {
+				$profile->setProfilePhone($profilePhone);
 				$changed = true;
 			}
 
 			if ($changed) {
-				// construct a temp object on the fly
-				$tempProfile = new Profile($requestContent["profileId"], $requestObject["profileOAuthId"], $requestObject["profileAccessToken"],
-					$requestObject["profileEmail"], $requestObject["profileName"], $requestObject["profilePhone"]);
-				$tempProfile->update($pdo);
+				$profile->update($pdo);
 				// update message
 				$reply->message = "Profile was updated OK.";
 			}
@@ -122,60 +110,34 @@ try{
 				$reply->message = "No changes were made.";
 			}
 			break;
-		case "PUT":
+		case "DELETE":
 			// verify that a XSRF-TOKEN is present
 			verifyXsrf();
-
-			// make sure that the user is logged in before undating his/her profile
-			if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $id) {
+			// make sure that the user is logged in before deleting his/her profile
+			if(empty($_SESSION["profile"])) {
 				throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
 			}
-			// validate header
-			validateJwtHeader();
-
-			// use PHP’s stream handling to get request content and then decode json object
-			$requestContent = file_get_contents("php://input");
-			$requestObject = json_decode($requestContent);
-
-			//retrieve the profile to be updated
-			$profile = Profile::getProfileByProfileId($pdo, $id);
-			if(!$profile) {
-				throw(new RuntimeException("Profile does not exist.", 404));
+			// get profile form the database
+			$profile = Profile::getProfileByProfileId($pdo, $_SESSION["profile"]->getProfileId());
+			if($profile) {
+				$profile->delete($pdo);
+				$reply->message = "Profile was deleted OK.";
+			} else {
+				throw(new \InvalidArgumentException ("Could not locate specified profile.", 404));
 			}
-
-			// check whether all necessary data are present
-			//profile OAuth ID
-			if(empty($requestObject->profileOAuthId)) {
-				throw(new \InvalidArgumentException ("No profile OAuth ID.", 405));
-			}
-
-			//profile email is a required field
-			if(empty($requestObject->profileEmail) === true) {
-				throw(new \InvalidArgumentException ("No profile email present", 405));
-			}
-
-			//profile phone # | if null use the profile phone that is in the database
-			if(empty($requestObject->profilePhone) === true) {
-				$requestObject->ProfilePhone = $profile->getProfilePhone();
-			}
-
-			$profile->setProfileAtHandle($requestObject->profileAtHandle);
-			$profile->setProfileEmail($requestObject->profileEmail);
-			$profile->setProfilePhone($requestObject->profilePhone);
-			$profile->update($pdo);
-
 			break;
-		case "DELETE":
-
-			break;
+		default:
+			throw new \Exception("Method Not Supported.", 405);
 	}
 
-} catch() {
-
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
 }
 
-
-
+//encode and return reply to the fnont end caller
+header("Content-type: application/json");
+echo json_encode($reply);
 
 
 
