@@ -47,44 +47,30 @@ try {
 
 	//make sure the comment id is valid for methods that require it (required field)
 	if(($method === "DELETE" || $method === "PUT") && empty($id) === true) {
-		throw(new InvalidArgumentException("comment id cannot be empty", 405));
+		throw(new InvalidArgumentException("id cannot be empty", 405));
 	}
 
-	// handle GET request - if id is present, that tweet is returned
+	// handle GET request - if id is present, that comment is returned
 	if($method === "GET") {
 		//set XSRF cookie
 		setXsrfCookie();
 
 		//get a specific comment and update reply
 		if(empty($id) === false) {
-
-			var_dump($id);
-			$comment = Comment::getCommentByCommentId($pdo, $id);
-			if($comment !== null) {
-				$reply->data = $comment;
-			}
+			$reply->data = Comment::getCommentByCommentId($pdo, $id);
 
 			//TODO how to get comments from animal?
 		} else if(empty($commentAnimalId) === false) {
-
 			// grab all the comments that are on this animal
-			$comments = Comment::getCommentByCommentAnimalId($pdo, $commentAnimalId->getAnimalId())->toArray();
-			if($comments !== null) {
-				$reply->data = $comments;
-			}
-		} else if(empty($commentProfileId) === false) {
+			$reply->data = Comment::getCommentByCommentAnimalId($pdo, $commentAnimalId->getAnimalId())->toArray();
 
+		} else if(empty($commentProfileId) === false) {
 			// if the user is logged in grab all the comments by that user based on who is logged in
-			$comments = Comment::getCommentByCommentProfileId($pdo, $_SESSION["profile"]->getProfileId()->toArray());
-			if($comments !== null) {
-				$reply->data = $comments;
-			}
+			$reply->data = Comment::getCommentByCommentProfileId($pdo, $_SESSION["profile"]->getProfileId())->toArray();
+
 		} else if(empty($commentText) === false) {
-			//var_dump($commentText);
-			$comments = Comment::getCommentByCommentText($pdo, $commentText)->toArray();
-			if($comments !== null) {
-				$reply->data = $comments;
-			}
+			//get comments based on the content;
+			$reply->data = Comment::getCommentByCommentText($pdo, $commentText)->toArray();
 		}
 	} else if($method === "PUT" || $method ==="POST") {
 
@@ -99,6 +85,11 @@ try {
 		// enforce the user is signed in
 		if(empty($_SESSION["profile"]) === true) {
 			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
+		}
+
+		// make sure the comment text is available (required field)
+		if(empty($requestObject->commentText) === true) {
+			throw(new \InvalidArgumentException("No text for comment.",405 ));
 		}
 
 		// make sure the comment date is accurate (optional field)
