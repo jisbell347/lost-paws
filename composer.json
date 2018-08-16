@@ -7,6 +7,7 @@
     "facebook/graph-sdk" : "~5.0",
     "apigen/apigen": "dev-master",
     "phpdocumentor/reflection-docblock": "@stable",
+    "lcobucci/jwt": "3.2",
     "phpunit/dbunit": "@stable",
     "phpunit/phpunit": "@stable",
     "roave/better-reflection": "dev-master#a402048"
