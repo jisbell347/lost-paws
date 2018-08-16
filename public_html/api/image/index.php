@@ -30,44 +30,12 @@ $reply->status = 200;
 $reply->data = null;
 
 
-
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["file_to_upload"]["name"]);
-$upload_ok = 1;
-$image_file_type = pathinfo($target_file,PATHINFO_EXTENSION);
-// checking if image file is accessible
-if(isset($_POST["submit"])) {
-	$check = getimagesize($_FILES["file_to_upload"]["tmp_name"]);
-	if($check !== false) {
-		echo "The file you picked is an image - " . $check["mime"] . ".";
-		$upload_ok = 1;
-	} else {
-		echo "The file you picked is not image.";
-		$upload_ok = 0;
-	}
-}
-
-//if (preg_match('/^image/p?jpeg$/i', $_FILES['upload']['type']) or
-//	preg_match('/^image/gif$/i', $_FILES['upload']['type']) or
-//	preg_match('/^image/(x-)?png$/i', $_FILES['upload']['type']))
-//{
-//	// Handle the file...
-//}
-//else
-//{
-//	$error = 'Please submit a JPEG, GIF, or PNG image file.';
-//	include $_SERVER['DOCUMENT_ROOT'] . '/includes/error.html.php';
-//	exit();
-//}
-//
-//
-
 try {
 	//grab the mySQL Connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 
 	//sanitize input
-	$id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_POST, "animalId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	// determine the HTTP method used (we only allow the POST method to be used for image uploaing)
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];

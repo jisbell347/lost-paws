@@ -59,7 +59,7 @@ try{
 		setXsrfCookie();
 
 		$reply->data = $profile;
-		$reply->message = "Profile was found OK.";
+
 
 	} else if ($method === "PUT") {
 		// verify that a XSRF-TOKEN is present
