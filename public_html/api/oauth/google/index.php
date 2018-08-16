@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 4) . "/vendor/autoload.php";
+require_once dirname(__DIR__, 4) . "/php/classes/autoload.php";
+require_once dirname(__DIR__, 4) . "/php/lib/xsrf.php";
+require_once dirname(__DIR__, 4) . "/php/lib/uuid.php";
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Jisbell347\LostPaws\Profile;
@@ -85,6 +85,35 @@ if(!empty($_GET['error'])) {
 		//Failed to get the user details
 		exit('Something went wrong: ' . $e->getMessage());
 	}
+
+	/**
+	 * Provides refresh token should user request offline access or first auth token expires.
+	 **/
+	$provider = new League\OAuth2\Client\Provider\Google([
+		"clientId" => $google->clientId,
+		"clientSecret" => $google->secretId,
+		"redirectUri" => "https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/oauth/",
+		'accessType'   => 'offline',
+	]);
+
+	$token = $provider->getAccessToken('authorization_code', [
+		'code' => $code
+	]);
+
+// persist the token in a database
+	$refreshToken = $token->getRefreshToken();
+	//force approval again if new token is needed.
+	$authUrl = $provider->getAuthorizationUrl(['approval_prompt' => 'force']);
+
+	$provider = new League\OAuth2\Client\Provider\Google([
+		"clientId" => $google->clientId,
+		"clientSecret" => $google->secretId,
+		"redirectUri" => "https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/oauth/",
+	]);
+
+	$grant = new League\OAuth2\Client\Grant\RefreshToken();
+	$token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
+
 	//Use this to interact with an API on the users behalf
 	echo $token->getToken();
 
