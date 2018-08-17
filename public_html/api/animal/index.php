@@ -129,8 +129,8 @@ try{
 			}
 
 			//enforce the user is  signed in and only trying to edit their own animal post.
-			if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $animal->getAnimalId()->toString()) {
-				throw(new \InvalidArgumentException("You are not allow to edit this animal posting.", 403));
+			if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $animal->getAnimalProfileId()->toString()) {
+				throw(new \InvalidArgumentException("You are not allowed to edit this animal posting.", 403));
 			}
 
 			//enforce that the end user has a JWT token
