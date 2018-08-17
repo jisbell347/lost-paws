@@ -82,7 +82,7 @@ try{
 		verifyXsrf();
 
 		$requestContent = file_get_contents("php://input");
-		//Retrieves the JSON package that the front end has sent, and stores it in $requestContent. Here we are using file_get_contents ("php://input) to get the request from th efront end. File_get_contents() is a PHP function that reads a file into a string. THe argument for the function here is "php://input". This is a read only stream that allows raw data to be read from the front end request which is in this case a JSON package.
+		//Retrieves the JSON package that the front end has sent, and stores it in $requestContent. Here we are using file_get_contents ("php://input) to get the request from the front end. File_get_contents() is a PHP function that reads a file into a string. THe argument for the function here is "php://input". This is a read only stream that allows raw data to be read from the front end request which is in this case a JSON package.
 		$requestObject = json_decode($requestContent);
 		//This line then decodes the json package and stores that result in $requestObject.
 
@@ -154,7 +154,7 @@ try{
 		} else if($method === "POST") {
 
 			// enforce that the user is signed in
-			if(empty($_SESSION[$profile]) === true) {
+			if(empty($_SESSION["profile"]) === true) {
 				throw(new \InvalidArgumentException("You must be logged in to post an animal.", 403));
 			}
 
