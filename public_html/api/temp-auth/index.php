@@ -44,7 +44,6 @@ try {
 		"profileEmail" => $profile->getProfileEmail()
 	];
 	setJwtAndAuthHeader("auth",$authObject);
-//	setJwtAndAuthHeader("empty", $object);
 	//echo $profile->getProfileId();
 	//$reply->data = $profile->getProfileId();
 
