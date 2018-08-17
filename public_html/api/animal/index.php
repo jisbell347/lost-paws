@@ -182,7 +182,7 @@ try{
 		}
 
 		//enforce the user is signed in and is only trying to edit their own animal post.
-		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId() !== $animal->getAnimalProfileId()) {
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $animal->getAnimalProfileId()->toString()) {
 			throw(new \InvalidArgumentException("You are not allowed to delete this animal post.", 403));
 		}
 
