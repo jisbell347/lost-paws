@@ -72,7 +72,7 @@ try{
 		} else if(empty($animalSpecies) === false) {
 			$reply->data = Animal::getAnimalByAnimalSpecies($pdo, $animalSpecies)->toArray();
 		} else if(empty($animalStatus) === false) {
-			$reply->data = Animal::getAnimalByAnimalStatus($pdo, $animalSpecies)->toArray();
+			$reply->data = Animal::getAnimalByAnimalStatus($pdo, $animalStatus)->toArray();
 		} else {
 			$reply->data = Animal:: getAllCurrentAnimals($pdo)->toArray();
 		}
