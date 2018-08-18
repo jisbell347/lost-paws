@@ -242,6 +242,25 @@ class ProfileTest extends LostPawsTest {
 	}
 
 	/**
+	 * test grabing a Profile from the database using a valid phone number
+	 **/
+	public function testGetProfileByValidPhone(): void {
+		// create a PDO connection object
+		$pdo = $this->getPDO();
+		// insert an instance of the Profile class into the database
+		$this->profile->insert($pdo);
+		// try grabing the data from mySQL and check if the fields match our expectations
+		$pdoProfile = Profile::getProfileByProfilePhone($this->getPDO(), $this->profile->getProfilePhone());
+		$this->assertNotNull($pdoProfile, "The profile object is supposed to be not null");
+		$this->assertEquals($pdoProfile->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoProfile->getProfileOAuthId(), $this->profile->getProfileOAuthId());
+		$this->assertEquals($pdoProfile->getProfileAccessToken(), $this->profile->getProfileAccessToken());
+		$this->assertEquals($pdoProfile->getProfileEmail(), $this->profile->getProfileEmail());
+		$this->assertEquals($pdoProfile->getProfileName(), $this->profile->getProfileName());
+		$this->assertEquals($pdoProfile->getProfilePhone(), $this->profile->getProfilePhone());
+	}
+
+	/**
 	 * test grabing a Profile from the database using a wrong email address
 	 **/
 	public function testGetProfileByInvalidEmail(): void {
