@@ -54,7 +54,7 @@ try{
 		if (!empty($profileEmail)) {
 			$reply->data = Profile::getProfileByProfileEmail($pdo, $profileEmail);
 		} else if (!empty($profilePhone)) {
-			$reply->data = Profile::getProfileByProfilePhone($pdo, $$profilePhone);
+			$reply->data = Profile::getProfileByProfilePhone($pdo, $profilePhone);
 		} else if (!empty($id)) {
 			echo "I reject Caleb's id" . PHP_EOL;
 			$reply->data = Profile::getProfileByProfileId($pdo, $id);
@@ -79,9 +79,15 @@ try{
 		}
 
 		// make sure that the user is trying to access his/her own profile
-		if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId()->toString()) {
+//		if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId()->toString()) {
+//			throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+//		}
+
+		if(empty($_SESSION["profile"])) {
 			throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
 		}
+
+		var_dump("Dumping decoded object: " .$decodedObject->profileEmail);
 
 		// make sure that decoded JSON contains a valid profile
 		if(empty($decodedObject->profileId)) {
@@ -112,8 +118,11 @@ try{
 			throw (new RuntimeException("Profile does not exist.", 404));
 		}
 
+		var_dump("Dumping profile id:  " .$profile->getProfileId());
+		var_dump("Dumping Session global profile id:  " .$_SESSION["profile"]->getProfileId()->toString());
+
 		//enforce the user is signed in and only trying to edit their own profile
-		if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId()->toString()) {
+		if(empty($_SESSION["profile"]) || ($_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId())) {
 			throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
 		}
 		validateJwtHeader();
