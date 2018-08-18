@@ -69,6 +69,8 @@ try {
 		} else if(empty($commentText) === false) {
 			//get comments based on the content;
 			$reply->data = Comment::getCommentByCommentText($pdo, $commentText)->toArray();
+		} else {
+			throw new InvalidArgumentException("Incorrect search parameters", 404);
 		}
 	} else if($method === "PUT" || $method ==="POST") {
 
@@ -179,10 +181,10 @@ try {
 	$reply->message = $exception->getMessage();
 }
 
-//header("Content-type: application/json");
-//if($reply->data === null) {
-//	unset($reply->data);
-//}
+header("Content-type: application/json");
+if($reply->data === null) {
+	unset($reply->data);
+}
 
 
 //encode and return reply to front end caller
