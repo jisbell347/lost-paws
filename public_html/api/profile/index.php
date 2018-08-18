@@ -32,14 +32,14 @@ try{
 	//grab the mySQL Connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 
-	//determine which HTTP method was used
-	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
-
 	// sanitize inputs
-	$id = filter_input(INPUT_GET, "profileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileName = filter_input(INPUT_GET, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profilePhone = filter_input(INPUT_GET, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	//determine which HTTP method was used
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	// make sure that id is valid for update and delete the profile record
 	if(($method === "DELETE" || $method === "PUT") && empty($id)) {
@@ -56,6 +56,7 @@ try{
 		} else if (!empty($profilePhone)) {
 			$reply->data = Profile::getProfileByProfilePhone($pdo, $$profilePhone);
 		} else if (!empty($id)) {
+			echo "I reject Caleb's id" . PHP_EOL;
 			$reply->data = Profile::getProfileByProfileId($pdo, $id);
 		}
 	} else if ($method === "PUT") {
@@ -129,11 +130,6 @@ try{
 
 //encode and return reply to the front-end caller
 header("Content-type: application/json");
-if (!$reply->data) {
-	unset($reply->data);
-}
-
-// encode and return reply to front-end caller
 echo json_encode($reply);
 
 
