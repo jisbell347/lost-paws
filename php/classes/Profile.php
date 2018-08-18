@@ -456,7 +456,7 @@ class Profile implements \JsonSerializable {
 		try {
 			$query = "SELECT * FROM profile WHERE profileEmail = :profileEmail";
 			$statement = $pdo->prepare($query);
-			// bind the profile id to the place holder in the template
+			// bind the profile email to the place holder in the template
 			$parameters = ["profileEmail" => $currProfileEmail];
 			$statement->execute($parameters);
 		}   catch (\Exception $exception) {
@@ -479,6 +479,51 @@ class Profile implements \JsonSerializable {
 		// if everything went well, return $newProfile
 		return $newProfile;
 	}
+
+	/**
+	 * get this Profile by profile phone number
+	 *
+	 * @param \PDO $pdo database connection object
+	 * @param string $currProfilePhone profile phone number to search for
+	 * @return Profile object or null if profile is not found
+	 * @throws \PDOException in case of mySQL related errors
+	 * @throws \InvalidArgumentException in case email address is empty or insecure
+	 * @throws \Exception -- all others except for \PDOException exception
+	 **/
+	public static function getProfileByProfilePhone(\PDO $pdo, string $currProfilePhone): ?Profile {
+		// verify the phone is secure
+		$currProfilePhone = Profile::normalizePhoneNumber($currProfilePhone);
+
+		if(empty($currProfilePhone)) {
+			throw(new \InvalidArgumentException("Profile phone number is empty or insecure."));
+		}
+		try {
+			$query = "SELECT * FROM profile WHERE profilePhone = :profilePhone";
+			$statement = $pdo->prepare($query);
+			// bind the profile phone to the place holder in the template
+			$parameters = ["profilePhone" => $currProfilePhone];
+			$statement->execute($parameters);
+		}   catch (\Exception $exception) {
+			// re-throw exception if occured
+			throw(new \Exception($exception->getMessage(), 0, $exception));
+		}
+		$newProfile = null;
+		try {
+			// grab the selected profile from mySQL
+			$row = $statement->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newProfile = new Profile($row["profileId"], $row["profileOAuthId"], $row["profileAccessToken"],
+					$row["profileEmail"], $row["profileName"], $row["profilePhone"]);
+			}
+		} catch (\PDOException | \Exception $exception) {
+			// re-throw exception if occured
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// if everything went well, return $newProfile
+		return $newProfile;
+	}
+
 
 	/**
 	 * formats the state variables for JSON serialization

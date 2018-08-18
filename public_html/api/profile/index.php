@@ -41,74 +41,86 @@ try{
 	$profileName = filter_input(INPUT_GET, "profileName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profilePhone = filter_input(INPUT_GET, "profilePhone", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-	// make sure that the user is logged in
-	if(empty($_SESSION["profile"]) || ($id !== strval($_SESSION["profile"]->getProfileId()))) {
-		throw(new \InvalidArgumentException("You are not logged into your account.", 403));
+	// make sure that id is valid for update and delete the profile record
+	if(($method === "DELETE" || $method === "PUT") && empty($id)) {
+			throw(new \InvalidArgumentException("You must be logged in to perform this operation.", 405));
 	}
-
-	// get profile by profile ID form the database
-	$profile = Profile::getProfileByProfileId($pdo, $_SESSION["profile"]->getProfileId());
-
-	if (!$profile) {
-		throw(new \InvalidArgumentException ("Could not locate specified profile.", 404));
-	}
-
 	// handle different HTTP methods
-	if ($method === "GET") {
+	if($method === "GET") {
 		// set up a XSRF-TOKEN to prevent CSRF
 		setXsrfCookie();
 
-		$reply->data = $profile;
-
-
+		// we allow the logged in user to search for another user using his/her phone number or email address
+		if (!empty($profileEmail)) {
+			$reply->data = Profile::getProfileByProfileEmail($pdo, $profileEmail);
+		} else if (!empty($profilePhone)) {
+			$reply->data = Profile::getProfileByProfilePhone($pdo, $$profilePhone);
+		} else if (!empty($id)) {
+			$reply->data = Profile::getProfileByProfileId($pdo, $id);
+		}
 	} else if ($method === "PUT") {
 		// verify that a XSRF-TOKEN is present
 		verifyXsrf();
 		// validate header
 		validateJwtHeader();
 		// use PHP’s stream handling to get request content and decode JSON object
-		$decodedObject = json_decode(file_get_contents("php://input"), true);
+		$decodedObject = json_decode(file_get_contents("php://input"));
 
 		if (!$decodedObject) {
 			throw (new Exception("Data missing or invalid.", 404));
 		}
 
+		// retrieve the profile to be updated
+		$profile = Profile::getProfileByProfileId($pdo, $id);
+
+		if (!$profile) {
+			throw (new RuntimeException("Profile does not exist.", 404));
+		}
+
+		// make sure that the user is trying to access his/her own profile
+		if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId()->toString()) {
+			throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+		}
+
 		// make sure that decoded JSON contains a valid profile
-		if(empty($decodedObject["profileId"])) {
+		if(empty($decodedObject->profileId)) {
 			throw(new \InvalidArgumentException ("No profile was located.", 404));
 		}
 
-		// make sure that changes are being made before updating a profile
-		$changed = false;
-		// check what needs to be updated
-		if ($profile->getProfileEmail() !== $decodedObject["profileEmail"]) {
-			$profile->setProfileEmail($decodedObject["profileEmail"]);
-			$changed = true;
+		// we only allow the logged in user to modify his/her email address, name, and phone number
+		if (!empty($decodedObject->profileEmail)) {
+			$profile->setProfileEmail($decodedObject->profileEmail);
 		}
-		if ($profile->getProfileName() !== $decodedObject["profileName"]) {
-			$profile->setProfileName($decodedObject["profileName"]);
-			$changed = true;
+		if (!empty($decodedObject->profileName)) {
+			$profile->setProfileName($decodedObject->profileName);
 		}
-		if ($profile->getProfilePhone() !== $decodedObject["profilePhone"]) {
-			$profile->setProfilePhone($decodedObject["profilePhone"]);
-			$changed = true;
+		if (!empty($decodedObject->profilePhone)) {
+			$profile->setProfilePhone($decodedObject->profilePhone);
 		}
-		if ($changed) {
-			$profile->update($pdo);
-			// update message
-			$reply->message = "Profile was updated OK.";
-		}
-		else {
-			$reply->message = "No changes were detected Profile wasn't updated.";
-		}
+		// update current profile
+		$profile->update($pdo);
+		// update message
+		$reply->message = "Profile information was updated.";
 	} else if ($method === "DELETE") {
 		// verify that a XSRF-TOKEN is present
 		verifyXsrf();
 
+		// get profile from the database
+		$profile = Profile::getProfileByProfileId($pdo, $id);
+		if (!$profile) {
+			throw (new RuntimeException("Profile does not exist.", 404));
+		}
+
+		//enforce the user is signed in and only trying to edit their own profile
+		if(empty($_SESSION["profile"]) || $_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId()->toString()) {
+			throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+		}
+		validateJwtHeader();
+		//delete the post from the database
 		$profile->delete($pdo);
-		$reply->message = "Profile was deleted OK.";
+		$reply->message = "Profile was deleted.";
 	} else {
-		throw (new \Exception("Method Not Supported.", 405));
+		throw (new \Exception("This HTTP request is not supported.", 405));
 	}
 } catch(\Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
@@ -117,6 +129,11 @@ try{
 
 //encode and return reply to the fnont end caller
 header("Content-type: application/json");
+if (!$reply->data) {
+	unset($reply->data);
+}
+
+// encode and return reply to fron end caller
 echo json_encode($reply);
 
 
