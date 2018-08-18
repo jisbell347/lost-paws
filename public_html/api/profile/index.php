@@ -127,13 +127,13 @@ try{
 	$reply->message = $exception->getMessage();
 }
 
-//encode and return reply to the fnont end caller
+//encode and return reply to the front-end caller
 header("Content-type: application/json");
 if (!$reply->data) {
 	unset($reply->data);
 }
 
-// encode and return reply to fron end caller
+// encode and return reply to front-end caller
 echo json_encode($reply);
 
 

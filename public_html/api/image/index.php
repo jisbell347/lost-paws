@@ -40,23 +40,20 @@ try {
 	// determine the HTTP method used (we only allow the POST method to be used for image uploaing)
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 	if ($method !== "POST") {
-		throw (new \Exception("Method not supported for image upload.", 405));
+		throw (new \Exception("This HTTP method is not supported for image upload.", 405));
 	}
 
-	// make sure that a user is logged in
-	if(empty($_SESSION["profile"])) {
-		throw(new \InvalidArgumentException("You are not logged in.", 403));
-	}
 	//determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	// verify that a XSRF-TOKEN is present
 	verifyXsrf();
 
-	// make sure that the user is logged in before updating his/her profile
-	if(empty($_SESSION["profile"])) {
-		throw(new \InvalidArgumentException("You are not allowed to access this profile.", 403));
+	// make sure that a user is logged in before uploading a picture
+	if(empty($_SESSION["profile"]) || empty($_SESSION["profile"]->getProfileId()->toString())) {
+		throw(new \InvalidArgumentException("You are not logged in.", 403));
 	}
+
 	// validate header
 	validateJwtHeader();
 
@@ -64,34 +61,33 @@ try {
 	$cloudinary = json_decode($config["cloudinary"]);
 	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "api_key" => $cloudinary->apiKey, "api_secret" => $cloudinary->apiSecret]);
 
-	if ($method === "POST") {
-		// grab the animal record from the database using animal ID (from $_POST["animalImageUrl"])
-		$animal = Animal::getAnimalByAnimalId($pdo, $id);
-		if(!$animal) {
-			throw(new \InvalidArgumentException ("Could not locate specified animal(s) fro this profile.", 404));
-		}
-		// assigning variable to the animal, add image extension
-		$tempAnimalFileName = $_FILES["image"]["tmp_name"];
-		// upload image to cloudinary and get public id
-		$cloudinaryResult = \Cloudinary\Uploader::upload($tempAnimalFileName, array("width" => 500, "crop" => "scale"));
-		// after sending the image to Cloudinary, set animalImageUrl to the animal record
-		$animal->setAnimalImageUrl($cloudinaryResult["secure_url"]);
-		$animal->update($pdo);
-		// update reply
-		$reply->message = "Image uploaded Ok";
-	} else {
-		throw (new \Exception("Method is not supported.", 405));
+	// grab the animal record from the database using animal ID (from $_POST["animalImageUrl"])
+	$animal = Animal::getAnimalByAnimalId($pdo, $id);
+	if(!$animal) {
+		throw(new \InvalidArgumentException ("Could not locate specified animal(s) fro this profile.", 404));
 	}
+	// assigning variable to the animal, add image extension
+	$tempAnimalFileName = $_FILES["image"]["tmp_name"];
+	// upload image to cloudinary and get public id
+	$cloudinaryResult = \Cloudinary\Uploader::upload($tempAnimalFileName, array("width" => 500, "crop" => "scale"));
+	// after sending the image to Cloudinary, set animalImageUrl to the animal record
+	$animal->setAnimalImageUrl($cloudinaryResult["secure_url"]);
+	$animal->update($pdo);
+	// update reply
+	$reply->message = "Image uploaded Ok";
 } catch(\Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
 
-//encode and return reply to the fnont end caller
-header("Content-type: image/jpeg");
+//encode and return reply to the front-end caller
+header("Content-type: application/json");
+if (!$reply->data) {
+	unset($reply->data);
+}
+
+// encode and return reply to front-end caller
 echo json_encode($reply);
-
-
 
 
 
