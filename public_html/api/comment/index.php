@@ -141,7 +141,7 @@ try {
 			validateJwtHeader();
 
 			//create a new comment and insert into the database
-			$comment = new Comment(generateUuidV4(), $requestObject->getAnimalId(), $_SESSION["profile"]->getProfileId(), null, $requestObject->commentText);
+			$comment = new Comment(generateUuidV4(), $requestObject->getAnimalId()->toString(), $_SESSION["profile"]->getProfileId()->toString(), null, $requestObject->commentText);
 			$comment->insert($pdo);
 
 			// update comment
