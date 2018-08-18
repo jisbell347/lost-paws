@@ -139,9 +139,8 @@ try {
 			//enforce the end user has a JWT token
 
 			validateJwtHeader();
-
 			//create a new comment and insert into the database
-			$comment = new Comment(generateUuidV4(), $requestObject->getCommentAnimalId()->toString(), $_SESSION["profile"]->getProfileId()->toString(), null, $requestObject->commentText);
+			$comment = new Comment(generateUuidV4(), $requestObject->getCommentAnimalId(), $_SESSION["profile"]->getProfileId(), null, $requestObject->commentText);
 			$comment->insert($pdo);
 
 			// update comment
