@@ -60,7 +60,7 @@ try {
 			//TODO how to get comments from animal?
 		} else if(empty($commentAnimalId) === false) {
 			// grab all the comments that are on this animal
-			$reply->data = Comment::getCommentByCommentAnimalId($pdo, $commentAnimalId->getAnimalId())->toArray();
+			$reply->data = Comment::getCommentByCommentAnimalId($pdo, $commentAnimalId)->toArray();
 
 		} else if(empty($commentProfileId) === false) {
 			// if the user is logged in grab all the comments by that user based on who is logged in
@@ -140,7 +140,7 @@ try {
 
 			validateJwtHeader();
 			//create a new comment and insert into the database
-			$comment = new Comment(generateUuidV4(), $requestObject->getCommentAnimalId(), $_SESSION["profile"]->getProfileId(), null, $requestObject->commentText);
+			$comment = new Comment(generateUuidV4(), $requestObject->getAnimalId(), $_SESSION["profile"]->getProfileId()->toString(), null, $requestObject->commentText);
 			$comment->insert($pdo);
 
 			// update comment
