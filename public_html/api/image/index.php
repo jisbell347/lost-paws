@@ -43,15 +43,12 @@ try {
 		throw (new \Exception("This HTTP method is not supported for image upload.", 405));
 	}
 
-	//determine which HTTP method was used
-	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
-
 	// verify that a XSRF-TOKEN is present
 	verifyXsrf();
 
 	// make sure that a user is logged in before uploading a picture
 	if(empty($_SESSION["profile"]) || empty($_SESSION["profile"]->getProfileId()->toString())) {
-		throw(new \InvalidArgumentException("You are not logged in.", 403));
+		throw(new \InvalidArgumentException("You must be logged in to upload an image of your pet.", 403));
 	}
 
 	// validate header
@@ -64,7 +61,7 @@ try {
 	// grab the animal record from the database using animal ID (from $_POST["animalImageUrl"])
 	$animal = Animal::getAnimalByAnimalId($pdo, $id);
 	if(!$animal) {
-		throw(new \InvalidArgumentException ("Could not locate specified animal(s) fro this profile.", 404));
+		throw(new \InvalidArgumentException ("Could not locate specified animal(s).", 404));
 	}
 	// assigning variable to the animal, add image extension
 	$tempAnimalFileName = $_FILES["image"]["tmp_name"];
