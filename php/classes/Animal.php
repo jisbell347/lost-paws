@@ -703,11 +703,10 @@ class Animal implements \JsonSerializable {
 		$animalGender = str_replace("_", "\\_", str_replace("%", "\\%", $animalGender));
 
 		//create query template
-		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalGender LIKE :animalGender";
+		$query = "SELECT animalId, animalProfileId, animalColor, animalDate, animalDescription, animalGender, animalImageUrl, animalLocation, animalName, animalSpecies, animalStatus FROM animal WHERE animalGender = :animalGender";
 		$statement = $pdo->prepare($query);
 
 		//bind the animal gender to the placeholder in template
-		$animalGender = "%$animalGender%";
 		$parameters = ["animalGender" => $animalGender];
 		$statement->execute($parameters);
 
@@ -795,7 +794,6 @@ class Animal implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		//bind the animal status to the placeholder in template
-		$animalStatus = "%$animalStatus%";
 		$parameters = ["animalStatus" => $animalStatus];
 		$statement->execute($parameters);
 
