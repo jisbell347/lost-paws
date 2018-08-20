@@ -370,8 +370,9 @@ Class AnimalTest extends LostPawsTest{
 		$animalId = generateUuidV4();
 		$animal = new Animal($animalId, $this->profile->getProfileId(),$this->VALID_ANIMAL_COLOR, $this->VALID_ANIMAL_DATE, $this->VALID_ANIMAL_DESCRIPTION, $this->VALID_ANIMAL_GENDER,$this->VALID_ANIMAL_IMAGE_URL, $this->VALID_ANIMAL_LOCATION, $this->VALID_ANIMAL_NAME, $this->VALID_ANIMAL_SPECIES, $this->VALID_ANIMAL_STATUS);
 		$animal->insert($this->getPDO());
+
 		// grab the data from mySQL and enforce that the fields match expectations
-		$results = Animal::getAnimalByAnimalGender($this->getPDO(), $animal->getAnimalGender());
+		$results = Animal::getAnimalByAnimalGender($this->getPDO(),$animal->getAnimalGender());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("animal"));
 		$this->assertCount(1, $results);
 		//enforce that no other objects are bleeding into the test
