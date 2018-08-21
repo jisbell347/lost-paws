@@ -1,16 +1,13 @@
-export class Animal {
-	constructor(
-		public animalId: string,
-		public animalProfileId: string,
-		public animalColor: string,
-		public animalDate: string,
-		public animalDescription: string,
-		public animalGender: string,
-		public animalImageUrl: string,
-		public animalLocation: string,
-		public animalName: string,
-		public animalSpecies: string,
-		public animalStatus: string
-
-	) {}
+export interface Animal {
+		animalId: string;
+		animalProfileId: string;
+		animalColor: string;
+		animalDate: string;
+		animalDescription: string;
+		animalGender: string;
+		animalImageUrl: string;
+		animalLocation: string;
+		animalName: string;
+		animalSpecies: string;
+		animalStatus: string;
 }
