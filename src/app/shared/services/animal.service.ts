@@ -14,7 +14,6 @@ export class AnimalService {
 	// call to the animal API and delete the animal in question
 	deleteAnimal(animalId: string) : Observable<Status> {
 		return(this.http.delete<Status>(this.animalUrl + animalId));
-
 	}
 
 	// call to the Animal API and edit the animal in question
@@ -35,6 +34,26 @@ export class AnimalService {
 	//call to the Animal API and get an array of animals by  profileId
 	getAnimalbyProfileId(animalProfileId: string) : Observable<Animal[]> {
 		return(this.http.get<Animal[]>(this.animalUrl + animalProfileId));
+	}
+
+	//call to the Animal API and get an array of animals by animalColor
+	getAnimalByAnimalColor(animalColor: string) : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl + animalColor));
+	}
+
+	//call to the Animal API and get an array of animals by animalDescription
+	getAnimalByAnimalDescription(animalDescription: string) : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl + animalDescription));
+	}
+
+	//call to the Animal API and get an array of animals by animalGender
+	getAnimalByAnimalGender(animalGender: string) : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl + animalGender));
+	}
+
+	//call to the Animal API and get an array of animals by animalSpecies
+	getAnimalByAnimalSpecies(animalSpecies: string) : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl + animalSpecies));
 	}
 
 
