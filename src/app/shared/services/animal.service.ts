@@ -32,6 +32,11 @@ export class AnimalService {
 		return(this.http.get<Animal>(this.animalUrl + animalId));
 	}
 
+	//call to the Animal API and get an array of animals by  profileId
+	getAnimalbyProfileId(animalProfileId: string) : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl + animalProfileId));
+	}
+
 
 
 
