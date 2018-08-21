@@ -1,7 +1,8 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
-import {User} from "../interfaces/user";
+import {Profile} from "../interfaces/profile";
+import {Animal} from"../interfaces/animal";
 
 @Injectable()
 export class AnimalService {
@@ -20,6 +21,17 @@ export class AnimalService {
 	editAnimal(animal : Animal) : Observable<Status> {
 		return(this.http.put<Status>(this.animalUrl + animal.animalId, animal));
 	}
+
+	// call to the Animal API and create an animal posting
+	createAnimal(animal: Animal) : Observable<Status> {
+		return(this.http.post<Status>(this.animalUrl, animal));
+	}
+
+	//call to the Animal API and get an animal by animalId
+	getAnimal(animalId: string) : Observable<Animal> {
+		return(this.http.get<Animal>(this.animalUrl + animalId));
+	}
+
 
 
 
