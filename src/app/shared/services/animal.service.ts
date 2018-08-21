@@ -56,6 +56,11 @@ export class AnimalService {
 		return(this.http.get<Animal[]>(this.animalUrl + animalSpecies));
 	}
 
+	//call to the Animal API and get an array of animals by animalStatus
+	getAnimalByAnimalStatus(animalStatus: string) : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl + animalStatus));
+	}
+
 
 
 
