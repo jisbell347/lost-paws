@@ -62,7 +62,4 @@ export class AnimalService {
 		return(this.http.get<Animal[]>(this.animalUrl + animalStatus));
 	}
 
-
-
-
 }
