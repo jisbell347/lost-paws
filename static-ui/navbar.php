@@ -24,9 +24,12 @@
 					<a class="nav-link" href="#link3">User Profile</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="#link4">About Us</a>
+				</li>
+				<li class="nav-item">
 					<!--link triggers modal-->
 					<!--<signIn></signIn>-->
-					<a class="nav-link" href="#link4">Sign In</a>
+					<a class="nav-link" href="#link5">Sign In</a>
 				</li>
 			</ul>
 		</div>
