@@ -1,5 +1,5 @@
-<?php /*require_once ("head-utils.php");
-		require_once ("navbar.php"); */?>
+<?php require_once ("head-utils.php");
+		require_once ("navbar.php"); ?>
 
 <main>
 	<div class="container-fluid">
