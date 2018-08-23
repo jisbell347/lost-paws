@@ -36,3 +36,15 @@
 .navbar-toggler.collapsed .bottom-bar {
 	transform: rotate(0);
 }
+
+.home {
+	background-color: lightslategrey;
+	border-radius: 5px;
+	margin-top: 5em;
+	padding-top: 3em;
+	padding-bottom: 3em;
+}
+
+.card-img {
+	max-height: 30em;
+}
