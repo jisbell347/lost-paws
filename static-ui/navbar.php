@@ -1,4 +1,5 @@
 <?php require_once ("head-utils.php");?>
+<?php require_once  ("sign-up-modal.php");?>
 
 
 <header>
@@ -23,6 +24,8 @@
 					<a class="nav-link" href="#link3">User Profile</a>
 				</li>
 				<li class="nav-item">
+					<!--link triggers modal-->
+					<!--<signIn></signIn>-->
 					<a class="nav-link" href="#link4">Sign In</a>
 				</li>
 			</ul>
