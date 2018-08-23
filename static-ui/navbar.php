@@ -14,16 +14,16 @@
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#link1">Sign In</a>
+					<a class="nav-link" href="#link1">Search Pets</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#link2">Search Pets</a>
+					<a class="nav-link" href="#link2">Post a Pet</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#link3">Post a Pet</a>
+					<a class="nav-link" href="#link3">User Profile</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#link4">User Profile</a>
+					<a class="nav-link" href="#link4">Sign In</a>
 				</li>
 			</ul>
 		</div>
