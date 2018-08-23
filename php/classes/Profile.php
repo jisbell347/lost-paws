@@ -532,9 +532,9 @@ class Profile implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		// keep this profileAccessToken secret
+		// also we don't need profileOAuthId -- keep it out as well
 		return [
 			'profileId' => strval($this->profileId),
-			'profileOAuthId' => strval($this->profileOAuthId),
 			'profileEmail' => $this->profileEmail,
 			'profileName' => $this->profileName,
 			'profilePhone' => $this->profilePhone

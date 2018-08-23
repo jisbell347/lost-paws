@@ -1,5 +1,8 @@
 export interface Profile {
 	profileId: string;
-
-//	add the others
+	profileOAuthId: string
+	profileAccessToken: string;
+	profileEmail: string;
+	profileName: string;
+	profilePhone: string;
 }
