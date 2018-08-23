@@ -2,9 +2,9 @@
 
 <?php require_once ("navbar.php"); ?>
 
-<main>
+<main class="mt-4 pt-5">
 	<div class="container">
-		<div class="row">
+		<div class="row justify-content-center">
 			<h3 class="text-center">Animal Profile</h3>
 		</div>
 		<div class="card border border-0">
@@ -19,7 +19,7 @@
 				<li class="list-group-item">Gender: Male</li>
 				<li class="list-group-item">Description: Fuzzy is a three year-old male cat with light brown and white fur. He was last seen near our house on 1st and Main about 10pm on the 18th of August wearing a blue collar.</li>
 			</ul>
-			<h4 class="p-3 text-center">Contact:</h4>
+			<h4 class="p-3 text-center mt-4">Contact:</h4>
 			<ul class="list-group">
 				<li class="list-group-item">Name: Walter Smith</li>
 				<li class="list-group-item">Phone: 505-111-5555</li>
