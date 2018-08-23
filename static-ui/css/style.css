@@ -1,0 +1,38 @@
+/*navbar*/
+/*custom navbar toggler*/
+.icon-bar {
+	width: 1.5em;
+	height: .15em;
+	background-color: #444444;
+	display: block;
+	transition: all 0.5s;
+	margin-top: .32em;
+}
+/*navbar toggler animation*/
+.navbar-toggler {
+	border: none;
+	background: transparent !important;
+}
+.navbar-toggler:focus {
+	outline: none;
+}
+.navbar-toggler .top-bar {
+	transform: rotate(45deg);
+	transform-origin: 4.5% 20%;
+}
+.navbar-toggler .middle-bar {
+	opacity: 0;
+}
+.navbar-toggler .bottom-bar {
+	transform: rotate(-45deg);
+	transform-origin: 4.5% 80%;
+}
+.navbar-toggler.collapsed .top-bar {
+	transform: rotate(0);
+}
+.navbar-toggler.collapsed .middle-bar {
+	opacity: 1;
+}
+.navbar-toggler.collapsed .bottom-bar {
+	transform: rotate(0);
+}
