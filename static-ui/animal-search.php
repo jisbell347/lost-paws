@@ -16,10 +16,10 @@
 			</select>
 		</div>
 
-		<div class="row bg-dark text-light justify-content-center">
+		<div class="row bg-dark text-light justify-content-center rounded-top">
 			<h4>Fuzzy</h4>
 		</div>
-		<div class="row align-items-center bg-dark rounded pb-4 mb-4">
+		<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4">
 			<div class="col-md-4">
 				<img src="http://placekitten.com/300/250" alt="placeholder cat" class="img-fluid rounded p-3">
 			</div>
