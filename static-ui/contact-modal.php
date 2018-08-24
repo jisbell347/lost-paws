@@ -9,7 +9,9 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Contact Information</h5>
+					<div class="row ml-auto">
+						<h5 class="modal-title">Contact Information</h5>
+					</div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
