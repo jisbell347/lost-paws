@@ -58,8 +58,8 @@
 			</div><!--row-->
 			<div class="row justify-content-md-center">
 				<div class="col-md-8">
-					<button type="button" class="btn btn-primary"><div class="my-btn" style="text-align:left;"><i class="fa fa-pencil-square-o" style="color:white;" aria-hidden="true"></i>&nbsp;&nbsp;Update</div></button>
-					<button type="button" class="btn btn-warning" onclick="resetAll()"><div class="my-btn" style="text-align:left;"><i class="fa fa-undo" style="color:white;" aria-hidden="true"></i>&nbsp;&nbsp;Reset</div></button>
+					<button type="button" class="btn btn-primary profile"><div class="my-btn" style="text-align:left;"><i class="fa fa-pencil-square-o" style="color:white;" aria-hidden="true"></i>&nbsp;&nbsp;Update</div></button>
+					<button type="button" class="btn btn-warning profile" onclick="resetAll()"><div class="my-btn" style="text-align:left;"><i class="fa fa-undo" style="color:white;" aria-hidden="true"></i>&nbsp;&nbsp;Reset</div></button>
 				</div><!--col-md-8-->
 			</div><!--row-->
 		</form>

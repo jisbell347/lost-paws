@@ -56,3 +56,29 @@
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
 }
 
+.red-star {
+	color: red;
+	font-weight: bolder;
+}
+
+label[class="control-label"] {
+	/*color: #1e623b;*/
+	font-weight: bolder;
+}
+
+i[class~="fa"] {
+	color: #428bca;
+	font-size: 1.2rem;
+}
+
+button .profile {
+	width: 7em;
+	margin-right: 1rem;
+	margin-top: 1rem;
+}
+
+.my-btn {
+	color: white;
+	/*font-weight: bolder;*/
+	font-size: 1.1rem;
+}
