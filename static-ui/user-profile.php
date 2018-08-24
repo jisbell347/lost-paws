@@ -12,7 +12,7 @@
 		<form class="form-control-lg" id="form-profile" action="" method="post">
 			<div class="row justify-content-md-center">
 				<div class="col-md-4">
-					<label class="control-label" for="first-name">First Name <span class="red-star">*</span></label>
+					<label class="control-label" for="first-name">First Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -21,7 +21,7 @@
 					</div><!--		input-group mb-3-->
 				</div><!--col-md-4-->
 				<div class="col-md-4">
-					<label class="control-label" for="last-name">Last Name <span class="red-star">*</span></label>
+					<label class="control-label" for="last-name">Last Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -33,7 +33,7 @@
 			<div class="row justify-content-md-center">
 				<div class="col-md-8">
 					<div class="form-group mb-3">
-						<label class="control-label" for="email">Email <span class="red-star">*</span></label>
+						<label class="control-label" for="email">Email <span class="text-danger">*</span></label>
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
@@ -46,7 +46,7 @@
 			</div><!--row-->
 			<div class="row justify-content-md-center">
 				<div class="col-md-8">
-					<label class="control-label" for="last-name">Phone Number <span class="red-star">*</span></label>
+					<label class="control-label" for="last-name">Phone Number <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
