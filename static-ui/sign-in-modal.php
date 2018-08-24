@@ -2,6 +2,8 @@
 <?php require_once("navbar.php"); ?>
 
 
+
+
 <main>
 	<!--this button is for testing purposes-->
 	<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#sign-in-modal">
@@ -13,10 +15,21 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title ml-auto mr-auto">Sign-In</h4>
+					<div class="row ml-auto">
+					<h4 class="modal-title pl-3">Sign-In</h4>
+					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
 				</div>
-				<div class="modal-body ml-auto mr-auto">
-					<div class="g-signin2" data-onsuccess="onSignIn"></div>
+				<div class="modal-body">
+					<div class="row justify-content-center">
+					<div class="g-signin2" data-width="110" data-onsuccess="onSignIn"></div><br>
+					</div>
+					<div class="row justify-content-center mt-3">
+					<a id="facebook-button" class="btn btn-social btn-facebook">
+						<i class="fab fa-facebook-square pr-3"></i> Sign in
+					</a>
+					</div>
 				</div>
 			</div>
 		</div>

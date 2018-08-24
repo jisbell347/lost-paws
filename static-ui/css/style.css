@@ -48,3 +48,9 @@
 .card-img {
 	max-height: 30em;
 }
+
+#facebook-button {
+	background-color: #4267B2;
+	color: white;
+	border-radius: 0;
+}
