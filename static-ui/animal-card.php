@@ -20,7 +20,7 @@
 				<li class="list-group-item">Description: Fuzzy is a three year-old male cat with light brown and white fur. He was last seen near our house on 1st and Main about 10pm on the 18th of August wearing a blue collar.</li>
 			</ul>
 			<h4 class="p-3 text-center mt-4">Contact:</h4>
-			<button type="button" class="btn btn-info">Info</button>
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#contact">Info</button>
 		</div>
 	</div>
 </main>
