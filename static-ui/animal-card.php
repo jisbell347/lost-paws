@@ -3,6 +3,7 @@
 <?php require_once ("navbar.php"); ?>
 
 <?php require_once ("contact-modal.php");?>
+<?php require_once ("footer.php"); ?>
 
 <main class="mt-4 pt-5">
 	<div class="container p-4">
