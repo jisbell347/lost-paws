@@ -1,3 +1,8 @@
+/*Global Styling*/
+main {
+	padding-top: 6em;
+}
+
 /*navbar*/
 /*custom navbar toggler*/
 .icon-bar {
@@ -37,6 +42,7 @@
 	transform: rotate(0);
 }
 
+/*Homepage Styles*/
 .home {
 	background-color: lightslategrey;
 	border-radius: 5px;
@@ -61,7 +67,5 @@
 }
 
 
-main {
-	padding-top: 6em;
-}
+
 
