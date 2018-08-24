@@ -2,6 +2,8 @@
 
 <?php require_once ("navbar.php"); ?>
 
+<?php require_once ("contact-modal.php");?>
+
 <main class="mt-4 pt-5">
 	<div class="container p-4">
 		<div class="row justify-content-center">
