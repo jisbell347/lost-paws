@@ -1,16 +1,7 @@
 <?php require_once("head-utils.php"); ?>
 <?php require_once("navbar.php"); ?>
 
-
-
-
 <main>
-	<!--this button is for testing purposes-->
-	<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#sign-in-modal">
-		Test Modal!
-	</button>
-
-
 	<div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="sign-in-modal" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
