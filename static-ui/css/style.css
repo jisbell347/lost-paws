@@ -1,6 +1,10 @@
 /*Global Styling*/
 main {
-	padding-top: 6em;
+	padding-top: 3em;
+}
+
+body {
+	padding-bottom: 5em;
 }
 
 /*navbar*/
