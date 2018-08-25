@@ -15,7 +15,7 @@
 					<label class="control-label" for="first-name">First Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fa fa-user text-primary" aria-hidden="true"></i></span>
+							<span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<input type="text" class="form-control" id="first-name" placeholder="Your first name" name="first-name" required />
 					</div><!--		input-group mb-3-->
@@ -24,7 +24,7 @@
 					<label class="control-label" for="last-name">Last Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fa fa-user text-primary" aria-hidden="true"></i></span>
+							<span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<input type="text" class="form-control" id="first-name" placeholder="Your last name" name="last-name" required />
 					</div><!--		input-group mb-3-->
@@ -36,7 +36,7 @@
 						<label class="control-label" for="email">Email <span class="text-danger">*</span></label>
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fa fa-envelope text-primary" aria-hidden="true"></i></span>
+								<span class="input-group-text"><i class="fas fa-envelope text-primary"></i></span>
 							</div><!--	input-group-prepend-->
 							<input type="text" class="form-control" placeholder="Enter your email address" name="email" aria-describedby="emailHelp" required />
 						</div><!--	input-group-->
@@ -49,7 +49,7 @@
 					<label class="control-label" for="last-name">Phone Number <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fa fa-phone text-primary" aria-hidden="true"></i></span>
+							<span class="input-group-text"><i class="fas fa-phone text-primary"></i></span>
 						</div><!--	input-group-prepend-->
 						<input type="tel" id="phone" name="phone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
 						<span class="validity"></span>
