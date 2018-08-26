@@ -58,8 +58,8 @@
 			</div><!--row-->
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
-					<button type="button" class="btn btn-primary text-light mt-3 mr-3 profile"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
-					<button type="button" class="btn btn-warning text-light mt-3 profile" onclick="resetAll()"><i class="fas fa-undo"></i>&nbsp;&nbsp;Reset</button>
+					<button type="button" class="btn btn-primary text-light mt-3 mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+					<button type="button" class="btn btn-warning text-light mt-3 profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
 			</div><!--row-->
 		</form>
