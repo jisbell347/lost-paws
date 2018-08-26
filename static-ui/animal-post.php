@@ -21,7 +21,7 @@
 							<option selected>Dog</option>
 							<option>Cat</option>
 						</select>
-					</div><!--		input-group mb-3-->
+					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
 				<div class="col-md-3">
 					<label class="control-label" for="animal-gender">Pet Gender <span class="text-danger">*</span></label>
@@ -34,7 +34,7 @@
 							<option>Female</option>
 							<option>Male</option>
 						</select>
-					</div><!--		input-group mb-3-->
+					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
@@ -44,8 +44,8 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-pen text-primary"></i></span>
 					</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="animal-name" placeholder="Animal name. Leave empty if unknow." name="animal-name" />
-					</div><!--		input-group mb-3-->
+						<input type="text" class="form-control" id="animal-name" placeholder="Animal name. Leave empty if unknown." name="animal-name" />
+					</div><!--input-group mb-3-->
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
@@ -80,9 +80,9 @@
 								<option>Tabbies</option>
 								<option>Points</option>
 							</select>
-						</div><!--		input-group-->
+						</div><!--input-group-->
 						<small id="colorHelp">Please choose a predominant pet color or pattern.</small>
-					</div><!--	form-group mb-3-->
+					</div><!--form-group mb-3-->
 				</div><!--col-md-6-->
 			</div><!--row-->
 			<div class="row justify-content-md-center">
@@ -92,7 +92,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-map-marker-alt text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="first-name" placeholder="Please enter the last know pet location." name="first-name" required />
+						<input type="text" class="form-control" id="animal-location" placeholder="Please enter the last know pet location." name="animal-location" required />
 					</div><!--		input-group mb-3-->
 				</div><!--col-md-6-->
 			</div><!--row-->
@@ -103,8 +103,8 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-comment text-primary"></i></span>
 						</div>
-						<textarea class="form-control" rows="5" placeholder="Please enter more detailed pet description." name="animal-description"></textarea>
-					</div><!--		input-group mb-3-->
+						<textarea class="form-control" rows="5" placeholder="Please enter more detailed pet description." name="animal-description" required></textarea>
+					</div><!--input-group mb-3-->
 				</div><!--col-md-6-->
 			</div><!--row-->
 			<div class="row justify-content-md-center">
@@ -115,5 +115,4 @@
 			</div><!--row-->
 		</form>
 	</div><!--		container-->
-
 </main>
