@@ -5,13 +5,13 @@
 <main>
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<h1 class="text-center my-5">Post an Animal</h1>
-			</div><!--col-md-8-->
+			</div><!--col-md-6-->
 		</div><!--row-->
 		<form class="form-control-lg" id="form-animal" action="" method="post">
 			<div class="row justify-content-md-center">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<label class="control-label" for="animal-species">Animal Species <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -22,8 +22,8 @@
 							<option>Cat</option>
 						</select>
 					</div><!--		input-group mb-3-->
-				</div><!--col-md-4-->
-				<div class="col-md-4">
+				</div><!--col-md-3-->
+				<div class="col-md-3">
 					<label class="control-label" for="animal-gender">Animal Gender <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -35,10 +35,10 @@
 							<option>Male</option>
 						</select>
 					</div><!--		input-group mb-3-->
-				</div><!--col-md-4-->
+				</div><!--col-md-3-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-8">
+				<div class="col-md-6">
 				<label class="control-label" for="animal-name">Animal Name</label>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
@@ -46,7 +46,7 @@
 					</div><!--input-group-prepend-->
 						<input type="text" class="form-control" id="animal-name" placeholder="Animal name. Leave empty if unknow." name="animal-name" />
 					</div><!--		input-group mb-3-->
-				</div><!--col-md-8-->
+				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 		</form>
 	</div><!--		container-->
