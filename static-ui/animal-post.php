@@ -114,5 +114,5 @@
 				</div><!--col-md-6-->
 			</div><!--row-->
 		</form>
-	</div><!--		container-->
+	</div><!--container-->
 </main>
