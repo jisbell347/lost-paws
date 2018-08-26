@@ -70,10 +70,13 @@ body {
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
 }
 
-/*Profile-update*/
-.profile {
+/*profile-update*/
+.profile-btn {
 	width: 7.5em;
  }
 
-
+/*animal-post*/
+.animal-btn {
+	width: 7.5em;
+}
 
