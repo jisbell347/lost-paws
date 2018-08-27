@@ -30,7 +30,7 @@
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<select class="form-control" id="animal-gender">
-							<option selected>Unknow</option>
+							<option selected>Unknown</option>
 							<option>Female</option>
 							<option>Male</option>
 						</select>
@@ -57,7 +57,7 @@
 								<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 							</div><!--input-group-prepend-->
 							<select class="form-control" id="animal-color" aria-describedby="colorHelp">
-								<option selected>Unknow</option>
+								<option selected>Unknown</option>
 								<option>Brown</option>
 								<option>Red</option>
 								<option>Gold</option>
@@ -103,14 +103,14 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-comment text-primary"></i></span>
 						</div>
-						<textarea class="form-control" rows="5" placeholder="Please enter more detailed pet description." name="animal-description" required></textarea>
+						<textarea class="form-control" rows="5" placeholder="Please enter a detailed pet description. (250 character maximum)" name="animal-description" required></textarea>
 					</div><!--input-group mb-3-->
 				</div><!--col-md-6-->
 			</div><!--row-->
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
-					<button type="button" class="btn btn-primary text-light mt-3 mr-3 animal-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
-					<button type="button" class="btn btn-warning text-light mt-3 animal-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
+					<button type="button" class="btn btn-primary text-light mt-3 mb-5 mr-3 animal-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
+					<button type="button" class="btn btn-warning text-light mt-3 mb-5 animal-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
 			</div><!--row-->
 		</form>
