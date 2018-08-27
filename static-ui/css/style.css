@@ -5,6 +5,7 @@ main {
 
 body {
 	padding-bottom: 5em;
+	position: relative;
 }
 
 /*navbar*/
@@ -78,5 +79,18 @@ body {
 /*animal-post*/
 .animal-btn {
 	width: 7.5em;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #333;
+	color:#fff;
+	margin-top: 5rem;
+}
+
+.form-padding {
+	padding-bottom: 38rem;
 }
 
