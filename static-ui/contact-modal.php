@@ -2,7 +2,7 @@
 
 <?php require_once("animal-card.php");?>
 
-<main>
+<section>
 
 	<!-- Modal -->
 	<div id="contact" class="modal" tabindex="-1" role="dialog">
@@ -31,4 +31,5 @@
 			</div>
 		</div>
 	</div>
+</section>
 
