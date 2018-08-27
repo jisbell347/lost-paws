@@ -2,7 +2,7 @@
 <?php require_once("navbar.php");?>
 <?php //require_once ("footer.php"); ?>
 
-<main>
+<main class="form-padding">
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-md-6">
@@ -116,3 +116,5 @@
 		</form>
 	</div><!--container-->
 </main>
+
+<?php require_once "footer.php"; ?>
