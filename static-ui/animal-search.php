@@ -2,7 +2,7 @@
 <?php require_once ("navbar.php"); ?>
 
 <main>
-	<div class="container pt-5 mt-5">
+	<div class="container pt-5">
 		<div class="row justify-content-between align-items-center">
 			<h2 class="p-3">Search Results</h2>
 			<label for="sort"></label>
@@ -61,3 +61,5 @@
 		</div>
 	</div>
 </main>
+
+<?php require_once "footer.php"; ?>
