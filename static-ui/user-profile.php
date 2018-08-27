@@ -1,8 +1,8 @@
 <?php require_once ("head-utils.php");?>
 <?php require_once("navbar.php");?>
+<?php /*require_once ("footer.php"); */?>
 
-
-<main>
+<main class="form-padding">
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-md-6">
@@ -58,12 +58,12 @@
 			</div><!--row-->
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
-					<button type="button" class="btn btn-primary text-light mt-3 mb-5 mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
-					<button type="button" class="btn btn-warning text-light mt-3 mb-5 profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
+					<button type="button" class="btn btn-primary text-light mt-3 mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+					<button type="button" class="btn btn-warning text-light mt-3 profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
 			</div><!--row-->
 		</form>
 	</div><!--		container-->
 </main>
 
-
+<?php require_once "footer.php"; ?>
