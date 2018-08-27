@@ -1,7 +1,7 @@
 <?php require_once("head-utils.php"); ?>
 <?php require_once("navbar.php"); ?>
 
-<main>
+<section>
 	<div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="sign-in-modal" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -26,4 +26,4 @@
 			</div>
 		</div>
 	</div>
-</main>
+</section>
