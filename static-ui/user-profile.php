@@ -3,7 +3,7 @@
 
 
 <main>
-	<form class="form-control-lg" id="form-profile">
+	<form class="form-control-md" id="form-profile">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
@@ -66,5 +66,5 @@
 	</form>
 
 </main>
-<?php //require_once "footer.php"; ?>
+<?php require_once "footer.php"; ?>
 
