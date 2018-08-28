@@ -2,7 +2,7 @@
 <?php require_once("navbar.php"); ?>
 
 <main>
-	<div class="container home text-center">
+	<div class="container mt-4 home text-center">
 		<div class="row">
 			<div class="col-md">
 				<h1>Welcome to Lost Paws!</h1>
@@ -13,14 +13,14 @@
 	<div class="container pl-1 pr-1 mt-4">
 	<a href="#" type="button" class="btn btn-primary btn-lg btn-block">Post a lost or found animal</a>
 	</div>
-	<div class="container mt-4 text-center">
+	<div class="container animal-buttons mt-4 text-center">
 		<div class="row">
 			<div class="col-md">
 				<h2>Search lost and found animals.</h2>
 			</div>
 		</div>
 	</div>
-	<div class="container mt-3 text-center">
+	<div class="container mt-3 mb-5 text-center">
 		<div class="row">
 			<div class="col-md-6">
 				<a href="#">
@@ -49,3 +49,5 @@
 		</div>
 	</div>
 </main>
+
+<?php require_once "footer.php";?>
