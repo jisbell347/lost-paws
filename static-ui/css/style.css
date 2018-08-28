@@ -1,11 +1,14 @@
 /*Global Styling*/
-main {
-	padding-top: 2em;
+html {
+	display: flex;
 }
 
 body {
-	padding-bottom: 5em;
-	position: relative;
+	width: 100%;
+}
+
+main {
+	padding-top: 2em;
 }
 
 /*navbar*/
@@ -90,32 +93,14 @@ body {
 	width: 7.5em;
 }
 
-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	background-color: #333;
-	color:#fff;
-	margin-top: 5rem;
+/* Footer */
+.sfooter > * {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
-.form-padding {
-	height: 150vh;
-	/*padding-bottom: 38rem;*/
-}
-
-@media (min-width: 900px) {
-	.form-padding {
-		height: 140vh;
-		/*padding-bottom: 38rem;*/
-	}
-}
-.form-padding-user {
-	height: 125vh;
-}
-@media (min-width: 900px) {
-	.form-padding-user {
-		height: 95vh;
-	}
+.sfooter-content {
+	flex: 1 0 auto;
 }
 
