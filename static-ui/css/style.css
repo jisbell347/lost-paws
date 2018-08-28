@@ -95,9 +95,10 @@ footer {
 	padding-bottom: 38rem;
 }
 
-@media screen and (min-width: 900px) {
+@media (min-width: 700px) {
 	.form-padding {
-		height: 100vh;
+		height: 125vh;
+		padding-bottom: 0;
 	}
 }
 
