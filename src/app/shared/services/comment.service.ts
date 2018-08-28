@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Status} from "../interfaces/status";
 import {Comment} from "../interfaces/comment";
 import {Observable} from "rxjs/internal/Observable";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable ()
 export class CommentService {
@@ -35,16 +35,16 @@ export class CommentService {
 
 	// call to the comment API and get an array of tweets based off the animalId
 	getCommentbyAnimalId(commentAnimalId : string) : Observable<Comment[]> {
-		return(this.http.get<Comment[]>(this.commentUrl + commentAnimalId));
+		return(this.http.get<Comment[]>(this.commentUrl, {params: new HttpParams().set("commentAnimalId", commentAnimalId)}));
 	}
 
 	// call to the comment API and get an array of comments based off the profileId
 	getCommentbyProfileId(commentProfileId : string) : Observable<Comment[]> {
-		return(this.http.get<Comment[]>(this.commentUrl + commentProfileId));
+		return(this.http.get<Comment[]>(this.commentUrl, {params: new HttpParams().set("commentProfileId", commentProfileId)}));
 	}
 
 	// call to the comment API and get an array of comments based off the commentText
 	getCommentByText(commentText : string) : Observable<Comment[]> {
-		return(this.http.get<Comment[]>(this.commentUrl + commentText));
+		return(this.http.get<Comment[]>(this.commentUrl, {params: new HttpParams().set("commentText", commentText)}));
 	}
 }
