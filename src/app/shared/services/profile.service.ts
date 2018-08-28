@@ -1,8 +1,9 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
 import {Status} from "../interfaces/status";
 import {Profile} from"../interfaces/profile";
+import {Animal} from "../interfaces/animal";
 
 @Injectable()
 export class ProfileService {
@@ -29,12 +30,11 @@ export class ProfileService {
 
 	// call to the Profile API and get a Profile object by its email address
 	getProfileByProfileEmail(profileEmail: string) : Observable<Profile> {
-		return(this.http.get<Profile>(this.profileUrl + "?profileEmail=" + profileEmail));
+		return(this.http.get<Profile>(this.profileUrl, {params: new HttpParams().set("profileEmail", profileEmail)}));
 	}
-
 
 	// call to the Profile API and get a Profile object by its phone number
 	getProfileByProfilePhone(profilePhone: string) : Observable<Profile> {
-		return(this.http.get<Profile>(this.profileUrl + "?profilePhone=" + profilePhone));
+		return(this.http.get<Profile>(this.profileUrl,  {params: new HttpParams().set("profilePhone", profilePhone)}));
 	}
 }
