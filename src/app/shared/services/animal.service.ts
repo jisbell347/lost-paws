@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
 import {Status} from "../interfaces/status";
@@ -34,32 +34,32 @@ export class AnimalService {
 
 	//call to the Animal API and get an array of animals by  profileId
 	getAnimalbyProfileId(animalProfileId: string) : Observable<Animal[]> {
-		return(this.http.get<Animal[]>(this.animalUrl + animalProfileId));
+		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalProfileId", animalProfileId)}));
 	}
 
 	//call to the Animal API and get an array of animals by animalColor
 	getAnimalByAnimalColor(animalColor: string) : Observable<Animal[]> {
-		return(this.http.get<Animal[]>(this.animalUrl + animalColor));
+		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalColor", animalColor)}));
 	}
 
 	//call to the Animal API and get an array of animals by animalDescription
 	getAnimalByAnimalDescription(animalDescription: string) : Observable<Animal[]> {
-		return(this.http.get<Animal[]>(this.animalUrl + animalDescription));
+		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalDescription", animalDescription)}));
 	}
 
 	//call to the Animal API and get an array of animals by animalGender
 	getAnimalByAnimalGender(animalGender: string) : Observable<Animal[]> {
-		return(this.http.get<Animal[]>(this.animalUrl + animalGender));
+		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalGender", animalGender)}));
 	}
 
 	//call to the Animal API and get an array of animals by animalSpecies
 	getAnimalByAnimalSpecies(animalSpecies: string) : Observable<Animal[]> {
-		return(this.http.get<Animal[]>(this.animalUrl + animalSpecies));
+		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalSpecies", animalSpecies)}));
 	}
 
 	//call to the Animal API and get an array of animals by animalStatus
 	getAnimalByAnimalStatus(animalStatus: string) : Observable<Animal[]> {
-		return(this.http.get<Animal[]>(this.animalUrl + animalStatus));
+		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalStatus", animalStatus)}));
 	}
 
 }
