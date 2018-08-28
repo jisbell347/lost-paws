@@ -3,7 +3,7 @@
 
 
 <main>
-	<form class="form-control-lg" id="form-profile" action="" method="post">
+	<form class="form-control-lg" id="form-profile">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
@@ -17,7 +17,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="first-name" placeholder="Your first name" name="first-name" required />
+						<input type="text" class="form-control" id="first-name" placeholder="Your first name" required />
 					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
 				<div class="col-md-3">
@@ -26,7 +26,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="last-name" placeholder="Your last name" name="last-name" required />
+						<input type="text" class="form-control" id="last-name" placeholder="Your last name" required />
 					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
 			</div><!--row justify-content-md-center-->
@@ -38,7 +38,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-envelope text-primary"></i></span>
 							</div><!--input-group-prepend-->
-							<input type="text" class="form-control" placeholder="Enter your email address" name="email" aria-describedby="emailHelp" required />
+							<input class="form-control"type="text" id="email" placeholder="Enter your email address" aria-describedby="emailHelp" required />
 						</div><!--	input-group-->
 						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 					</div><!--	form-group mb-3-->
@@ -51,7 +51,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-phone text-primary"></i></span>
 						</div><!--	input-group-prepend-->
-						<input type="tel" id="phone" name="phone" class="form-control" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+						<input class="form-control" type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
 						<span class="validity"></span>
 					</div><!--		input-group mb-3-->
 				</div><!--col-md-6-->
