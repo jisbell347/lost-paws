@@ -38,7 +38,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-envelope text-primary"></i></span>
 							</div><!--input-group-prepend-->
-							<input class="form-control"type="text" id="email" placeholder="Enter your email address" aria-describedby="emailHelp" required />
+							<input class="form-control" type="text" id="email" placeholder="Enter your email address" aria-describedby="emailHelp" required />
 						</div><!--	input-group-->
 						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 					</div><!--	form-group mb-3-->
