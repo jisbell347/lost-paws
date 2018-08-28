@@ -101,13 +101,21 @@ footer {
 
 .form-padding {
 	height: 150vh;
-	padding-bottom: 38rem;
+	/*padding-bottom: 38rem;*/
 }
 
-@media (min-width: 700px) {
+@media (min-width: 900px) {
 	.form-padding {
-		height: 125vh;
-		padding-bottom: 0;
+		height: 140vh;
+		/*padding-bottom: 38rem;*/
+	}
+}
+.form-padding-user {
+	height: 125vh;
+}
+@media (min-width: 900px) {
+	.form-padding-user {
+		height: 95vh;
 	}
 }
 
