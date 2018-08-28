@@ -2,7 +2,7 @@
 <?php require_once("navbar.php");?>
 
 <main class="mb-5">
-	<form class="form-control-lg" id="form-animal">
+	<form class="form-control-md" id="form-animal">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">

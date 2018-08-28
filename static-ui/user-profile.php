@@ -2,7 +2,8 @@
 <?php require_once("navbar.php");?>
 
 
-<main>
+<main class="sfooter">
+	<div class="sfooter-content">
 	<form class="form-control-md" id="form-profile">
 		<div class="container">
 			<div class="row justify-content-md-center">
@@ -64,7 +65,7 @@
 			</div><!--row justify-content-md-center-->
 		</div><!--		container-->
 	</form>
-
+	</div>
 </main>
 <?php require_once "footer.php"; ?>
 
