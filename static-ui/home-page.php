@@ -1,7 +1,8 @@
 <?php require_once("head-utils.php"); ?>
 <?php require_once("navbar.php"); ?>
 
-<main>
+<main class="sfooter">
+<div class="sfooter-content">
 	<div class="container mt-4 home text-center">
 		<div class="row">
 			<div class="col-md">
@@ -48,6 +49,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </main>
 
 <?php require_once ("footer.php");?>
