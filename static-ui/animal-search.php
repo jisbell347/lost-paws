@@ -1,7 +1,7 @@
 <?php require_once ("head-utils.php"); ?>
 <?php require_once ("navbar.php"); ?>
 
-<main class="form-padding">
+<main>
 	<div class="container pt-5">
 		<div class="row justify-content-between align-items-center">
 			<h2 class="p-3">Search Results</h2>
