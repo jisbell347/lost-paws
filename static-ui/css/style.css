@@ -9,6 +9,11 @@ body {
 }
 
 /*navbar*/
+
+.nav-logo {
+	height: 2em;
+}
+
 /*custom navbar toggler*/
 .icon-bar {
 	width: 1.5em;
