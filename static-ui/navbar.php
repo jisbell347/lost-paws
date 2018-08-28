@@ -10,7 +10,7 @@
 			<span class="icon-bar middle-bar"></span>
 			<span class="icon-bar bottom-bar"></span>
 		</button>
-		<a class="navbar-brand text-secondary pl-3" href="#"><img src="images/lost-paws-icon.png" alt="logo" class="nav-logo"/>Lost Paws</a>
+		<a class="navbar-brand text-secondary pl-3" href="#"><img src="images/lost-paws-icon.png" alt="logo" class="nav-logo pr-1"/>Lost Paws</a>
 		<button class="btn btn-secondary d-lg-none d-xl-none" type="submit">Search</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav ml-auto">
