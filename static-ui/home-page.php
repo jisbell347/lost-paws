@@ -1,5 +1,3 @@
-<?php require_once("head-utils.php"); ?>
-<?php require_once("navbar.php"); ?>
 
 <main class="sfooter">
 <div class="sfooter-content">
@@ -52,4 +50,3 @@
 </div>
 </main>
 
-<?php require_once ("footer.php");?>
