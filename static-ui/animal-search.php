@@ -1,8 +1,8 @@
-<?php require_once ("head-utils.php"); ?>
-<?php require_once ("navbar.php"); ?>
+<navbar></navbar>
+<sign-in></sign-in>
 
-<main class="sfooter">
-	<div class="sfooter-content">
+<main>
+	<div>
 		<div class="container pt-5">
 			<div class="row justify-content-between align-items-center">
 				<h2 class="p-3">Search Results</h2>
@@ -15,11 +15,11 @@
 				<label for="sort"></label>
 				<select id="sort" class="col-md-3">
 					<option value="">--Filter By--</option>
-					<option value="color">Color</option>
-					<option value="gender">Gender</option>
-					<option value="name">Name</option>
-					<option value="species">Species</option>
-					<option value="status">Status</option>
+					<option *ngFor="let option of options" (click)="getAnimalByAnimalColor(option.animalColor);" value="color">Color</option>
+					<option *ngFor="let option of options" (click)="getAnimalByAnimalGender(option.animalGender);" value="gender">Gender</option>
+					<option *ngFor="let option of options" (click)="getAnimalByAnimalDescription(option.animalDescription);" value="description">Description</option>
+					<option *ngFor="let option of options" (click)="getAnimalByAnimalSpecies(option.animalSpecies);" value="species">Species</option>
+					<option *ngFor="let option of options" (click)="getAnimalByAnimalStatus(option.animalStatus);" value="status">Status</option>
 				</select>
 			</div>
 
@@ -70,4 +70,3 @@
 	</div>
 </main>
 
-<?php require_once ("footer.php");?>

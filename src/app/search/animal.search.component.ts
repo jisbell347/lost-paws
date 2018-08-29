@@ -21,10 +21,7 @@ export class AnimalSearchComponent implements OnInit{
 	ngOnInit() {
 		this.loadSearchResults();
 		this.searchForm = this.formBuilder.group({
-			animalDescription: ["", [Validators.maxLength(250), Validators.required]],
-			animalGender: ["", [Validators.maxLength(7), Validators.required]],
-			animalSpecies: ["", [Validators.maxLength(3), Validators.required]],
-			animalsStatus: ["", [Validators.maxLength(8), Validators.required]]
+			searchContent: ["", [Validators.maxLength(64)]]
 		})
 	}
 
