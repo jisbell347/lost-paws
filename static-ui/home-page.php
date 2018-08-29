@@ -1,6 +1,4 @@
-
-<main class="sfooter">
-<div class="sfooter-content">
+<main>
 	<div class="container mt-4 home text-center">
 		<div class="row">
 			<div class="col-md">
@@ -47,6 +45,5 @@
 			</div>
 		</div>
 	</div>
-</div>
 </main>
 
