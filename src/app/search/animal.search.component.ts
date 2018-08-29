@@ -3,7 +3,7 @@ import {Component, OnInit} from "@angular/core";
 import {AnimalService} from "../shared/services/animal.service";
 import {Status} from "../shared/interfaces/status";
 import {Animal} from "../shared/interfaces/animal";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
 	template: require("./animal.search.template.html")
