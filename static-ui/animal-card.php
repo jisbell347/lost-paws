@@ -16,6 +16,7 @@
 				<h4 class="text-center">About this animal:</h4>
 				<ul class="list-group">
 					<li class="list-group-item">Status: Found</li>
+					<li class="list-group-item">Date Lost/Found: August 26, 2018</li>
 					<li class="list-group-item">Species: Cat</li>
 					<li class="list-group-item">Name: Fuzzy</li>
 					<li class="list-group-item">Color: White/Brown</li>
