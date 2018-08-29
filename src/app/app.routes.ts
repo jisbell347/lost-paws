@@ -17,6 +17,7 @@ import {CommentService} from "./shared/services/comment.service";
 import {ProfileService} from "./shared/services/profile.service";
 import {SessionService} from "./shared/services/session.service";
 import {SignOutService} from "./shared/services/sign.out.service";
+import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 // Add components to the array that will be passed off to the module
 export const allAppComponents = [HomeComponent];
