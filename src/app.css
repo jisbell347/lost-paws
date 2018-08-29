@@ -1,2 +1,108 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+/*Global Styling*/
+html {
+	display: flex;
+}
+
+body {
+	width: 100%;
+}
+
+main {
+	padding-top: 2em;
+}
+
+/*navbar*/
+
+.nav-logo {
+	height: 2em;
+}
+
+/*custom navbar toggler*/
+.icon-bar {
+	width: 1.5em;
+	height: .15em;
+	background-color: #444444;
+	display: block;
+	transition: all 0.5s;
+	margin-top: .32em;
+}
+/*navbar toggler animation*/
+.navbar-toggler {
+	border: none;
+	background: transparent !important;
+}
+.navbar-toggler:focus {
+	outline: none;
+}
+.navbar-toggler .top-bar {
+	transform: rotate(45deg);
+	transform-origin: 4.5% 20%;
+}
+.navbar-toggler .middle-bar {
+	opacity: 0;
+}
+.navbar-toggler .bottom-bar {
+	transform: rotate(-45deg);
+	transform-origin: 4.5% 80%;
+}
+.navbar-toggler.collapsed .top-bar {
+	transform: rotate(0);
+}
+.navbar-toggler.collapsed .middle-bar {
+	opacity: 1;
+}
+.navbar-toggler.collapsed .bottom-bar {
+	transform: rotate(0);
+}
+
+/*Homepage Styles*/
+.home {
+	background-color: lightslategrey;
+	border-radius: 5px;
+	padding-top: 3em;
+	padding-bottom: 3em;
+}
+
+.card-img {
+	max-height: 25em;
+	opacity: .70;
+}
+
+.card-img-overlay {
+	color: black;
+}
+
+#facebook-button {
+	background-color: #4267B2;
+	color: white;
+	border-radius: 0;
+	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
+}
+
+.animal-buttons {
+	margin-bottom: 2em;
+}
+
+/*profile-update*/
+.profile-btn {
+	width: 7.5em;
+}
+
+/*animal-post*/
+.animal-btn {
+	width: 7.5em;
+}
+
+/* Footer */
+.sfooter > * {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.sfooter-content {
+	flex: 1 0 auto;
+}
+
