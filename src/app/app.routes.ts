@@ -15,19 +15,20 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AnimalService} from "./shared/services/animal.service";
 import {CommentService} from "./shared/services/comment.service";
 import {ProfileService} from "./shared/services/profile.service";
+import {NavbarComponent} from "./shared/components/navbar/navbar.component";
 import {SessionService} from "./shared/services/session.service";
 import {SignOutService} from "./shared/services/sign.out.service";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent];
+export const allAppComponents = [HomeComponent,NavbarComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
  **/
 export const routes: Routes = [
 	{path: "", component: AnimalPostComponent},
-	{path: "", component: HomeComponent}
+	{path: "", component: HomeComponent},
 ];
 
 // An array of services
