@@ -62,4 +62,8 @@ export class AnimalService {
 		return(this.http.get<Animal[]>(this.animalUrl, {params: new HttpParams().set("animalStatus", animalStatus)}));
 	}
 
+	getAllCurrentAnimals() : Observable<Animal[]> {
+		return(this.http.get<Animal[]>(this.animalUrl));
+	}
+
 }
