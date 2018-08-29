@@ -5,7 +5,6 @@ import {Component, OnInit} from "@angular/core";
 	template: require("./animal-post.component.html")
 })
 export class AnimalPostComponent{
-
 	constructor() {
 	}
 }
