@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 
 // Place needed components here!
 import {HomeComponent} from "./home/home.component";
-
+import {AnimalPostComponent} from "./animal-post/animal-post.component";
 
 
 // Import all needed Interceptors
@@ -26,6 +26,7 @@ export const allAppComponents = [HomeComponent];
  * Place them in order of most specific to least specific.
  **/
 export const routes: Routes = [
+	{path: "", component: AnimalPostComponent},
 	{path: "", component: HomeComponent}
 ];
 
