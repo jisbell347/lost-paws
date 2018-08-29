@@ -1,8 +1,8 @@
 <?php require_once ("head-utils.php");?>
 <?php require_once("navbar.php");?>
 
-<main class="mb-5">
-	<form class="form-control-md" id="form-animal">
+<main>
+	<form class="form-control-md mt-5" id="form-animal">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
@@ -10,7 +10,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-3">
+				<div class="form-group col-md-3">
 					<label class="control-label" for="animal-species">Animal Species <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -22,7 +22,7 @@
 						</select>
 					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
-				<div class="col-md-3">
+				<div class="form-group col-md-3">
 					<label class="control-label" for="animal-gender">Pet Gender <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -37,7 +37,7 @@
 				</div><!--col-md-3-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<label class="control-label" for="animal-name">Pet Name</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -48,7 +48,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<div class="form-group mb-3">
 						<label class="control-label" for="animal-color">Pet Color</label>
 						<div class="input-group">
@@ -85,7 +85,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<label class="control-label" for="animal-location">Pet Last Known Location</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -96,7 +96,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<label class="control-label" for="animal-description">Pet Description <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -107,7 +107,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<button type="button" class="btn btn-primary text-light mt-3 mb-5 mr-3 animal-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
 					<button type="button" class="btn btn-warning text-light mt-3 mb-5 animal-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
