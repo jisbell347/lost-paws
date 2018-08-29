@@ -4,15 +4,15 @@
 
 <main class="sfooter">
 	<div class="sfooter-content">
-	<form class="form-control-md" id="form-profile">
+	<form class="form-control-md mt-5" id="form-profile">
 		<div class="container">
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<h1 class="text-center my-5">Update Profile</h1>
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-3">
+				<div class="form-group col-md-3">
 					<label class="control-label" for="first-name">First Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -21,7 +21,7 @@
 						<input type="text" class="form-control" id="first-name" placeholder="Your first name" required />
 					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
-				<div class="col-md-3">
+				<div class="form-group col-md-3">
 					<label class="control-label" for="last-name">Last Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -46,7 +46,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<label class="control-label" for="phone">Phone Number <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -58,7 +58,7 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="col-md-6">
+				<div class="form-group col-md-6">
 					<button type="button" class="btn btn-primary text-light mt-3 mb-5 mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
 					<button type="button" class="btn btn-warning text-light mt-3 mb-5 profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
