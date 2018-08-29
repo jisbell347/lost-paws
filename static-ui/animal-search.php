@@ -6,8 +6,14 @@
 		<div class="container pt-5">
 			<div class="row justify-content-between align-items-center">
 				<h2 class="p-3">Search Results</h2>
+				<div class="input-group col-md-3 offset-3">
+					<div class="input-group-prepend">
+						<button class="btn btn-dark" type="button" id="button-addon1">Search</button>
+					</div>
+					<input type="text" class="form-control" placeholder="Search by" aria-label="Example text with button addon" aria-describedby="button-addon1">
+				</div>
 				<label for="sort"></label>
-				<select id="sort">
+				<select id="sort" class="col-md-3">
 					<option value="">--Filter By--</option>
 					<option value="color">Color</option>
 					<option value="gender">Gender</option>
