@@ -17,4 +17,4 @@ import "bootstrap";
 import "@fortawesome/fontawesome";
 import "@fortawesome/fontawesome-free-brands";
 import "@fortawesome/fontawesome-free-regular";
-import "@fortawesome/fontawesome-fre
+import "@fortawesome/fontawesome-free-solid";
