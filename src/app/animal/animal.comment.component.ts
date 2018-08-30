@@ -23,11 +23,12 @@ import {ActivatedRoute, Params} from "@angular/router";
 
 export class AnimalCommentComponent implements OnInit {
 	animal: Animal;
+	profile: Profile;
 	comment: Comment;
 	comments: Comment[] = [];
 	animalId = this.route.snapshot.params["animalId"];
 	createCommentForm: FormGroup;
-	status: Status;
+	status: Status = {status: null, message: null, type: null};
 
 	constructor(
 		protected formBuilder: FormBuilder,
@@ -66,8 +67,6 @@ export class AnimalCommentComponent implements OnInit {
 				if(this.status.status == 200) {
 					this.loadComments();
 					this.createCommentForm.reset();
-				} else {
-					return false
 				}
 			});
 	}
