@@ -74,6 +74,7 @@ main {
 	color: black;
 }
 
+
 #facebook-button {
 	background-color: #4267B2;
 	color: white;
@@ -93,6 +94,19 @@ main {
 /*animal-post*/
 .animal-btn {
 	width: 7.5em;
+}
+
+/*Animal Card */
+
+#animal-card {
+	max-height: 500px;
+	max-width: 600px;
+}
+
+.list-span {
+	font-weight: bold;
+	font-size: 1.2em;
+	color: teal;
 }
 
 /* Footer */
