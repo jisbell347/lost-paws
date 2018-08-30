@@ -6,6 +6,7 @@ import {HomeComponent} from "./home/home.component";
 import {AnimalPostComponent} from "./animal-post/animal-post.component";
 import {AnimalCardComponent} from "./animal/animal.card.component";
 import {AnimalCommentComponent} from "./animal/animal.comment.component";
+import {ContactComponent} from "./animal/contact.component";
 
 
 // Import all needed Interceptors
@@ -25,7 +26,7 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent];
+export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, ContactComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
