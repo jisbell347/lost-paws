@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-2 col-md-3"></div>
+		<div class="card col-12 col-sm-8 col-md-6 col-lg-10 offset-1">
+			<br>
+			<p><strong>Comments</strong></p>
+			<br>
+			<form id="createCommentForm" name="createCommentForm" [formGroup]="createCommentForm" (submit)="createAnimalComment()" novalidate>
+						<textarea class="form-control" type="text" name="commentContent" id="commentText"
+									 placeholder="Write your comment here!" formControlName="commentText" rows="3"></textarea>
+				<button class="btn btn-success mt-3" type="submit">Submit Comment</button>
+			</form>
+			<div class="col-12 col-lg-12">
+				<!--<div class="card-columns">-->
+
+				<!-- begin comment item -->
+				<div class="row border-bottom" *ngFor="let comment of comments">
+					<div class="card-body">
+						<h4 class="card-title">{{profile.profileName}}</h4>
+						<p class="card-text">{{comment.commentText}}</p>
+						<div class="small text-muted">{{comment.commentDate | date:"medium"}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
