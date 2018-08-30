@@ -15,7 +15,6 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 //Import needed services
 import {AnimalService} from "./shared/services/animal.service";
-import {AuthService} from "./shared/services/auth.service";
 import {CommentService} from "./shared/services/comment.service";
 import {ProfileService} from "./shared/services/profile.service";
 import {NavbarComponent} from "./shared/components/navbar/navbar.component";
@@ -33,13 +32,13 @@ export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardCompon
  **/
 export const routes: Routes = [
 	{path: "animal/:animalId", component: AnimalCardComponent},
-	{path: "", component: AnimalPostComponent},
+	{path: "animal-post", component: AnimalPostComponent},
 	{path: "", component: HomeComponent},
 ];
 
 // An array of services
 
-const services: any[] = [AnimalService, AuthService, CommentService, ProfileService, SessionService, SignOutService];
+const services: any[] = [AnimalService, CommentService, ProfileService, SessionService, SignOutService];
 
 // An array of misc providers
 const providers: any[] = [
