@@ -187,9 +187,10 @@ class CommentTest extends LostPawsTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Comment", $results);
-
+//		var_dump($results);
 		// grab the result from the array and validate it
 		$pdoComment = $results[0];
+
 
 		$this->assertEquals($pdoComment->getCommentId(), $commentId);
 		$this->assertEquals($pdoComment->getCommentAnimalId(), $this->animal->getAnimalId());
@@ -197,6 +198,7 @@ class CommentTest extends LostPawsTest {
 		// format the date to seconds since the beginning of time to avoid round off error
 		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 		$this->assertEquals($pdoComment->getCommentText(), $this->VALID_COMMENTTEXT);
+
 	}
 
 	/**
@@ -225,17 +227,19 @@ class CommentTest extends LostPawsTest {
 		$results = Comment::getCommentByCommentAnimalId($this->getPDO(), $comment->getCommentAnimalId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Comment", $results);
+		//$this->assertContainsOnlyInstancesOf("Jisbell347\LostPaws\Comment", $results);
 
 		//grab the result from the array and validate it
 		$pdoComment = $results[0];
+		$pdoProfile = $results[0];
 
-		$this->assertEquals($pdoComment->getCommentId(), $commentId);
-		$this->assertEquals($pdoComment->getCommentAnimalId(), $this->animal->getAnimalId());
-		$this->assertEquals($pdoComment->getCommentProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoComment->comment->getCommentId(), $commentId);
+		$this->assertEquals($pdoComment->comment->getCommentAnimalId(), $this->animal->getAnimalId());
+		$this->assertEquals($pdoComment->comment->getCommentProfileId(), $this->profile->getProfileId());
 		// format the date to seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $comment->getCommentDate()->getTimestamp());
-		$this->assertEquals($pdoComment->getCommentText(), $this->VALID_COMMENTTEXT);
+		$this->assertEquals($pdoComment->comment->getCommentDate()->getTimestamp(), $comment->getCommentDate()->getTimestamp());
+		$this->assertEquals($pdoComment->comment->getCommentText(), $this->VALID_COMMENTTEXT);
+		$this->assertEquals($pdoProfile->profileName, $this->profile->getProfileName());
 
 	}
 
