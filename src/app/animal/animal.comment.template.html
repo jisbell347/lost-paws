@@ -11,13 +11,13 @@
 									 placeholder="Write your comment here!" formControlName="commentText" rows="3"></textarea>
 				<button class="btn btn-success mt-3" type="submit">Submit Comment</button>
 			</form>
-
+			{{tempComments | json}}
 				<!-- begin comment item -->
 				<div class="row border-bottom" *ngFor="let tempComment of tempComments">
 					<div class="card-body">
 						<h4 class="card-title">{{tempComment.profileName}}</h4>
-						<p class="card-text">{{tempComment.commentText}}</p>
-						<div class="small text-muted">{{tempComment.commentDate | date:"medium"}}</div>
+						<p class="card-text">{{comments[tempComment.commentText]}}</p>
+						<div class="small text-muted">{{comments[tempComment.commentDate | date:"medium"]}}</div>
 					</div>
 				</div>
 			</div>
