@@ -7,6 +7,8 @@ import {AnimalPostComponent} from "./animal-post/animal-post.component";
 import {AnimalCardComponent} from "./animal/animal.card.component";
 import {AnimalCommentComponent} from "./animal/animal.comment.component";
 import {ContactComponent} from "./animal/contact.component";
+import {NavbarComponent} from "./shared/components/navbar/navbar.component";
+// import {SigninComponent} from "./shared/components/navbar/signin.component";
 
 
 // Import all needed Interceptors
@@ -18,7 +20,6 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AnimalService} from "./shared/services/animal.service";
 import {CommentService} from "./shared/services/comment.service";
 import {ProfileService} from "./shared/services/profile.service";
-import {NavbarComponent} from "./shared/components/navbar/navbar.component";
 import {SessionService} from "./shared/services/session.service";
 import {SignOutService} from "./shared/services/sign.out.service";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
@@ -26,6 +27,7 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 
 // Add components to the array that will be passed off to the module
+//TODO add signin component here
 export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, ContactComponent];
 /**
  * Add routes to the array that will be passed off to the module.
