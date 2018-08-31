@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 
 @Component({
 	template: require("./signin.template.html"),
-	selector: "signin"
+	selector: "sign-in"
 })
 
 export class SigninComponent {
