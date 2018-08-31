@@ -34,8 +34,8 @@ export class CommentService {
 	}
 
 	// call to the comment API and get an array of tweets based off the animalId
-	getCommentbyAnimalId(commentAnimalId : string) : Observable<Comment[]> {
-		return(this.http.get<Comment[]>(this.commentUrl, {params: new HttpParams().set("commentAnimalId", commentAnimalId)}));
+	getCommentbyAnimalId(commentAnimalId : string) : Observable<any[]> {
+		return(this.http.get<any[]>(this.commentUrl, {params: new HttpParams().set("commentAnimalId", commentAnimalId)}));
 	}
 
 	// call to the comment API and get an array of comments based off the profileId
