@@ -18,16 +18,16 @@ import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
 	template: require("./animal.comment.template.html"),
-	selector: "comment"
+	selector: "comments"
 })
 
 export class AnimalCommentComponent implements OnInit {
 	animal: Animal;
 	profile: Profile;
-	/*comment: Comment;
-	comments: Comment[] = [];*/
+	comment: Comment = {commentId: null, commentAnimalId: null, commentProfileId: null, commentDate: null, commentText: null, profileName: null};
+	comments: Comment[] = [];
 	animalId = this.route.snapshot.params["animalId"];
-	tempComments: any[] = [];
+	tempComments: any[];
 	createCommentForm: FormGroup;
 	status: Status = {status: null, message: null, type: null};
 
@@ -49,7 +49,7 @@ export class AnimalCommentComponent implements OnInit {
 	}
 
 	loadComments() : any {
-		this.commentService.getCommentbyAnimalId(this.animalId).subscribe(tempComments => this.tempComments = tempComments);
+		this.commentService.getCommentbyAnimalId(this.animalId).subscribe(comments => this.tempComments = comments);
 	}
 
 	createAnimalComment(): any {
@@ -68,7 +68,6 @@ export class AnimalCommentComponent implements OnInit {
 
 				if(status.status === 200) {
 					this.loadComments();
-					this.createCommentForm.reset();
 				}
 			});
 	}
