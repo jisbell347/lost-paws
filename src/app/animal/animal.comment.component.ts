@@ -24,9 +24,10 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class AnimalCommentComponent implements OnInit {
 	animal: Animal;
 	profile: Profile;
-	comment: Comment;
-	comments: Comment[] = [];
+	/*comment: Comment;
+	comments: Comment[] = [];*/
 	animalId = this.route.snapshot.params["animalId"];
+	tempComments: any[] = [];
 	createCommentForm: FormGroup;
 	status: Status = {status: null, message: null, type: null};
 
@@ -39,8 +40,8 @@ export class AnimalCommentComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.animalService.getAnimal(this.animalId).subscribe(reply => this.animal = reply);
 		this.loadComments();
+		this.animalService.getAnimal(this.animalId).subscribe(reply => this.animal = reply);
 		this.createCommentForm = this.formBuilder.group({
 			commentText: ["", [Validators.maxLength(1000), Validators.required]]
 		});
@@ -48,7 +49,7 @@ export class AnimalCommentComponent implements OnInit {
 	}
 
 	loadComments() : any {
-		this.commentService.getCommentbyAnimalId(this.animalId).subscribe(comments => this.comments = comments);
+		this.commentService.getCommentbyAnimalId(this.animalId).subscribe(tempComments => this.tempComments = tempComments);
 	}
 
 	createAnimalComment(): any {
@@ -57,14 +58,15 @@ export class AnimalCommentComponent implements OnInit {
 			commentAnimalId: null,
 			commentProfileId: null,
 			commentDate: null,
-			commentText: this.createCommentForm.value.commentText
+			commentText: this.createCommentForm.value.commentText,
+			profileName: null
 		};
 
 		this.commentService.createComment(comment)
 			.subscribe(status => {
 				this.status = status;
 
-				if(this.status.status == 200) {
+				if(status.status === 200) {
 					this.loadComments();
 					this.createCommentForm.reset();
 				}
