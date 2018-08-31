@@ -99,8 +99,7 @@ main {
 /*Animal Card */
 
 #animal-card {
-	max-height: 500px;
-	max-width: 600px;
+	width: 600px;
 }
 
 .list-span {
