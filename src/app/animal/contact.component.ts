@@ -1,8 +1,16 @@
-import {Component, ViewChild, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProfileService} from "../shared/services/profile.service";
+import {Component, OnInit} from "@angular/core";
+
+//Interfaces
 import  {Profile} from "../shared/interfaces/profile";
-import {Observable} from "rxjs";
+import {Animal} from "../shared/interfaces/animal";
+
+//Services
+import {ProfileService} from "../shared/services/profile.service";
+import {AnimalService} from "../shared/services/animal.service";
+
+//Router
+import {ActivatedRoute} from "@angular/router";
+
 
 
 @Component({
@@ -11,15 +19,24 @@ import {Observable} from "rxjs";
 })
 
 export class ContactComponent  implements OnInit{
+	animal: Animal;
+	animalId = this.route.snapshot.params["animalId"];
+	animalProfileId = this.route.snapshot["animalProfileId"];
 	profile: Profile;
+	profileId = this.route.snapshot.params["profileId"];
 
-	constructor(protected profileService: ProfileService, protected router: ActivatedRoute) {
+	constructor(
+		protected animalService: AnimalService,
+		protected profileService: ProfileService,
+		protected route: ActivatedRoute
+	) {
 
 	}
 
-	profileId = this.router.snapshot.params["profileId"];
+
 	ngOnInit() {
 		this.loadProfile();
+		this.animalService.getAnimal(this.animalId).subscribe(reply => this.animal = reply);
 	}
 
 	loadProfile() {
