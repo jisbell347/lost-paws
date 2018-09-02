@@ -3,6 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 
 // Place needed components here!
 import {HomeComponent} from "./home/home.component";
+import {AboutUsComponent} from "./about-us/about-us.component";
 import {AnimalPostComponent} from "./animal-post/animal-post.component";
 import {AnimalCardComponent} from "./animal/animal.card.component";
 import {AnimalCommentComponent} from "./animal/animal.comment.component";
@@ -27,7 +28,7 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, ContactComponent, SigninComponent];
+export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
@@ -35,6 +36,7 @@ export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardCompon
 export const routes: Routes = [
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
+	{path: "about-us", component: AboutUsComponent},
 	{path: "", component: HomeComponent},
 ];
 
