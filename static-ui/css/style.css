@@ -93,6 +93,12 @@ main {
 	width: 7.5em;
 }
 
+/*about-us*/
+.about-picture {
+	height: 12em;
+	width: 9em;
+}
+
 /* Footer */
 .sfooter > * {
 	display: flex;
