@@ -108,6 +108,12 @@ main {
 	color: teal;
 }
 
+/*about-us*/
+.about-picture {
+	height: 12em;
+	width: 9em;
+}
+
 /* Footer */
 .sfooter > * {
 	display: flex;
