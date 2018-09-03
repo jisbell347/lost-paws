@@ -13,25 +13,25 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<select class="form-control" id="animal-species">
+						<select class="form-control" id="animal-species" name="animal-species">
 							<option selected>Dog</option>
 							<option>Cat</option>
 						</select>
 					</div><!--input-group mb-3-->
-				</div><!--col-md-3-->
+				</div><!--form-group col-md-3-->
 				<div class="form-group col-md-3">
 					<label class="control-label" for="animal-gender">Pet Gender <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<select class="form-control" id="animal-gender">
+						<select class="form-control" id="animal-gender" name="animal-gender">
 							<option selected>Unknown</option>
 							<option>Female</option>
 							<option>Male</option>
 						</select>
 					</div><!--input-group mb-3-->
-				</div><!--col-md-3-->
+				</div><!--form-group col-md-3-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
@@ -40,47 +40,45 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-pen text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="animal-name" placeholder="Animal name. Leave empty if unknown." />
+						<input type="text" class="form-control" id="animal-name" name="animal-name" placeholder="Animal name. Leave empty if unknown." />
 					</div><!--input-group mb-3-->
-				</div><!--col-md-6-->
+				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
-			<div class="row justify-content-md-center">
+			<div class="row justify-content-md-center mb-3">
 				<div class="form-group col-md-6">
-					<div class="form-group mb-3">
-						<label class="control-label" for="animal-color">Pet Color</label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
-							</div><!--input-group-prepend-->
-							<select class="form-control" id="animal-color" aria-describedby="colorHelp">
-								<option selected>Unknown</option>
-								<option>Brown</option>
-								<option>Red</option>
-								<option>Gold</option>
-								<option>Yellow</option>
-								<option>Cream</option>
-								<option>Black</option>
-								<option>Blue</option>
-								<option>Gray</option>
-								<option>White</option>
-								<option>Black and Tan</option>
-								<option>Blue and Tan</option>
-								<option>Black and White</option>
-								<option>Bicolor</option>
-								<option>Tricolor</option>
-								<option>Merle</option>
-								<option>Spotted</option>
-								<option>Harlequin</option>
-								<option>Dilute</option>
-								<option>Smoke</option>
-								<option>Tabbies</option>
-								<option>Points</option>
-							</select>
-						</div><!--input-group-->
-						<small id="colorHelp">Please choose a predominant pet color or pattern.</small>
-					</div><!--form-group mb-3-->
-				</div><!--col-md-6-->
-			</div><!--row justify-content-md-center-->
+					<label class="control-label" for="animal-color">Pet Color</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
+						</div><!--input-group-prepend-->
+						<select class="form-control" id="animal-color" name="animal-color" aria-describedby="colorHelp">
+							<option selected>Unknown</option>
+							<option>Brown</option>
+							<option>Red</option>
+							<option>Gold</option>
+							<option>Yellow</option>
+							<option>Cream</option>
+							<option>Black</option>
+							<option>Blue</option>
+							<option>Gray</option>
+							<option>White</option>
+							<option>Black and Tan</option>
+							<option>Blue and Tan</option>
+							<option>Black and White</option>
+							<option>Bicolor</option>
+							<option>Tricolor</option>
+							<option>Merle</option>
+							<option>Spotted</option>
+							<option>Harlequin</option>
+							<option>Dilute</option>
+							<option>Smoke</option>
+							<option>Tabbies</option>
+							<option>Points</option>
+						</select>
+					</div><!--input-group-->
+					<small id="colorHelp">Please choose a predominant pet color or pattern.</small>
+				</div><!--form-group col-md-6-->
+			</div><!--row justify-content-md-center mb-3-->
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
 					<label class="control-label" for="animal-location">Pet Last Known Location</label>
@@ -88,9 +86,9 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-map-marker-alt text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="animal-location" placeholder="Please enter the last know pet location." required />
+						<input type="text" class="form-control" id="animal-location" name="animal-location" placeholder="Please enter the last know pet location." required />
 					</div><!--		input-group mb-3-->
-				</div><!--col-md-6-->
+				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
@@ -99,15 +97,15 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-comment text-primary"></i></span>
 						</div>
-						<textarea class="form-control" rows="5" id="animal-description" placeholder="Please enter a detailed pet description. (250 character maximum)"  required></textarea>
+						<textarea class="form-control" rows="5" id="animal-description" name="animal-description" placeholder="Please enter a detailed pet description. (250 character maximum)"  required></textarea>
 					</div><!--input-group mb-3-->
-				</div><!--col-md-6-->
+				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
-					<button type="button" class="btn btn-primary text-light mt-3 mb-5 mr-3 animal-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
-					<button type="button" class="btn btn-warning text-light mt-3 mb-5 animal-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
-				</div><!--col-md-6-->
+					<button type="submit" class="btn btn-primary text-light mt-3 mb-5 mr-3 animal-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
+					<button type="reset" class="btn btn-warning text-light mt-3 mb-5 animal-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
+				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 		</div><!--container-->
 	</form>
