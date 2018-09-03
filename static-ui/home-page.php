@@ -1,5 +1,8 @@
+<?php require_once ("head-utils.php");?>
+<?php require_once("navbar.php");?>
+
 <main>
-	<div class="container mt-4 home text-center">
+	<div class="container mt-5 home text-center">
 		<div class="row">
 			<div class="col-md">
 				<h1>Welcome to Lost Paws!</h1>
@@ -46,4 +49,6 @@
 		</div>
 	</div>
 </main>
+
+<?php require_once "footer.php"; ?>
 
