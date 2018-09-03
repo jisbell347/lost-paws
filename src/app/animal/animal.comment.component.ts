@@ -35,6 +35,7 @@ export class AnimalCommentComponent implements OnInit {
 		protected formBuilder: FormBuilder,
 		protected commentService: CommentService,
 		protected animalService: AnimalService,
+		protected profileService: ProfileService,
 		protected route: ActivatedRoute
 	) {
 	}
