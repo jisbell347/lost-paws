@@ -55,12 +55,12 @@
 					</div><!--		input-group mb-3-->
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
-			<div class="row justify-content-md-center">
+			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-6">
-					<button type="submit" class="btn btn-primary text-light mt-3 mb-5 mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
-					<button type="reset" class="btn btn-warning text-light mt-3 mb-5 profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
+					<button type="submit" class="btn btn-primary text-light mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+					<button type="reset" class="btn btn-warning text-light profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
-			</div><!--row justify-content-md-center-->
+			</div><!--row justify-content-md-center mt-3 mb-5-->
 		</div><!--		container-->
 	</form>
 	</div>
