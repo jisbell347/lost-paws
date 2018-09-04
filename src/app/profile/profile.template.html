@@ -1,5 +1,5 @@
 <main>
-	<form class="form-control-md mt-5" id="form-profile">
+	<form (ngSubmit)="onSubmit()" #f="ngForm" class="form-control-md mt-5" id="form-profile">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
@@ -8,21 +8,35 @@
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-3">
-					<label class="control-label" for="first-name">First Name <span class="text-danger">*</span></label>
+					<label class="control-label" for="firstname">First Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="first-name" name="first-name" placeholder="Your first name" required />
+						<input
+							type="text"
+							class="form-control"
+							id="firstname"
+							name="firstname"
+							[ngModel] = "fname"
+							required
+						/>
 					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
 				<div class="form-group col-md-3">
-					<label class="control-label" for="last-name">Last Name <span class="text-danger">*</span></label>
+					<label class="control-label" for="lastname">Last Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input type="text" class="form-control" id="last-name" name="last-name" placeholder="Your last name" required />
+						<input
+							type="text"
+							class="form-control"
+							id="lastname"
+							name="lastname"
+							[ngModel] = "lname"
+							required
+						/>
 					</div><!--input-group mb-3-->
 				</div><!--col-md-3-->
 			</div><!--row justify-content-md-center-->
@@ -33,9 +47,21 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-envelope text-primary"></i></span>
 						</div><!--input-group-prepend-->
-						<input class="form-control" type="text" id="email" name="email" placeholder="Enter your email address" aria-describedby="emailHelp" required />
+						<input
+							class="form-control"
+							type="text"
+							id="email"
+							name="email"
+							ngModel
+							placeholder="Enter your email address"
+							aria-describedby="emailHelp"
+							required
+							email
+							#email="ngModel"
+						/>
 					</div><!--	input-group-->
 					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+					<span class="help-block text-danger" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
@@ -45,15 +71,33 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-phone text-primary"></i></span>
 						</div><!--	input-group-prepend-->
-						<input class="form-control" type="tel" id="phone" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
-						<span class="validity"></span>
+						<input
+							class="form-control"
+							type="tel"
+							id="phone"
+							name="phone"
+							ngModel
+							placeholder="123-456-7890"
+							pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+							required
+							#phone="ngModel"
+						/>
 					</div><!--		input-group mb-3-->
+					<span class="validity"></span>
+					<span class="help-block text-danger" *ngIf="!phone.valid && phone.touched">Please use the following format for your phone: 123-456-7890</span>
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-6">
-					<button type="submit" class="btn btn-primary text-light mr-3 profile-btn"><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
-					<button type="reset" class="btn btn-warning text-light profile-btn"><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
+					<button
+						type="submit"
+						class="btn btn-primary text-light mr-3 profile-btn"
+						[disabled]="!f.valid"
+					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+					<button
+						type="reset"
+						class="btn btn-warning text-light profile-btn"
+					><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center mt-3 mb-5-->
 		</div><!--		container-->
