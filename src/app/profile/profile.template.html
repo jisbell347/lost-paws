@@ -19,10 +19,20 @@
 							id="firstname"
 							name="firstname"
 							[ngModel] = "fisrtName"
+							#firstname = "ngModel"
 							required
+							maxLength="46"
 						/>
 					</div><!--input-group mb-3-->
-				</div><!--col-md-3-->
+					<div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="firstname.errors.required">
+							First name is required.
+						</div>
+						<div *ngIf="firstname.errors.maxLength">
+							Your first name is too long.
+						</div>
+					</div><!--alert alert-danger-->
+				</div><!--form-group col-md-3-->
 				<div class="form-group col-md-3">
 					<label class="control-label" for="lastname">Last Name <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
@@ -35,9 +45,19 @@
 							id="lastname"
 							name="lastname"
 							[ngModel] = "lastName"
+							#lastname = "ngModel"
 							required
+							maxLength="46"
 						/>
 					</div><!--input-group mb-3-->
+					<div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="lastname.errors.required">
+							Last name is required.
+						</div>
+						<div *ngIf="lastname.errors.maxLength">
+							Your last name is too long.
+						</div>
+					</div><!--alert alert-danger-->
 				</div><!--col-md-3-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mb-3">
@@ -52,16 +72,23 @@
 							type="text"
 							id="email"
 							name="email"
-							ngModel
 							placeholder="Enter your email address"
 							aria-describedby="emailHelp"
+							ngModel
+							#email="ngModel"
 							required
 							email
-							#email="ngModel"
 						/>
 					</div><!--	input-group-->
 					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-					<span class="help-block text-danger" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+					<div *ngIf="!email.valid && (email.dirty || email.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="email.errors.required">
+							Email is required.
+						</div>
+						<div *ngIf="email.errors.email">
+							Please provide a valid email!
+						</div>
+					</div><!--alert alert-danger-->
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
@@ -76,15 +103,21 @@
 							type="tel"
 							id="phone"
 							name="phone"
-							ngModel
 							placeholder="123-456-7890"
+							ngModel
+							#phone="ngModel"
 							pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 							required
-							#phone="ngModel"
 						/>
 					</div><!--		input-group mb-3-->
-					<span class="validity"></span>
-					<span class="help-block text-danger" *ngIf="!phone.valid && phone.touched">Please use the following format for your phone: 123-456-7890</span>
+					<div *ngIf="!phone.valid && (phone.dirty || phone.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="phone.errors.required">
+							Phone number is required.
+						</div>
+						<div *ngIf="phone.errors.pattern">
+							Please use the following format for your phone: 123-456-7890
+						</div>
+					</div><!--alert alert-danger-->
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
