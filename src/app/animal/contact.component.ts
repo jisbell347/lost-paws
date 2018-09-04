@@ -10,7 +10,7 @@ import {AnimalService} from "../shared/services/animal.service";
 
 //Router
 import {ActivatedRoute} from "@angular/router";
-
+import {Status} from "../shared/interfaces/status";
 
 
 @Component({
@@ -24,6 +24,7 @@ export class ContactComponent  implements OnInit{
 	animalProfileId = this.route.snapshot["animalProfileId"];
 	profile: Profile;
 	profileId = this.route.snapshot.params["profileId"];
+	status: Status = {status: null, message: null, type: null};
 
 	constructor(
 		protected animalService: AnimalService,
@@ -36,13 +37,15 @@ export class ContactComponent  implements OnInit{
 
 	ngOnInit() {
 		this.loadProfile();
-		this.animalService.getAnimal(this.animalId).subscribe(reply => this.animal = reply);
+		this.animalService.getAnimal(this.animalId).subscribe(profileId => this.animal = profileId);
 	}
 
 	loadProfile() {
-		this.profileService.getProfile(this.profileId).subscribe( reply => {
-			this.profile = reply;
+		this.profileService.getProfile(this.profileId).subscribe( profile => {
+			this.profile = profile;
 		})
+
+
 	}
 }
 
