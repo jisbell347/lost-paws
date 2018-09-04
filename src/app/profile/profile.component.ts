@@ -8,7 +8,7 @@ import {Status} from "../shared/interfaces/status";
 
 @Component({
 	selector: "profile",
-	template: require("./profile.component.html")
+	template: require("./profile.template.html")
 })
 export class ProfileComponent implements OnInit {
 	@ViewChild('f1') userForm: NgForm;
