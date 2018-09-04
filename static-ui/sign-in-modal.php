@@ -15,7 +15,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="row justify-content-center">
-					<div class="g-signin2" data-width="110" data-onsuccess="onSignIn"></div><br>
+						<a id="google-button" class="btn btn-light btn-google"></a><br>
 					</div>
 					<div class="row justify-content-center mt-3">
 					<a id="facebook-button" class="btn btn-social btn-facebook">
