@@ -22,6 +22,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 //Import needed services
 import {AuthService} from "./shared/services/auth.service";
 import {AnimalService} from "./shared/services/animal.service";
+import {CookieService} from "ng2-cookies";
 import {CommentService} from "./shared/services/comment.service";
 import {ProfileService} from "./shared/services/profile.service";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -49,7 +50,7 @@ export const routes: Routes = [
 
 // An array of services
 
-const services: any[] = [AuthService, AnimalService, CommentService, JwtHelperService ,ProfileService, SessionService, SignOutService];
+const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService ,ProfileService, SessionService, SignOutService];
 
 // An array of misc providers
 const providers: any[] = [

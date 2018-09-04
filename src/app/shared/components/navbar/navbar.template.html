@@ -20,12 +20,13 @@
 					<a class="nav-link" href="#link2">Post a Pet</a>
 				</li>
 				<li class="nav-item">
+					<!--<a class="nav-link" href="../../../profile/profile.template.html">User Profile</a>-->
 					<a class="nav-link" routerLink="profile">User Profile</a>
 				</li>
-				<li class="nav-item">
-					<!--link triggers modal-->
-					<a href="#" class="nav-link" data-toggle="modal" data-target="#sign-in-modal">Sign In</a>
+				<li>
+					<button class="nav-link" (click)="signOut();">Sign Out</button>
 				</li>
+
 			</ul>
 			<ul class="navbar-nav ml-auto" *ngIf="isAuthenticated === false">
 				<li class="nav-item">
@@ -35,9 +36,12 @@
 				<li class="nav-item">
 					<a class="nav-link" routerLink="about-us">About Us</a>
 				</li>
-				<li>
-					<a class="nav-link" (click)="signOut()">Sign Out</a>
+				<li class="nav-item">
+					<!--link triggers modal-->
+					<a href="#" class="nav-link" data-toggle="modal" data-target="#sign-in-modal">Sign In</a>
+
 				</li>
+
 			</ul>
 		</div>
 
