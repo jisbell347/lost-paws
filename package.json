@@ -45,6 +45,7 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
+    "@angular/cli": "^6.0.0-rc.4",
     "@auth0/angular-jwt": "^2.0.0",
     "@fortawesome/fontawesome": "^1.1.7",
     "@fortawesome/fontawesome-free-brands": "^5.0.12",
