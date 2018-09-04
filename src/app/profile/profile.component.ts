@@ -11,7 +11,7 @@ import {Status} from "../shared/interfaces/status";
 	template: require("./profile.component.html")
 })
 export class ProfileComponent implements OnInit {
-	@ViewChild('f') userForm: NgForm;
+	@ViewChild('f1') userForm: NgForm;
 	profile: Profile;
 	profileId: string;
 	firstName: string = 'Your first name';
