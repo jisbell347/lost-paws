@@ -106,7 +106,7 @@
 							placeholder="123-456-7890"
 							ngModel
 							#phone="ngModel"
-							pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+							pattern="[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}"
 							required
 						/>
 					</div><!--		input-group mb-3-->
@@ -115,7 +115,9 @@
 							Phone number is required.
 						</div>
 						<div *ngIf="phone.errors.pattern">
-							Please use the following format for your phone: 123-456-7890
+							<p>Please one of the following formats for your phone:</p>
+							<p>123-456-7890</p>
+							<p>1234567890</p>
 						</div>
 					</div><!--alert alert-danger-->
 				</div><!--form-group col-md-6-->
