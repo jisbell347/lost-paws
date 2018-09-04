@@ -6,7 +6,8 @@ import {Animal} from "../shared/interfaces/animal";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-	template: require("./animal.search.template.html")
+	template: require("./animal.search.template.html"),
+	selector: "search"
 })
 
 export class AnimalSearchComponent implements OnInit{
