@@ -3,6 +3,7 @@ require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Jisbell347\LostPaws\Profile;
@@ -79,23 +80,31 @@ if(!empty($_GET['error'])) {
 		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
 		$_SESSION["profile"] = $profile;
 
-		header("Location: http://localhost:7272/");
+		//create the Auth payload
+		$authObject = (object) [
+			"profileId" =>$profile->getProfileId(),
+			"profileName" =>$profile->getProfileName()
+		];
+
+		// create and set th JWT TOKEN
+		setJwtAndAuthHeader("auth",$authObject);
+		$reply->message = "Welcome to Lost Paws. Feel the fuzzy!";
+
+//		header("Location: ../..");
 
 	} catch(Exception $e) {
 		//Failed to get the user details
 		exit('Something went wrong: ' . $e->getMessage());
 	}
 	//Use this to interact with an API on the users behalf
-	echo $token->getToken();
+//	echo $token->getToken();
 
 	//Use this to get a new access token if the old one expires
-	echo $token->getRefreshToken();
+//	echo $token->getRefreshToken();
 
 	//Number of seconds until the access token will expire and need refreshing
-	echo $token->getExpires();
+//	echo $token->getExpires();
 }
 
-
-
-
-
+header("Content-type: application/json");
+echo json_encode($reply);
