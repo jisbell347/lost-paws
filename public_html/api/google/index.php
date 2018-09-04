@@ -79,7 +79,7 @@ if(!empty($_GET['error'])) {
 		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
 		$_SESSION["profile"] = $profile;
 
-		header("Location: ../..");
+		header("Location: http://localhost:7272/");
 
 	} catch(Exception $e) {
 		//Failed to get the user details
