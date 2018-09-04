@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 
 //Interfaces
@@ -20,7 +20,8 @@ import {Status} from "../shared/interfaces/status";
 	})
 
 export class ContactComponent  implements OnInit{
-	animal: Animal;
+	@Input() animalProfileId: string;
+	profile: Profile = null;
 	// animalId = this.route.snapshot.params["animalId"];
 	// animalProfileId = this.route.snapshot["animalProfileId"];
 	// profile: Profile;
@@ -28,28 +29,30 @@ export class ContactComponent  implements OnInit{
 	// status: Status = {status: null, message: null, type: null};
 
 	constructor(
-		protected animalService: AnimalService,
-		// protected profileService: ProfileService,
-		protected router: ActivatedRoute
+		// protected animalService: AnimalService,
+		protected profileService: ProfileService,
+		// protected router: ActivatedRoute
 	) {
 
 	}
 
-	animalId= this.router.snapshot.params["animalId"];
+	// animalId= this.router.snapshot.params["animalId"];
 
 	ngOnInit() {
-		this.loadAnimal();
+		this.profileService.getProfile(this.animalProfileId) . subscribe(profile => this.profile = profile);
+
+		// this.loadAnimal();
 
 
 		// this.loadProfile();
 		// this.animalService.getAnimal(this.animalId).	subscribe(profileId => this.animal = profileId);
 	}
 
-	loadAnimal() {
-		this.animalService.getAnimal(this.animalId).subscribe(reply => {
-			this.animal = reply;
-		});
-	}
+	// loadAnimal() {
+	// 	this.animalService.getAnimal(this.animalId).subscribe(reply => {
+	// 		this.animal = reply;
+	// 	});
+	// }
 	// loadProfile() {
 	// 	this.profileService.getProfile(this.profileId).subscribe( profile => {
 	// 		this.profile = profile;
