@@ -1,9 +1,8 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from '@angular/forms';
-import {ActivatedRoute} from "@angular/router";
-import {ProfileService} from "../shared/services/profile.service";
-import {Profile} from "../shared/interfaces/profile";
-import {AuthService} from "../shared/services/auth.service";
+import { Profile } from "../shared/interfaces/profile";
+import { ProfileService } from "../shared/services/profile.service";
+import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
 
 @Component({
@@ -22,11 +21,10 @@ export class ProfileComponent implements OnInit {
 
 	// need to grab profileId from the current Session
 	// the remaining fields - from the form
-	constructor(protected authService: AuthService, protected profileService: ProfileService, protected route: ActivatedRoute) {
+	constructor(protected authService: AuthService, protected profileService: ProfileService) {
 	}
 
 	ngOnInit() : void {
-
 		//grab the current logged in profileId off JWT
 		this.profileId = this.authService.decodeJwt().auth.profileId;
 		this.loadProfile();
