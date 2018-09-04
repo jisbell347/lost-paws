@@ -15,13 +15,15 @@
 				<div class="mx-auto modal-body">
 					<div class="g-recaptcha" data-sitekey="insert sitekey here"></div>
 					<!--					Below is some example text of what can be displayed when recaptcha is verified d.none is for testing purposes-->
-					<div class="text-center">
+					<div class="text-center" *ngIf="animal">
 						<h4>Name</h4>
-						<p>{{profile.profileName}}</p>
-						<h4>Phone</h4>
-						<p>{{profile.profilePhone}}</p>
-						<h4>Email</h4>
-						<p>{{profile.profileEmail}}</p>
+						<p>is this thing on?</p>
+						<p>{{animal.animalName}}</p>
+						<!--<p>{{profile.profileName}}</p>-->
+						<!--<h4>Phone</h4>-->
+						<!--<p>{{profile.profilePhone}}</p>-->
+						<!--<h4>Email</h4>-->
+						<!--<p>{{profile.profileEmail}}</p>-->
 					</div>
 				</div>
 			</div>
