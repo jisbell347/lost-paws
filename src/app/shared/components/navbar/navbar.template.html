@@ -9,9 +9,12 @@
 		<a class="navbar-brand text-secondary pl-3" href="#"><img src="../../../images/lost-paws-icon.png" alt="logo" class="nav-logo pr-1"/>Lost Paws</a>
 		<button class="btn btn-secondary d-lg-none d-xl-none" type="submit">Search</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto" *ngIf="isAuthenticated === true">
 				<li class="nav-item">
 					<a class="nav-link" href="#link1">Search Pets</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="about-us">About Us</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#link2">Post a Pet</a>
@@ -21,12 +24,21 @@
 					<a class="nav-link" routerLink="profile">User Profile</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLink="about-us">About Us</a>
+					<!--link triggers modal-->
+					<a href="#" class="nav-link" data-toggle="modal" data-target="#sign-in-modal">Sign In</a>
+
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto" *ngIf="isAuthenticated === false">
+				<li class="nav-item">
+				<li class="nav-item">
+					<a class="nav-link" href="#link1">Search Pets</a>
 				</li>
 				<li class="nav-item">
-					<!--link triggers modal-->
-					<a class="nav-link" href="#link4">Sign Out</a>
-
+					<a class="nav-link" routerLink="about-us">About Us</a>
+				</li>
+				<li>
+					<a class="nav-link" (click)="signOut()">Sign Out</a>
 				</li>
 			</ul>
 		</div>
