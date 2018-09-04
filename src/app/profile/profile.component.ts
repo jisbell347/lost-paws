@@ -28,11 +28,9 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() : void {
 
 		//grab the current logged in profileId off JWT
-		// this.profileId = this.authService.decodeJwt().auth.profileId;
-
-
+		this.profileId = this.authService.decodeJwt().auth.profileId;
 		this.loadProfile();
-		this.profileId = this.route.snapshot.data["profileId"];
+
 		this.userName = this.profile.profileName.split(' ');
 		this.firstName = this.userName[0];
 		this.lastName = this.userName[this.userName.length - 1];
