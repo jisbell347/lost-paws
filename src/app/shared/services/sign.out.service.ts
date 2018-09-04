@@ -11,9 +11,9 @@ export class SignOutService {
 
 	}
 
-	private signOutUrl = "api/sign-out";
+	private signOutUrl = "api/sign-out/";
 
-	signOut() : Observable<Status> {
+	getSignOut() : Observable<Status> {
 		return(this.http.get<Status>(this.signOutUrl));
 	}
 }
