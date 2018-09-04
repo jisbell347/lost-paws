@@ -80,6 +80,19 @@ main {
 	color: white;
 	border-radius: 0;
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
+	height: auto;
+	width: 7.25rem;
+}
+
+#google-button {
+	background-color: white;
+	border-radius: 0;
+	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
+}
+
+#google-button > img {
+	height: 50px;
+	width: 55px;
 }
 
 .animal-buttons {
