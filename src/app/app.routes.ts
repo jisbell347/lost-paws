@@ -9,7 +9,6 @@ import {AnimalCardComponent} from "./animal/animal.card.component";
 import {AnimalCommentComponent} from "./animal/animal.comment.component";
 import {ContactComponent} from "./animal/contact.component";
 import {NavbarComponent} from "./shared/components/navbar/navbar.component";
-import {NavbarComponentSignedOut} from "./shared/components/navbar/navbar-signed-out.component";
 import {SigninComponent} from "./shared/components/navbar/signin.component";
 import {ProfileComponent} from "./profile/profile.component";
 
@@ -20,9 +19,11 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 
 //Import needed services
+import {AuthService} from "./shared/services/auth.service";
 import {AnimalService} from "./shared/services/animal.service";
 import {CommentService} from "./shared/services/comment.service";
 import {ProfileService} from "./shared/services/profile.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
 import {SessionService} from "./shared/services/session.service";
 import {SignOutService} from "./shared/services/sign.out.service";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
@@ -30,7 +31,7 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent,NavbarComponent, NavbarComponentSignedOut, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent];
+export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
@@ -45,7 +46,7 @@ export const routes: Routes = [
 
 // An array of services
 
-const services: any[] = [AnimalService, CommentService, ProfileService, SessionService, SignOutService];
+const services: any[] = [AuthService, AnimalService, CommentService, JwtHelperService ,ProfileService, SessionService, SignOutService];
 
 // An array of misc providers
 const providers: any[] = [
