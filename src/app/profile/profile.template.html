@@ -1,5 +1,5 @@
 <main>
-	<form (ngSubmit)="onSubmit()" #f="ngForm" class="form-control-md mt-5" id="form-profile">
+	<form (ngSubmit)="onSubmit()" #f1="ngForm" class="form-control-md mt-5" id="form-profile">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
@@ -18,7 +18,7 @@
 							class="form-control"
 							id="firstname"
 							name="firstname"
-							[ngModel] = "fname"
+							[ngModel] = "fisrtName"
 							required
 						/>
 					</div><!--input-group mb-3-->
@@ -34,7 +34,7 @@
 							class="form-control"
 							id="lastname"
 							name="lastname"
-							[ngModel] = "lname"
+							[ngModel] = "lastName"
 							required
 						/>
 					</div><!--input-group mb-3-->

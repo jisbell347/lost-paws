@@ -4,31 +4,33 @@ import { NgForm } from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "../shared/services/profile.service";
 import {Profile} from "../shared/interfaces/profile";
+import {Status} from "../shared/interfaces/status";
 
 @Component({
 	selector: "profile",
 	template: require("./profile.component.html")
 })
 export class ProfileComponent implements OnInit {
-	@ViewChild('f') userForm: NgForm;
+	@ViewChild('f1') userForm: NgForm;
 	profile: Profile;
 	profileId: string;
-	fname: string = 'Your first name';
-	lname: string = 'Your last name';
+	firstName: string = 'Your first name';
+	lastName: string = 'Your last name';
 	userName: string[] = [];
 	submitted = false;
+	status : Status = null;
 
 	// need to grab profileId from the current Session
 	// the remaining fields - from the form
 	constructor(protected profileService: ProfileService, protected route: ActivatedRoute) {
-		this.profileId = route.snapshot.data["profileId"];
 	}
 
 	ngOnInit() : void {
 		this.loadProfile();
+		this.profileId = this.route.snapshot.data["profileId"];
 		this.userName = this.profile.profileName.split(' ');
-		this.fname = this.userName[0];
-		this.lname = this.userName[this.userName.length - 1];
+		this.firstName = this.userName[0];
+		this.lastName = this.userName[this.userName.length - 1];
 	}
 
 	loadProfile() {
@@ -42,6 +44,10 @@ export class ProfileComponent implements OnInit {
 		this.profile.profileName = this.userForm.value.firstname + " " + this.userForm.value.lastname;
 		this.profile.profileEmail = this.userForm.value.email;
 		this.profile.profilePhone = this.userForm.value.phone;
-		this.userForm.reset();
+
+		this.profileService.editProfile(this.profile).subscribe(status => {this.status = status;
+		if (this.status.status === 200 ) {
+			this.userForm.reset();
+		}});
 	}
 }
