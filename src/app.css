@@ -138,3 +138,13 @@ header {
 	flex: 1 0 auto;
 }
 
+.searchForm {
+	text-decoration: none;
+	color: black;
+}
+.searchForm:hover {
+	text-decoration: none;
+	color: black;
+	text-underline: none;
+}
+
