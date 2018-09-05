@@ -1,3 +1,11 @@
 <main class="container mt-5">
 	<h1>Always read the documentation!</h1>
+
+	<div *ngIf="status !== null" class="alert alert-dismissible" [class]="status.type" role="alert">
+		<button type="button" class="close" aria-label="Close" (click)="status = null;"><span
+			aria-hidden="true">&times;</span></button>
+		{{ status.message }}
+
+
+	</div>
 </main>
