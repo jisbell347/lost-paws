@@ -10,36 +10,35 @@
 		<button class="btn btn-secondary d-lg-none d-xl-none" type="submit">Search</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav ml-auto" *ngIf="isAuthenticated === true">
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<a class="nav-link" routerLink="search">Search Pets</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<a class="nav-link" routerLink="about-us">About Us</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<a class="nav-link" routerLink="animal-post">Post a Pet</a>
 				</li>
-				<li class="nav-item">
-					<!--<a class="nav-link" href="../../../profile/profile.template.html">User Profile</a>-->
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<a class="nav-link" routerLink="profile">User Profile</a>
 				</li>
+				<!--TODO: collapsing sign out acts weird-->
+				<!--<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">-->
 				<li>
 					<a class="nav-link" (click)="signOut();">Sign Out</a>
 				</li>
 
 			</ul>
 			<ul class="navbar-nav ml-auto" *ngIf="isAuthenticated === false">
-				<li class="nav-item">
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<a class="nav-link" routerLink="search">Search Pets</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<a class="nav-link" routerLink="about-us">About Us</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
 					<!--link triggers modal-->
 					<a href="#" class="nav-link" data-toggle="modal" data-target="#sign-in-modal">Sign In</a>
-
 				</li>
 
 			</ul>
