@@ -13,18 +13,21 @@
 					</button>
 				</div>
 				<div class="mx-auto modal-body">
-					<div class="g-recaptcha" data-sitekey="insert sitekey here"></div>
+					<re-captcha (resolved)="resolved($event)" siteKey="6Ldkk24UAAAAAAlz32feF_s--mbmG9Db410u9e6L" *ngIf="isAuthenticated === false"></re-captcha>
 					<!--					Below is some example text of what can be displayed when recaptcha is verified d.none is for testing purposes-->
-					<div class="text-center" *ngIf="profile">
-						<h4>Name</h4>
-						<p>{{profile.profileName}}</p>
-						<h4>Phone</h4>
-						<p>{{profile.profilePhone}}</p>
-						<h4>Email</h4>
-						<p>{{profile.profileEmail}}</p>
+					<div *ngIf="isAuthenticated === true">
+						<div class="text-center" *ngIf="profile">
+							<h4>Name</h4>
+							<p>{{profile.profileName}}</p>
+							<h4>Phone</h4>
+							<p>{{profile.profilePhone}}</p>
+							<h4>Email</h4>
+							<p>{{profile.profileEmail}}</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
