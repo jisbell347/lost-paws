@@ -530,7 +530,7 @@ class Profile implements \JsonSerializable {
 	 *
 	 * @return array resulting state variables to serialize
 	 **/
-	public function jsonSerialize() {
+	/*public function jsonSerialize() : array {
 		// keep this profileAccessToken secret
 		// also we don't need profileOAuthId -- keep it out as well
 		return [
@@ -539,5 +539,15 @@ class Profile implements \JsonSerializable {
 			'profileName' => $this->profileName,
 			'profilePhone' => $this->profilePhone
 		];
+	}*/
+
+	public function jsonSerialize() : array {
+		$fields = get_object_vars($this);
+
+		$fields["profileId"] = strval($this->profileId);
+		$fields["profileEmail"] = $this->profileEmail;
+		$fields["profileName"] = $this->profileName;
+		$fields["profilePhone"] = $this->profilePhone;
+		return($fields);
 	}
 }
