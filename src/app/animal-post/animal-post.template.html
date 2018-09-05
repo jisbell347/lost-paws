@@ -1,5 +1,5 @@
 <main>
-	<form (ngSubmit)="onSubmit()" #f2="ngForm" class="form-control-md mt-5" id="form-animal">
+	<form [formGroup]="animalForm" (ngSubmit)="onSubmit()" class="form-control-md mt-5" id="form-animal">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
@@ -7,7 +7,25 @@
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2">
+					<label class="control-label" for="status">Animal Status <span class="text-danger">*</span></label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
+						</div><!--input-group-prepend-->
+						<select
+							class="form-control"
+							id="status"
+							name="status"
+							[formControl]="astatus"
+						>
+							<option selected>Lost</option>
+							<option>Found</option>
+							<option>Reunited</option>
+						</select>
+					</div><!--input-group mb-3-->
+				</div><!--form-group col-md-2-->
+				<div class="form-group col-md-2">
 					<label class="control-label" for="species">Animal Species <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -17,13 +35,14 @@
 							class="form-control"
 							id="species"
 							name="species"
+							[formControl]="aspecies"
 						>
 							<option selected>Dog</option>
 							<option>Cat</option>
 						</select>
 					</div><!--input-group mb-3-->
-				</div><!--form-group col-md-3-->
-				<div class="form-group col-md-3">
+				</div><!--form-group col-md-2-->
+				<div class="form-group col-md-2">
 					<label class="control-label" for="gender">Pet Gender <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -33,13 +52,14 @@
 							class="form-control"
 							id="gender"
 							name="gender"
+							[formControl]="agender"
 						>
 							<option selected>Unknown</option>
 							<option>Female</option>
 							<option>Male</option>
 						</select>
 					</div><!--input-group mb-3-->
-				</div><!--form-group col-md-3-->
+				</div><!--form-group col-md-2-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
 				<div class="form-group col-md-6">
@@ -53,6 +73,7 @@
 							class="form-control"
 							id="name"
 							name="name"
+							[formControl]="aname"
 							placeholder="Animal name. Leave empty if unknown."
 						/>
 					</div><!--input-group mb-3-->
@@ -69,6 +90,7 @@
 							class="form-control"
 							id="color"
 							name="color"
+							[formControl]="acolor"
 							aria-describedby="colorHelp"
 						>
 							<option selected>Unknown</option>
@@ -110,6 +132,7 @@
 							class="form-control"
 							id="location"
 							name="location"
+							[formControl]="alocation"
 							placeholder="Please enter the last know pet location."
 						/>
 					</div><!--		input-group mb-3-->
@@ -127,20 +150,12 @@
 							rows="5"
 							id="description"
 							name="description"
+							[formControl]="adescription"
 							placeholder="Please enter a detailed pet description. (250 character maximum)"
-							description="ngModel"
 							required
 							maxLength="250"
 						></textarea>
 					</div><!--input-group mb-3-->
-					<div *ngIf="!description.valid && (description.dirty || description.touched)" class="alert alert-danger" role="alert">
-						<div *ngIf="description.errors.required">
-							You need to provide the animal description.
-						</div>
-						<div *ngIf="description.errors.maxLength">
-							Your description is too long (can not be more than 250 characters long).
-						</div>
-					</div><!--alert alert-danger-->
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
@@ -148,7 +163,7 @@
 					<button
 						type="submit"
 						class="btn btn-primary text-light mr-3 animal-btn"
-						[disabled]="!f2.valid"
+						[disabled]="!animalForm.valid"
 					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
 					<button
 						type="reset"
