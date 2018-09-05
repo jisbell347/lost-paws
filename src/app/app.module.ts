@@ -6,6 +6,7 @@ import {AppComponent} from "./app.component";
 import {allAppComponents, appRoutingProviders, routing} from "./app.routes";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JwtModule} from "@auth0/angular-jwt";
+import {RecaptchaModule} from "ng-recaptcha";
 
 
 const moduleDeclarations = [AppComponent];
@@ -24,7 +25,7 @@ const JwtHelper = JwtModule.forRoot({
 });
 
 @NgModule({
-	imports: 		[BrowserModule, HttpClientModule, JwtHelper, ReactiveFormsModule, FormsModule, routing],
+	imports: 		[BrowserModule, HttpClientModule, JwtHelper, ReactiveFormsModule, FormsModule, routing, RecaptchaModule.forRoot()],
 	declarations:  [...moduleDeclarations, ...allAppComponents],
 	bootstrap:		[AppComponent],
 	providers:		[appRoutingProviders]
