@@ -21,18 +21,18 @@ export class AnimalSearchComponent implements OnInit{
 		{"parameter" : "species",},
 		{"parameter" : "status",},
 	];
-	searchParameters : any[] = [
-		{"parameter" : "gender",},
-	];
-	searchParameters : any[] = [
-		{"parameter" : "description",},
-	];
-	searchParameters : any[] = [
-		{"parameter" : "species",},
-	];
-searchParameters : any[] = [
-	{"parameter" : "status",},
-];
+// 	searchParameters : any[] = [
+// 		{"parameter" : "gender",},
+// 	];
+// 	searchParameters : any[] = [
+// 		{"parameter" : "description",},
+// 	];
+// 	searchParameters : any[] = [
+// 		{"parameter" : "species",},
+// 	];
+// searchParameters : any[] = [
+// 	{"parameter" : "status",},
+// ];
 
 	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder) {
 
