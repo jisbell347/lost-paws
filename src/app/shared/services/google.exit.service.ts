@@ -15,6 +15,10 @@ export class GoogleExitService {
 	//perform the the post to initiate redirect
 
 	getRedirect(code: string) : Observable<Status> {
+
+		//make sure there are no stale JWT tokens in local storage
+		localStorage.removeItem("jwt-token");
+
 		return(this.http.get<Status>(this.googleExit, {params: new HttpParams().set("code", code)}));
 	}
 }
