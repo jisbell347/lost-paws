@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
 	ngOnInit() : void {
 		//grab the current logged in profileId off JWT
-		this.profileId = this.authService.decodeJwt().auth.profileId;
+		this.profileId = this.getJwtProfileId();
 		this.loadProfile();
 
 		this.userName = this.profile.profileName.split(' ');
@@ -35,9 +35,19 @@ export class ProfileComponent implements OnInit {
 	}
 
 	loadProfile() {
-		this.profileService.getProfile(this.profileId).subscribe( reply => {
-			this.profile = reply;
-		})
+		if (this.profileId) {
+			this.profileService.getProfile(this.profileId).subscribe( reply => {
+				this.profile = reply;
+			});
+		}
+	}
+
+	getJwtProfileId() : any {
+		if(this.authService.decodeJwt()) {
+			return this.authService.decodeJwt().auth.profileId;
+		} else {
+			return false
+		}
 	}
 
 	onSubmit() : void {
