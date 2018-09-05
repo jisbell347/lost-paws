@@ -42,6 +42,7 @@ export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardCompon
  * Place them in order of most specific to least specific.
  **/
 export const routes: Routes = [
+	{path: "google-exit", component: GoogleExitComponent},
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
 	{path: "about-us", component: AboutUsComponent},

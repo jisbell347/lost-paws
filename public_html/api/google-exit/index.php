@@ -36,7 +36,7 @@ $google = json_decode($config["google"]);
 $provider = new League\OAuth2\Client\Provider\Google([
 	"clientId" => $google->clientId,
 	"clientSecret" => $google->secretId,
-	"redirectUri" => "https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/google/"
+	"redirectUri" => "http://localhost:7272/google-exit/"
 ]);
 
 

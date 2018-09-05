@@ -36,7 +36,8 @@ $google = json_decode($config["google"]);
 $provider = new League\OAuth2\Client\Provider\Google([
 	"clientId" => $google->clientId,
 	"clientSecret" => $google->secretId,
-	"redirectUri" => "https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/google/"
+//	"redirectUri" => "https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/google/"
+	"redirectUri" =>  "http://localhost:7272/google-exit/"
 ]);
 
 
@@ -54,25 +55,25 @@ if(!empty($_GET['error'])) {
 	unset($_SESSION['oauth2state']);
 	exit('Invalid state');
 } else {
-	//Try to get an access token (using the authorization code grant)
-	$token = $provider->getAccessToken('authorization_code', ['code' => $_GET['code']
-	]);
-	//Optional: Now you have a token you can look up a users profile data
-	try {
-		//We got an access token, let's now get the owner details
-		$ownerDetails = $provider->getResourceOwner($token);
-		$userName= $ownerDetails->getName();
-		$userEmail = $ownerDetails->getEmail();
-		/**
-		 * Verifies if the profile exists by checking the email.
-		 * If the profile doesn't exist, creates a new profile an inserts into the database.
-		 **/
-		$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
-		if(($profile) === null) {
-			// create a new profile
-			$user = new Profile(generateUuidV4(), 1, null, $userEmail, $userName, "");
-			$user->insert($pdo);
-			$reply->message = "Welcome to Lost Paws!";
+				//Try to get an access token (using the authorization code grant)
+				$token = $provider->getAccessToken('authorization_code', ['code' => $_GET['code']
+				]);
+				//Optional: Now you have a token you can look up a users profile data
+				try {
+					//We got an access token, let's now get the owner details
+					$ownerDetails = $provider->getResourceOwner($token);
+					$userName= $ownerDetails->getName();
+					$userEmail = $ownerDetails->getEmail();
+					/**
+					 * Verifies if the profile exists by checking the email.
+					 * If the profile doesn't exist, creates a new profile an inserts into the database.
+					 **/
+					$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
+					if(($profile) === null) {
+						// create a new profile
+						$user = new Profile(generateUuidV4(), 1, null, $userEmail, $userName, "");
+						$user->insert($pdo);
+						$reply->message = "Welcome to Lost Paws!";
 
 		}else {
 			$reply->message ="Welcome back to Lost Paws!";
