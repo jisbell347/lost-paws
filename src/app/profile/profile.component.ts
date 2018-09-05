@@ -13,9 +13,6 @@ export class ProfileComponent implements OnInit {
 	@ViewChild('f1') userForm: NgForm;
 	profile: Profile;
 	profileId: string;
-	firstName: string = 'Your first name';
-	lastName: string = 'Your last name';
-	userName: string[] = [];
 	submitted = false;
 	status : Status = null;
 
@@ -27,11 +24,10 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() : void {
 		//grab the current logged in profileId off JWT
 		this.profileId = this.getJwtProfileId();
-		this.loadProfile();
+		console.log(this.profile || "didn't get a profile ID from JWT token");
 
-		this.userName = this.profile.profileName.split(' ');
-		this.firstName = this.userName[0];
-		this.lastName = this.userName[this.userName.length - 1];
+		this.loadProfile();
+		console.log(this.profile ? "profile exists"  : "profile was not created" );
 	}
 
 	loadProfile() {
@@ -40,6 +36,7 @@ export class ProfileComponent implements OnInit {
 				this.profile = reply;
 			});
 		}
+
 	}
 
 	getJwtProfileId() : any {

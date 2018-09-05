@@ -18,7 +18,8 @@
 							class="form-control"
 							id="firstname"
 							name="firstname"
-							[ngModel] = "firstname"
+							ngModel
+							placeholder="Enter your first name."
 							#firstname = "ngModel"
 							required
 							maxLength="46"
@@ -44,8 +45,9 @@
 							class="form-control"
 							id="lastname"
 							name="lastname"
-							[ngModel] = "lastName"
+							ngModel
 							#lastname = "ngModel"
+							placeholder="Enter your last name."
 							required
 							maxLength="46"
 						/>
