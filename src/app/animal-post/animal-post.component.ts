@@ -27,7 +27,7 @@ export class AnimalPostComponent implements OnInit {
 			aspecies: ["", [Validators.required]],
 			agender: ["", [Validators.required]],
 			aname: ["", [Validators.maxLength(100)]],
-			acolor: ["", [Validators.maxLength(25)]],
+			acolor: ["", [Validators.required]],
 			alocation: ["", [Validators.maxLength(200)]],
 			adescription: ["", [Validators.maxLength(500), Validators.required]],
 		});
