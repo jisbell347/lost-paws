@@ -5,17 +5,17 @@ import  {Status} from "../interfaces/status";
 import {Redirect} from "../interfaces/redirect";
 
 @Injectable()
-export class RedirectService {
+export class GoogleExitService {
 	constructor(protected http: HttpClient) {
 
 	}
 
-	private googleSignIn ="api/google/";
+	private googleSignIn ="api/google-exit/";
 
 
 	//perform the the post to initiate redirect
 
-	postRedirect(redirect: Redirect) : Observable<Status> {
-		return(this.http.post<Status>(this.googleSignIn, redirect));
+	getRedirect(redirect: Redirect) : Observable<Status> {
+		return(this.http.get<Status>(this.googleSignIn, redirect));
 	}
 }

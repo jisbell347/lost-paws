@@ -12,6 +12,7 @@ import {NavbarComponent} from "./shared/components/navbar/navbar.component";
 import {SigninComponent} from "./shared/components/navbar/signin.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AnimalSearchComponent} from "./search/animal.search.component";
+import {GoogleExitComponent} from "./shared/components/navbar/google.exit.component";
 
 
 // Import all needed Interceptors
@@ -29,12 +30,13 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {SessionService} from "./shared/services/session.service";
 import {SignOutService} from "./shared/services/sign.out.service";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
+import {GoogleExitService} from "./shared/services/google.exit.service";
 //import {AnimalSearchComponent} from "./search/animal.search.component";
 
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent];
+export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
@@ -50,7 +52,7 @@ export const routes: Routes = [
 
 // An array of services
 
-const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService ,ProfileService, SessionService, SignOutService];
+const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService ,ProfileService, SessionService, SignOutService, GoogleExitService];
 
 // An array of misc providers
 const providers: any[] = [
