@@ -20,7 +20,6 @@ export class AnimalPostComponent implements OnInit {
 	}
 
 	ngOnInit() : void {
-
 		//grab the current logged in profileId off JWT
 		this.profileId = this.getJwtProfileId();
 		this.animalForm = this.fb.group({
