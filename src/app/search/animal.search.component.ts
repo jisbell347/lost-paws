@@ -33,9 +33,8 @@ export class AnimalSearchComponent implements OnInit{
 		this.searchForm = this.formBuilder.group({
 			searchContent: ["", [Validators.maxLength(64), Validators.required]],
 			searchParameter: ["", [Validators.required]]
-
-
-		})
+		});
+		this.getAllAnimals();
 	}
 
 	loadSearchResults() {
@@ -54,6 +53,10 @@ export class AnimalSearchComponent implements OnInit{
 
 
 
+	}
+
+	getAllAnimals() {
+		this.animalService.getAllCurrentAnimals().subscribe(animals => this.animals = animals);
 	}
 
 
