@@ -5,7 +5,7 @@
 				<h2 class="p-3">Search Results</h2>
 				<div class="input-group col-md-3 offset-3">
 					<div class="input-group-prepend">
-
+						<button class="btn btn-dark" type="submit" id="button-addon1">Search</button>
 					</div>
 					<input type="text" class="form-control" formControlName="searchContent"  placeholder="Search by" aria-label="Example text with button addon" aria-describedby="button-addon1">
 				</div>
@@ -14,7 +14,7 @@
 					<option value="">--Filter By--</option>
 					<option *ngFor="let parameter of searchParameters" >{{parameter.parameter}}</option>
 				</select>
-				<button class="btn btn-dark" type="submit" id="button-addon1">Search</button>
+
 			</form>
 
 
