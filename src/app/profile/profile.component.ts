@@ -24,7 +24,12 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() : void {
 		//grab the current logged in profileId off JWT
 		this.profileId = this.getJwtProfileId();
-		console.log(this.profile || "didn't get a profile ID from JWT token");
+		if (this.profile) {
+			console.log(this.profile);
+		}
+		else {
+			console.log("didn't get a profile ID from JWT token");
+		}
 
 		this.loadProfile();
 		console.log(this.profile ? "profile exists"  : "profile was not created" );
@@ -35,8 +40,9 @@ export class ProfileComponent implements OnInit {
 			this.profileService.getProfile(this.profileId).subscribe( reply => {
 				this.profile = reply;
 			});
-		}
 
+			console.log(this.profile);
+		}
 	}
 
 	getJwtProfileId() : any {
@@ -49,12 +55,13 @@ export class ProfileComponent implements OnInit {
 
 	onSubmit() : void {
 		this.submitted = true;
-		this.profile.profileName = this.userForm.value.firstname + " " + this.userForm.value.lastname;
+		this.profile.profileName = this.userForm.value.first + " " + this.userForm.value.last;
 		this.profile.profileEmail = this.userForm.value.email;
 		this.profile.profilePhone = this.userForm.value.phone;
 
 		this.profileService.editProfile(this.profile).subscribe(status => {this.status = status;
 		if (this.status.status === 200 ) {
+			console.log(this.status.message);
 			this.userForm.reset();
 		}});
 	}
