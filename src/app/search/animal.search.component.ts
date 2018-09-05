@@ -4,6 +4,7 @@ import {AnimalService} from "../shared/services/animal.service";
 import {Status} from "../shared/interfaces/status";
 import {Animal} from "../shared/interfaces/animal";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Route} from "@angular/router";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AnimalSearchComponent implements OnInit{
 	];
 
 
-	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder) {
+	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder, protected route : ActivatedRoute) {
 
 	}
 
@@ -41,7 +42,7 @@ export class AnimalSearchComponent implements OnInit{
 	loadSearchResults() {
 		// make an api to the animal API using any parameter
 
-		this.animalService.getAnimalByAnimalColor(this.animalColor).subscribe(animals => this.animals = animals);
+		this.animalService.getAnimalByAnimalColor(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
 
 		// console.log the result
 

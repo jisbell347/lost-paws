@@ -17,25 +17,25 @@
 				<button class="btn btn-dark" type="submit" id="button-addon1">Search</button>
 			</form>
 
-			<div class="row bg-dark text-light justify-content-center rounded-top">
-				<h4>Fuzzy</h4>
+			<div class="row bg-dark text-light justify-content-center rounded-top" *ngFor="let animal of animals">
+				<h4>{{animal.animalName}}</h4>
 			</div>
-			<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4">
+			<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4" *ngFor="let animal of animals">
 				<div class="col-md-4">
-					<img src="http://placekitten.com/300/250" alt="placeholder cat" class="img-fluid rounded p-3">
+					<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3">
 				</div>
 				<div class="col-md-4">
 					<ul class="list-group">
-						<li class="list-group-item">Name: Fuzzy</li>
-						<li class="list-group-item">Status: Lost</li>
-						<li class="list-group-item">Species: Cat</li>
+						<li class="list-group-item">Name: {{animal.animalName}}</li>
+						<li class="list-group-item">Status: {{animal.animalStatus}}</li>
+						<li class="list-group-item">Species: {{animal.animalSpecies}}</li>
 					</ul>
 				</div>
 				<div class="col-md-4">
 					<ul class="list-group">
-						<li class="list-group-item">Location: 1st and Main</li>
-						<li class="list-group-item">Gender: Male</li>
-						<li class="list-group-item">Color: Grey</li>
+						<li class="list-group-item">Location: {{animal.animalLocation}}</li>
+						<li class="list-group-item">Gender: {{animal.animalGender}}</li>
+						<li class="list-group-item">Color: {{animal.animalColor}}</li>
 					</ul>
 				</div>
 			</div>
