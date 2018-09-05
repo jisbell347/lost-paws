@@ -24,8 +24,10 @@ export class ProfileService {
 
 	// call to the Profile API and get a Profile object by its id
 	getProfile(id: string) : Observable<Profile> {
+		if (this.profileUrl[this.profileUrl.length - 1] !== "/") {
+			id = "/" + id;
+		}
 		return(this.http.get<Profile>(this.profileUrl + id));
-
 	}
 
 	// call to the Profile API and get a Profile object by its email address
