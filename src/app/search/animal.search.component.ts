@@ -14,25 +14,25 @@ export class AnimalSearchComponent implements OnInit{
 	animals: Animal[] = [];
 	searchForm : FormGroup;
 	status: Status = {status: null, message: null, type: null};
-	searchParameters : any[] = [
-		{"parameter" : "color",},
-		{"parameter" : "gender",},
-		{"parameter" : "description",},
-		{"parameter" : "species",},
-		{"parameter" : "status",},
+	searchParametersColor : any[] = [
+		{"parameter" : "color"},
+		// {"parameter" : "gender"},
+		// {"parameter" : "description"},
+		// {"parameter" : "species"},
+		// {"parameter" : "status"},
 	];
-// 	searchParameters : any[] = [
-// 		{"parameter" : "gender",},
-// 	];
-// 	searchParameters : any[] = [
-// 		{"parameter" : "description",},
-// 	];
-// 	searchParameters : any[] = [
-// 		{"parameter" : "species",},
-// 	];
-// searchParameters : any[] = [
-// 	{"parameter" : "status",},
-// ];
+	searchParametersGender : any[] = [
+		{"parameter" : "gender",},
+	];
+	searchParametersDescription : any[] = [
+		{"parameter" : "description",},
+	];
+	searchParametersSpecies : any[] = [
+		{"parameter" : "species",},
+	];
+searchParametersStatus : any[] = [
+	{"parameter" : "status",},
+];
 
 	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder) {
 
