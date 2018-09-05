@@ -41,9 +41,9 @@ export class AnimalSearchComponent implements OnInit{
 		// make an api to the animal API using any parameter
 
 		this.animalService.getAnimalByAnimalColor(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
-		this.animalService.getAnimalByAnimalGender(this.searchForm.value.searchContent).subscribe(animals =>this.animals = animals);
-		this.animalService.getAnimalByAnimalSpecies(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
-		this.animalService.getAnimalByAnimalStatus(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
+		//this.animalService.getAnimalByAnimalGender(this.searchForm.value.searchContent).subscribe(animals =>this.animals = animals);
+		// this.animalService.getAnimalByAnimalSpecies(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
+		// this.animalService.getAnimalByAnimalStatus(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
 
 		// console.log the result
 
