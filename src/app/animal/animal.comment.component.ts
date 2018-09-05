@@ -24,12 +24,12 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class AnimalCommentComponent implements OnInit {
 	animal: Animal;
 	profile: Profile;
-	comment: Comment = {commentId: null, commentAnimalId: null, commentProfileId: null, commentDate: null, commentText: null, profileName: null};
+	comment: Comment;
 	comments: Comment[] = [];
 	animalId = this.route.snapshot.params["animalId"];
 	tempComments: any[];
 	createCommentForm: FormGroup;
-	status: Status = {status: null, message: null, type: null};
+	status: Status = null;
 
 	constructor(
 		protected formBuilder: FormBuilder,
@@ -56,7 +56,7 @@ export class AnimalCommentComponent implements OnInit {
 	createAnimalComment(): any {
 		let comment: Comment = {
 			commentId: null,
-			commentAnimalId: null,
+			commentAnimalId: this.animalId,
 			commentProfileId: null,
 			commentDate: null,
 			commentText: this.createCommentForm.value.commentText,
