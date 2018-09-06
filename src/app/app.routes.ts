@@ -46,7 +46,11 @@ export const routes: Routes = [
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
 	{path: "about-us", component: AboutUsComponent},
-	{path: "search", component: AnimalSearchComponent},
+	{path: "search", component: AnimalSearchComponent,
+		children: [
+			{path: "", component: AnimalSearchComponent},
+			{path: ":animalParameter/:animalValue", component: AnimalSearchComponent}
+		]},
 	{path: "profile", component: ProfileComponent},
 	{path: "", component: HomeComponent},
 ];
