@@ -15,6 +15,8 @@ import {ActivatedRoute, Route} from "@angular/router";
 export class AnimalSearchComponent implements OnInit{
 	animals: Animal[] = [];
 	searchForm : FormGroup;
+	animalParameter: string = this.route.snapshot.firstChild.params["animalParameter"];
+	animalValue: string = this.route.snapshot.firstChild.params["animalValue"];
 
 	status: Status = {status: null, message: null, type: null};
 	searchParameters : any[] = [
@@ -34,24 +36,19 @@ export class AnimalSearchComponent implements OnInit{
 			searchContent: ["", [Validators.maxLength(64), Validators.required]],
 			searchParameter: ["", [Validators.required]]
 		});
-		// this.getAllAnimals();
-
+		this.loadSearchResults();
 	}
 
 	loadSearchResults() {
-		// make an api to the animal API using any parameter
-
-
-		//this.animalService.getAnimalByAnimalGender(this.searchForm.value.searchContent).subscribe(animals =>this.animals = animals);
-		// this.animalService.getAnimalByAnimalSpecies(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
-		//
-
-		// console.log the result
-
-	console.log(this.animals);
-
-		// display the results on the dom
-
+		if(this.animalParameter === "animalStatus"){
+			this.loadStatus(this.animalValue);
+		} else if(this.animalParameter === "animalColor"){
+			this.loadColor(this.animalValue);
+		} else if(this.animalParameter === "animalGender"){
+			this.loadGender(this.animalValue);
+		} else if(this.animalParameter === "animalSpecies"){
+			this.loadSpecies(this.animalValue);
+		}
 	}
 
 
