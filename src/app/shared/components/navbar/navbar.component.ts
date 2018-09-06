@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit{
 					this.cookieService.deleteAll();
 					localStorage.clear();
 
-					//send user back home, refresh page
+					//send user to signed out component with alert, then refreshes app back to home.
 					this.router.navigate(["signed-out"]);
 					location.reload();
 					console.log("goodbye");
