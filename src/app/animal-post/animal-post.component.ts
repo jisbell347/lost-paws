@@ -11,22 +11,16 @@ import {Status} from "../shared/interfaces/status";
 })
 export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
-	profileId: string;
-	animal: Animal;
+	/*animal: Animal;*/
 	submitted : boolean = false;
 	status : Status = null;
 
 	constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
-					private fb: FormBuilder) {
+					protected fb: FormBuilder) {
 	}
 
 	ngOnInit() : void {
-		//grab the current logged in profileId off JWT
-		this.profileId = this.getJwtProfileId();
-
-		console.log(this.profileId || "no profile ID was retrieved");
-
 		this.animalForm = this.fb.group({
 			status: ["", [Validators.required]],
 			species: ["", [Validators.required]],
@@ -36,42 +30,58 @@ export class AnimalPostComponent implements OnInit {
 			location: ["", [Validators.maxLength(200)]],
 			description: ["", [Validators.maxLength(500), Validators.required]],
 		});
-
-		console.log(this.animalForm["status"]);
-
 	}
 
-	getJwtProfileId() : any {
-		if(this.authService.decodeJwt()) {
-			return this.authService.decodeJwt().auth.profileId;
-		} else {
-			return false
-		}
-	}
 
-	createAnAnimal(id: string) : void {
-		this.animal.animalId = null;
-		this.animal.animalProfileId = id;
-		this.animal.animalColor = this.animalForm.value.color;
-		this.animal.animalDate = null;
-		this.animal.animalDescription = this.animalForm.value.description;
-		this.animal.animalGender = this.animalForm.value.gender;
-		this.animal.animalImageUrl = null;
-		this.animal.animalLocation = this.animalForm.value.location;
-		this.animal.animalName = this.animalForm.value.name;
-		this.animal.animalSpecies = this.animalForm.value.species;
-		this.animal.animalStatus = this.animalForm.value.status;
-	}
 
-	onSubmit() : void {
+	/*
+		animalId: string;
+		animalProfileId: string;
+		animalColor: string;
+		animalDate: string;
+		animalDescription: string;
+		animalGender: string;
+		animalImageUrl: string;
+		animalLocation: string;
+		animalName: string;
+		animalSpecies: string;
+		animalStatus: string;
+	 */
+
+	createAnimal() : void {
 		this.submitted = true;
-		if (this.profileId) {
-			this.createAnAnimal(this.profileId);
-		}
 
-		this.animalService.createAnimal(this.animal).subscribe(status => {this.status = status;
-			if (this.status.status === 200 ) {
-				this.animalForm.reset();
-			}});
+		const animal: Animal = {
+			animalId: null,
+			animalProfileId: null,
+			animalColor: this.animalForm.value.color,
+			animalDate: null,
+			animalDescription: this.animalForm.value.description,
+			animalGender: this.animalForm.value.gender,
+			animalImageUrl: null,
+			animalLocation: this.animalForm.value.location,
+			animalName: this.animalForm.value.name,
+			animalSpecies: this.animalForm.value.species,
+			animalStatus: this.animalForm.value.status
+		};
+
+/*		console.log(this.animalForm.value.color || "color is undefined");
+		console.log(this.animalForm.value.description || "description is undefined");
+		console.log(this.animalForm.value.gender || "gender is undefined");
+		console.log(this.animalForm.value.location || "location is undefined");
+		console.log(this.animalForm.value.name || "name is undefined");
+		console.log(this.animalForm.value.species || "species is undefined");
+		console.log(this.animalForm.value.status || "status is undefined");*/
+
+		if (animal) {
+			this.animalService.createAnimal(animal).subscribe(status => {
+				this.status = status;
+				if(this.status.status === 200) {
+					this.animalForm.reset();
+				}
+			});
+		} else {
+			console.log("animal wasn't created");
+		}
 	}
 }

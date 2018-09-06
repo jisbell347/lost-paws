@@ -1,5 +1,5 @@
 <main>
-	<form [formGroup]="animalForm" (ngSubmit)="onSubmit()" class="form-control-md mt-5" id="form-animal">
+	<form [formGroup]="animalForm" (ngSubmit)="createAnimal()" class="form-control-md mt-5" id="form-animal">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
@@ -18,6 +18,7 @@
 							class="form-control"
 							id="status"
 							name="status"
+							[formControl]
 							formControlName="status"
 						>
 							<option selected>Lost</option>
@@ -37,6 +38,7 @@
 							class="form-control"
 							id="species"
 							name="species"
+							[formControl]
 							formControlName="species"
 						>
 							<option selected>Dog</option>
@@ -55,6 +57,7 @@
 							class="form-control"
 							id="gender"
 							name="gender"
+							[formControl]
 							formControlName="gender"
 						>
 							<option selected>Unknown</option>
@@ -76,6 +79,7 @@
 							class="form-control"
 							id="name"
 							name="name"
+							[formControl]
 							formControlName="name"
 							placeholder="Animal name. Leave empty if unknown."
 						/>
@@ -94,6 +98,7 @@
 							class="form-control"
 							id="color"
 							name="color"
+							[formControl]
 							formControlName="color"
 							aria-describedby="colorHelp"
 						>
@@ -136,6 +141,7 @@
 							class="form-control"
 							id="location"
 							name="location"
+							[formControl]
 							formControlName="location"
 							placeholder="Please enter the last know pet location."
 						/>
@@ -155,6 +161,7 @@
 							rows="5"
 							id="description"
 							name="description"
+							[formControl]
 							formControlName="description"
 							placeholder="Please enter a detailed pet description. (250 character maximum)"
 							required
