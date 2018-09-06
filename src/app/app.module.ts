@@ -1,6 +1,7 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 
+import {NgxPaginationModule} from "ngx-pagination";
 import {HttpClientModule} from "@angular/common/http";
 import {AppComponent} from "./app.component";
 import {allAppComponents, appRoutingProviders, routing} from "./app.routes";
@@ -25,7 +26,7 @@ const JwtHelper = JwtModule.forRoot({
 });
 
 @NgModule({
-	imports: 		[BrowserModule, HttpClientModule, JwtHelper, ReactiveFormsModule, FormsModule, routing, RecaptchaModule.forRoot()],
+	imports: 		[BrowserModule, HttpClientModule, JwtHelper, ReactiveFormsModule, FormsModule, routing, NgxPaginationModule,RecaptchaModule.forRoot()],
 	declarations:  [...moduleDeclarations, ...allAppComponents],
 	bootstrap:		[AppComponent],
 	providers:		[appRoutingProviders]
