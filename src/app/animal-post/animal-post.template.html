@@ -14,10 +14,11 @@
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<select
+							type="text"
 							class="form-control"
 							id="status"
 							name="status"
-							[formControl]="astatus"
+							formControlName="status"
 						>
 							<option selected>Lost</option>
 							<option>Found</option>
@@ -32,10 +33,11 @@
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<select
+							type="text"
 							class="form-control"
 							id="species"
 							name="species"
-							[formControl]="aspecies"
+							formControlName="species"
 						>
 							<option selected>Dog</option>
 							<option>Cat</option>
@@ -49,10 +51,11 @@
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<select
+							type="text"
 							class="form-control"
 							id="gender"
 							name="gender"
-							[formControl]="agender"
+							formControlName="gender"
 						>
 							<option selected>Unknown</option>
 							<option>Female</option>
@@ -73,7 +76,7 @@
 							class="form-control"
 							id="name"
 							name="name"
-							[formControl]="aname"
+							formControlName="name"
 							placeholder="Animal name. Leave empty if unknown."
 						/>
 					</div><!--input-group mb-3-->
@@ -87,10 +90,11 @@
 							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
 						</div><!--input-group-prepend-->
 						<select
+							type="text"
 							class="form-control"
 							id="color"
 							name="color"
-							[formControl]="acolor"
+							formControlName="color"
 							aria-describedby="colorHelp"
 						>
 							<option selected>Unknown</option>
@@ -132,7 +136,7 @@
 							class="form-control"
 							id="location"
 							name="location"
-							[formControl]="alocation"
+							formControlName="location"
 							placeholder="Please enter the last know pet location."
 						/>
 					</div><!--		input-group mb-3-->
@@ -146,21 +150,22 @@
 							<span class="input-group-text"><i class="fas fa-comment text-primary"></i></span>
 						</div>
 						<textarea
+							type="text"
 							class="form-control"
 							rows="5"
 							id="description"
 							name="description"
-							[formControl]="adescription"
+							formControlName="description"
 							placeholder="Please enter a detailed pet description. (250 character maximum)"
 							required
 							maxLength="250"
 						></textarea>
 					</div><!--input-group mb-3-->
-					<div *ngIf="!adescription.valid && (adescription.dirty || adescription.touched)" class="alert alert-danger" role="alert">
-						<div *ngIf="adescription.errors.required">
+					<div *ngIf="!animalForm.controls.description.valid && (animalForm.controls.description.dirty || animalForm.controls.description.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="animalForm.controls.description.errors.required">
 							The description field cannot be empty.
 						</div>
-						<div *ngIf="adescription.errors.maxLength">
+						<div *ngIf="animalForm.controls.description.errors.maxLength">
 							Your description is too long, it cannot exceed 500 characters.
 						</div>
 					</div><!--alert alert-danger-->

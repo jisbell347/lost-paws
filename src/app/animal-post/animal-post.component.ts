@@ -13,24 +13,32 @@ export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
 	profileId: string;
 	animal: Animal;
-	submitted = false;
+	submitted : boolean = false;
 	status : Status = null;
 
-	constructor(protected authService: AuthService, protected animalService: AnimalService, private fb: FormBuilder) {
+	constructor(protected authService: AuthService,
+					protected animalService: AnimalService,
+					private fb: FormBuilder) {
 	}
 
 	ngOnInit() : void {
 		//grab the current logged in profileId off JWT
 		this.profileId = this.getJwtProfileId();
+
+		console.log(this.profileId || "no profile ID was retrieved");
+
 		this.animalForm = this.fb.group({
-			astatus: ["", [Validators.required]],
-			aspecies: ["", [Validators.required]],
-			agender: ["", [Validators.required]],
-			aname: ["", [Validators.maxLength(100)]],
-			acolor: ["", [Validators.required]],
-			alocation: ["", [Validators.maxLength(200)]],
-			adescription: ["", [Validators.maxLength(500), Validators.required]],
+			status: ["", [Validators.required]],
+			species: ["", [Validators.required]],
+			gender: ["", [Validators.required]],
+			name: ["", [Validators.maxLength(100)]],
+			color: ["", [Validators.required]],
+			location: ["", [Validators.maxLength(200)]],
+			description: ["", [Validators.maxLength(500), Validators.required]],
 		});
+
+		console.log(this.animalForm["status"]);
+
 	}
 
 	getJwtProfileId() : any {
@@ -44,15 +52,15 @@ export class AnimalPostComponent implements OnInit {
 	createAnAnimal(id: string) : void {
 		this.animal.animalId = null;
 		this.animal.animalProfileId = id;
-		this.animal.animalColor = this.animalForm.value.acolor;
+		this.animal.animalColor = this.animalForm.value.color;
 		this.animal.animalDate = null;
-		this.animal.animalDescription = this.animalForm.value.adesription;
-		this.animal.animalGender = this.animalForm.value.agender;
+		this.animal.animalDescription = this.animalForm.value.description;
+		this.animal.animalGender = this.animalForm.value.gender;
 		this.animal.animalImageUrl = null;
-		this.animal.animalLocation = this.animalForm.value.alocation;
-		this.animal.animalName = this.animalForm.value.aname;
-		this.animal.animalSpecies = this.animalForm.value.aspecies;
-		this.animal.animalStatus = this.animalForm.value.astatus;
+		this.animal.animalLocation = this.animalForm.value.location;
+		this.animal.animalName = this.animalForm.value.name;
+		this.animal.animalSpecies = this.animalForm.value.species;
+		this.animal.animalStatus = this.animalForm.value.status;
 	}
 
 	onSubmit() : void {
