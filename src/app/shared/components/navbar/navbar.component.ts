@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit{
 					localStorage.clear();
 
 					//send user back home, refresh page
-					this.router.navigate([""]);
+					this.router.navigate(["signed-out"]);
 					location.reload();
 					console.log("goodbye");
 				}
