@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {GoogleExitService} from "../../services/google.exit.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -11,6 +11,7 @@ import {Status} from "../../interfaces/status";
 export class GoogleExitComponent implements OnInit{
 	code: string = this.route.snapshot.queryParams["code"];
 	status: Status = null;
+	@Output() isAuthenticatedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	constructor(protected googleExitService: GoogleExitService, protected route: ActivatedRoute, protected router: Router){
 
@@ -20,7 +21,9 @@ export class GoogleExitComponent implements OnInit{
 		this.googleExitService.getRedirect(this.code).subscribe(status => {
 			this.status = status;
 
+
 			if(this.status.status === 200) {
+				this.isAuthenticatedEvent.emit(true);
 				this.router.navigate([""]);
 			}
 		});
