@@ -43,7 +43,7 @@ export class AnimalSearchComponent implements OnInit{
 	getSearchResults() {
 		let searchParameter = this.searchForm.value.searchParameter;
 		let searchContent = this.searchForm.value.searchContent;
-		this.router.navigate(["search", {animalParameter: "animal" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1), animalValue: searchContent}]);
+		this.router.navigate(["search", {animalParameter: "animal" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1)}, {animalValue: searchContent}]);
 		// this.router.navigate(["search", this.searchForm.value.searchParameter, this.searchForm.value.searchContent])
 	}
 

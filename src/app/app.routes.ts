@@ -35,9 +35,8 @@ import {GoogleExitService} from "./shared/services/google.exit.service";
 //import {AnimalSearchComponent} from "./search/animal.search.component";
 
 
-
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, SignOutRedirectComponent];
+export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, SignOutRedirectComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
@@ -48,18 +47,15 @@ export const routes: Routes = [
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
 	{path: "about-us", component: AboutUsComponent},
-	{path: "search", component: AnimalSearchComponent,
-		children: [
-			{path: ":animalParameter/:animalValue", component: AnimalSearchComponent},
-			{path: "", redirectTo: "animalStatus/Lost", pathMatch: "full"}
-		]},
+	{path: "search", redirectTo: "animalStatus/Lost", pathMatch: "full"},
+	{path: "search/:animalParameter/:animalValue", component: AnimalSearchComponent},
 	{path: "profile", component: ProfileComponent},
 	{path: "", component: HomeComponent},
 ];
 
 // An array of services
 
-const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService ,ProfileService, SessionService, SignOutService, GoogleExitService];
+const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService, ProfileService, SessionService, SignOutService, GoogleExitService];
 
 // An array of misc providers
 const providers: any[] = [
