@@ -1,5 +1,7 @@
 <main class="text-center">
 	<h1>Signing you in.</h1>
+	<button type="button" class="btn btn-dark" routerLink="">Click here if your browser does not automatically redirect you.</button>
+
 
 	<div *ngIf="status !== null" class="alert alert-dismissible" [class]="status.type" role="alert">
 		<button type="button" class="close" aria-label="Close" (click)="status = null;"><span
