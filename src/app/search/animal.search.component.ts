@@ -16,8 +16,8 @@ export class AnimalSearchComponent implements OnInit{
 	filterByValue: any;
 	animals: Animal[] = [];
 	searchForm : FormGroup;
-	animalParameter: string = this.route.snapshot.firstChild.params["animalParameter"];
-	animalValue: string = this.route.snapshot.firstChild.params["animalValue"];
+	animalParameter: string = this.route.snapshot.params["animalParameter"];
+	animalValue: string = this.route.snapshot.params["animalValue"];
 
 	status: Status = {status: null, message: null, type: null};
 	searchParameters : any[] = [

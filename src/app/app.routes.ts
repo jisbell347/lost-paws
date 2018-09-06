@@ -47,7 +47,7 @@ export const routes: Routes = [
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
 	{path: "about-us", component: AboutUsComponent},
-	{path: "search", redirectTo: "animalStatus/Lost", pathMatch: "full"},
+	{path: "search", redirectTo: "/search/animalStatus/Lost"},
 	{path: "search/:animalParameter/:animalValue", component: AnimalSearchComponent},
 	{path: "profile", component: ProfileComponent},
 	{path: "", component: HomeComponent},
