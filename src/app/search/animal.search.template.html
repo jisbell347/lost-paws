@@ -1,0 +1,47 @@
+<main>
+	<div>
+		<div class="container pt-5">
+			<form [formGroup]="searchForm" (submit)="loadSearchResults();" class="row justify-content-between align-items-center">
+				<h2 class="p-3 ml-1">Search Results</h2>
+				<div class="input-group col-md-3 mb-2 ">
+					<div class="input-group-prepend">
+						<button class="btn btn-dark" type="submit" id="button-addon1">Search</button>
+					</div>
+					<input type="text" class="form-control" formControlName="searchContent"  placeholder="Search by" aria-label="Example text with button addon" aria-describedby="button-addon1">
+				</div>
+				<label for="sort"></label>
+				<select formControlName="searchParameter" id="sort" class="mb-2 ml-1 mr-1 col-md-3">
+					<option value="">--Filter By--</option>
+					<option *ngFor="let parameter of searchParameters" >{{parameter.parameter}}</option>
+				</select>
+			</form>
+
+			<ul class="search-results">
+				<li class="searchForm"  routerLink="/animal/{{animal.animalId}}" *ngFor="let animal of animals | paginate: { itemsPerPage: 10, currentPage: page }">
+					<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4">
+						<div class="col-md-4 text-center">
+							<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3 searchImage">
+						</div>
+						<div class="col-md-4">
+							<ul class="list-group">
+								<li class="list-group-item">Name: {{animal.animalName}}</li>
+								<li class="list-group-item">Status: {{animal.animalStatus}}</li>
+								<li class="list-group-item">Species: {{animal.animalSpecies}}</li>
+							</ul>
+						</div>
+						<div class="col-md-4">
+							<ul class="list-group">
+								<li class="list-group-item">Location: {{animal.animalLocation}}</li>
+								<li class="list-group-item">Gender: {{animal.animalGender}}</li>
+								<li class="list-group-item">Color: {{animal.animalColor}}</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="text-center">
+			<pagination-controls (pageChange)="page = $event"></pagination-controls>
+		</div>
+	</div>
+</main>
