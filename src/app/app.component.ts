@@ -6,8 +6,13 @@ import {SessionService} from "./shared/services/session.service";
 	selector: "lost-paws",
 	template: require("./app.component.html")
 })
-export class AppComponent {
-	constructor() {
+export class AppComponent implements OnInit{
+	constructor(protected sessionService: SessionService) {
 
 	}
+
+	ngOnInit(){
+		this.sessionService.setSession();
+	}
+
 }
