@@ -11,7 +11,6 @@ import {Status} from "../shared/interfaces/status";
 })
 export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
-	/*animal: Animal;*/
 	submitted : boolean = false;
 	status : Status = null;
 
@@ -32,22 +31,6 @@ export class AnimalPostComponent implements OnInit {
 		});
 	}
 
-
-
-	/*
-		animalId: string;
-		animalProfileId: string;
-		animalColor: string;
-		animalDate: string;
-		animalDescription: string;
-		animalGender: string;
-		animalImageUrl: string;
-		animalLocation: string;
-		animalName: string;
-		animalSpecies: string;
-		animalStatus: string;
-	 */
-
 	createAnimal() : void {
 		this.submitted = true;
 
@@ -58,7 +41,7 @@ export class AnimalPostComponent implements OnInit {
 			animalDate: null,
 			animalDescription: this.animalForm.value.description,
 			animalGender: this.animalForm.value.gender,
-			animalImageUrl: '',
+			animalImageUrl: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg',
 			animalLocation: this.animalForm.value.location,
 			animalName: this.animalForm.value.name,
 			animalSpecies: this.animalForm.value.species,
@@ -74,15 +57,12 @@ export class AnimalPostComponent implements OnInit {
 		console.log(this.animalForm.value.status || "status is undefined");*/
 
 		if (animal) {
-			console.log(animal.animalColor || "there is no animal created");
 			this.animalService.createAnimal(animal).subscribe(status => {
 				this.status = status;
 				if(this.status.status === 200) {
 					this.animalForm.reset();
 				}
 			});
-		} else {
-			console.log("animal wasn't created");
 		}
 	}
 }
