@@ -130,12 +130,16 @@
 						type="submit"
 						class="btn btn-primary text-light mr-3 profile-btn"
 						[disabled]="!f1.valid"
+						[submitted]="submitted"
 					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
 					<button
 						type="reset"
 						class="btn btn-warning text-light profile-btn"
 					><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
-				</div><!--col-md-6-->
+				</div><!--form-group col-md-6-->
+				<div *ngIf="submitted" class="alert alert-success" role="alert">
+					User profile was successfully updated.
+				</div><!--alert alert-success-->
 			</div><!--row justify-content-md-center mt-3 mb-5-->
 		</div><!--		container-->
 	</form>
