@@ -58,7 +58,7 @@ export class AnimalPostComponent implements OnInit {
 			animalDate: null,
 			animalDescription: this.animalForm.value.description,
 			animalGender: this.animalForm.value.gender,
-			animalImageUrl: null,
+			animalImageUrl: '',
 			animalLocation: this.animalForm.value.location,
 			animalName: this.animalForm.value.name,
 			animalSpecies: this.animalForm.value.species,
@@ -74,6 +74,7 @@ export class AnimalPostComponent implements OnInit {
 		console.log(this.animalForm.value.status || "status is undefined");*/
 
 		if (animal) {
+			console.log(animal.animalColor || "there is no animal created");
 			this.animalService.createAnimal(animal).subscribe(status => {
 				this.status = status;
 				if(this.status.status === 200) {
