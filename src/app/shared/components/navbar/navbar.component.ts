@@ -1,25 +1,24 @@
-import{Component, OnInit} from "@angular/core";
-import {AuthService} from "../../services/auth.service";
+import{Component} from "@angular/core";
 import {SignOutService} from "../../services/sign.out.service";
 import {Status} from "../../interfaces/status";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
 	template: require("./navbar.template.html"),
 	selector: "navbar"
 })
 
-export class NavbarComponent implements OnInit{
+export class NavbarComponent{
 	status: Status = {status: null, message: null, type: null};
-	isAuthenticated: boolean;
 
 	constructor(protected authService: AuthService, protected cookieService: CookieService, protected signOutService: SignOutService, protected router: Router) {
 
 	}
 
-	ngOnInit() {
-		this.isAuthenticated = this.authService.isAuthenticated();
+	isAuthenticated(): boolean {
+		return(this.authService.isAuthenticated());
 	}
 
 	signOut() : void {
