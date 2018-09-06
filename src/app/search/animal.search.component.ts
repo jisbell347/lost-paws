@@ -16,8 +16,8 @@ export class AnimalSearchComponent implements OnInit{
 	filterByValue: any;
 	animals: Animal[] = [];
 	searchForm : FormGroup;
-	animalParameter: string = this.route.snapshot.params["animalParameter"];
-	animalValue: string = this.route.snapshot.params["animalValue"];
+	animalParameter: string;
+	animalValue: string;
 
 	status: Status = {status: null, message: null, type: null};
 	searchParameters : any[] = [
@@ -29,7 +29,7 @@ export class AnimalSearchComponent implements OnInit{
 
 
 	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder, protected route : ActivatedRoute, protected router: Router) {
-
+		router.onSameUrlNavigation = "reload";
 	}
 
 	ngOnInit() {
@@ -43,11 +43,14 @@ export class AnimalSearchComponent implements OnInit{
 	getSearchResults() {
 		let searchParameter = this.searchForm.value.searchParameter;
 		let searchContent = this.searchForm.value.searchContent;
-		this.router.navigate(["search", {animalParameter: "animal" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1)}, {animalValue: searchContent}]);
+		this.router.navigate(["/search", "animal" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1), searchContent])
+			.then(() => this.loadSearchResults());
 		// this.router.navigate(["search", this.searchForm.value.searchParameter, this.searchForm.value.searchContent])
 	}
 
 	loadSearchResults() {
+		this.animalParameter = this.route.snapshot.params["animalParameter"];
+		this.animalValue = this.route.snapshot.params["animalValue"];
 		if(this.animalParameter === "animalStatus"){
 			this.loadStatus(this.animalValue);
 		} else if(this.animalParameter === "animalColor"){
