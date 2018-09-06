@@ -48,8 +48,8 @@ export const routes: Routes = [
 	{path: "about-us", component: AboutUsComponent},
 	{path: "search", component: AnimalSearchComponent,
 		children: [
-			{path: "", component: AnimalSearchComponent},
-			{path: ":animalParameter/:animalValue", component: AnimalSearchComponent}
+			{path: ":animalParameter/:animalValue", component: AnimalSearchComponent},
+			{path: "", redirectTo: "animalStatus/Lost", pathMatch: "full"}
 		]},
 	{path: "profile", component: ProfileComponent},
 	{path: "", component: HomeComponent},
