@@ -25,6 +25,7 @@ export class AnimalService {
 	// call to the Animal API and create an animal posting
 	createAnimal(animal: Animal) : Observable<Status> {
 		return(this.http.post<Status>(this.animalUrl, animal));
+
 	}
 
 	//call to the Animal API and get an animal by animalId
