@@ -4,7 +4,7 @@ import {AnimalService} from "../shared/services/animal.service";
 import {Status} from "../shared/interfaces/status";
 import {Animal} from "../shared/interfaces/animal";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 
 
 @Component({
@@ -13,6 +13,7 @@ import {ActivatedRoute, Route} from "@angular/router";
 })
 
 export class AnimalSearchComponent implements OnInit{
+	filterByValue: any;
 	animals: Animal[] = [];
 	searchForm : FormGroup;
 	animalParameter: string = this.route.snapshot.firstChild.params["animalParameter"];
@@ -27,7 +28,7 @@ export class AnimalSearchComponent implements OnInit{
 	];
 
 
-	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder, protected route : ActivatedRoute) {
+	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder, protected route : ActivatedRoute, protected router: Router) {
 
 	}
 
@@ -37,6 +38,13 @@ export class AnimalSearchComponent implements OnInit{
 			searchParameter: ["", [Validators.required]]
 		});
 		this.loadSearchResults();
+	}
+
+	getSearchResults() {
+		let searchParameter = this.searchForm.value.searchParameter;
+		let searchContent = this.searchForm.value.searchContent;
+		this.router.navigate(["search", {animalParameter: "animal" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1), animalValue: searchContent}]);
+		// this.router.navigate(["search", this.searchForm.value.searchParameter, this.searchForm.value.searchContent])
 	}
 
 	loadSearchResults() {
@@ -50,6 +58,7 @@ export class AnimalSearchComponent implements OnInit{
 			this.loadSpecies(this.animalValue);
 		}
 	}
+
 
 
 	loadColor(animalColor: string){
