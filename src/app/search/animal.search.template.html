@@ -14,55 +14,34 @@
 					<option value="">--Filter By--</option>
 					<option *ngFor="let parameter of searchParameters" >{{parameter.parameter}}</option>
 				</select>
-
 			</form>
 
-
-			<a class="searchForm" *ngFor="let animal of animals" routerLink="/animal/{{animal.animalId}}">
-			<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4">
-
-				<div class="col-md-4 text-center">
-					<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3 searchImage">
-				</div>
-				<div class="col-md-4">
-					<ul class="list-group">
-						<li class="list-group-item">Name: {{animal.animalName}}</li>
-						<li class="list-group-item">Status: {{animal.animalStatus}}</li>
-						<li class="list-group-item">Species: {{animal.animalSpecies}}</li>
-					</ul>
-				</div>
-				<div class="col-md-4">
-					<ul class="list-group">
-						<li class="list-group-item">Location: {{animal.animalLocation}}</li>
-						<li class="list-group-item">Gender: {{animal.animalGender}}</li>
-						<li class="list-group-item">Color: {{animal.animalColor}}</li>
-					</ul>
-				</div>
-
-			</div>
-			</a>
+			<ul class="search-results">
+				<li class="searchForm"  routerLink="/animal/{{animal.animalId}}" *ngFor="let animal of animals | paginate: { itemsPerPage: 10, currentPage: page }">
+						<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4">
+							<div class="col-md-4 text-center">
+								<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3 searchImage">
+							</div>
+							<div class="col-md-4">
+								<ul class="list-group">
+									<li class="list-group-item">Name: {{animal.animalName}}</li>
+									<li class="list-group-item">Status: {{animal.animalStatus}}</li>
+									<li class="list-group-item">Species: {{animal.animalSpecies}}</li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<ul class="list-group">
+									<li class="list-group-item">Location: {{animal.animalLocation}}</li>
+									<li class="list-group-item">Gender: {{animal.animalGender}}</li>
+									<li class="list-group-item">Color: {{animal.animalColor}}</li>
+								</ul>
+							</div>
+						</div>
+				</li>
+			</ul>
 		</div>
-
-		<div class="container pt-5">
-			<div class="row justify-content-center">
-				<nav aria-label="...">
-					<ul class="pagination">
-						<li class="page-item disabled">
-							<a class="page-link" href="#" tabindex="-1">Previous</a>
-						</li>
-						<li class="page-item active">
-							<a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">2</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
+		<div class="text-center">
+			<pagination-controls (pageChange)="page = $event"></pagination-controls>
 		</div>
 	</div>
 </main>
