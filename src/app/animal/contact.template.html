@@ -14,7 +14,7 @@
 				</div>
 				<div class="mx-auto modal-body">
 					<re-captcha (resolved)="resolved($event)" siteKey="6Ldkk24UAAAAAAlz32feF_s--mbmG9Db410u9e6L" *ngIf="isAuthenticated === false"></re-captcha>
-					<!--					Below is some example text of what can be displayed when recaptcha is verified d.none is for testing purposes-->
+					<!--Below is the contact information. It will only be displayed if user is signed in.-->
 					<div *ngIf="isAuthenticated === true">
 						<div class="text-center" *ngIf="profile">
 							<h4>Name</h4>
