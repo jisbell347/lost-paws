@@ -32,8 +32,6 @@
 			<h4 class="text-secondary">Jude Baca-Miller</h4>
 			<p>Jude is a web developer from Albuquerque who enjoys problem solving and creating pleasing user experiences. Jude shares a house with his wife, two elderly cats and a rambunctious terrier.</p>
 		</div>
-
-
 	</div>
 </main>
 
