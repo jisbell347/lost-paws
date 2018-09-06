@@ -34,16 +34,17 @@ export class AnimalSearchComponent implements OnInit{
 			searchContent: ["", [Validators.maxLength(64), Validators.required]],
 			searchParameter: ["", [Validators.required]]
 		});
-		this.getAllAnimals();
+		// this.getAllAnimals();
+
 	}
 
 	loadSearchResults() {
 		// make an api to the animal API using any parameter
 
-		this.animalService.getAnimalByAnimalColor(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
+
 		//this.animalService.getAnimalByAnimalGender(this.searchForm.value.searchContent).subscribe(animals =>this.animals = animals);
 		// this.animalService.getAnimalByAnimalSpecies(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
-		// this.animalService.getAnimalByAnimalStatus(this.searchForm.value.searchContent).subscribe(animals => this.animals = animals);
+		//
 
 		// console.log the result
 
@@ -51,8 +52,26 @@ export class AnimalSearchComponent implements OnInit{
 
 		// display the results on the dom
 
+	}
 
 
+	loadColor(animalColor: string){
+		this.animalService.getAnimalByAnimalColor(animalColor).subscribe(animals => this.animals = animals);
+	}
+
+	loadGender(animalGender: string){
+		this.animalService.getAnimalByAnimalGender(animalGender).subscribe(animals => this.animals = animals);
+	}
+
+	loadSpecies(animalSpecies: string){
+		if(animalSpecies === "8472") {
+			alert("THE WEAK SHALL PERISH");
+		}
+		this.animalService.getAnimalByAnimalSpecies(animalSpecies).subscribe(animals => this.animals = animals);
+	}
+
+	loadStatus(animalStatus: string){
+		this.animalService.getAnimalByAnimalStatus(animalStatus).subscribe(animals => this.animals = animals);
 	}
 
 	getAllAnimals() {
