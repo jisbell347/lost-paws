@@ -13,6 +13,7 @@ import {SigninComponent} from "./shared/components/navbar/signin.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AnimalSearchComponent} from "./search/animal.search.component";
 import {GoogleExitComponent} from "./shared/components/navbar/google.exit.component";
+import {SignOutRedirectComponent} from "./sign-out-redirect/sign-out-redirect.component";
 
 
 // Import all needed Interceptors
@@ -36,12 +37,13 @@ import {GoogleExitService} from "./shared/services/google.exit.service";
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent];
+export const allAppComponents = [HomeComponent,NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, SignOutRedirectComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
  **/
 export const routes: Routes = [
+	{path: "signed-out", component: SignOutRedirectComponent},
 	{path: "google-exit", component: GoogleExitComponent},
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
