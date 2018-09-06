@@ -127,6 +127,11 @@ header {
 	width: 9em;
 }
 
+/*Search results*/
+.search-results {
+	list-style: none;
+}
+
 /* Footer */
 .sfooter > * {
 	display: flex;
