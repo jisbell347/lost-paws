@@ -18,22 +18,22 @@
 
 			<ul class="search-results">
 				<li class="searchForm"  routerLink="/animal/{{animal.animalId}}" *ngFor="let animal of animals | paginate: { itemsPerPage: 10, currentPage: page }">
-					<div class="row align-items-center bg-dark rounded-bottom pb-3 mb-4">
-						<div class="col-md-4 text-center">
+					<div class="row align-items-center bg-dark rounded py-3 my-4">
+						<div class="col-md-4 text-center my-sm-2">
 							<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3 searchImage">
 						</div>
 						<div class="col-md-4">
 							<ul class="list-group">
-								<li class="list-group-item">Name: {{animal.animalName}}</li>
-								<li class="list-group-item">Status: {{animal.animalStatus}}</li>
-								<li class="list-group-item">Species: {{animal.animalSpecies}}</li>
+								<li class="list-group-item"><strong>Name:</strong> {{animal.animalName}}</li>
+								<li class="list-group-item"><strong>Status:</strong> {{animal.animalStatus}}</li>
+								<li class="list-group-item"><strong>Species:</strong> {{animal.animalSpecies}}</li>
 							</ul>
 						</div>
 						<div class="col-md-4">
 							<ul class="list-group">
-								<li class="list-group-item">Location: {{animal.animalLocation}}</li>
-								<li class="list-group-item">Gender: {{animal.animalGender}}</li>
-								<li class="list-group-item">Color: {{animal.animalColor}}</li>
+								<li class="list-group-item"><strong>Location:</strong> {{animal.animalLocation}}</li>
+								<li class="list-group-item"><strong>Gender:</strong> {{animal.animalGender}}</li>
+								<li class="list-group-item"><strong>Color:</strong> {{animal.animalColor}}</li>
 							</ul>
 						</div>
 					</div>
