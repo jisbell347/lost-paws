@@ -78,21 +78,21 @@ header {
 #facebook-button {
 	background-color: #4267B2;
 	color: white;
-	border-radius: 0;
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
-	height: auto;
-	width: 7.25rem;
+	height: 2.5rem;
+	width: 12rem;
 }
 
 #google-button {
-	background-color: white;
-	border-radius: 0;
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
+	height: 2.5rem;
+	width: 12rem;
 }
 
 #google-button > img {
-	height: 50px;
-	width: 55px;
+	height: 1em;
+	width: 1em;
+	margin-bottom: .18em;
 }
 
 .animal-buttons {
