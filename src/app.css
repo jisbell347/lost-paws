@@ -173,6 +173,13 @@ max-height: 600px;
 .searchImage {
 	max-width: 100%;
 	max-height: 28vh;
+
+
+}
+
+.searchBackground {
+	max-width: 85%;
+	max-height: 28vh;
 	background-image: url("../src/app/images/paw-print.jpg");
 	background-size: contain;
 }

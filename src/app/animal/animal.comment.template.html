@@ -3,22 +3,21 @@
 		<div class="card offset-lg-1 col-md-12 col-lg-10">
 			<br>
 
-			<!--{{tempComments | json}}-->
 			<p><strong>Comments</strong></p>
 			<br>
 			<form [formGroup]="createCommentForm" (submit)="createAnimalComment();" novalidate>
 						<textarea class="form-control" type="text" name="commentContent" id="commentText"
 									 placeholder="Write your comment here!" formControlName="commentText" rows="3"></textarea>
-				<button class="btn btn-success mt-3" type="submit">Submit Comment</button>
+				<button class="btn my-3" type="submit">Submit Comment</button>
 			</form>
-				<!-- begin comment item -->
-				<div class="row border-bottom" *ngFor="let tempComment of tempComments">
-					<div class="card-body">
-						<h4 class="card-title">{{tempComment.profileName}}</h4>
-						<p class="card-text">{{tempComment.comment.commentText}}</p>
-						<div class="small text-muted">{{tempComment.comment.commentDate | date:"short"}}</div>
-					</div>
+			<!-- begin comment item -->
+			<div class="row border-bottom" *ngFor="let tempComment of tempComments">
+				<div class="card-body">
+					<h4 class="card-title">{{tempComment.profileName}}</h4>
+					<p class="card-text">{{tempComment.comment.commentText}}</p>
+					<div class="small text-muted">{{tempComment.comment.commentDate | date:"short"}}</div>
 				</div>
 			</div>
+		</div>
 	</div>
 </div>
