@@ -8,7 +8,7 @@
 			<form [formGroup]="createCommentForm" (submit)="createAnimalComment();" novalidate>
 						<textarea class="form-control" type="text" name="commentContent" id="commentText"
 									 placeholder="Write your comment here!" formControlName="commentText" rows="3"></textarea>
-				<button class="btn my-3" type="submit">Submit Comment</button>
+				<button class="btn submit-btn my-3" type="submit">Submit Comment</button>
 			</form>
 			<!-- begin comment item -->
 			<div class="row border-bottom" *ngFor="let tempComment of tempComments">
