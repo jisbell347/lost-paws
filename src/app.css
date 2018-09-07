@@ -60,10 +60,14 @@ header {
 /*Homepage Styles*/
 .home {
 	background-color: lightslategrey;
-	border-radius: 5px;
+	background: url("../src/app/images/lost-paws-header.jpeg");
+	background-size: cover;
+	/*opacity: .8;*/
+	height: 50vh;
 	padding-top: 3em;
 	padding-bottom: 3em;
 }
+
 
 .card-img {
 	max-height: 25em;
