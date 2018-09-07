@@ -123,7 +123,17 @@ if(!empty($profile)) {
 	$_SESSION["profile"] = $profile;
 	$profileId = $_SESSION["profile"]->getProfileId();
 
-	header("Location: ../..");
+	//create the Auth payload
+	$authObject = (object)[
+		"profileId" => $profile->getProfileId(),
+		"profileName" => $profile->getProfileName()
+	];
+
+	// create and set th JWT TOKEN
+	setJwtAndAuthHeader("auth", $authObject);
+	$reply->message = "Welcome to Lost Paws. Feel the fuzzy!";
+
+//	header("Location: ../..");
 } else {
 	$newProfile = new Profile(generateUuidV4(), 2, null, $userEmail, $userName, "");
 	$newProfile->insert($pdo);
@@ -131,6 +141,19 @@ if(!empty($profile)) {
 	$profile = Profile::getProfileByProfileEmail($pdo, $userEmail);
 	$_SESSION["profile"] = $newProfile;
 
-	header("Location: ../..");
+	//create the Auth payload
+	$authObject = (object)[
+		"profileId" => $profile->getProfileId(),
+		"profileName" => $profile->getProfileName()
+	];
+
+	// create and set th JWT TOKEN
+	setJwtAndAuthHeader("auth", $authObject);
+	$reply->message = "Welcome to Lost Paws. Feel the fuzzy!";
+
+//	header("Location: ../..");
 }
+
+header("Content-type: application/json");
+echo json_encode($reply);
 

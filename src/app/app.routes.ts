@@ -13,6 +13,7 @@ import {SigninComponent} from "./shared/components/navbar/signin.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AnimalSearchComponent} from "./search/animal.search.component";
 import {GoogleExitComponent} from "./shared/components/navbar/google.exit.component";
+import {FacebookExitComponent} from "./shared/components/navbar/facebook.exit.component";
 import {SignOutRedirectComponent} from "./sign-out-redirect/sign-out-redirect.component";
 
 
@@ -32,17 +33,18 @@ import {SessionService} from "./shared/services/session.service";
 import {SignOutService} from "./shared/services/sign.out.service";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 import {GoogleExitService} from "./shared/services/google.exit.service";
-//import {AnimalSearchComponent} from "./search/animal.search.component";
+import {FacebookExitService} from "./shared/services/facebook.exit.service";
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, SignOutRedirectComponent];
+export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, FacebookExitComponent, SignOutRedirectComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
  **/
 export const routes: Routes = [
 	{path: "signed-out", component: SignOutRedirectComponent},
+	{path: "facebook-exit", component: FacebookExitComponent},
 	{path: "google-exit", component: GoogleExitComponent},
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
@@ -55,7 +57,7 @@ export const routes: Routes = [
 
 // An array of services
 
-const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService, ProfileService, SessionService, SignOutService, GoogleExitService];
+const services: any[] = [AuthService, AnimalService, CommentService, CookieService, JwtHelperService, ProfileService, SessionService, SignOutService, GoogleExitService, FacebookExitService];
 
 // An array of misc providers
 const providers: any[] = [

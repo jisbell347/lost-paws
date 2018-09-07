@@ -35,6 +35,6 @@ $fb = new Facebook\Facebook([
 $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ["email"]; // Optional permissions
-$loginUrl = $helper->getLoginUrl("https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/src/app/home/home.template.html", $permissions);
+$loginUrl = $helper->getLoginUrl("https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/facebook/", $permissions);
 
 echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
