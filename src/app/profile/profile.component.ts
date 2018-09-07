@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
 		}
 	}
 
-	onSubmit() : void {
+	onSubmit() : boolean {
 		this.submitted = true;
 		this.profile.profileId = this.profileId;
 		this.profile.profileName = this.userForm.value.first + " " + this.userForm.value.last;
@@ -54,6 +54,8 @@ export class ProfileComponent implements OnInit {
 			this.status = reply;
 		if (this.status.status === 200 ) {
 			this.userForm.reset();
+			return true;
 		}});
+		return false;
 	}
 }
