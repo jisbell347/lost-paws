@@ -34,7 +34,6 @@ export class NavbarComponent{
 
 					//send user to signed out component with alert, then refreshes app back to home.
 					this.router.navigate(["signed-out"]);
-					location.reload();
 					console.log("goodbye");
 				}
 			});
