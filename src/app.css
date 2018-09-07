@@ -80,13 +80,13 @@ header {
 	color: white;
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
 	height: 2.5rem;
-	width: 12rem;
+	width: 15rem;
 }
 
 #google-button {
 	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.4);
 	height: 2.5rem;
-	width: 12rem;
+	width: 15rem;
 }
 
 #google-button > img {
