@@ -112,7 +112,8 @@ header {
 /*Animal Card */
 
 #animal-card {
-	width: 600px;
+/*	width: 600px;*/
+max-height: 600px;
 }
 
 .list-span {
@@ -154,7 +155,7 @@ header {
 }
 
 .searchImage {
-	width: 300px;
+	max-width: 100%;
 	max-height: 250px;
 }
 
