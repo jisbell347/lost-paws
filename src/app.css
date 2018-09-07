@@ -76,8 +76,8 @@ header {
 Card styling
  */
 
-.card-body:hover {
-
+.card:hover {
+	cursor: pointer;
 }
 
 .card-img {
