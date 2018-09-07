@@ -1,4 +1,4 @@
-<main class="">
+<main class="sfooter-content">
 	<div class="container p-4">
 		<div class="row justify-content-center">
 			<h3 class="text-center">Animal Profile</h3>
@@ -20,7 +20,13 @@
 			<h4 class="p-3 text-center mt-4">Contact:</h4>
 			<button type="button" class="btn info-btn" data-toggle="modal" data-target="#contact">Info</button>
 		</div>
+		<div class="container py-4">
+			<!--TODO: add proper map code tying in the location of pet-->
+			<!--<ngui-map center="Albuquerque, New Mexico"></ngui-map>-->
+		</div>
 	</div>
+
+
 	<comments></comments>
 	<contact [animalProfileId]="animal.animalProfileId"></contact>
 
