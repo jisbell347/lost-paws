@@ -1,7 +1,7 @@
 <main>
 	<div class="container-fluid home text-md-center text-lg-left">
 		<div class="row">
-			<div class="col-md pl-lg-5 ml-lg-5" >
+			<div class="col-md pl-lg-5 ml-lg-5">
 				<h1>Welcome to Lost Paws!</h1>
 				<p>Lost Paws is home to a community of pet lovers dedicated to helping lost pets reunite with their
 					families.</p>
@@ -10,7 +10,9 @@
 	</div>
 
 	<div class="container pl-1 pr-1 mt-4" *ngIf="isAuthenticated === true">
-		<button routerLink="animal-post" type="button" class="btn btn-primary btn-lg btn-block">Post a lost or found animal</button>
+		<button routerLink="animal-post" type="button" class="btn btn-primary btn-lg btn-block">Post a lost or found
+			animal
+		</button>
 	</div>
 
 	<div class="container pl-1 pr-1 mt-4" *ngIf="isAuthenticated === false">
@@ -26,20 +28,18 @@
 	<div class="container mt-3 mb-5 text-center">
 		<div class="row">
 			<div class="col-md-6">
-				<a routerLink="/search">
-					<div class="card">
-						<img class="card-img" src="http://placekitten.com/200/300" alt="card image">
-						<div class="card-img-overlay">
-							<div class="card-title">
-								<h3>See All <br>Lost Animals</h3>
-							</div>
+				<!--<a routerLink="/search">-->
+					<div class="card border border-secondary h-100 shadow rounded" routerLink="/search">
+						<div class="card-body bg-light text-dark">
+							<h3>See All <br>Lost Animals</h3>
 						</div>
+						<img class="card-img" src="../images/puppy.jpg" alt="card image">
 					</div>
-				</a>
+				<!--</a>-->
 			</div>
 			<div class="col-md-6">
-				<a routerLink="/search/animalStatus/Found">
-					<div class="card">
+				<!--<a routerLink="/search/animalStatus/Found">-->
+					<div class="card" routerLink="/search/animalStatus/Found">
 						<img class="card-img" src="http://placekitten.com/300/300" alt="card image">
 						<div class="card-img-overlay">
 							<div class="card-title">
@@ -47,7 +47,7 @@
 							</div>
 						</div>
 					</div>
-				</a>
+				<!--</a>-->
 			</div>
 		</div>
 	</div>
