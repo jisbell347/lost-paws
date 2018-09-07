@@ -192,5 +192,9 @@ max-height: 600px;
 	flex: 1 0 auto;
 }
 
+#ngui-map-api {
+	display: none;
+}
+
 
 
