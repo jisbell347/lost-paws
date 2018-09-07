@@ -62,7 +62,9 @@ header {
 /*Homepage Styles*/
 .home {
 	background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("../src/app/images/lost-paws-header.jpeg");
-	background-position: top;
+	background-position: 60% 95px;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 	background-size: cover;
 	height: 50vh;
 	padding-top: 3em;
