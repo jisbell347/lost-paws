@@ -8,6 +8,7 @@ import {allAppComponents, appRoutingProviders, routing} from "./app.routes";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JwtModule} from "@auth0/angular-jwt";
 import {RecaptchaModule} from "ng-recaptcha";
+import {NguiMapModule} from "@ngui/map";
 
 
 const moduleDeclarations = [AppComponent];
@@ -26,7 +27,18 @@ const JwtHelper = JwtModule.forRoot({
 });
 
 @NgModule({
-	imports: 		[BrowserModule, HttpClientModule, JwtHelper, ReactiveFormsModule, FormsModule, routing, NgxPaginationModule,RecaptchaModule.forRoot()],
+	imports: 		[
+		BrowserModule,
+		HttpClientModule,
+		JwtHelper,
+		ReactiveFormsModule,
+		FormsModule,
+		routing,
+		NgxPaginationModule,
+		RecaptchaModule.forRoot(),
+		NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBlQW1ByPR9Lj47wQv3gk8agkF8rpS4KN4'})
+
+	],
 	declarations:  [...moduleDeclarations, ...allAppComponents],
 	bootstrap:		[AppComponent],
 	providers:		[appRoutingProviders]
