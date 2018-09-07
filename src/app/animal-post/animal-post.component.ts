@@ -41,7 +41,7 @@ export class AnimalPostComponent implements OnInit {
 			animalDate: null,
 			animalDescription: this.animalForm.value.description,
 			animalGender: this.animalForm.value.gender,
-			animalImageUrl: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg',
+			animalImageUrl: 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg',
 			animalLocation: this.animalForm.value.location,
 			animalName: this.animalForm.value.name,
 			animalSpecies: this.animalForm.value.species,
@@ -54,7 +54,13 @@ export class AnimalPostComponent implements OnInit {
 		console.log(this.animalForm.value.location || "location is undefined");
 		console.log(this.animalForm.value.name || "name is undefined");
 		console.log(this.animalForm.value.species || "species is undefined");
-		console.log(this.animalForm.value.status || "status is undefined");*/
+		console.log(this.animalForm.value.status || "status is undefined");
+		'https://images.pexels.com/photos/159541/wildlife-photography-pet-photography-dog-animal-159541.jpeg'
+		'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg'
+		'https://images.pexels.com/photos/57416/cat-sweet-kitty-animals-57416.jpeg'
+		'https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg'
+
+		*/
 
 		if (animal) {
 			this.animalService.createAnimal(animal).subscribe(status => {
