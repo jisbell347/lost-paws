@@ -181,10 +181,23 @@
 			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-6">
 					<button
+						type="button"
+						class="btn btn-primary text-light mr-3 animal-btn"
+						id="image"
+						[formControl]
+						formControlName="image"
+						(click)="onClick()"
+					><i class="fas fa-file-image"></i>	Image Upload
+					</button>
+				</div><!--form-group col-md-6-->
+			</div><!--row justify-content-md-center-->
+			<div class="row justify-content-md-center mt-3 mb-5">
+				<div class="form-group col-md-6">
+					<button
 						type="submit"
 						class="btn btn-primary text-light mr-3 animal-btn"
 						[disabled]="!animalForm.valid"
-					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+					><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
 					<button
 						type="reset"
 						class="btn btn-warning text-light animal-btn"

@@ -125,6 +125,10 @@ Card styling
 	width: 7.5em;
 }
 
+.animal-btn#image {
+	width: 9em;
+}
+
 /*Animal Card */
 
 #animal-card {
