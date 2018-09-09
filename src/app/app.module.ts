@@ -10,6 +10,10 @@ import {JwtModule} from "@auth0/angular-jwt";
 import {RecaptchaModule} from "ng-recaptcha";
 import {NguiMapModule} from "@ngui/map";
 
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+
+
 
 const moduleDeclarations = [AppComponent];
 
@@ -36,8 +40,10 @@ const JwtHelper = JwtModule.forRoot({
 		routing,
 		NgxPaginationModule,
 		RecaptchaModule.forRoot(),
-		NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBlQW1ByPR9Lj47wQv3gk8agkF8rpS4KN4'})
-
+		NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBlQW1ByPR9Lj47wQv3gk8agkF8rpS4KN4'}),
+		CloudinaryModule.forRoot(Cloudinary,{
+			cloud_name: 'deep-dive',
+			upload_preset: 'lostpaws'})
 	],
 	declarations:  [...moduleDeclarations, ...allAppComponents],
 	bootstrap:		[AppComponent],
