@@ -10,13 +10,15 @@
 	</div>
 
 	<div class="container pl-1 pr-1 mt-4" *ngIf="isAuthenticated === true">
-		<button routerLink="animal-post" type="button" class="btn btn-primary btn-lg btn-block">Post a lost or found
+		<button routerLink="animal-post" type="button" class="btn submit-btn btn-lg btn-block shadow">Post a lost or found
 			animal
 		</button>
 	</div>
 
 	<div class="container pl-1 pr-1 mt-4" *ngIf="isAuthenticated === false">
-		<p class="text-center">Please sign in to post a lost or found pet.</p>
+		<h4 class="text-center pt-3">Need to post a pet?</h4>
+		<p class="text-center">No sign-up required, simply sign-in with your Google or Facebook account.</p>
+		<button type="button" class="btn submit-btn btn-lg btn-block mt-2 mb-4 shadow" data-toggle="modal" data-target="#sign-in-modal">Sign In Now</button>
 	</div>
 	<div class="container animal-buttons mt-4 text-center">
 		<div class="row">
