@@ -81,7 +81,7 @@ Card styling
 	cursor: pointer;
 }
 
-.card-img {
+.card-img-bottom {
 	max-height: 25em;
 	opacity: .70;
 }
