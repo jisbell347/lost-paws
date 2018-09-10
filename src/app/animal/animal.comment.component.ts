@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../shared/services/auth.service";
 
 //Interfaces used by the component
 import {Comment} from "../shared/interfaces/comment";
@@ -30,18 +31,21 @@ export class AnimalCommentComponent implements OnInit {
 	tempComments: any[];
 	createCommentForm: FormGroup;
 	status: Status = null;
+	isAuthenticated: boolean;
 
 	constructor(
 		protected formBuilder: FormBuilder,
 		protected commentService: CommentService,
 		protected animalService: AnimalService,
 		protected profileService: ProfileService,
-		protected route: ActivatedRoute
+		protected route: ActivatedRoute,
+		protected authService: AuthService
 	) {
 	}
 
 	ngOnInit(): void {
 		this.loadComments();
+		this.isAuthenticated = this.authService.isAuthenticated();
 		this.animalService.getAnimal(this.animalId).subscribe(reply => this.animal = reply);
 		this.createCommentForm = this.formBuilder.group({
 			commentText: ["", [Validators.maxLength(1000), Validators.required]]
