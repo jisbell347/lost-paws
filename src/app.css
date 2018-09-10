@@ -1,5 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import url('https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans:400,700');
 
 /*Global Styling*/
 html {
@@ -19,7 +19,7 @@ header {
 
 .navbar {
 	font-family: 'Comfortaa', cursive;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .nav-logo {
@@ -181,6 +181,11 @@ max-height: 600px;
 	text-decoration: none;
 	color: black;
 	text-underline: none;
+}
+
+.searchHeader{
+	color: #3a9a81;
+	font-weight: 700;
 }
 
 .searchImage {
