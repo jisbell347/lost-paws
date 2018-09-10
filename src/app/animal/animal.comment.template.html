@@ -8,7 +8,14 @@
 			<form [formGroup]="createCommentForm" (submit)="createAnimalComment();" novalidate>
 						<textarea class="form-control" type="text" name="commentContent" id="commentText"
 									 placeholder="Write your comment here!" formControlName="commentText" rows="3"></textarea>
-				<button class="btn submit-btn my-3" type="submit">Submit Comment</button>
+				<div *ngIf="isAuthenticated === true">
+					<button class="btn submit-btn my-3" type="submit" >Submit Comment</button>
+				</div>
+				<div *ngIf="isAuthenticated === false">
+					<button class="btn submit-btn my-3" type="submit" data-toggle="modal" data-target="#sign-in-modal" >Sign in to post a comment</button>
+				</div>
+
+
 			</form>
 			<!-- begin comment item -->
 			<div class="row border-bottom" *ngFor="let tempComment of tempComments">
