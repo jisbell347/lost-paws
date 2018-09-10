@@ -77,7 +77,7 @@ header {
 Card styling
  */
 
-.card:hover {
+.card-home:hover {
 	cursor: pointer;
 }
 
