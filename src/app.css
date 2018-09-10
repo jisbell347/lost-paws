@@ -158,6 +158,11 @@ max-height: 600px;
 	width: 9em;
 }
 
+/* Shelter page */
+.shelter-header{
+	color: #52a489;
+}
+
 /*Search results*/
 .search-results {
 	list-style: none;
