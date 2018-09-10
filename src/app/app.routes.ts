@@ -15,6 +15,7 @@ import {AnimalSearchComponent} from "./search/animal.search.component";
 import {GoogleExitComponent} from "./shared/components/navbar/google.exit.component";
 import {FacebookExitComponent} from "./shared/components/navbar/facebook.exit.component";
 import {SignOutRedirectComponent} from "./sign-out-redirect/sign-out-redirect.component";
+import {ShelterInfoComponent} from "./shelter/shelter.info.component";
 
 
 // Import all needed Interceptors
@@ -37,7 +38,7 @@ import {FacebookExitService} from "./shared/services/facebook.exit.service";
 
 
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, FacebookExitComponent, SignOutRedirectComponent];
+export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, FacebookExitComponent, SignOutRedirectComponent, ShelterInfoComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
@@ -48,6 +49,7 @@ export const routes: Routes = [
 	{path: "google-exit", component: GoogleExitComponent},
 	{path: "animal/:animalId", component: AnimalCardComponent},
 	{path: "animal-post", component: AnimalPostComponent},
+	{path: "shelter", component: ShelterInfoComponent},
 	{path: "about-us", component: AboutUsComponent},
 	{path: "search/:animalParameter/:animalValue", component: AnimalSearchComponent},
 	{path: "search", redirectTo: "/search/animalStatus/Lost"},
