@@ -6,19 +6,24 @@ import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+/*import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
+import {FILE_UPLOAD_DIRECTIVES, FileUploader} from "ng2-file-upload";*/
+
 
 @Component({
 	selector: "animal-post",
-	template: require("./animal-post.template.html")
+	template: require("./animal-post.template.html"),
+	/*directives: [FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES]*/
 })
 export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
 	submitted : boolean = false;
 	status : Status = null;
 	imageUrl : string = 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg';
+	baseURL: string = "https://api.cloudinary.com/v1_1/deep-dive";
 
 
-	constructor(protected authService: AuthService,
+		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
 					protected fb: FormBuilder) {
 	}

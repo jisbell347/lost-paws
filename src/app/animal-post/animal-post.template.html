@@ -191,6 +191,13 @@
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-6">
+				</div><!--form-group col-md-6-->
+				<label class="btn btn-primary">Select File
+					<input type="file" (change)="onChange($event)" [multiple]="multiple" style="display: none;"/>
+				</label>
+			</div><!--row justify-content-md-center-->
+			<div class="row justify-content-md-center mt-3 mb-5">
+				<div class="form-group col-md-6">
 					<button
 						type="submit"
 						class="btn btn-primary text-light mr-3 animal-btn"
