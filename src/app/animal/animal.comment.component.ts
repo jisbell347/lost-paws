@@ -72,6 +72,7 @@ export class AnimalCommentComponent implements OnInit {
 				this.status = status;
 
 				if(status.status === 200) {
+					this.createCommentForm.reset();
 					this.loadComments();
 				}
 			});
