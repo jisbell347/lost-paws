@@ -21,8 +21,10 @@
 			<button type="button" class="btn info-btn" data-toggle="modal" data-target="#contact">Info</button>
 		</div>
 		<div class="container py-4">
-			<!--TODO: add proper map code tying in the location of pet-->
-			<!--<ngui-map center="Albuquerque, New Mexico"></ngui-map>-->
+			<ngui-map zoom="15" center="{{animal.animalLocation}}">
+				<marker position="{{animal.animalLocation}}"
+						  draggable="false"></marker>
+			</ngui-map>
 		</div>
 	</div>
 
