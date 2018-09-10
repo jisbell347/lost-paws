@@ -4,6 +4,8 @@ import { Animal } from "../shared/interfaces/animal";
 import { AnimalService } from "../shared/services/animal.service";
 import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
 
 @Component({
 	selector: "animal-post",
@@ -13,6 +15,8 @@ export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
 	submitted : boolean = false;
 	status : Status = null;
+	imageUrl : string = 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg';
+
 
 	constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
@@ -27,8 +31,30 @@ export class AnimalPostComponent implements OnInit {
 			name: ["", [Validators.maxLength(100)]],
 			color: ["", [Validators.required]],
 			location: ["", [Validators.maxLength(200)]],
-			description: ["", [Validators.maxLength(500), Validators.required]],
+			description: ["", [Validators.maxLength(500), Validators.required]]
 		});
+	}
+
+	upload(): void {
+		/*cloudinary.openUploadWidget({cloud_name: 'deep-dive', upload_preset: 'lostpaws'},
+			function(error: string, result: string) {
+				/!*this.imageUrl = result[0].url.toString();*!/
+				console.log(result[0]);
+				console.log('secure URL: ' + result[0]['secure_url']);
+				console.log('public ID: ' + result[0]['public_id']);*/
+				/*
+
+								this.imageUrl = result[0]['secure_url'];
+								console.log("this.imageUrl: " + this.imageUrl);
+				*/
+
+
+				/*this.pubId = result[0]['public_id'];
+				  console.log("public ID: " + this.pubId);*/
+
+				/*this.imageUrl = result[0]['secure_url'];
+				console.log("this.imageUrl: " + this.imageUrl);*/
+	/*		});*/
 	}
 
 	createAnimal() : void {
@@ -41,7 +67,7 @@ export class AnimalPostComponent implements OnInit {
 			animalDate: null,
 			animalDescription: this.animalForm.value.description,
 			animalGender: this.animalForm.value.gender,
-			animalImageUrl: 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg',
+			animalImageUrl: this.imageUrl,
 			animalLocation: this.animalForm.value.location,
 			animalName: this.animalForm.value.name,
 			animalSpecies: this.animalForm.value.species,
