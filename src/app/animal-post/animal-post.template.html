@@ -219,6 +219,13 @@
 						class="btn btn-warning text-light animal-btn"
 					><i class="fas fa-undo"></i>&nbsp;&nbsp;Clear All</button>
 				</div><!--form-group col-md-6-->
+				<div class="row justify-content-md-center mb-3" *ngIf="success === true">
+					<div class="form-group col-md-6">
+						<div class="alert alert-success" role="alert">
+							Animal Post Successfully Updated.
+						</div><!--alert alert-success-->
+					</div><!--form-group col-md-6-->
+				</div>
 			</div><!--row justify-content-md-center-->
 		</div><!--container-->
 	</form>

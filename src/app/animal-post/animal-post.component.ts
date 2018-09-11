@@ -6,7 +6,7 @@ import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 /*import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from "ng2-file-upload";*/
@@ -29,12 +29,14 @@ export class AnimalPostComponent implements OnInit {
 	deleted: boolean = false;
 	@ViewChild("photo") photo: ElementRef;
 	animalId = this.route.snapshot.params["animalId"];
+	success: boolean = false;
 
 
 		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
 					protected fb: FormBuilder,
-					protected route: ActivatedRoute) {
+					protected route: ActivatedRoute,
+					protected router: Router) {
 	}
 
 	ngOnInit() : void {
@@ -151,7 +153,14 @@ export class AnimalPostComponent implements OnInit {
 	}
 
 	editAnimal(){
-		this.animalService.editAnimal(this.animal).subscribe(status => {this.status = status});
+		this.animalService.editAnimal(this.animal).subscribe(status => {
+			this.status = status;
+		});
+		this.animalForm.reset();
+		if(this.status.status === 200) {
+			this.success = true;
+			// this.router.navigate(["animal/:animalId"]);
+		}
 	}
 
 	deleteAnimal(){
@@ -160,6 +169,7 @@ export class AnimalPostComponent implements OnInit {
 			if(this.status.status === 200){
 				this.deleted = true;
 				this.animal = {animalId: null, animalProfileId: null, animalColor: null, animalDate: null, animalDescription: null, animalGender: null, animalImageUrl: null, animalLocation: null, animalName: null, animalSpecies: null, animalStatus: null};
+				this.router.navigate([""]);
 			}
 		})
 	}
