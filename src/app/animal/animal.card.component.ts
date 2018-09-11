@@ -14,9 +14,9 @@ import {Observable} from "rxjs";
 })
 
 export class AnimalCardComponent implements OnInit{
-	animal: Animal = {animalId: null, animalProfileId: null, animalColor: null, animalDate: null, animalDescription: null, animalGender: null, animalImageUrl: null, animalLocation: null, animalName: null, animalSpecies: null, animalStatus: null};
-	profile: Profile;
-	profileId: string = null;
+	animal: Animal = null;
+	profile: Profile = {profileId: null, profileEmail: null, profileName: null, profilePhone: null};
+	profileId: string;
 
 
 	constructor(protected animalService: AnimalService, protected router: ActivatedRoute, protected profileService: ProfileService, protected authService: AuthService, protected route: Router) {
@@ -26,7 +26,7 @@ export class AnimalCardComponent implements OnInit{
 	ngOnInit() {
 		window.sessionStorage.setItem('url', window.location.pathname);
 		this.loadAnimal();
-		this.getJwtProfileId();
+		this.profileId = this.getJwtProfileId();
 	}
 
 	loadAnimal() {
@@ -39,8 +39,8 @@ export class AnimalCardComponent implements OnInit{
 	}
 
 	getJwtProfileId() : any {
-		if(this.authService.decodeJwt()) {
-			console.log(this.authService.decodeJwt().auth.profileId);
+		if(this.authService.loggedIn()) {
+			return this.authService.decodeJwt().auth.profileId;
 		} else {
 			return false;
 		}
