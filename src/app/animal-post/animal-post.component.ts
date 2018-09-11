@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormControl,  ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators, NgForm} from '@angular/forms';
 import { Animal } from "../shared/interfaces/animal";
 import { AnimalService } from "../shared/services/animal.service";
 import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+
 /*import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from "ng2-file-upload";*/
 
@@ -21,7 +22,9 @@ export class AnimalPostComponent implements OnInit {
 	status : Status = null;
 	imageUrl : string = 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg';
 	baseURL: string = "https://api.cloudinary.com/v1_1/deep-dive";
-
+	/*cloudinary: Cloudinary.Cloudinary;
+	*/
+	@ViewChild("photo") photo: ElementRef;
 
 		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
@@ -40,7 +43,25 @@ export class AnimalPostComponent implements OnInit {
 		});
 	}
 
-	upload(): void {
+	upload() : void {
+		this.photo.nativeElement.cloudinary.openUploadWidget({
+			cloud_name: 'deep-dive', upload_preset: 'lostpaws'}, (error: any, result: any) => {
+			if (result) {
+				console.log(result[0]['secure_url']);
+				this.imageUrl = result[0]['secure_url'].toString();
+			}
+		});
+	}
+
+	/*upload(): void {
+		this.cloudinary.openUploadWidget({
+			cloud_name: 'deep-dive', upload_preset: 'lostpaws'}, (error: any, result: any) => {
+			if (result) {
+				console.log(result[0]['secure_url']);
+				this.imageUrl = result[0]['secure_url'].toString();
+			}
+		});*/
+
 		/*cloudinary.openUploadWidget({cloud_name: 'deep-dive', upload_preset: 'lostpaws'},
 			function(error: string, result: string) {
 				/!*this.imageUrl = result[0].url.toString();*!/
@@ -60,7 +81,7 @@ export class AnimalPostComponent implements OnInit {
 				/*this.imageUrl = result[0]['secure_url'];
 				console.log("this.imageUrl: " + this.imageUrl);*/
 	/*		});*/
-	}
+/*	}*/
 
 	createAnimal() : void {
 		this.submitted = true;

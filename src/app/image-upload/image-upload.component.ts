@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, NgZone } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from "ng2-file-upload";
 import { Cloudinary } from '@cloudinary/angular-5.x';
 
 @Component({

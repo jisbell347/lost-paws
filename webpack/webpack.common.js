@@ -12,7 +12,10 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: [".ts", ".js"]
+		extensions: [".ts", ".js"],
+		alias: {
+			"cloudinary-core": "cloudinary-core/cloudinary-core-shrinkwrap.js"
+		}
 	},
 
 	module: {

@@ -9,10 +9,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JwtModule} from "@auth0/angular-jwt";
 import {RecaptchaModule} from "ng-recaptcha";
 import {NguiMapModule} from "@ngui/map";
-
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import {CloudinaryModule, CloudinaryConfiguration, provideCloudinary} from '@cloudinary/angular-5.x';
+import * as cloudinary from 'cloudinary-core';
 import * as  Cloudinary from 'cloudinary-core';
-
+/*import { CloudinaryModule } from '@cloudinary/angular-5.x';*/
 
 
 const moduleDeclarations = [AppComponent];
