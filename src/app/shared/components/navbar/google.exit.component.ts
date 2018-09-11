@@ -29,10 +29,14 @@ export class GoogleExitComponent implements OnInit{
 			if(this.status.status === 200) {
 				this.isAuthenticatedEvent.emit(true);
 
-				// navigate to the stored return url
-				if (window.sessionStorage.getItem("url").includes("animal")) {
-					window.location.href=returnUrl;
-				//if user is not on an animal card page, the user will be redirected home.
+				// navigate home if user is on the sign-out page
+				if(window.sessionStorage.getItem("url").includes("signed-out")){
+					this.router.navigate([""]);
+				}
+				//navigate back to the page the user was on
+				else if (window.sessionStorage.getItem("url")) {
+					this.router.navigateByUrl(returnUrl);
+				//if there is no stored return url, navigate home.
 				} else {
 					this.router.navigate([""]);
 				}
