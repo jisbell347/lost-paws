@@ -33,6 +33,8 @@ export class AnimalSearchComponent implements OnInit{
 	}
 
 	ngOnInit() {
+		//set session storage for sign in purposes
+		window.sessionStorage.setItem('url', window.location.pathname);
 		this.searchForm = this.formBuilder.group({
 			searchContent: ["", [Validators.maxLength(64), Validators.required]],
 			searchParameter: ["", [Validators.required]]

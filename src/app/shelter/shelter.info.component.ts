@@ -10,7 +10,7 @@ import {Component} from "@angular/core";
 export class ShelterInfoComponent {
 	ngOnInit() {
 		//set session storage for sign in purposes
-		window.sessionStorage.setItem('url',window.location.href);
+		window.sessionStorage.setItem('url', window.location.pathname);
 	};
 
 }

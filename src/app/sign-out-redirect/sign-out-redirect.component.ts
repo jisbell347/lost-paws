@@ -7,8 +7,8 @@ import {Component} from "@angular/core";
 
 export class SignOutRedirectComponent {
 	ngOnInit() {
-		//clear session storage for sign in purposes
-		window.sessionStorage.removeItem('url');
+		//set session storage for sign in purposes
+		window.sessionStorage.setItem('url', window.location.pathname);
 	};
 
 }

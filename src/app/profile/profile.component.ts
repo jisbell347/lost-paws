@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
 	ngOnInit() : void {
 		//set session storage for sign in purposes
-		window.sessionStorage.setItem('url',window.location.href);
+		window.sessionStorage.setItem('url', window.location.pathname);
 		//grab the current logged in profileId off JWT
 		this.profileId = this.getJwtProfileId();
 		/*console.log(this.profileId);*/
