@@ -6,6 +6,7 @@ import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+import {ActivatedRoute} from "@angular/router";
 
 /*import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from "ng2-file-upload";*/
@@ -20,30 +21,52 @@ export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
 	submitted : boolean = false;
 	status : Status = null;
+	animal: Animal = {animalId: null, animalProfileId: null, animalColor: null, animalDate: null, animalDescription: null, animalGender: null, animalImageUrl: null, animalLocation: null, animalName: null, animalSpecies: null, animalStatus: null};
 	imageUrl : string = 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg';
 	baseURL: string = "https://api.cloudinary.com/v1_1/deep-dive";
 	/*cloudinary: Cloudinary.Cloudinary;
 	*/
 	@ViewChild("photo") photo: ElementRef;
+	animalId = this.route.snapshot.params["animalId"];
+
 
 		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
-					protected fb: FormBuilder) {
+					protected fb: FormBuilder,
+					protected route: ActivatedRoute) {
 	}
 
 	ngOnInit() : void {
 		//set session storage for sign in purposes
 		window.sessionStorage.setItem('url',window.location.href);
+		this.loadAnimalValues();
 		this.animalForm = this.fb.group({
-			status: ["", [Validators.required]],
-			species: ["", [Validators.required]],
-			gender: ["", [Validators.required]],
-			name: ["", [Validators.maxLength(100)]],
-			color: ["", [Validators.required]],
-			location: ["", [Validators.maxLength(200)]],
-			description: ["", [Validators.maxLength(500), Validators.required]]
+			animalStatus: ["", [Validators.required]],
+			animalSpecies: ["", [Validators.required]],
+			animalGender: ["", [Validators.required]],
+			animalName: ["", [Validators.maxLength(100)]],
+			animalColor: ["", [Validators.required]],
+			animalLocation: ["", [Validators.maxLength(200)]],
+			animalDescription: ["", [Validators.maxLength(500), Validators.required]]
 		});
+		this.applyFormChanges();
 	}
+
+	applyFormChanges() :void {
+			this.animalForm.valueChanges.subscribe(values => {
+				for(let field in values) {
+					this.animal[field] = values[field];
+				}
+			});
+	}
+
+	loadAnimalValues(){
+			this.animalService.getAnimal(this.animalId).subscribe(animal => {
+				this.animal = animal;
+				this.animalForm.patchValue(animal);
+			});
+	}
+
 
 	upload() : void {
 		this.photo.nativeElement.cloudinary.openUploadWidget({
