@@ -48,6 +48,7 @@ export const routes: Routes = [
 	{path: "facebook-exit", component: FacebookExitComponent},
 	{path: "google-exit", component: GoogleExitComponent},
 	{path: "animal/:animalId", component: AnimalCardComponent},
+	{path: "animal-post/:animalId", component: AnimalPostComponent},
 	{path: "animal-post", component: AnimalPostComponent},
 	{path: "shelter", component: ShelterInfoComponent},
 	{path: "about-us", component: AboutUsComponent},
