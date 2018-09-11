@@ -19,6 +19,7 @@ export class AnimalCardComponent implements OnInit{
 	}
 	animalId = this.router.snapshot.params["animalId"];
 	ngOnInit() {
+		window.sessionStorage.setItem('url',window.location.href);
 		this.loadAnimal();
 	}
 

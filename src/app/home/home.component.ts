@@ -17,6 +17,8 @@ export class HomeComponent {
 	};
 
 	ngOnInit() {
+		//set session storage for sign in purposes
+		window.sessionStorage.setItem('url',window.location.href);
 		this.isAuthenticated = this.authService.isAuthenticated();
 	};
 
