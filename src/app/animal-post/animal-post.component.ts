@@ -26,6 +26,7 @@ export class AnimalPostComponent implements OnInit {
 	baseURL: string = "https://api.cloudinary.com/v1_1/deep-dive";
 	/*cloudinary: Cloudinary.Cloudinary;
 	*/
+	deleted: boolean = false;
 	@ViewChild("photo") photo: ElementRef;
 	animalId = this.route.snapshot.params["animalId"];
 
@@ -147,5 +148,19 @@ export class AnimalPostComponent implements OnInit {
 				}
 			});
 		}
+	}
+
+	editAnimal(){
+		this.animalService.editAnimal(this.animal).subscribe(status => {this.status = status});
+	}
+
+	deleteAnimal(){
+		this.animalService.deleteAnimal(this.animal.animalId).subscribe(status => {
+			this.status = status;
+			if(this.status.status === 200){
+				this.deleted = true;
+				this.animal = {animalId: null, animalProfileId: null, animalColor: null, animalDate: null, animalDescription: null, animalGender: null, animalImageUrl: null, animalLocation: null, animalName: null, animalSpecies: null, animalStatus: null};
+			}
+		})
 	}
 }

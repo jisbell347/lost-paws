@@ -203,7 +203,17 @@
 						type="submit"
 						class="btn btn-primary text-light mr-3 animal-btn"
 						[disabled]="!animalForm.valid"
-					><i class="fas fa-edit"></i>&nbsp;&nbsp;Post</button>
+					><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Post</button>
+					<button
+						type="submit"
+						class="btn btn-success text-light mr-3 animal-btn"
+						[disabled]="!animalForm.valid" (click)="editAnimal();"
+					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
+					<button
+						type="submit"
+						class="btn btn-danger text-light mr-3 animal-btn"
+						[disabled]="!animalForm.valid" (click)="deleteAnimal();"
+					><i class="far fa-trash-alt"></i>&nbsp;Delete</button>
 					<button
 						type="reset"
 						class="btn btn-warning text-light animal-btn"
