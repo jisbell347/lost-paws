@@ -13,8 +13,25 @@
 					</button>
 				</div>
 				<div class="mx-auto modal-body">
-					<re-captcha (resolved)="resolved($event)" siteKey="6Ldkk24UAAAAAAlz32feF_s--mbmG9Db410u9e6L" *ngIf="isAuthenticated === false"></re-captcha>
+					<div *ngIf="isAuthenticated === false">
+						<!--Commented out recaptcha until resolved on live site.-->
+						<!--<re-captcha (resolved)="resolved($event)" siteKey="6Ldkk24UAAAAAAlz32feF_s&#45;&#45;mbmG9Db410u9e6L" ></re-captcha>-->
+
+						<!--Here is a temporary solution to get sign-in buttons to view in place of recaptcha.-->
+						<p class="text-center">You must log in to view contact information.</p>
+						<div class="row justify-content-center">
+							<a href="https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/google/" id="google-button" class="btn btn-light btn-google"><img src="../images/google-icon.svg" alt="google logo" /> Sign in with Google</a><br>
+						</div>
+						<div class="row justify-content-center mt-3">
+							<a href="https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/facebook/" id="facebook-button" class="btn btn-facebook"><i class="fab fa-facebook-square"></i> Sign in with Facebook</a>
+						</div>
+					</div>
+
 					<!--Below is the contact information. It will only be displayed if user is signed in.-->
+					<!--<div *ngIf="grecaptcha.getResponse() === true">-->
+						<!--<p>Show the contact placeholder</p>-->
+					<!--</div>-->
+
 					<div *ngIf="isAuthenticated === true">
 						<div class="text-center" *ngIf="profile">
 							<h4>Name</h4>
