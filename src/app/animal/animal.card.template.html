@@ -3,6 +3,9 @@
 		<div class="row justify-content-center">
 			<h3 class="text-center">Animal Profile</h3>
 		</div>
+		<div *ngIf="profileId === animal.animalProfileId">
+			<button type="button" class="btn btn-warning" (click)="updateAnimal();"><i class="far fa-edit"></i> Edit</button>
+		</div>
 		<div class="card border border-0" *ngIf="animal">
 			<img src="{{animal.animalImageUrl}}" alt="Image of pet"
 				  class="card-image-top p-5 img-fluid mx-auto" id="animal-card">
