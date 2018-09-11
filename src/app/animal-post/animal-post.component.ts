@@ -38,7 +38,7 @@ export class AnimalPostComponent implements OnInit {
 
 	ngOnInit() : void {
 		//set session storage for sign in purposes
-		window.sessionStorage.setItem('url',window.location.href);
+		window.sessionStorage.setItem('url', window.location.pathname);
 		this.loadAnimalValues();
 		this.animalForm = this.fb.group({
 			animalStatus: ["", [Validators.required]],
