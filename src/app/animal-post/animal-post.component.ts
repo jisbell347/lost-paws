@@ -7,10 +7,7 @@ import {Status} from "../shared/interfaces/status";
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
 import {ActivatedRoute, Router} from "@angular/router";
-
-/*import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
-import {FILE_UPLOAD_DIRECTIVES, FileUploader} from "ng2-file-upload";*/
-
+import { ImageUploadComponent } from '../image-upload/image-upload.component'
 
 @Component({
 	selector: "animal-post",
@@ -21,16 +18,21 @@ export class AnimalPostComponent implements OnInit {
 	animalForm: FormGroup;
 	submitted : boolean = false;
 	status : Status = null;
-	animal: Animal = {animalId: null, animalProfileId: null, animalColor: null, animalDate: null, animalDescription: null, animalGender: null, animalImageUrl: null, animalLocation: null, animalName: null, animalSpecies: null, animalStatus: null};
-	imageUrl : string = 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg';
-	baseURL: string = "https://api.cloudinary.com/v1_1/deep-dive";
-	/*cloudinary: Cloudinary.Cloudinary;
-	*/
-	deleted: boolean = false;
-	@ViewChild("photo") photo: ElementRef;
+	animal: Animal = {
+		animalId: null,
+		animalProfileId: null,
+		animalColor: null,
+		animalDate: null,
+		animalDescription: null,
+		animalGender: null,
+		animalImageUrl: null,
+		animalLocation: null,
+		animalName: null,
+		animalSpecies: null,
+		animalStatus: null};
+	image: ImageUploadComponent;
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
-
 
 		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
@@ -70,47 +72,6 @@ export class AnimalPostComponent implements OnInit {
 			});
 	}
 
-
-	upload() : void {
-		this.photo.nativeElement.cloudinary.openUploadWidget({
-			cloud_name: 'deep-dive', upload_preset: 'lostpaws'}, (error: any, result: any) => {
-			if (result) {
-				console.log(result[0]['secure_url']);
-				this.imageUrl = result[0]['secure_url'].toString();
-			}
-		});
-	}
-
-	/*upload(): void {
-		this.cloudinary.openUploadWidget({
-			cloud_name: 'deep-dive', upload_preset: 'lostpaws'}, (error: any, result: any) => {
-			if (result) {
-				console.log(result[0]['secure_url']);
-				this.imageUrl = result[0]['secure_url'].toString();
-			}
-		});*/
-
-		/*cloudinary.openUploadWidget({cloud_name: 'deep-dive', upload_preset: 'lostpaws'},
-			function(error: string, result: string) {
-				/!*this.imageUrl = result[0].url.toString();*!/
-				console.log(result[0]);
-				console.log('secure URL: ' + result[0]['secure_url']);
-				console.log('public ID: ' + result[0]['public_id']);*/
-				/*
-
-								this.imageUrl = result[0]['secure_url'];
-								console.log("this.imageUrl: " + this.imageUrl);
-				*/
-
-
-				/*this.pubId = result[0]['public_id'];
-				  console.log("public ID: " + this.pubId);*/
-
-				/*this.imageUrl = result[0]['secure_url'];
-				console.log("this.imageUrl: " + this.imageUrl);*/
-	/*		});*/
-/*	}*/
-
 	createAnimal() : void {
 		this.submitted = true;
 
@@ -121,7 +82,7 @@ export class AnimalPostComponent implements OnInit {
 			animalDate: null,
 			animalDescription: this.animalForm.value.description,
 			animalGender: this.animalForm.value.gender,
-			animalImageUrl: this.imageUrl,
+			animalImageUrl: this.image.cloudinarySecureUrl,
 			animalLocation: this.animalForm.value.location,
 			animalName: this.animalForm.value.name,
 			animalSpecies: this.animalForm.value.species,
