@@ -68,17 +68,18 @@ try {
 	// upload image to cloudinary and get public id
 	$cloudinaryResult = \Cloudinary\Uploader::upload($tempAnimalFileName, array("width" => 500, "crop" => "scale"));
 	// after sending the image to Cloudinary, set animalImageUrl to the animal record
-	$animal->setAnimalImageUrl($cloudinaryResult["secure_url"]);
+	$reply->data = $cloudinaryResult["secure_url"];
+	$animal->setAnimalImageUrl($reply->data);
 	$animal->update($pdo);
 	// update reply
-	$reply->message = "Image uploaded Ok";
+	$reply->message = "Image uploaded Ok.";
 } catch(\Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
 
 //encode and return reply to the front-end caller
-header("Content-type: application/json");
+header("Content-Type: application/json");
 if (!$reply->data) {
 	unset($reply->data);
 }
