@@ -51,7 +51,7 @@ try {
 	// validate header
 	validateJwtHeader();
 
-	$config = readConfig("/etc/apache2/lost-paws/lostfuzzy.ini");
+	$config = readConfig("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 	$cloudinary = json_decode($config["cloudinary"]);
 	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "api_key" => $cloudinary->apiKey, "api_secret" => $cloudinary->apiSecret]);
 

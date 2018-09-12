@@ -1,5 +1,6 @@
 {
   "require": {
+    "cloudinary/cloudinary_php": "@stable",
     "ramsey/uuid": "@stable",
     "google/recaptcha": "@stable",
     "google/apiclient": "^2.0",

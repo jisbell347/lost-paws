@@ -19,7 +19,7 @@
 							id="status"
 							name="status"
 							[formControl]
-							formControlName="animalStatus"
+							formControlName="status"
 						>
 							<option selected>Lost</option>
 							<option>Found</option>
@@ -39,7 +39,7 @@
 							id="species"
 							name="species"
 							[formControl]
-							formControlName="animalSpecies"
+							formControlName="species"
 						>
 							<option selected>Dog</option>
 							<option>Cat</option>
@@ -58,7 +58,7 @@
 							id="gender"
 							name="gender"
 							[formControl]
-							formControlName="animalGender"
+							formControlName="gender"
 						>
 							<option selected>Unknown</option>
 							<option>Female</option>
@@ -80,7 +80,7 @@
 							id="name"
 							name="name"
 							[formControl]
-							formControlName="animalName"
+							formControlName="name"
 							placeholder="Animal name. Leave empty if unknown."
 						/>
 					</div><!--input-group mb-3-->
@@ -99,7 +99,7 @@
 							id="color"
 							name="color"
 							[formControl]
-							formControlName="animalColor"
+							formControlName="color"
 							aria-describedby="colorHelp"
 						>
 							<option selected>Unknown</option>
@@ -142,7 +142,7 @@
 							id="location"
 							name="location"
 							[formControl]
-							formControlName="animalLocation"
+							formControlName="location"
 							placeholder="Please enter the last know pet location."
 						/>
 					</div><!--		input-group mb-3-->
@@ -162,7 +162,7 @@
 							id="description"
 							name="description"
 							[formControl]
-							formControlName="animalDescription"
+							formControlName="description"
 							placeholder="Please enter a detailed pet description. (250 character maximum)"
 							required
 							maxLength="250"
@@ -182,7 +182,7 @@
 				<div class="form-group col-md-6">
 					<div class="form-group">
 						<label for="pet" class="modal-labels">Select File</label>
-						<input type="file" name="pet" id="pet" />
+						<input type="file" name="pet" id="pet" ng2FileSelect [uploader]="uploader" />
 					</div><!--form-group-->
 					<button
 						type="button"
@@ -190,7 +190,7 @@
 						id="photo"
 						name="photo"
 						#photo
-						(click)="upload()"><i class="fas fa-file-image"></i> Upload Image</button>
+						(click)="uploadImage()"><i class="fas fa-file-image"></i> Upload Image</button>
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
