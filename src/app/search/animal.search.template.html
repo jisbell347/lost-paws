@@ -19,14 +19,14 @@
 			<ul class="search-results">
 				<li class="searchForm"  routerLink="/animal/{{animal.animalId}}" *ngFor="let animal of animals | paginate: { itemsPerPage: 10, currentPage: page }">
 					<div class="row align-items-center bg-dark rounded py-3 my-4 ">
-						<div class="col-md-3 text-center my-sm-2 searchBackground px-1 mx-1 ml-4 mr-4">
+						<div class="col-md-3 text-center my-2 searchBackground rounded px-1 mx-1 ml-4 mr-4">
 							<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3 searchImage">
 						</div>
 						<div class="col-md-4">
 							<ul class="list-group">
 								<li class="list-group-item"><strong class="searchHeader">Name:</strong> {{animal.animalName}}</li>
 								<li class="list-group-item"><strong class="searchHeader">Status:</strong> {{animal.animalStatus}}</li>
-								<li class="list-group-item"><strong class="searchHeader">Species:</strong> {{animal.animalSpecies}}</li>
+								<li class="list-group-item"><strong class="searchHeader">Date:</strong> {{animal.animalDate | date:"short"}}</li>
 							</ul>
 						</div>
 						<div class="col-md-4">
