@@ -168,11 +168,11 @@
 							maxLength="250"
 						></textarea>
 					</div><!--input-group mb-3-->
-					<div *ngIf="!animalForm.controls.description.valid && (animalForm.controls.description.dirty || animalForm.controls.description.touched)" class="alert alert-danger" role="alert">
-						<div *ngIf="animalForm.controls.description.errors.required">
+					<div *ngIf="!animalDescription.valid && (animalDescription.dirty || animalDescription.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="animalDescription.errors.required">
 							The description field cannot be empty.
 						</div>
-						<div *ngIf="animalForm.controls.description.errors.maxLength">
+						<div *ngIf="animalDescription.errors.maxLength">
 							Your description is too long, it cannot exceed 500 characters.
 						</div>
 					</div><!--alert alert-danger-->
@@ -180,19 +180,18 @@
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-6">
+					<div class="form-group">
+						<label for="pet" class="modal-labels">Select File</label>
+						<input type="file" name="pet" id="pet" />
+					</div><!--form-group-->
 					<button
 						type="button"
 						class="btn btn-primary text-light mr-3 animal-btn"
-						id="upload"
 						#photo
 						(click)="upload()"
-					><i class="fas fa-file-image"></i>	Image Upload
+					>
+						<i class="fas fa-file-upload"></i> Upload Image
 					</button>
-				</div><!--form-group col-md-6-->
-			</div><!--row justify-content-md-center-->
-			<div class="row justify-content-md-center mt-3 mb-5">
-				<div class="form-group col-md-6">
-					<image-upload></image-upload>
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">

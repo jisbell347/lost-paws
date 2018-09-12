@@ -6,8 +6,12 @@ import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+import { FileUploader } from 'ng2-file-upload';
+import { Cookie } from 'ng2-cookies';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/from';
 import {ActivatedRoute, Router} from "@angular/router";
-import { ImageUploadComponent } from '../image-upload/image-upload.component'
+
 
 @Component({
 	selector: "animal-post",
@@ -30,10 +34,22 @@ export class AnimalPostComponent implements OnInit {
 		animalName: null,
 		animalSpecies: null,
 		animalStatus: null};
-	image: ImageUploadComponent;
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
 	deleted: boolean = false;
+
+
+	public uploader: FileUploader = new FileUploader(
+		{
+			itemAlias: 'pet',
+			url: './api/image/',
+			headers: [{name: 'X-XSRF-TOKEN', value: Cookie.get('XSRF-TOKEN')}],
+			additionalParameter: {}
+		}
+	)
+
+	cloudinarySecureUrl: string = '';
+	cloudinaryPublicObservable: Observable<string> = new Observable<string>();
 
 		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
@@ -58,6 +74,20 @@ export class AnimalPostComponent implements OnInit {
 		this.applyFormChanges();
 	}
 
+	uploadImage(): void {
+		this.uploader.onSuccessItem = ( item: any, response: string, status: number, headers: any ) => {
+			let reply = JSON.parse(response);
+			this.cloudinarySecureUrl = reply.data;
+			this.cloudinaryPublicObservable = Observable.from(this.cloudinarySecureUrl);
+		};
+
+		this.uploader.uploadAll();
+	}
+
+	getCloudinaryUrl(): void {
+		this.cloudinaryPublicObservable.subscribe(cloudinarySecureUrl => this.cloudinarySecureUrl = cloudinarySecureUrl);
+	}
+
 	applyFormChanges() :void {
 			this.animalForm.valueChanges.subscribe(values => {
 				for(let field in values) {
@@ -75,6 +105,7 @@ export class AnimalPostComponent implements OnInit {
 
 	createAnimal() : void {
 		this.submitted = true;
+		this.getCloudinaryUrl();
 
 		const animal: Animal = {
 			animalId: null,
@@ -83,7 +114,7 @@ export class AnimalPostComponent implements OnInit {
 			animalDate: null,
 			animalDescription: this.animalForm.value.description,
 			animalGender: this.animalForm.value.gender,
-			animalImageUrl: this.image.cloudinarySecureUrl,
+			animalImageUrl: this.cloudinarySecureUrl,
 			animalLocation: this.animalForm.value.location,
 			animalName: this.animalForm.value.name,
 			animalSpecies: this.animalForm.value.species,
