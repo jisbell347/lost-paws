@@ -33,6 +33,7 @@ export class AnimalPostComponent implements OnInit {
 	image: ImageUploadComponent;
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
+	deleted: boolean = false;
 
 		constructor(protected authService: AuthService,
 					protected animalService: AnimalService,
