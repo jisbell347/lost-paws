@@ -63,6 +63,8 @@ export class AnimalPostComponent {
 			console.log(reply);
 			this.cloudinarySecureUrl = reply.data;
 			this.cloudinaryPublicObservable = Observable.from(this.cloudinarySecureUrl);
+			console.log(this.cloudinarySecureUrl);
+			this.createAnimal();
 		};
 		this.animalForm = this.fb.group({
 			status: ["", [Validators.required]],
@@ -90,7 +92,6 @@ export class AnimalPostComponent {
 	}
 
 	uploadImage(): void {
-		console.log("resistance.isFutile() = " + true);
 		this.uploader.uploadAll();
 	}
 
@@ -114,7 +115,7 @@ export class AnimalPostComponent {
 	}
 
 	createAnimal(): void {
-		this.getCloudinaryUrl();
+		console.log(this.cloudinarySecureUrl);
 
 		this.submitted = true;
 
