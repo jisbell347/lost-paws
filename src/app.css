@@ -63,6 +63,9 @@ header {
 .navbar-toggler.collapsed .bottom-bar {
 	transform: rotate(0);
 }
+.nav-link {
+	cursor: pointer;
+}
 
 /*Homepage Styles*/
 .home {
