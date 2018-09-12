@@ -143,10 +143,6 @@ Card styling
 	width: 9em;
 }
 
-label[for="pet"] {
-	width: 6em;
-}
-
 /*Animal Card */
 
 #animal-card {

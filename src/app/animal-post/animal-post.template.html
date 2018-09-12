@@ -179,10 +179,28 @@
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
-				<div class="form-group col-md-6">
-					<label for="pet" class="modal-labels">Select File</label>
-					<input type="file" name="pet" id="pet" ng2FileSelect [uploader]="uploader" />
+				<div class="form-group col-md-4">
+					<input
+						type="file"
+						name="pet"
+						id="pet"
+						ng2FileSelect
+						[uploader]="uploader"
+						[formControl]
+						formControlName="image"
+						aria-describedby="imageHelp"
+					/>
+					<small id="imageHelp">Please select one image of your pet to upload.</small>
 				</div><!--form-group col-md-6-->
+				<div class="col-md-2">
+					<button
+						type="button"
+						class="btn btn-primary text-light mr-3 animal-btn"
+						id="photo"
+						name="photo"
+						#photo
+						(click)="uploadImage()"><i class="fas fa-file-image"></i> Upload Image</button>
+				</div>
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-6">

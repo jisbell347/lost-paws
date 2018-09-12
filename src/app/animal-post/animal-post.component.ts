@@ -74,28 +74,12 @@ export class AnimalPostComponent {
 			color: ["", [Validators.required]],
 			location: ["", [Validators.maxLength(200)]],
 			description: ["", [Validators.maxLength(500), Validators.required]],
+			image: ["", [Validators.required]],
 		});
-	}
-
-	createForm(): void {
-/*		this.animalForm = new FormGroup({
-			status: new FormControl(),
-			species: new FormControl(),
-			gender: new FormControl(),
-			name: new FormControl(),
-			color: new FormControl(),
-			location: new FormControl(),
-			description: new FormControl(),
-		});*/
-
-
 	}
 
 	uploadImage(): void {
 		this.uploader.uploadAll();
-	}
-
-	getCloudinaryUrl(): void {
 		this.cloudinaryPublicObservable.subscribe(cloudinarySecureUrl => this.cloudinarySecureUrl = cloudinarySecureUrl);
 	}
 
@@ -115,40 +99,24 @@ export class AnimalPostComponent {
 	}
 
 	createAnimal(): void {
-		console.log(this.cloudinarySecureUrl);
-
-		this.submitted = true;
-
-		const animal: Animal = {
-			animalId: null,
-			animalProfileId: null,
-			animalColor: this.animalForm.value.color,
-			animalDate: null,
-			animalDescription: this.animalForm.value.description,
-			animalGender: this.animalForm.value.gender,
-			animalImageUrl: this.cloudinarySecureUrl,
-			animalLocation: this.animalForm.value.location,
-			animalName: this.animalForm.value.name,
-			animalSpecies: this.animalForm.value.species,
-			animalStatus: this.animalForm.value.status
-		};
-
-		/*		console.log(this.animalForm.value.color || "color is undefined");
-				console.log(this.animalForm.value.description || "description is undefined");
-				console.log(this.animalForm.value.gender || "gender is undefined");
-				console.log(this.animalForm.value.location || "location is undefined");
-				console.log(this.animalForm.value.name || "name is undefined");
-				console.log(this.animalForm.value.species || "species is undefined");
-				console.log(this.animalForm.value.status || "status is undefined");
-				'https://images.pexels.com/photos/159541/wildlife-photography-pet-photography-dog-animal-159541.jpeg'
-				'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg'
-				'https://images.pexels.com/photos/57416/cat-sweet-kitty-animals-57416.jpeg'
-				'https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg'
-
-				*/
-
-		if(animal) {
-			this.animalService.createAnimal(animal).subscribe(status => {
+		if (this.cloudinarySecureUrl) {
+			this.submitted = true;
+			const animal: Animal = {
+				animalId: null,
+				animalProfileId: null,
+				animalColor: this.animalForm.value.color,
+				animalDate: null,
+				animalDescription: this.animalForm.value.description,
+				animalGender: this.animalForm.value.gender,
+				animalImageUrl: this.cloudinarySecureUrl,
+				animalLocation: this.animalForm.value.location,
+				animalName: this.animalForm.value.name,
+				animalSpecies: this.animalForm.value.species,
+				animalStatus: this.animalForm.value.status
+			};
+		}
+		if(this.animal) {
+			this.animalService.createAnimal(this.animal).subscribe(status => {
 				this.status = status;
 				if(this.status.status === 200) {
 					this.animalForm.reset();
