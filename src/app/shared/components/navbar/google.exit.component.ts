@@ -21,7 +21,7 @@ export class GoogleExitComponent implements OnInit{
 
 	ngOnInit(){
 		// get return url from session storage
-		let returnUrl = window.sessionStorage.getItem('url');
+		let returnUrl = JSON.parse(window.sessionStorage.getItem('url'));
 
 		this.googleExitService.getRedirect(this.code).subscribe(status => {
 			this.status = status;
@@ -35,7 +35,7 @@ export class GoogleExitComponent implements OnInit{
 				}
 				//navigate back to the page the user was on
 				else if (window.sessionStorage.getItem("url")) {
-					this.router.navigateByUrl(returnUrl);
+					this.router.navigate(returnUrl);
 				//if there is no stored return url, navigate home.
 				} else {
 					this.router.navigate([""]);
