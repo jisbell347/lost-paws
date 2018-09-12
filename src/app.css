@@ -179,6 +179,7 @@ max-height: 600px;
 .searchForm {
 	text-decoration: none;
 	color: black;
+	cursor: pointer;
 }
 .searchForm:hover {
 	text-decoration: none;
