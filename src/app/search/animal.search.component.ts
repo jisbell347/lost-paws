@@ -89,5 +89,9 @@ export class AnimalSearchComponent implements OnInit{
 		this.animalService.getAllCurrentAnimals().subscribe(animals => this.animals = animals);
 	}
 
+	sortFunc(a, b): any {
+		return b.animalDate - a.animalDate
+	}
+
 
 }
