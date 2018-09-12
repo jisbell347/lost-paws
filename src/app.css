@@ -66,6 +66,12 @@ header {
 .nav-link {
 	cursor: pointer;
 }
+@media  screen
+	and (max-device-width: 369px) {
+	#bigger-than-iphonese {
+		display: none;
+	}
+}
 
 /*Homepage Styles*/
 .home {
