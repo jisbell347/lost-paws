@@ -1,4 +1,6 @@
 import {Component} from "@angular/core";
+import {AuthService} from "../shared/services/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component ({
 	template: require("./about-us.template.html")
@@ -7,9 +9,16 @@ import {Component} from "@angular/core";
 
 
 export class AboutUsComponent {
+
+	constructor(
+		protected route: ActivatedRoute
+	) {
+	};
+
 	ngOnInit() {
 		//set session storage for sign in purposes
-		window.sessionStorage.setItem('url', window.location.pathname);
+		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
+
 	};
 
 }

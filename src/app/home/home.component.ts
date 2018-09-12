@@ -14,13 +14,13 @@ export class HomeComponent {
 
 	constructor(
 		protected authService: AuthService,
-		protected router: ActivatedRoute
+		protected route: ActivatedRoute
 	) {
 	};
 
 	ngOnInit() {
 		//set session storage for sign in purposes
-		this.router.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
+		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		this.isAuthenticated = this.authService.isAuthenticated();
 	};
 

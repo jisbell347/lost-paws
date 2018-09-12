@@ -28,13 +28,17 @@ export class AnimalSearchComponent implements OnInit{
 	];
 
 
-	constructor(protected animalService : AnimalService, protected formBuilder: FormBuilder, protected route : ActivatedRoute, protected router: Router) {
+	constructor(
+		protected animalService : AnimalService,
+		protected formBuilder: FormBuilder,
+		protected route : ActivatedRoute,
+		protected router: Router) {
 		router.onSameUrlNavigation = "reload";
 	}
 
 	ngOnInit() {
 		//set session storage for sign in purposes
-		window.sessionStorage.setItem('url', window.location.pathname);
+		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		this.searchForm = this.formBuilder.group({
 			searchContent: ["", [Validators.maxLength(64), Validators.required]],
 			searchParameter: ["", [Validators.required]]

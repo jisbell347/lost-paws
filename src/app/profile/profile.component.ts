@@ -4,6 +4,7 @@ import { Profile } from "../shared/interfaces/profile";
 import { ProfileService } from "../shared/services/profile.service";
 import { AuthService } from "../shared/services/auth.service";
 import {Status} from "../shared/interfaces/status";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
 	selector: "profile",
@@ -18,12 +19,15 @@ export class ProfileComponent implements OnInit {
 
 	// need to grab profileId from the current Session
 	// the remaining fields - from the form
-	constructor(protected authService: AuthService, protected profileService: ProfileService) {
+	constructor(
+		protected authService: AuthService,
+		protected profileService: ProfileService,
+		protected route: ActivatedRoute) {
 	}
 
 	ngOnInit() : void {
 		//set session storage for sign in purposes
-		window.sessionStorage.setItem('url', window.location.pathname);
+		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		//grab the current logged in profileId off JWT
 		this.profileId = this.getJwtProfileId();
 		/*console.log(this.profileId);*/

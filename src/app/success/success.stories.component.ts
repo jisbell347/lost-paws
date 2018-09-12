@@ -3,7 +3,7 @@ import {Component, OnInit} from "@angular/core";
 import {AnimalService} from "../shared/services/animal.service";
 import {Status} from "../shared/interfaces/status";
 import {Animal} from "../shared/interfaces/animal";
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -16,10 +16,13 @@ export class SuccessStoriesComponent implements OnInit{
 	animalParameter: string;
 	animalValue: string;
 
-	constructor(protected animalService: AnimalService, protected route: ActivatedRoute, protected router: Router){}
+	constructor(protected animalService: AnimalService,
+					protected route: ActivatedRoute,
+					protected router: Router){}
 
 	ngOnInit(){
-		window.sessionStorage.setItem('url', window.location.pathname);
+		//Save route in session storage for sign in purposes
+		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		this.loadResults();
 	}
 

@@ -19,12 +19,18 @@ export class AnimalCardComponent implements OnInit{
 	profileId: string;
 
 
-	constructor(protected animalService: AnimalService, protected router: ActivatedRoute, protected profileService: ProfileService, protected authService: AuthService, protected route: Router) {
+	constructor(
+		protected animalService: AnimalService,
+		protected route: ActivatedRoute,
+		protected profileService: ProfileService,
+		protected authService: AuthService,
+		protected router: Router
+	) {
 
 	}
-	animalId = this.router.snapshot.params["animalId"];
+	animalId = this.route.snapshot.params["animalId"];
 	ngOnInit() {
-		window.sessionStorage.setItem('url', window.location.pathname);
+		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		this.loadAnimal();
 		this.profileId = this.getJwtProfileId();
 	}
@@ -35,7 +41,7 @@ export class AnimalCardComponent implements OnInit{
 		});
 	}
 	updateAnimal(animal: Animal) : void {
-		this.route.navigate(["/animal-post/", this.animalId]);
+		this.router.navigate(["/animal-post/", this.animalId]);
 	}
 
 	getJwtProfileId() : any {
