@@ -168,11 +168,11 @@
 							maxLength="250"
 						></textarea>
 					</div><!--input-group mb-3-->
-					<div *ngIf="!animalDescription.valid && (animalDescription.dirty || animalDescription.touched)" class="alert alert-danger" role="alert">
-						<div *ngIf="animalDescription.errors.required">
+					<div *ngIf="!animalForm.controls.description.valid && (animalForm.controls.description.dirty || animalForm.controls.description.touched)" class="alert alert-danger" role="alert">
+						<div *ngIf="animalForm.controls.description.errors.required">
 							The description field cannot be empty.
 						</div>
-						<div *ngIf="animalDescription.errors.maxLength">
+						<div *ngIf="animalForm.controls.description.errors.maxLength">
 							Your description is too long, it cannot exceed 500 characters.
 						</div>
 					</div><!--alert alert-danger-->
@@ -187,11 +187,10 @@
 					<button
 						type="button"
 						class="btn btn-primary text-light mr-3 animal-btn"
+						id="photo"
+						name="photo"
 						#photo
-						(click)="upload()"
-					>
-						<i class="fas fa-file-upload"></i> Upload Image
-					</button>
+						(click)="upload()"><i class="fas fa-file-image"></i> Upload Image</button>
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">

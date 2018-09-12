@@ -133,8 +133,12 @@ Card styling
 	width: 7.5em;
 }
 
-.animal-btn#upload {
+#photo {
 	width: 9em;
+}
+
+label[for="pet"] {
+	width: 6em;
 }
 
 /*Animal Card */
