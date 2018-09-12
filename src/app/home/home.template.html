@@ -18,7 +18,7 @@
 	<div class="container pl-1 pr-1 mt-4" *ngIf="isAuthenticated === false">
 		<h4 class="text-center pt-3">Need to post a pet?</h4>
 		<p class="text-center">No sign-up required, simply sign-in with your Google or Facebook account.</p>
-		<button type="button" class="btn submit-btn btn-lg btn-block mt-2 mb-4 shadow" data-toggle="modal" data-target="#sign-in-modal">Sign In Now</button>
+		<button type="button" class="btn submit-btn btn-lg btn-block mt-2 mb-4 shadow" data-toggle="modal" data-target="#sign-in-modal"><i class="fas fa-sign-in-alt"></i> Sign In Now</button>
 	</div>
 	<div class="container animal-buttons mt-4 text-center">
 		<div class="row">
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container mt-3 mb-5 text-center">
+	<div class="container mt-3 text-center">
 		<div class="row">
 			<div class="col-md-6 pb-5">
 				<!--<a routerLink="/search">-->
@@ -51,14 +51,15 @@
 			</div>
 		</div>
 	</div>
-	<div class="container py-4">
+	<div class="container text-center p-4 mb-5">
 		<div class="row">
-			<div class="col-4">
-
+			<div class="col-md-4">
+				<img class="img-fluid rounded border border-secondary shadow card-home" routerLink="/success/animalStatus/Reunited" src="../images/pet-success.jpg" alt="success story image"/>
 			</div>
-			<div class="col-8">
-				<p>We love success stories. Click here to view reunited pets.</p>
-				<button routerLink="/success/animalStatus/Reunited" class="button submit-btn">Success Stories</button>
+			<div class="col-md-8 text-center pt-4 my-auto">
+				<h3 class="shelter-header">Success Stories</h3>
+				<p>At Lost Paws, we love success stories. Click here to view stories of pets who have been reunited with their owners.</p>
+				<button routerLink="/success/animalStatus/Reunited" class="btn submit-btn btn-lg btn-block mt-2 mb-4 shadow"><i class="fas fa-paw"></i> Success Stories</button>
 			</div>
 		</div>
 
