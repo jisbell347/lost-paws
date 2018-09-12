@@ -34,9 +34,6 @@ try {
 	//grab the mySQL Connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 
-	//sanitize input
-	$id = filter_input(INPUT_POST, "animalId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-
 	// determine the HTTP method used (we only allow the POST method to be used for image uploaing)
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 	if ($method !== "POST") {
@@ -64,7 +61,7 @@ try {
 		throw(new \InvalidArgumentException ("Could not locate specified animal(s).", 404));
 	}
 	// assigning variable to the animal, add image extension
-	$tempAnimalFileName = $_FILES["image"]["tmp_name"];
+	$tempAnimalFileName = $_FILES["pet"]["tmp_name"];
 	// upload image to cloudinary and get public id
 	$cloudinaryResult = \Cloudinary\Uploader::upload($tempAnimalFileName, array("width" => 500, "crop" => "scale"));
 	// after sending the image to Cloudinary, set animalImageUrl to the animal record
