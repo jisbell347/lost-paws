@@ -213,6 +213,10 @@ max-height: 600px;
 	background-image: url("../src/app/images/paw-print.jpg");
 	background-size: contain;
 }
+/*Success Stories*/
+.success-story {
+	background-color: #52a489;
+}
 
 /* Footer */
 .sfooter > * {
