@@ -1,53 +1,40 @@
-import { Component, OnInit, Input, NgZone } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from "ng2-file-upload";
-import { Cloudinary } from '@cloudinary/angular-5.x';
+import { Component, OnInit } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload';
+import { Cookie } from 'ng2-cookies';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/from';
 
 @Component({
-	selector: 'image-uploader',
-	templateUrl: 'image-upload.template.html'
+	selector: 'image-upload',
+	templateUrl: './image-upload.template.html'
 })
 export class ImageUploadComponent implements OnInit {
-	@Input()
-	responses: Array<any>;
 
-	private hasBaseDropZoneOver: boolean = false;
-	private uploader: FileUploader;
-	private title: string;
+	public uploader: FileUploader = new FileUploader(
+		{
+			itemAlias: 'pet',
+			url: './api/image/',
+			headers: [{name: 'X-XSRF-TOKEN', value: Cookie.get('XSRF-TOKEN')}],
+			additionalParameter: {}
+		}
+	)
 
-	constructor (
-			private cloudinary: Cloudinary,
-			private zone: NgZone,
-			private http: HttpClient
-	) {
-		this.responses = [];
-		this.title = '';
-	}
+	cloudinarySecureUrl: string = '';
+	cloudinaryPublicObservable: Observable<string> = new Observable<string>();
 
 	ngOnInit(): void {
-		// create the file uploader and hook it up to our account
-		const uploaderOptions: FileUploaderOptions = {
-			url: `https://api.cloudinary.com/v1_1/deep-dive${this.cloudinary.config().cloud_name}/upload`,
-			// upload file automatically upon addition to upload queue
-			autoUpload: true,
-			// use xhrTransport in favor of iframeTransport
-			isHTML5: true,
-			// calculate progress independently for each uploaded file
-			removeAfterUpload: true,
-			// XHR request headers
-			headers: [
-				{
-					name: 'X-Requested-With',
-					value: 'XMLHttpRequest'
-				}
-			]
+		this.uploader.onSuccessItem = ( item: any, response: string, status: number, headers: any ) => {
+			let reply = JSON.parse(response);
+			this.cloudinarySecureUrl = reply.data;
+			this.cloudinaryPublicObservable = Observable.from(this.cloudinarySecureUrl);
 		};
-		this.uploader = new FileUploader(uploaderOptions);
-
-
-
-
 	}
 
+	uploadImage(): void {
+		this.uploader.uploadAll();
+	}
 
+	getCloudinaryUrl(): void {
+		this.cloudinaryPublicObservable.subscribe(cloudinarySecureUrl => this.cloudinarySecureUrl = cloudinarySecureUrl);
+	}
 }
