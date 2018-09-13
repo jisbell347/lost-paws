@@ -38,6 +38,7 @@ $provider = new League\OAuth2\Client\Provider\Google([
 	"clientSecret" => $google->secretId,
 //	"redirectUri" => "https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/google-exit/"
 	"redirectUri" =>  "http://localhost:7272/google-exit/"
+
 ]);
 
 
