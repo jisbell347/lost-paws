@@ -24,7 +24,6 @@ export class AnimalPostComponent {
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
 	imageUploaded: boolean = false;
-	deleted: boolean = false;
 
 
 	public uploader: FileUploader = new FileUploader(
