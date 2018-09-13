@@ -114,7 +114,6 @@ export class AnimalPostComponent {
 				animalSpecies: this.animalForm.value.species,
 				animalStatus: this.animalForm.value.status
 			};
-
 				this.animalService.createAnimal(animal).subscribe(status => {
 					this.status = status;
 					if(this.status.status === 200) {
