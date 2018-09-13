@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import 'rxjs/add/observable/from';
 import {ActivatedRoute, Router} from "@angular/router";
 
+let Message: string;
 
 @Component({
 	selector: "animal-post",
@@ -35,6 +36,7 @@ export class AnimalPostComponent {
 	};
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
+	imageUploaded: boolean = false;
 	deleted: boolean = false;
 
 
@@ -50,7 +52,7 @@ export class AnimalPostComponent {
 		}
 	);
 
-	cloudinarySecureUrl: string = '';
+	cloudinarySecureUrl: string;
 	cloudinaryPublicObservable: Observable<string> = new Observable<string>();
 
 	constructor(protected authService: AuthService,
@@ -58,14 +60,6 @@ export class AnimalPostComponent {
 					protected fb: FormBuilder,
 					protected route: ActivatedRoute,
 					protected router: Router) {
-		this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
-			let reply = JSON.parse(response);
-			console.log(reply);
-			this.cloudinarySecureUrl = reply.data;
-			this.cloudinaryPublicObservable = Observable.from(this.cloudinarySecureUrl);
-			console.log(this.cloudinarySecureUrl);
-			this.createAnimal();
-		};
 		this.animalForm = this.fb.group({
 			status: ["", [Validators.required]],
 			species: ["", [Validators.required]],
@@ -73,14 +67,22 @@ export class AnimalPostComponent {
 			name: ["", [Validators.maxLength(100)]],
 			color: ["", [Validators.required]],
 			location: ["", [Validators.maxLength(200)]],
-			description: ["", [Validators.maxLength(500), Validators.required]],
-			image: ["", [Validators.required]],
+			description: ["", [Validators.maxLength(500), Validators.required]]
 		});
 	}
 
 	uploadImage(): void {
 		this.uploader.uploadAll();
 		this.cloudinaryPublicObservable.subscribe(cloudinarySecureUrl => this.cloudinarySecureUrl = cloudinarySecureUrl);
+		this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
+			let reply = JSON.parse(response);
+			this.cloudinarySecureUrl = reply.data;
+			this.cloudinaryPublicObservable = Observable.from(this.cloudinarySecureUrl);
+			console.log(this.cloudinarySecureUrl);
+			if (this.cloudinarySecureUrl) {
+				this.imageUploaded = true;
+			}
+		};
 	}
 
 	applyFormChanges(): void {
@@ -98,7 +100,7 @@ export class AnimalPostComponent {
 		});
 	}
 
-	createAnimal(): void {
+	postAnimal(): void {
 		if (this.cloudinarySecureUrl) {
 			this.submitted = true;
 			const animal: Animal = {
@@ -114,14 +116,36 @@ export class AnimalPostComponent {
 				animalSpecies: this.animalForm.value.species,
 				animalStatus: this.animalForm.value.status
 			};
+			if(this.animal) {
+				console.log(animal.animalId);
+				console.log(animal.animalProfileId);
+				console.log(animal.animalColor);
+				console.log(animal.animalDate);
+				console.log(animal.animalDescription);
+				console.log(animal.animalGender);
+				console.log(animal.animalImageUrl);
+				console.log(animal.animalLocation);
+				console.log(animal.animalName);
+				console.log(animal.animalSpecies);
+				console.log(animal.animalStatus);
+
+				this.animalService.createAnimal(this.animal).subscribe(status => {
+					this.status = status;
+					console.log(this.status);
+					if(this.status.status === 200) {
+						this.animalForm.reset();
+						Message = "Animal has been successfully posted.";
+					}
+				});
+			}
+			else {
+				console.log("Animal wasn't created.");
+				Message = "Animal has not been created.";
+			}
 		}
-		if(this.animal) {
-			this.animalService.createAnimal(this.animal).subscribe(status => {
-				this.status = status;
-				if(this.status.status === 200) {
-					this.animalForm.reset();
-				}
-			});
+		else {
+			console.log("Animal wasn't posted.");
+			Message = "Animal has not been posted.";
 		}
 	}
 
