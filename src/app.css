@@ -149,6 +149,19 @@ Card styling
 	width: 9em;
 }
 
+/* Animal Edit */
+.icon-edit {
+	color: #52a489;
+}
+
+.img-upload-btn {
+	background-color: black;
+}
+
+.animal-update-btn {
+	background-color: #52a489;
+}
+
 /*Animal Card */
 
 #animal-card {

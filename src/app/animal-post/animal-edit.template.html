@@ -11,7 +11,7 @@
 					<label class="control-label" for="status">Animal Status <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-check-square icon-edit"></i></span>
 						</div><!--input-group-prepend-->
 						<select
 							type="text"
@@ -31,7 +31,7 @@
 					<label class="control-label" for="species">Animal Species <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-check-square icon-edit"></i></span>
 						</div><!--input-group-prepend-->
 						<select
 							type="text"
@@ -50,7 +50,7 @@
 					<label class="control-label" for="gender">Pet Gender <span class="text-danger">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-check-square icon-edit"></i></span>
 						</div><!--input-group-prepend-->
 						<select
 							type="text"
@@ -72,7 +72,7 @@
 					<label class="control-label" for="name">Pet Name</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-pencil-alt text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-pencil-alt icon-edit"></i></span>
 						</div><!--input-group-prepend-->
 						<input
 							type="text"
@@ -91,7 +91,7 @@
 					<label class="control-label" for="color">Pet Color</label>
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-check-square text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-check-square icon-edit"></i></span>
 						</div><!--input-group-prepend-->
 						<select
 							type="text"
@@ -134,7 +134,7 @@
 					<label class="control-label" for="location">Pet Last Known Location</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-map-marker-alt text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-map-marker-alt icon-edit"></i></span>
 						</div><!--input-group-prepend-->
 						<input
 							type="text"
@@ -154,7 +154,7 @@
 					<p class="text-muted small">** If you changed status to Reunited, please provide your story in place of the description.</p>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-comment text-primary"></i></span>
+							<span class="input-group-text"><i class="fas fa-comment icon-edit"></i></span>
 						</div>
 						<textarea
 							type="text"
@@ -181,6 +181,7 @@
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mt-3 mb-5">
 				<div class="form-group col-md-4">
+					<small id="petHelp">Please select one image of your pet to upload.</small>
 					<input
 						type="file"
 						name="pet"
@@ -189,12 +190,13 @@
 						[uploader]="uploader"
 						aria-describedby="petHelp"
 					/>
-					<small id="petHelp">Please select one image of your pet to upload.</small>
+
 				</div><!--form-group col-md-6-->
+
 				<div class="col-md-2">
 					<button
 						type="button"
-						class="btn btn-primary text-light mr-3 animal-btn"
+						class="btn btn-primary text-light mr-3 img-upload-btn"
 						id="photo"
 						name="photo"
 						#photo
@@ -212,7 +214,7 @@
 				<div class="form-group col-md-6">
 					<button
 						type="button"
-						class="btn btn-success text-light mr-3 animal-btn"
+						class="btn btn-success text-light mr-3 animal-update-btn"
 						[disabled]="!animalForm.valid" (click)="editAnimal();"
 					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
 					<button
