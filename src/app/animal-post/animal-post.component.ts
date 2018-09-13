@@ -64,7 +64,6 @@ export class AnimalPostComponent {
 			let reply = JSON.parse(response);
 			this.cloudinarySecureUrl = reply.data;
 			this.cloudinaryPublicObservable = Observable.from(this.cloudinarySecureUrl);
-			console.log(this.cloudinarySecureUrl);
 			if (this.cloudinarySecureUrl) {
 				this.imageUploaded = true;
 			}
