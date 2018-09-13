@@ -3,7 +3,6 @@ import {GoogleExitService} from "../../services/google.exit.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 import {Status} from "../../interfaces/status";
-import {stringify} from "querystring";
 
 @Component({
 	template: require("./google.exit.template.html")
@@ -15,12 +14,13 @@ export class GoogleExitComponent implements OnInit{
 	@Output() isAuthenticatedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	constructor(protected googleExitService: GoogleExitService, protected route: ActivatedRoute, protected router: Router){
-
+		router.onSameUrlNavigation = "reload";
 
 	}
 
 	ngOnInit(){
 		// get return url from session storage
+
 		let returnUrl = JSON.parse(window.sessionStorage.getItem('url'));
 
 		this.googleExitService.getRedirect(this.code).subscribe(status => {
@@ -34,8 +34,11 @@ export class GoogleExitComponent implements OnInit{
 					this.router.navigate([""]);
 				}
 				//navigate back to the page the user was on
-				else if (window.sessionStorage.getItem("url")) {
-					this.router.navigate(returnUrl);
+				else if (returnUrl !== null) {
+					// returnUrl = ["/", ...returnUrl];
+					let url = "";
+					returnUrl.map((part: any) => url = url + "/" + part.path);
+					this.router.navigateByUrl(url);
 				//if there is no stored return url, navigate home.
 				} else {
 					this.router.navigate([""]);
