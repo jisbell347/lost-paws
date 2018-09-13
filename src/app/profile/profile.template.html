@@ -139,12 +139,13 @@
 			</div><!--row justify-content-md-center mt-3 mb-5-->
 			<div class="row justify-content-md-center mb-3">
 				<div class="form-group col-md-6">
-			<div *ngIf="f1.submitted && phone.pristine" class="alert alert-success" role="alert">
-				User profile has been successfully updated.
-			</div><!--alert alert-success-->
-			<div *ngIf="f1.submitted && phone.dirty" class="alert alert-danger" role="alert">
-				User profile has not been updated.
-			</div><!--alert alert-danger--></div><!--form-group col-md-6-->
+					<div *ngIf="f1.submitted && phone.pristine" class="alert alert-success" role="alert">
+						User profile has been successfully updated.
+					</div><!--alert alert-success-->
+					<div *ngIf="f1.submitted && phone.dirty" class="alert alert-danger" role="alert">
+						User profile has not been updated.
+					</div><!--alert alert-danger-->
+				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 		</div><!--		container-->
 	</form>
