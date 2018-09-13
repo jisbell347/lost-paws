@@ -1,5 +1,5 @@
 <main>
-	<form [formGroup]="animalForm" class="form-control-md mt-5" id="form-animal">
+	<form [formGroup]="animalForm" class="form-control-md mt-5" id="form-animal" (submit)="postAnimal()">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
@@ -233,10 +233,11 @@
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center mb-3">
 				<div class="form-group col-md-6">
-					<span>{{ Message }}</span>
-					<!--<div *ngIf="post" class="alert alert-success" role="alert">
-						Animal Post Successfully Updated.
-					</div>--><!--alert alert-success-->
+					<div  class="container py-5" *ngIf="status !== null">
+						<div class="alert alert-info" role="alert">
+							{{ status.message }}
+						</div>
+					</div><!--alert alert-success-->
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 		</div><!--container-->

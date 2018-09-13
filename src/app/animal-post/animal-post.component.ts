@@ -10,8 +10,6 @@ import {Observable} from 'rxjs';
 import 'rxjs/add/observable/from';
 import {ActivatedRoute, Router} from "@angular/router";
 
-let Message: string;
-
 @Component({
 	selector: "animal-post",
 	template: require("./animal-post.template.html"),
@@ -116,37 +114,14 @@ export class AnimalPostComponent {
 				animalSpecies: this.animalForm.value.species,
 				animalStatus: this.animalForm.value.status
 			};
-			if(this.animal) {
-				console.log(animal.animalId);
-				console.log(animal.animalProfileId);
-				console.log(animal.animalColor);
-				console.log(animal.animalDate);
-				console.log(animal.animalDescription);
-				console.log(animal.animalGender);
-				console.log(animal.animalImageUrl);
-				console.log(animal.animalLocation);
-				console.log(animal.animalName);
-				console.log(animal.animalSpecies);
-				console.log(animal.animalStatus);
 
-				this.animalService.createAnimal(this.animal).subscribe(status => {
+				this.animalService.createAnimal(animal).subscribe(status => {
 					this.status = status;
-					console.log(this.status);
 					if(this.status.status === 200) {
 						this.animalForm.reset();
-						Message = "Animal has been successfully posted.";
 					}
 				});
 			}
-			else {
-				console.log("Animal wasn't created.");
-				Message = "Animal has not been created.";
-			}
-		}
-		else {
-			console.log("Animal wasn't posted.");
-			Message = "Animal has not been posted.";
-		}
 	}
 
 	editAnimal() {
