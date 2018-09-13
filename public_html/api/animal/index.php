@@ -88,15 +88,15 @@ try{
 
 		//make sure the animal color is available (required field)
 		if(empty($requestObject->animalColor) === true) {
-			throw(new \InvalidArgumentException("No color input for the animal.", 405));
+			throw(new \InvalidArgumentException("No color entered for the animal.", 405));
 		}
 		//make sure the animal description is available (required field)
 		if(empty($requestObject->animalDescription) === true) {
-			throw(new \InvalidArgumentException("No description for the animal.", 405));
+			throw(new \InvalidArgumentException("No description entered for the animal.", 405));
 		}
 		//make sure the animal gender is available (required field)
 		if(empty($requestObject->animalGender) === true) {
-			throw(new \InvalidArgumentException("No gender input for the animal.", 405));
+			throw(new \InvalidArgumentException("No gender entered for the animal.", 405));
 		}
 		//make sure the animal species is available (required field)
 		if(empty($requestObject->animalSpecies) === true) {
@@ -104,7 +104,7 @@ try{
 		}
 		//make sure the animal status is available (required field)
 		if(empty($requestObject->animalStatus) === true) {
-			throw(new \InvalidArgumentException("No status input for the animal.", 405));
+			throw(new \InvalidArgumentException("No status entered for the animal.", 405));
 		}
 
 		//make sure the animal date is accurate (optional field)
@@ -114,7 +114,7 @@ try{
 			// if the date exists, Angular's milliseconds since the beginning of time must be converted
 			$animalDate = DateTime::createFromFormat("U.u", $requestObject->animalDate / 1000);
 			if($animalDate === false) {
-				throw(new RuntimeException("invalid animal date", 400));
+				throw(new RuntimeException("Invalid animal date.", 400));
 			}
 			$requestObject->animalDate = $animalDate;
 		}
@@ -125,7 +125,7 @@ try{
 			//retrieve the animal to update
 			$animal = Animal::getAnimalByAnimalId($pdo, $id);
 			if($animal === null) {
-				throw (new RuntimeException("Animal does not exist", 404));
+				throw (new RuntimeException("Animal does not exist.", 404));
 			}
 
 			//enforce the user is  signed in and only trying to edit their own animal post.
@@ -149,7 +149,7 @@ try{
 			$animal->update($pdo);
 
 			//update reply
-			$reply->message = "Animal posting updated OK";
+			$reply->message = "Animal information has been updated successfully.";
 
 		} else if($method === "POST") {
 
@@ -166,7 +166,7 @@ try{
 			$animal->insert($pdo);
 
 			//update reply
-			$reply->message = "Animal posting created OK";
+			$reply->message = "Animal information has been posted successfully.";
 
 		}
 
@@ -192,7 +192,7 @@ try{
 		//delete the animal post
 		$animal->delete($pdo);
 		//update reply
-		$reply->message = "Animal post deleted OK";
+		$reply->message = "Animal information has been deleted successfully.";
 	} else {
 		throw(new InvalidArgumentException("Invalid HTTP method request."));
 }
