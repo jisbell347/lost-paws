@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
+import { RecaptchaModule} from "ng-recaptcha";
+import {RecaptchaFormsModule} from "ng-recaptcha/forms";
 
 //Interfaces
 import  {Profile} from "../shared/interfaces/profile";
@@ -17,7 +19,7 @@ export class ContactComponent  implements OnInit{
 	@Input() animalProfileId: string;
 	profile: Profile = null;
 	isAuthenticated: boolean;
-	resolved(captchaResponse: string) {
+	public resolved(captchaResponse: string) {
 		console.log(`Resolved captcha with response ${captchaResponse}:`);
 	}
 
