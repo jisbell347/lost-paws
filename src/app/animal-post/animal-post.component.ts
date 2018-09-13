@@ -70,6 +70,24 @@ export class AnimalPostComponent {
 		};
 	}
 
+	getAnimalFromInput(): void {
+		if (this.cloudinarySecureUrl) {
+			this.animal = {
+				animalId: null,
+				animalProfileId: null,
+				animalColor: this.animalForm.value.color,
+				animalDate: null,
+				animalDescription: this.animalForm.value.description,
+				animalGender: this.animalForm.value.gender,
+				animalImageUrl: this.cloudinarySecureUrl,
+				animalLocation: this.animalForm.value.location,
+				animalName: this.animalForm.value.name,
+				animalSpecies: this.animalForm.value.species,
+				animalStatus: this.animalForm.value.status
+			};
+		}
+	}
+
 	applyFormChanges(): void {
 		this.animalForm.valueChanges.subscribe(values => {
 			for(let field in values) {
@@ -88,19 +106,8 @@ export class AnimalPostComponent {
 	postAnimal(): void {
 		if (this.cloudinarySecureUrl) {
 			this.submitted = true;
-			this.animal = {
-				animalId: null,
-				animalProfileId: null,
-				animalColor: this.animalForm.value.color,
-				animalDate: null,
-				animalDescription: this.animalForm.value.description,
-				animalGender: this.animalForm.value.gender,
-				animalImageUrl: this.cloudinarySecureUrl,
-				animalLocation: this.animalForm.value.location,
-				animalName: this.animalForm.value.name,
-				animalSpecies: this.animalForm.value.species,
-				animalStatus: this.animalForm.value.status
-			};
+			this.getAnimalFromInput();
+			if(this.animal) {
 				this.animalService.createAnimal(this.animal).subscribe(status => {
 					this.status = status;
 					if(this.status.status === 200) {
@@ -108,6 +115,7 @@ export class AnimalPostComponent {
 					}
 				});
 			}
+		}
 	}
 
 	editAnimal() {
