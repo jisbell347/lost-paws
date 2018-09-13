@@ -37,6 +37,15 @@ export class AnimalCardComponent implements OnInit{
 		this.profileId = this.getJwtProfileId();
 	}
 
+	isReunited() {
+		if (this.animal.animalStatus === "Reunited") {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
 	loadAnimal() {
 		this.animalService.getAnimal(this.animalId).subscribe(reply => {
 			this.animal = reply;
