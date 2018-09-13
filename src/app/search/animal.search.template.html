@@ -18,7 +18,7 @@
 
 			<ul class="search-results">
 				<li class="searchForm"  routerLink="/animal/{{animal.animalId}}" *ngFor="let animal of animals.sort(sortFunc) | paginate: { itemsPerPage: 10, currentPage: page }">
-					<div class="row align-items-center bg-dark rounded py-3 my-4 ">
+					<div class="row align-items-center bg-dark rounded py-3 my-4 mr-2">
 						<div class="col-md-3 text-center my-2 searchBackground rounded px-1 mx-1 ml-4 mr-4">
 							<img src="{{animal.animalImageUrl}}" alt="animal" class="img-fluid rounded p-3 searchImage">
 						</div>
