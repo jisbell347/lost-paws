@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-6">
-					<h1 class="text-center mb-5">Post a Pet</h1>
+					<h1 class="text-center mb-5">Update Pet</h1>
 				</div><!--col-md-6-->
 			</div><!--row justify-content-md-center-->
 			<div class="row justify-content-md-center">
@@ -19,7 +19,7 @@
 							id="status"
 							name="status"
 							[formControl]
-							formControlName="status"
+							formControlName="animalStatus"
 						>
 							<option selected>Lost</option>
 							<option>Found</option>
@@ -39,7 +39,7 @@
 							id="species"
 							name="species"
 							[formControl]
-							formControlName="species"
+							formControlName="animalSpecies"
 						>
 							<option selected>Dog</option>
 							<option>Cat</option>
@@ -58,7 +58,7 @@
 							id="gender"
 							name="gender"
 							[formControl]
-							formControlName="gender"
+							formControlName="animalGender"
 						>
 							<option selected>Unknown</option>
 							<option>Female</option>
@@ -80,7 +80,7 @@
 							id="name"
 							name="name"
 							[formControl]
-							formControlName="name"
+							formControlName="animalName"
 							placeholder="Animal name. Leave empty if unknown."
 						/>
 					</div><!--input-group mb-3-->
@@ -99,7 +99,7 @@
 							id="color"
 							name="color"
 							[formControl]
-							formControlName="color"
+							formControlName="animalColor"
 							aria-describedby="colorHelp"
 						>
 							<option selected>Unknown</option>
@@ -142,7 +142,7 @@
 							id="location"
 							name="location"
 							[formControl]
-							formControlName="location"
+							formControlName="animalLocation"
 							placeholder="Please enter the last know pet location."
 						/>
 					</div><!--		input-group mb-3-->
@@ -162,7 +162,7 @@
 							id="description"
 							name="description"
 							[formControl]
-							formControlName="description"
+							formControlName="animalDescription"
 							placeholder="Please enter a detailed pet description. (250 character maximum)"
 							required
 							maxLength="250"
@@ -182,7 +182,6 @@
 				<div class="form-group col-md-4">
 					<input
 						type="file"
-						accept="image/*"
 						name="pet"
 						id="pet"
 						ng2FileSelect
@@ -212,10 +211,9 @@
 				<div class="form-group col-md-6">
 					<button
 						type="button"
-						class="btn btn-primary text-light mr-3 animal-btn"
-						[disabled]="!animalForm.valid"
-						(click)="postAnimal()"
-					><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Post</button>
+						class="btn btn-success text-light mr-3 animal-btn"
+						[disabled]="!animalForm.valid" (click)="editAnimal();"
+					><i class="fas fa-edit"></i>&nbsp;&nbsp;Update</button>
 					<button
 						type="reset"
 						class="btn btn-warning text-light animal-btn"

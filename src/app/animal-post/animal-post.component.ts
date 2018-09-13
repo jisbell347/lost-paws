@@ -20,6 +20,7 @@ export class AnimalPostComponent {
 	submitted: boolean = false;
 	status: Status = null;
 	animal: Animal;
+
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
 	imageUploaded: boolean = false;
@@ -88,21 +89,6 @@ export class AnimalPostComponent {
 		}
 	}
 
-	applyFormChanges(): void {
-		this.animalForm.valueChanges.subscribe(values => {
-			for(let field in values) {
-				this.animal[field] = values[field];
-			}
-		});
-	}
-
-	loadAnimalValues() {
-		this.animalService.getAnimal(this.animalId).subscribe(animal => {
-			this.animal = animal;
-			this.animalForm.patchValue(animal);
-		});
-	}
-
 	postAnimal(): void {
 		if (this.cloudinarySecureUrl) {
 			this.submitted = true;
@@ -116,39 +102,5 @@ export class AnimalPostComponent {
 				});
 			}
 		}
-	}
-
-	editAnimal() {
-		this.animalService.editAnimal(this.animal).subscribe(status => {
-			this.status = status;
-		});
-		this.animalForm.reset();
-		if(this.status.status === 200) {
-			this.success = true;
-			// this.router.navigate(["animal/:animalId"]);
-		}
-	}
-
-	deleteAnimal() {
-		this.animalService.deleteAnimal(this.animal.animalId).subscribe(status => {
-			this.status = status;
-			if(this.status.status === 200) {
-				this.deleted = true;
-				this.animal = {
-					animalId: null,
-					animalProfileId: null,
-					animalColor: null,
-					animalDate: null,
-					animalDescription: null,
-					animalGender: null,
-					animalImageUrl: null,
-					animalLocation: null,
-					animalName: null,
-					animalSpecies: null,
-					animalStatus: null
-				};
-				this.router.navigate([""]);
-			}
-		})
 	}
 }

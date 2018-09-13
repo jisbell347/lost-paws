@@ -18,6 +18,7 @@ import {SignOutRedirectComponent} from "./sign-out-redirect/sign-out-redirect.co
 import {ShelterInfoComponent} from "./shelter/shelter.info.component";
 import {FileSelectDirective} from "ng2-file-upload";
 import {SuccessStoriesComponent} from "./success/success.stories.component";
+import {AnimalEditComponent} from "./animal-post/animal-edit.component";
 
 
 // Import all needed Interceptors
@@ -40,8 +41,9 @@ import {FacebookExitService} from "./shared/services/facebook.exit.service";
 
 
 
+
 // Add components to the array that will be passed off to the module
-export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, FacebookExitComponent, FileSelectDirective, SignOutRedirectComponent, ShelterInfoComponent, SuccessStoriesComponent];
+export const allAppComponents = [HomeComponent, NavbarComponent, AnimalCardComponent, AnimalCommentComponent, AnimalPostComponent, AboutUsComponent, ContactComponent, SigninComponent, ProfileComponent, AnimalSearchComponent, GoogleExitComponent, FacebookExitComponent, FileSelectDirective, SignOutRedirectComponent, ShelterInfoComponent, SuccessStoriesComponent, AnimalEditComponent];
 /**
  * Add routes to the array that will be passed off to the module.
  * Place them in order of most specific to least specific.
@@ -51,7 +53,7 @@ export const routes: Routes = [
 	{path: "facebook-exit", component: FacebookExitComponent},
 	{path: "google-exit", component: GoogleExitComponent},
 	{path: "animal/:animalId", component: AnimalCardComponent},
-	{path: "animal-post/:animalId", component: AnimalPostComponent},
+	{path: "animal-edit/:animalId", component: AnimalEditComponent},
 	{path: "animal-post", component: AnimalPostComponent},
 	{path: "success/:animalParameter/:animalValue", component: SuccessStoriesComponent},
 	{path: "shelter", component: ShelterInfoComponent},
