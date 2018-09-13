@@ -19,19 +19,7 @@ export class AnimalPostComponent {
 	animalForm: FormGroup;
 	submitted: boolean = false;
 	status: Status = null;
-	animal: Animal = {
-		animalId: null,
-		animalProfileId: null,
-		animalColor: null,
-		animalDate: null,
-		animalDescription: null,
-		animalGender: null,
-		animalImageUrl: null,
-		animalLocation: null,
-		animalName: null,
-		animalSpecies: null,
-		animalStatus: null
-	};
+	animal: Animal;
 	animalId = this.route.snapshot.params["animalId"];
 	success: boolean = false;
 	imageUploaded: boolean = false;
@@ -101,7 +89,7 @@ export class AnimalPostComponent {
 	postAnimal(): void {
 		if (this.cloudinarySecureUrl) {
 			this.submitted = true;
-			const animal: Animal = {
+			this.animal = {
 				animalId: null,
 				animalProfileId: null,
 				animalColor: this.animalForm.value.color,
@@ -114,7 +102,7 @@ export class AnimalPostComponent {
 				animalSpecies: this.animalForm.value.species,
 				animalStatus: this.animalForm.value.status
 			};
-				this.animalService.createAnimal(animal).subscribe(status => {
+				this.animalService.createAnimal(this.animal).subscribe(status => {
 					this.status = status;
 					if(this.status.status === 200) {
 						this.animalForm.reset();
