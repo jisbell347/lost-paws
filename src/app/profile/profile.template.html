@@ -150,6 +150,8 @@
 		</div><!--		container-->
 	</form>
 	<div class="container">
+		<h3 *ngIf="profile">{{profile.profileName}}'s Animals</h3>
+		<hr />
 		<ul class="search-results">
 			<li class="searchForm"  routerLink="/animal/{{animal.animalId}}" *ngFor="let animal of animals.sort(sortFunc) | paginate: { itemsPerPage: 3, currentPage: page }">
 				<div class="row align-items-center bg-dark rounded py-3 my-4 mr-4">
