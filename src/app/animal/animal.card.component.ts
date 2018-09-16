@@ -35,6 +35,7 @@ export class AnimalCardComponent implements OnInit{
 		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		this.loadAnimal();
 		this.profileId = this.getJwtProfileId();
+		this.isPetOwner();
 	}
 
 	isPetOwner() {
@@ -44,11 +45,7 @@ export class AnimalCardComponent implements OnInit{
 	}
 
 	isReunited() {
-		if (this.animal.animalStatus === "Reunited") {
-			return false;
-		} else {
-			return true;
-		}
+		return this.animal.animalStatus !== "Reunited";
 	}
 
 
