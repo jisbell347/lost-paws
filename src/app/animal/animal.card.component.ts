@@ -35,7 +35,6 @@ export class AnimalCardComponent implements OnInit{
 		this.route.url.subscribe(route => window.sessionStorage.setItem("url", JSON.stringify(route)));
 		this.loadAnimal();
 		this.profileId = this.getJwtProfileId();
-		this.isPetOwner();
 	}
 
 	isPetOwner() {
@@ -53,6 +52,7 @@ export class AnimalCardComponent implements OnInit{
 		this.animalService.getAnimal(this.animalId).subscribe(reply => {
 			this.animal = reply;
 		});
+
 	}
 	updateAnimal(animal: Animal) : void {
 		this.router.navigate(["/animal-edit/", this.animalId]);
