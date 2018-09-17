@@ -37,8 +37,12 @@ export class AnimalCardComponent implements OnInit{
 		this.profileId = this.getJwtProfileId();
 	}
 
+	isAuthenticated(): boolean {
+		return(this.authService.isAuthenticated());
+	}
+
 	isPetOwner() {
-		if (this.profileId === this.animal.animalProfileId) {
+		if (this.profileId === this.animal.animalProfileId && this.isAuthenticated()) {
 			return true;
 		}
 	}
