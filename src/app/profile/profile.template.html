@@ -1,12 +1,16 @@
 <main>
 	<div class="container" *ngIf="profile">
 		<h3 class="row text-center justify-content-center py-3">{{profile.profileName}}'s Profile Page</h3>
-		<ul class="list-group col-sm-6 offset-3">
-			<li class="list-group-item"><strong>Name:</strong> {{profile.profileName}}</li>
-			<li class="list-group-item"><strong>Email:</strong> {{profile.profileEmail}}</li>
-			<li class="list-group-item"><strong>Phone:</strong> Number: {{profile.profilePhone}}</li>
-		</ul>
-		<button type="button" class="btn info-btn col-lg-4 col-md-6 col-sm-5 text-light offset-lg-4 my-4 shadow shadow-sm" (click)="updateProfile(profile);"><i class="far fa-edit"></i> Edit</button>
+		<div class="row justify-content-center ml-2">
+			<ul class="list-group col-md-6 col-sm-10 offset-md-3 offset-sm-1 col-lg-6 offset-lg-3 mx-auto">
+				<li class="list-group-item"><strong>Name:</strong> {{profile.profileName}}</li>
+				<li class="list-group-item"><strong>Email:</strong> {{profile.profileEmail}}</li>
+				<li class="list-group-item"><strong>Phone Number:</strong> {{profile.profilePhone}}</li>
+			</ul>
+		</div>
+		<div class=" row text-center justify-content-center">
+			<button type="button" class="btn info-btn text-light col-4 my-4 mx-auto shadow shadow-sm" (click)="updateProfile(profile);"><i class="far fa-edit"></i> Edit</button>
+		</div>
 	</div>
 	<div class="container">
 		<h3 *ngIf="profile">{{profile.profileName}}'s Animals</h3>
