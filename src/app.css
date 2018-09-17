@@ -248,5 +248,10 @@ max-height: 600px;
 	display: none;
 }
 
+.signed-out {
+	margin-bottom: -5rem;
+}
+
+
 
 
