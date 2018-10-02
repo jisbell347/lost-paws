@@ -29,7 +29,7 @@ $config = readConfig("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 $facebook = json_decode($config["facebook"]);
 
 $fb = new Facebook\Facebook([
-	"app_id" => $facebook->clientId,
+	"app_id" => $facebook->appId,
 	"app_secret" => $facebook->secretId,
 	"default_graph_version" => "v3.1",
 ]);
@@ -75,7 +75,7 @@ echo '<h3>Metadata</h3>';
 //var_dump($tokenMetadata);
 
 // Validation (these will throw FacebookSDKException's when they fail)
-$tokenMetadata->validateAppId($facebook->clientId); // Replace {app-id} with your app id
+$tokenMetadata->validateAppId($facebook->appId); // Replace {app-id} with your app id
 // If you know the user ID this access token belongs to, you can validate it here
 //$tokenMetadata->validateUserId('123');
 $tokenMetadata->validateExpiration();
@@ -129,7 +129,7 @@ if(!empty($profile)) {
 		"profileName" => $profile->getProfileName()
 	];
 
-	// create and set th JWT TOKEN
+	//create and set th JWT TOKEN
 	setJwtAndAuthHeader("auth", $authObject);
 	$reply->message = "Welcome to Lost Paws. Feel the fuzzy!";
 

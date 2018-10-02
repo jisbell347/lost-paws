@@ -27,7 +27,7 @@ $config = readConfig("/etc/apache2/capstone-mysql/lostfuzzy.ini");
 $facebook = json_decode($config["facebook"]);
 
 $fb = new Facebook\Facebook([
-	"app_id" => $facebook->clientId,
+	"app_id" => $facebook->appId,
 	"app_secret" => $facebook->secretId,
 	"default_graph_version" => "v3.1",
 ]);
@@ -35,6 +35,6 @@ $fb = new Facebook\Facebook([
 $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ["email"]; // Optional permissions
-$loginUrl = $helper->getLoginUrl("https://bootcamp-coders.cnm.edu/~jisbell1/lost-paws/public_html/api/facebook/", $permissions);
+$loginUrl = $helper->getLoginUrl("https://bootcamp-coders.cnm.edu/~jmiller156/lost-paws/public_html/api/facebook/", $permissions);
 
 echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
